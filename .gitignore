@@ -5,3 +5,6 @@
 bin/
 build/
 lib/
+
+# MacOS stuff
+.DS_Store
