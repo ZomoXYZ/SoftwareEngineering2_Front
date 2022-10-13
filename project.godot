@@ -13,6 +13,13 @@ config_version=4
 config/name="WAN"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/width=480
+window/size/height=853
+window/handheld/orientation="portrait"
+window/stretch/aspect="expand"
+
 [editor]
 
 version_control_autoload_on_startup=true
