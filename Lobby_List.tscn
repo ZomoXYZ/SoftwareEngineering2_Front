@@ -6,7 +6,7 @@
 [ext_resource path="res://assets/styles/background.tres" type="StyleBox" id=4]
 [ext_resource path="res://assets/styles/button_green.tres" type="StyleBox" id=5]
 
-[node name="Lobby_List" type="Control"]
+[node name="LobbyList" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
@@ -16,7 +16,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 custom_styles/panel = ExtResource( 4 )
 
-[node name="Top_Buttons" type="VBoxContainer" parent="Background"]
+[node name="TopButtons" type="VBoxContainer" parent="Background"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -147.5
@@ -25,7 +25,7 @@ margin_right = 147.5
 margin_bottom = 210.0
 custom_constants/separation = 30
 
-[node name="Create_Lobby" type="Button" parent="Background/Top_Buttons"]
+[node name="CreateLobby" type="Button" parent="Background/TopButtons"]
 margin_right = 295.0
 margin_bottom = 75.0
 size_flags_vertical = 3
@@ -36,7 +36,7 @@ custom_styles/disabled = ExtResource( 5 )
 custom_styles/normal = ExtResource( 5 )
 text = "Create Lobby"
 
-[node name="Join_by_ID" type="Button" parent="Background/Top_Buttons"]
+[node name="JoinbyID" type="Button" parent="Background/TopButtons"]
 margin_top = 105.0
 margin_right = 295.0
 margin_bottom = 180.0
@@ -52,7 +52,7 @@ text = "Join by ID"
 margin_right = 40.0
 margin_bottom = 40.0
 
-[node name="To_Main_Menu" type="Button" parent="Background"]
+[node name="ToMainMenu" type="Button" parent="Background"]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -68,4 +68,4 @@ custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
 text = "Main Menu"
 
-[connection signal="pressed" from="Background/To_Main_Menu" to="." method="_on_To_Main_Menu_pressed"]
+[connection signal="pressed" from="Background/ToMainMenu" to="." method="_on_To_Main_Menu_pressed"]

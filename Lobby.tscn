@@ -18,11 +18,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 custom_styles/panel = ExtResource( 4 )
 
-[node name="Player_List" type="VBoxContainer" parent="Background"]
+[node name="PlayerList" type="VBoxContainer" parent="Background"]
 margin_right = 40.0
 margin_bottom = 40.0
 
-[node name="Bottom_Bar" type="HBoxContainer" parent="Background"]
+[node name="BottomBar" type="HBoxContainer" parent="Background"]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -32,7 +32,7 @@ margin_right = -30.0
 margin_bottom = -30.0
 custom_constants/separation = 30
 
-[node name="Leave" type="Button" parent="Background/Bottom_Bar"]
+[node name="Leave" type="Button" parent="Background/BottomBar"]
 margin_right = 195.0
 margin_bottom = 75.0
 size_flags_horizontal = 3
@@ -43,7 +43,7 @@ custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
 text = "Leave"
 
-[node name="Options" type="Button" parent="Background/Bottom_Bar"]
+[node name="Options" type="Button" parent="Background/BottomBar"]
 margin_left = 225.0
 margin_right = 420.0
 margin_bottom = 75.0
@@ -79,7 +79,7 @@ custom_styles/disabled = ExtResource( 5 )
 custom_styles/normal = ExtResource( 5 )
 text = "Start Game"
 
-[node name="Lobby_ID" type="Label" parent="Background/Panel"]
+[node name="LobbyID" type="Label" parent="Background/Panel"]
 anchor_right = 1.0
 margin_bottom = 14.0
 custom_fonts/font = ExtResource( 1 )
@@ -87,5 +87,5 @@ custom_styles/normal = ExtResource( 5 )
 text = "Lobby ID:"
 valign = 2
 
-[connection signal="pressed" from="Background/Bottom_Bar/Leave" to="." method="_on_Leave_pressed"]
+[connection signal="pressed" from="Background/BottomBar/Leave" to="." method="_on_Leave_pressed"]
 [connection signal="pressed" from="Background/Panel/Start" to="." method="_on_Start_pressed"]
