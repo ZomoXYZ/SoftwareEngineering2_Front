@@ -1,12 +1,15 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/fonts/ComicNeue-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Main_Menu.gd" type="Script" id=2]
 [ext_resource path="res://assets/fonts/button_font.tres" type="DynamicFont" id=3]
+[ext_resource path="res://assets/styles/button_red.tres" type="StyleBox" id=4]
+[ext_resource path="res://assets/styles/button_green.tres" type="StyleBox" id=5]
+[ext_resource path="res://assets/styles/background.tres" type="StyleBox" id=6]
 
-[sub_resource type="CapsuleShape2D" id=2]
-radius = 74.0
-height = 152.0
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 73.9995
+height = 150.001
 
 [sub_resource type="DynamicFont" id=3]
 size = 86
@@ -20,6 +23,7 @@ script = ExtResource( 2 )
 [node name="Background" type="Panel" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+custom_styles/panel = ExtResource( 6 )
 
 [node name="Button_Container" type="VBoxContainer" parent="Background"]
 anchor_left = 0.5
@@ -37,6 +41,10 @@ margin_right = 295.0
 margin_bottom = 82.0
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 3 )
+custom_styles/hover = ExtResource( 5 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/disabled = ExtResource( 5 )
+custom_styles/normal = ExtResource( 5 )
 text = "Singleplayer"
 
 [node name="Multiplayer" type="Button" parent="Background/Button_Container"]
@@ -45,6 +53,10 @@ margin_right = 295.0
 margin_bottom = 195.0
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 3 )
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 4 )
 text = "Multiplayer"
 
 [node name="Tutorial" type="Button" parent="Background/Button_Container"]
@@ -53,6 +65,10 @@ margin_right = 295.0
 margin_bottom = 307.0
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 3 )
+custom_styles/hover = ExtResource( 5 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/disabled = ExtResource( 5 )
+custom_styles/normal = ExtResource( 5 )
 text = "Tutorial"
 
 [node name="Credits" type="Button" parent="Background/Button_Container"]
@@ -61,6 +77,10 @@ margin_right = 295.0
 margin_bottom = 420.0
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 3 )
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 4 )
 text = "Credits"
 
 [node name="Logo" type="StaticBody2D" parent="."]
@@ -69,9 +89,21 @@ __meta__ = {
 "_edit_group_": true
 }
 
+[node name="Panel" type="Panel" parent="Logo"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -143.0
+margin_top = -72.0
+margin_right = 152.0
+margin_bottom = 75.0
+custom_styles/panel = ExtResource( 4 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Logo"]
+position = Vector2( 3.99998, 0.999985 )
 rotation = 1.5708
-shape = SubResource( 2 )
+shape = SubResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="Logo"]
 
