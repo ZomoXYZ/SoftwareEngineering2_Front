@@ -1,5 +1,4 @@
-extends Control
-
+extends Node
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -21,6 +20,8 @@ func _on_Singleplayer_pressed():
 
 #Goes to lobby list
 func _on_Multiplayer_pressed():
+	$AnimationPlayer.play("Screen_Transition2")
+	yield($AnimationPlayer, "animation_finished")
 	get_tree().change_scene("res://Lobby_List.tscn")
 
 
