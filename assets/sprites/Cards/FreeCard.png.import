@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/FreeCard.png-f11a5f0938298b226937d3da3a38060c.stex"
+path="res://.import/FreeCard.png-7710b86d9063ad108c0b2eecf933aca6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Cards/FreeCard.png"
-dest_files=[ "res://.import/FreeCard.png-f11a5f0938298b226937d3da3a38060c.stex" ]
+source_file="res://assets/sprites/cards/FreeCard.png"
+dest_files=[ "res://.import/FreeCard.png-7710b86d9063ad108c0b2eecf933aca6.stex" ]
 
 [params]
 

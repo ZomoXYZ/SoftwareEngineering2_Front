@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/2Circ.png-106b1b25a20d741d6af33190ab08ae40.stex"
+path="res://.import/2Circ.png-34f612074108f10020251f40223e12f9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Cards/2Circ.png"
-dest_files=[ "res://.import/2Circ.png-106b1b25a20d741d6af33190ab08ae40.stex" ]
+source_file="res://assets/sprites/cards/2Circ.png"
+dest_files=[ "res://.import/2Circ.png-34f612074108f10020251f40223e12f9.stex" ]
 
 [params]
 

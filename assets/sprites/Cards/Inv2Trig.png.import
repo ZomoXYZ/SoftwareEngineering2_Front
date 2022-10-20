@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Inv2Trig.png-85c2294f56b3e647279b43d5c365c923.stex"
+path="res://.import/Inv2Trig.png-a34e6459fc6a6d2f9ec7670aef49c215.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Cards/Inv2Trig.png"
-dest_files=[ "res://.import/Inv2Trig.png-85c2294f56b3e647279b43d5c365c923.stex" ]
+source_file="res://assets/sprites/cards/Inv2Trig.png"
+dest_files=[ "res://.import/Inv2Trig.png-a34e6459fc6a6d2f9ec7670aef49c215.stex" ]
 
 [params]
 
