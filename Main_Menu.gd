@@ -55,7 +55,7 @@ func _on_EffectTimer_timeout():
 	shape.rotation = direction
 
 	# Choose the velocity for the shape.
-	var velocity = Vector2(rand_range(150.0, 250.0), 0.0)
+	var velocity = Vector2(rand_range(150.0, 1000.0), 0.0)
 	shape.linear_velocity = velocity.rotated(direction)
 
 	# Spawn the shape by adding it to the Main scene.

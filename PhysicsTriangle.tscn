@@ -7,12 +7,11 @@
 script = ExtResource( 2 )
 
 [node name="TriangleCollision" type="CollisionPolygon2D" parent="."]
-rotation = 3.14159
-build_mode = 1
-polygon = PoolVector2Array( 23, -42, 23, 39, -34, -1 )
+rotation = -3.14159
+polygon = PoolVector2Array( 23, 39, -34, -2, 23, -42 )
 
 [node name="Triangle" type="Sprite" parent="."]
-rotation = 3.14159
+rotation = -3.14159
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 1 )
 
