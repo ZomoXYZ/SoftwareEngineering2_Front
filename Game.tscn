@@ -1,10 +1,18 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/styles/background.tres" type="StyleBox" id=1]
 [ext_resource path="res://assets/styles/button_red.tres" type="StyleBox" id=2]
 [ext_resource path="res://assets/styles/button_green.tres" type="StyleBox" id=3]
 [ext_resource path="res://assets/sprites/cards/FreeCard.png" type="Texture" id=4]
-[ext_resource path="res://assets/sprites/cards/GreenFreeCard.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/cards/Back.png" type="Texture" id=5]
+[ext_resource path="res://Game.gd" type="Script" id=6]
+[ext_resource path="res://Card.tscn" type="PackedScene" id=7]
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 1, 1, 1, 1 )
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 1, 1, 1 )
@@ -19,6 +27,8 @@ corner_radius_bottom_right = 30
 corner_radius_bottom_left = 30
 
 [node name="Game" type="Node"]
+script = ExtResource( 6 )
+cardScene = ExtResource( 7 )
 
 [node name="Background" type="Panel" parent="."]
 anchor_right = 1.0
@@ -54,14 +64,14 @@ alignment = 1
 margin_right = 23.0
 margin_bottom = 60.0
 size_flags_horizontal = 3
-custom_styles/panel = ExtResource( 1 )
+custom_styles/panel = SubResource( 2 )
 
 [node name="LeftBar" type="Panel" parent="Background/PauseButton/PauseBarBox"]
 margin_left = 37.0
 margin_right = 60.0
 margin_bottom = 60.0
 size_flags_horizontal = 3
-custom_styles/panel = ExtResource( 1 )
+custom_styles/panel = SubResource( 3 )
 
 [node name="PlayArea" type="Panel" parent="Background"]
 anchor_right = 1.0
@@ -106,3 +116,4 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -162.0
+custom_constants/separation = 10
