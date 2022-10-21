@@ -1,13 +1,11 @@
 extends Node
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
+export(PackedScene) var triangleScene
+export(PackedScene) var ellipseScene
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	randomize()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -31,3 +29,34 @@ func _on_Tutorial_pressed():
 
 func _on_Credits_pressed():
 	pass # Replace with function body.
+
+#Function for creating the background effect shapes
+#Code vaguely stolen from here: https://docs.godotengine.org/en/stable/getting_started/first_2d_game/05.the_main_game_scene.html
+func _on_EffectTimer_timeout():
+	var shape
+	#Randomly chooses between a circle and an ellipse
+	if rand_range(0, 2) > 1:
+		shape = triangleScene.instance()
+	else:
+		shape = ellipseScene.instance()
+		
+	# Choose a random location on Path2D.
+	var shapeSpawnLocation = get_node("ShapePath/ShapeSpawnLocation")
+	shapeSpawnLocation.offset = randi()
+
+	# Set the shape's direction perpendicular to the path direction.
+	var direction = shapeSpawnLocation.rotation + PI / 2
+
+	# Set the shape's position to a random location.
+	shape.position = shapeSpawnLocation.position
+
+	# Add some randomness to the direction.
+	direction += rand_range(-PI / 4, PI / 4)
+	shape.rotation = direction
+
+	# Choose the velocity for the shape.
+	var velocity = Vector2(rand_range(150.0, 250.0), 0.0)
+	shape.linear_velocity = velocity.rotated(direction)
+
+	# Spawn the shape by adding it to the Main scene.
+	add_child(shape)
