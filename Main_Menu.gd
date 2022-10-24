@@ -14,7 +14,7 @@ func _ready():
 
 
 func _on_Singleplayer_pressed():
-	pass # Replace with function body.
+	get_tree().change_scene("res://Lobby.tscn")
 
 #Goes to lobby list
 func _on_Multiplayer_pressed():

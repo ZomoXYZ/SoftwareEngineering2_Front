@@ -17,7 +17,7 @@ func _ready():
 
 
 func _on_Start_pressed():
-	pass # Replace with function body.
+	get_tree().change_scene("res://Game.tscn")
 
 
 func _on_Leave_pressed():

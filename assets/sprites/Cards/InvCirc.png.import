@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/InvCirc.png-f57900f1832a6a8fba3a90f81a71adb7.stex"
+path="res://.import/InvCirc.png-5c1a0b37667c2318a936356442048e52.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/cards/InvCirc.png"
-dest_files=[ "res://.import/InvCirc.png-f57900f1832a6a8fba3a90f81a71adb7.stex" ]
+source_file="res://assets/sprites/Cards/InvCirc.png"
+dest_files=[ "res://.import/InvCirc.png-5c1a0b37667c2318a936356442048e52.stex" ]
 
 [params]
 

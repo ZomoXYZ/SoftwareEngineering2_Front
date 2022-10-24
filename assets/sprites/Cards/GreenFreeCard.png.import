@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/GreenFreeCard.png-35436d7dc4d4070a6c175b21addc372f.stex"
+path="res://.import/GreenFreeCard.png-188adddcf854dbe83fed63331f7fcf4d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/cards/GreenFreeCard.png"
-dest_files=[ "res://.import/GreenFreeCard.png-35436d7dc4d4070a6c175b21addc372f.stex" ]
+source_file="res://assets/sprites/Cards/GreenFreeCard.png"
+dest_files=[ "res://.import/GreenFreeCard.png-188adddcf854dbe83fed63331f7fcf4d.stex" ]
 
 [params]
 

@@ -18,3 +18,7 @@ func _ready():
 
 func _on_To_Main_Menu_pressed():
 	get_tree().change_scene("res://Main_Menu.tscn")
+
+
+func _on_CreateLobby_pressed():
+	get_tree().change_scene("res://Lobby.tscn")

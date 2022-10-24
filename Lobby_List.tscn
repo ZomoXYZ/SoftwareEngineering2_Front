@@ -68,4 +68,5 @@ custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
 text = "Main Menu"
 
+[connection signal="pressed" from="Background/TopButtons/CreateLobby" to="." method="_on_CreateLobby_pressed"]
 [connection signal="pressed" from="Background/ToMainMenu" to="." method="_on_To_Main_Menu_pressed"]
