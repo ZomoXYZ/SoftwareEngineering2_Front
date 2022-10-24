@@ -8,8 +8,8 @@ func _ready():
 	var cardInstance
 	for i in 5:
 		cardInstance = cardScene.instance()
-		
-		get_node('Background/HandBox').add_child(cardInstance)
+		cardInstance.set_rotation(PI / 2)
+		$Background/HandBox.add_child(cardInstance)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

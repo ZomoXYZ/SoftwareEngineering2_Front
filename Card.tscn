@@ -4,11 +4,11 @@
 [ext_resource path="res://assets/sprites/cards/FreeCard.png" type="Texture" id=2]
 
 [node name="Card" type="TextureButton"]
-margin_left = 610.0
-margin_top = 2.0
-margin_right = 1690.0
-margin_bottom = 610.0
+margin_right = 1080.0
+margin_bottom = 608.0
+rect_min_size = Vector2( 176, 97 )
 rect_rotation = 90.0
+rect_clip_content = true
 texture_normal = ExtResource( 2 )
 expand = true
 stretch_mode = 4
