@@ -120,11 +120,15 @@ stretch_mode = 4
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -202.0
-margin_bottom = -2.0
-custom_constants/separation = 0
+margin_left = -13.0
+margin_top = -184.0
+margin_right = 9.0
+margin_bottom = 16.0
+rect_clip_content = true
+alignment = 1
 
 [node name="Pause" type="Panel" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_styles/panel = ExtResource( 1 )

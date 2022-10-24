@@ -8,7 +8,7 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	$LobbyOptions.hide()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -22,3 +22,11 @@ func _on_Start_pressed():
 
 func _on_Leave_pressed():
 	get_tree().change_scene("res://Lobby_List.tscn")
+
+
+func _on_Options_pressed():
+	$LobbyOptions.show()
+
+
+func _on_BackToLobby_pressed():
+	$LobbyOptions.hide()

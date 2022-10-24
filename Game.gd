@@ -7,7 +7,7 @@ export(PackedScene) var cardScene
 func _ready():
 	var cardInstance
 	$Pause.hide()
-	for i in 6:
+	for i in 5:
 		cardInstance = cardScene.instance()
 		cardInstance.set_rotation(PI / 2)
 		$Background/HandBox.add_child(cardInstance)
