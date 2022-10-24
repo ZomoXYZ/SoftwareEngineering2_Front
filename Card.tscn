@@ -3,13 +3,20 @@
 [ext_resource path="res://Card.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/cards/FreeCard.png" type="Texture" id=2]
 
-[node name="Card" type="TextureButton"]
-margin_right = 1080.0
-margin_bottom = 608.0
-rect_min_size = Vector2( 176, 97 )
+[node name="CardRotate" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -379.0
+margin_bottom = -677.0
+rect_min_size = Vector2( 96, 176 )
+script = ExtResource( 1 )
+
+[node name="Card" type="TextureButton" parent="."]
+margin_right = 176.0
+margin_bottom = 101.0
+rect_min_size = Vector2( 176, 96 )
 rect_rotation = 90.0
-rect_clip_content = true
+size_flags_horizontal = 3
+size_flags_vertical = 3
 texture_normal = ExtResource( 2 )
 expand = true
-stretch_mode = 4
-script = ExtResource( 1 )

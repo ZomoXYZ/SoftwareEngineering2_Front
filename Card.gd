@@ -1,4 +1,4 @@
-extends TextureButton
+extends Control
 
 
 #Terrible way to do this yet alas
@@ -20,10 +20,11 @@ var cards = ['assets/sprites/cards/2Circ.png',
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
+	var type
+	randomize()
 	#This will probably need to be changed later for server integration
 	var card = cards[randi() % cards.size()]
-	self.texture_normal = load(card)
+	$Card.texture_normal = load(card)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
