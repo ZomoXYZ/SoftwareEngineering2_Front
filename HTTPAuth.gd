@@ -19,7 +19,8 @@ func _init():
 	client = HTTPClient.new()
 	var err = client.connect_to_host(Host, Port)
 	if err != OK:
-		return null
+		print("Offline")
+		return
 
 	# Wait until resolved and connected.
 	while client.get_status() == HTTPClient.STATUS_CONNECTING or client.get_status() == HTTPClient.STATUS_RESOLVING:
@@ -30,6 +31,10 @@ func _init():
 		else:
 			yield(Engine.get_main_loop(), "idle_frame")
 
+	if client.get_status() == HTTPClient.STATUS_CANT_CONNECT:
+		print("Offline")
+		return
+		
 	assert(client.get_status() == HTTPClient.STATUS_CONNECTED) # Check if the connection was made successfully.
 	ready = true
 	
