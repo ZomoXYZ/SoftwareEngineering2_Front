@@ -113,7 +113,7 @@ func request(path, method = HTTPClient.METHOD_GET, body = null, noToken = false)
 
 func getUserData():
 	var file = File.new()
-	file.open("user://save_game.dat", File.READ)
+	file.open("user://userdata.dat", File.READ)
 	var content = file.get_as_text()
 	file.close()
 	var jsonResult = JSON.parse(content)
