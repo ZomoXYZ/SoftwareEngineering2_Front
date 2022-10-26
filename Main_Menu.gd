@@ -12,8 +12,9 @@ func _ready():
 #func _process(delta):
 #	pass
 
-
+#goes straight to lobby
 func _on_Singleplayer_pressed():
+	StartVars.singlePlayer = true
 	get_tree().change_scene("res://Lobby.tscn")
 
 #Goes to lobby list

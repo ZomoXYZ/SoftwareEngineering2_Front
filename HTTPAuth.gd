@@ -16,6 +16,7 @@ var PlayerNameNoun = -1
 var PlayerPicture = -1
 
 func _init():
+	
 	client = HTTPClient.new()
 	var err = client.connect_to_host(Host, Port)
 	if err != OK:
@@ -34,7 +35,7 @@ func _init():
 	if client.get_status() == HTTPClient.STATUS_CANT_CONNECT:
 		print("Offline")
 		return
-		
+	
 	assert(client.get_status() == HTTPClient.STATUS_CONNECTED) # Check if the connection was made successfully.
 	ready = true
 	
