@@ -15,10 +15,10 @@ func _ready():
 #func _process(delta):
 #	pass
 
-
+#Return to main menu
 func _on_To_Main_Menu_pressed():
 	get_tree().change_scene("res://Main_Menu.tscn")
 
-
+#Goes to the lobby screen to create a lobby
 func _on_CreateLobby_pressed():
 	get_tree().change_scene("res://Lobby.tscn")

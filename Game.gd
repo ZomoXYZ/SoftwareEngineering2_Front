@@ -17,14 +17,18 @@ func _ready():
 #func _process(delta):
 #	pass
 
-
+#Pause shows pause overlay
 func _on_PauseButton_pressed():
 	$Pause.show()
 
-
+#Resume hides the pause again
 func _on_Resume_pressed():
 	$Pause.hide()
 
-
+#Returns to the lobby list or main menu if this is a multi or single player game
 func _on_Leave_pressed():
-	get_tree().change_scene("res://Lobby_List.tscn")
+	if StartVars.singlePlayer:
+		StartVars.singlePlayer = false
+		get_tree().change_scene("res://Main_Menu.tscn")
+	else:
+		get_tree().change_scene("res://Lobby_List.tscn")
