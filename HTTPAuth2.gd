@@ -20,6 +20,7 @@ func createRequest(root, callback, endpoint, method = HTTPClient.METHOD_GET, bod
 	# create request
 	var http_request = HTTPRequest.new()
 	add_child(http_request)
+	http_request.set_timeout(1) # TODO change timeout time
 	http_request.connect("request_completed", root, callback)
 
 	# Some headers
