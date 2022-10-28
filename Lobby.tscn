@@ -1,12 +1,171 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/fonts/button_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Lobby.gd" type="Script" id=2]
 [ext_resource path="res://assets/styles/button_red.tres" type="StyleBox" id=3]
 [ext_resource path="res://assets/styles/background.tres" type="StyleBox" id=4]
 [ext_resource path="res://assets/styles/button_green.tres" type="StyleBox" id=5]
+[ext_resource path="res://assets/fonts/ComicNeue-Regular.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://assets/styles/background2.tres" type="StyleBox" id=7]
 
 [sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="DynamicFont" id=4]
+size = 150
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 6 )
+
+[sub_resource type="Animation" id=5]
+resource_name = "Intro_Transition"
+length = 0.7
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("../IntroPanel:rect_position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.3, 145.428, 70, -0.25, 0, 0.2, 57.2843, 70, -0.25, 0, 0.1, -290.907, 680, -0.2, -500.012, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.3, 0.5, 0.7 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("../IntroPanel:rect_position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( -250, -0.25, 0, 0.2, -411.547, 250, -0.25, 0, 0.4, -37.1798, 250, -0.25, 0, 0.4, -37.1798, 250, -0.3, 2.56421, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.3, 0.5, 0.7 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("../IntroPanel:rect_rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.2, -245.099, 26.9, -0.25, 0, 0.3, 0.160395, 26.9, -0.25, 0, 0.3, 58.9123, 87.5, -0.3, -65.6236, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.3, 0.5, 0.7 )
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Options_Transition"
+length = 0.4
+tracks/0/type = "bezier"
+tracks/0/path = NodePath(".:modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath(".:modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath(".:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath(".:modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath(".:modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath(".:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("../IntroPanel:rect_position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("../IntroPanel:rect_position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( -250, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("../IntroPanel:rect_rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
 
 [node name="Lobby" type="Control"]
 anchor_right = 1.0
@@ -81,17 +240,17 @@ text = "Start Game"
 
 [node name="LobbyID" type="Label" parent="Background/Panel"]
 anchor_right = 1.0
-margin_bottom = 14.0
+margin_bottom = 72.0
 custom_fonts/font = ExtResource( 1 )
 custom_styles/normal = ExtResource( 5 )
-text = "Lobby ID:"
-valign = 2
+text = "ID: 123456"
+align = 1
+valign = 1
 
 [node name="LobbyOptions" type="Panel" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_styles/panel = ExtResource( 4 )
+custom_styles/panel = ExtResource( 7 )
 
 [node name="BottomBar" type="HBoxContainer" parent="LobbyOptions"]
 anchor_top = 1.0
@@ -180,6 +339,27 @@ custom_styles/pressed = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 5 )
 custom_styles/normal = ExtResource( 5 )
 text = "Point Goal"
+
+[node name="IntroPanel" type="Panel" parent="."]
+margin_top = -250.0
+margin_right = 480.0
+margin_bottom = -55.9996
+custom_styles/panel = ExtResource( 5 )
+
+[node name="IntroText" type="Label" parent="IntroPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 4 )
+text = "LOBBY
+"
+align = 1
+valign = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../LobbyOptions")
+anims/Intro_Transition = SubResource( 5 )
+anims/Options_Transition = SubResource( 2 )
+anims/RESET = SubResource( 3 )
 
 [connection signal="pressed" from="Background/BottomBar/Leave" to="." method="_on_Leave_pressed"]
 [connection signal="pressed" from="Background/BottomBar/Options" to="." method="_on_Options_pressed"]
