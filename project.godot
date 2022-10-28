@@ -16,10 +16,9 @@ config/icon="res://icon.png"
 
 [autoload]
 
-HTTPAuth="*res://HTTPAuth2.gd"
 StartVars="*res://Start_Vars.gd"
-<<<<<<<UpdatedupstreamStartVars="*res://Start_Vars.gd"
-HTTPAuthClass="*res://HTTPAuthClass.gd"
+Request="*res://HTTPAuth/request.gd"
+UserData="*res://HTTPAuth/userdata.gd"
 
 [display]
 

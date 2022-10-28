@@ -8,10 +8,6 @@ const BASE_URL = "%s://%s:%s%s" % [Schema, Host, Port, Path]
 
 var token = ""
 var lastChecked = -1
-
-var PlayerNameAdjective = -1
-var PlayerNameNoun = -1
-var PlayerPicture = -1
 	
 # createRequest(self, "_on_request_complete")
 func createRequest(root, callback, endpoint, method = HTTPClient.METHOD_GET, body = null, noToken = false):
@@ -35,31 +31,6 @@ func createRequest(root, callback, endpoint, method = HTTPClient.METHOD_GET, bod
 	var error = http_request.request(BASE_URL + endpoint, headers, Schema.to_lower() == "https", method, bodyStr)
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
-
-
-# func verifyResult(result):
-# 	if result == HTTPRequest.RESULT_SUCCESS:
-# 		return Status.Online
-# 	if result in [
-# 			HTTPRequest.RESULT_CANT_CONNECT,
-# 			HTTPRequest.RESULT_CANT_RESOLVE,
-# 			HTTPRequest.RESULT_NO_RESPONSE,
-# 			HTTPRequest.RESULT_REQUEST_FAILED,
-# 			HTTPRequest.RESULT_TIMEOUT,
-# 		]:
-# 		print("OFFLINE")
-# 		return Status.Offline
-# 	# if result in [
-# 	# 		HTTPRequest.RESULT_CHUNKED_BODY_SIZE_MISMATCH,
-# 	# 		HTTPRequest.RESULT_CONNECTION_ERROR,
-# 	# 		HTTPRequest.RESULT_SSL_HANDSHAKE_ERROR,
-# 	# 		HTTPRequest.RESULT_BODY_SIZE_LIMIT_EXCEEDED,
-# 	# 		HTTPRequest.RESULT_DOWNLOAD_FILE_CANT_OPEN,
-# 	# 		HTTPRequest.RESULT_REDIRECT_LIMIT_REACHED,
-# 	# 	]:
-# 	# 	print("OFFLINE/ERROR %s" % result)
-# 	# 	return Status.Error
-# 	return Status.Error
 
 enum Status {Online, Offline, Error}
 
@@ -97,16 +68,6 @@ func parseResponse(result, response_code, body):
 
 	return [Status.Online, jsonResult.result]
 
-func getUserData():
-	var file = File.new()
-	file.open("user://userdata.dat", File.READ)
-	var content = file.get_as_text()
-	file.close()
-	var jsonResult = JSON.parse(content)
-	if jsonResult.error != OK || !jsonResult.result.has('name') || !jsonResult.result.name.has('adjective') || !jsonResult.result.name.has('noun') || !jsonResult.result.has('picture'):
-		return null
-	return jsonResult.result
-	
 func authorizeSession(force = false):
 	# only run every 15 seconds at most
 	# TODO make this an hour if they have a token
@@ -121,20 +82,6 @@ func authorizeSession(force = false):
 		return
 	
 	createRequest(self, "_on_get_token", "/authorization", HTTPClient.METHOD_GET, null, true)
-	
-
-func setUserData(data):
-	assert(data.has('name') && data.name.has('adjective') && data.name.has('noun') && data.has('picture'))
-	var name = data.name
-	var picture = data.picture
-	var content = JSON.print({
-		"name": name,
-		"picture": picture
-	})
-	var file = File.new()
-	file.open("user://userdata.dat", File.WRITE)
-	file.store_string(content)
-	file.close()
 
 func _on_get_token(result, response_code, _headers, bodyString):
 	var response = parseResponse(result, response_code, bodyString)
@@ -144,7 +91,7 @@ func _on_get_token(result, response_code, _headers, bodyString):
 	token = response[1].token
 	print("Got token: %s" % token)
 	
-	var playerData = getUserData()
+	var playerData = UserData.getUserData()
 	if playerData == null:
 		createRequest(self, "_on_get_userdata", "/self")
 	else:
@@ -156,9 +103,5 @@ func _on_get_userdata(result, response_code, _headers, bodyString):
 		return
 	
 	var playerData = response[1]
-	setUserData(playerData)
+	UserData.setUserData(playerData)
 	print("Name: %s %s, Picture: %s" % [playerData.name.adjective, playerData.name.noun, playerData.picture])
-	
-	PlayerNameAdjective = playerData.name.adjective
-	PlayerNameNoun = playerData.name.noun
-	PlayerPicture = playerData.picture

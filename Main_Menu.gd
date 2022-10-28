@@ -6,7 +6,7 @@ export(PackedScene) var ellipseScene
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
-	HTTPAuth.authorizeSession()
+	Request.authorizeSession()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

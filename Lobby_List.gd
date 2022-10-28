@@ -10,8 +10,8 @@ func _ready():
 	# temp online checker
 	# TODO make a better online check system
 	# my vote is to not allow this page to be acceessed at all
-	if HTTPAuth.token != "":
-		HTTPAuth.createRequest(self, "_on_get_lobbylyst", "/lobbylist")
+	if Request.token != "":
+		Request.createRequest(self, "_on_get_lobbylyst", "/lobbylist")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -27,8 +27,8 @@ func _on_CreateLobby_pressed():
 	get_tree().change_scene("res://Lobby.tscn")
 
 func _on_get_lobbylyst(result, response_code, _headers, bodyString):
-	var response = HTTPAuth.parseResponse(result, response_code, bodyString)
-	if response[0] != HTTPAuth.Status.Online || response[1] == null:
+	var response = Request.parseResponse(result, response_code, bodyString)
+	if response[0] != Request.Status.Online || response[1] == null:
 		return
 	var lobbylist = response[1]
 	print(lobbylist)
