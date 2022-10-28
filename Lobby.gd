@@ -9,6 +9,8 @@ extends Control
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$LobbyOptions.hide()
+	$AnimationPlayer.play("Intro_Transition")
+	yield($AnimationPlayer, "animation_finished")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -30,7 +32,11 @@ func _on_Leave_pressed():
 #Shows the options overlay menu
 func _on_Options_pressed():
 	$LobbyOptions.show()
+	$AnimationPlayer.play("Options_Transition")
+	yield($AnimationPlayer, "animation_finished")
 
 #Hides overlay when done with options menu
 func _on_BackToLobby_pressed():
+	$AnimationPlayer.play_backwards("Options_Transition")
+	yield($AnimationPlayer, "animation_finished")
 	$LobbyOptions.hide()

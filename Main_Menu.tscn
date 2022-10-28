@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://assets/fonts/ComicNeue-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Main_Menu.gd" type="Script" id=2]
@@ -16,6 +16,72 @@ font_data = ExtResource( 1 )
 [sub_resource type="CapsuleShape2D" id=4]
 radius = 73.9995
 height = 150.001
+
+[sub_resource type="Animation" id=10]
+resource_name = "MultiPlayer_Transition"
+length = 0.4
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 90, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_size:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 295, -0.25, 0, 0.25, 0, 3000, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_size:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 439.001, -0.25, 0, 0.25, 0, 3000, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 93, -0.25, 0, 0.25, 0, 500, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 279, -0.25, 0, 0.25, 0, -200, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Background/CanvasLayer/ButtonContainer/Singleplayer:custom_styles/normal")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ) ]
+}
 
 [sub_resource type="Animation" id=5]
 length = 0.001
@@ -63,6 +129,48 @@ tracks/3/keys = {
 "points": PoolRealArray( 279, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_size:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 295, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_size:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 439.001, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Background/CanvasLayer/ButtonContainer/Singleplayer:custom_styles/normal")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 5 ) ]
+}
 
 [sub_resource type="Animation" id=6]
 resource_name = "Screen_Transition"
@@ -92,8 +200,74 @@ tracks/1/keys = {
 "values": [ true, false, false ]
 }
 
+[sub_resource type="Animation" id=9]
+resource_name = "SinglePlayer_Transition"
+length = 0.4
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 90, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_size:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 295, -0.25, 0, 0.25, 0, 3000, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_size:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 439.001, -0.25, 0, 0.25, 0, 3000, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 93, -0.25, 0, 0.25, 0, 500, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 279, -0.25, 0, 0.25, 0, -200, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Background/CanvasLayer/ButtonContainer/Singleplayer:custom_styles/normal")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 5 ) ]
+}
+
 [sub_resource type="Animation" id=7]
-resource_name = "Screen_Transition2"
+resource_name = "Unused_Transition"
 length = 0.4
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_position:x")
@@ -114,6 +288,18 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "points": PoolRealArray( 279, -0.25, 0, 0.211899, -237.386, 925, -0.2, -361.253, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.4 )
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Logo/LogoBackground:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
 }
 
 [sub_resource type="Curve2D" id=8]
@@ -142,7 +328,7 @@ anchor_bottom = 0.5
 margin_left = -147.0
 margin_top = -147.5
 margin_right = 148.0
-margin_bottom = 291.5
+margin_bottom = 291.501
 custom_constants/separation = 30
 
 [node name="Singleplayer" type="Button" parent="Background/CanvasLayer/ButtonContainer"]
@@ -232,9 +418,11 @@ wait_time = 0.5
 autostart = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/MultiPlayer_Transition = SubResource( 10 )
 anims/RESET = SubResource( 5 )
 anims/Screen_Transition = SubResource( 6 )
-anims/Screen_Transition2 = SubResource( 7 )
+anims/SinglePlayer_Transition = SubResource( 9 )
+anims/Unused_Transition = SubResource( 7 )
 
 [node name="ShapePath" type="Path2D" parent="."]
 curve = SubResource( 8 )

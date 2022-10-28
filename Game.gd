@@ -20,9 +20,13 @@ func _ready():
 #Pause shows pause overlay
 func _on_PauseButton_pressed():
 	$Pause.show()
+	$AnimationPlayer.play("Pause_Transition")
+	yield($AnimationPlayer, "animation_finished")
 
 #Resume hides the pause again
 func _on_Resume_pressed():
+	$AnimationPlayer.play_backwards("Pause_Transition")
+	yield($AnimationPlayer, "animation_finished")
 	$Pause.hide()
 
 #Returns to the lobby list or main menu if this is a multi or single player game

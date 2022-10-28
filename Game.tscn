@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://assets/styles/background.tres" type="StyleBox" id=1]
 [ext_resource path="res://assets/styles/button_red.tres" type="StyleBox" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Game.gd" type="Script" id=6]
 [ext_resource path="res://Card.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/fonts/button_font.tres" type="DynamicFont" id=8]
+[ext_resource path="res://assets/styles/background2.tres" type="StyleBox" id=9]
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 1, 1, 1, 1 )
@@ -29,6 +30,93 @@ corner_radius_bottom_left = 30
 
 [sub_resource type="StyleBoxEmpty" id=4]
 
+[sub_resource type="Animation" id=5]
+resource_name = "Pause_Transition"
+length = 0.4
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Pause:modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Pause:modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Pause:modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Pause:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Pause:modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Pause:modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Pause:modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Pause:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
 [node name="Game" type="Node"]
 script = ExtResource( 6 )
 cardScene = ExtResource( 7 )
@@ -36,7 +124,7 @@ cardScene = ExtResource( 7 )
 [node name="Background" type="Panel" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_styles/panel = ExtResource( 1 )
+custom_styles/panel = ExtResource( 9 )
 
 [node name="PauseButton" type="Button" parent="Background"]
 anchor_left = 1.0
@@ -130,7 +218,6 @@ rect_clip_content = true
 alignment = 1
 
 [node name="Pause" type="Panel" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_styles/panel = ExtResource( 1 )
@@ -183,11 +270,16 @@ custom_styles/panel = SubResource( 4 )
 
 [node name="LobbyID" type="Label" parent="Pause/Panel"]
 anchor_right = 1.0
-margin_bottom = 14.0
+margin_bottom = 72.0
 custom_fonts/font = ExtResource( 8 )
 custom_styles/normal = ExtResource( 3 )
-text = "Lobby ID:"
-valign = 2
+text = "ID: 123456"
+align = 1
+valign = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Pause_Transition = SubResource( 5 )
+anims/RESET = SubResource( 6 )
 
 [connection signal="pressed" from="Background/PauseButton" to="." method="_on_PauseButton_pressed"]
 [connection signal="pressed" from="Pause/BottomBar/Leave" to="." method="_on_Leave_pressed"]
