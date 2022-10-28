@@ -17,7 +17,8 @@ config/icon="res://icon.png"
 [autoload]
 
 StartVars="*res://Start_Vars.gd"
-HTTPAuth="*res://HTTPAuth2.gd"
+HTTPAuthClass="*res://HTTPAuthClass.gd"
+HTTPAuth="*res://HTTPAuth.gd"
 
 [display]
 
