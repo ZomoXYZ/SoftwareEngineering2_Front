@@ -7,7 +7,11 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	HTTPAuth.createRequest(self, "_on_get_lobbylyst", "/lobbylist")
+	# temp online checker
+	# TODO make a better online check system
+	# my vote is to not allow this page to be acceessed at all
+	if HTTPAuth.token != "":
+		HTTPAuth.createRequest(self, "_on_get_lobbylyst", "/lobbylist")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
