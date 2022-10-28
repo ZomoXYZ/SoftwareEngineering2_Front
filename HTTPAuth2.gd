@@ -36,6 +36,67 @@ func createRequest(root, callback, endpoint, method = HTTPClient.METHOD_GET, bod
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
 
+
+# func verifyResult(result):
+# 	if result == HTTPRequest.RESULT_SUCCESS:
+# 		return Status.Online
+# 	if result in [
+# 			HTTPRequest.RESULT_CANT_CONNECT,
+# 			HTTPRequest.RESULT_CANT_RESOLVE,
+# 			HTTPRequest.RESULT_NO_RESPONSE,
+# 			HTTPRequest.RESULT_REQUEST_FAILED,
+# 			HTTPRequest.RESULT_TIMEOUT,
+# 		]:
+# 		print("OFFLINE")
+# 		return Status.Offline
+# 	# if result in [
+# 	# 		HTTPRequest.RESULT_CHUNKED_BODY_SIZE_MISMATCH,
+# 	# 		HTTPRequest.RESULT_CONNECTION_ERROR,
+# 	# 		HTTPRequest.RESULT_SSL_HANDSHAKE_ERROR,
+# 	# 		HTTPRequest.RESULT_BODY_SIZE_LIMIT_EXCEEDED,
+# 	# 		HTTPRequest.RESULT_DOWNLOAD_FILE_CANT_OPEN,
+# 	# 		HTTPRequest.RESULT_REDIRECT_LIMIT_REACHED,
+# 	# 	]:
+# 	# 	print("OFFLINE/ERROR %s" % result)
+# 	# 	return Status.Error
+# 	return Status.Error
+
+enum Status {Online, Offline, Error}
+
+# returns: [status, body]
+func parseResponse(result, response_code, body):
+	if result != HTTPRequest.RESULT_SUCCESS:
+		print("OFFLINE")
+		return [Status.Offline, null]
+	print("ONLINE")
+
+	if response_code == 401:
+		print("Request Error")
+		return [Status.Error, null]
+	if response_code == 401:
+		print("Unauthorized")
+		return [Status.Error, null]
+	if response_code == 404:
+		print("Missing")
+		return [Status.Error, null]
+	if response_code != 200:
+		print("Unknown Response Code %s" % response_code)
+		return [Status.Error, null]
+
+	var bodyString = body.get_string_from_utf8()
+	
+	if bodyString == "":
+		return [Status.Online, null]
+	
+	var jsonResult = JSON.parse(bodyString)
+	print(bodyString)
+
+	if jsonResult.error != OK:
+		print("Error loading token from Server's JSON: %s" % jsonResult.error)
+		return [Status.Error, null]
+
+	return [Status.Online, jsonResult.result]
+
 func getUserData():
 	var file = File.new()
 	file.open("user://userdata.dat", File.READ)
@@ -75,16 +136,12 @@ func setUserData(data):
 	file.store_string(content)
 	file.close()
 
-func _on_get_token(result, response_code, headers, body):
-	# TODO check result/response_code/etc
-
-	var jsonResult = JSON.parse(body.get_string_from_utf8())
-	print(body.get_string_from_utf8())
-	if jsonResult.error != OK || !jsonResult.result.has("token"):
-		print("Error loading token from Server's JSON")
+func _on_get_token(result, response_code, _headers, bodyString):
+	var response = parseResponse(result, response_code, bodyString)
+	if response[0] != Status.Online || response[1] == null:
 		return
 		
-	token = jsonResult.result.token
+	token = response[1].token
 	print("Got token: %s" % token)
 	
 	var playerData = getUserData()
@@ -93,12 +150,12 @@ func _on_get_token(result, response_code, headers, body):
 	else:
 		createRequest(self, "_on_get_userdata", "/self", HTTPClient.METHOD_POST, playerData)
 
-func _on_get_userdata(result, response_code, headers, body):
-	var jsonResult = JSON.parse(body.get_string_from_utf8())
-	if jsonResult.error != OK:
-		print("Error loading userdata from Server's JSON")
+func _on_get_userdata(result, response_code, _headers, bodyString):
+	var response = parseResponse(result, response_code, bodyString)
+	if response[0] != Status.Online || response[1] == null:
 		return
-	var playerData = jsonResult.result
+	
+	var playerData = response[1]
 	setUserData(playerData)
 	print("Name: %s %s, Picture: %s" % [playerData.name.adjective, playerData.name.noun, playerData.picture])
 	

@@ -14,8 +14,10 @@ var PlayerPicture = -1
 
 func requestNoToken(endpoint, method = HTTPClient.METHOD_GET, body = null, headers = []):
 	headers.append("UUID: %s" % OS.get_unique_id())
-	var request = HTTPAuthClass.request(endpoint, method, body, headers, 1)
-	if request == HTTPAuthClass.Status.Offline:
+	var req = HTTPClass.request(endpoint, method, body, headers, 1)
+	var request = yield(req, "request_ready")
+	print(request)
+	if request == HTTPClass.Status.Offline:
 		print("OFFLINE")
 		return null
 	return request

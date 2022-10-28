@@ -8,12 +8,15 @@ const BASE_URL = "%s://%s:%s%s" % [Schema, Host, Port, Path]
 
 enum Status {Online, Offline}
 
+signal request_ready(status, body)
+
 # timeout is in seconds
 func request(endpoint, method = HTTPClient.METHOD_GET, body = null, headers = null, timeout = 1):
 	var client = HTTPClient.new()
 	var err = client.connect_to_host(Host, Port)
 	if err != OK:
 		print("Offline")
+		emit_signal("request_ready", Status.Offline)
 		return Status.Offline
 
 	var timer = 0
@@ -27,6 +30,7 @@ func request(endpoint, method = HTTPClient.METHOD_GET, body = null, headers = nu
 			yield(Engine.get_main_loop(), "idle_frame")
 
 	if timer >= timeout * 10:
+		emit_signal("request_ready", Status.Offline)
 		return Status.Offline
 	
 	var bodyStr = ""
@@ -35,6 +39,7 @@ func request(endpoint, method = HTTPClient.METHOD_GET, body = null, headers = nu
 
 	err = client.request(method, BASE_URL + endpoint, headers, bodyStr)
 	if err != OK:
+		emit_signal("request_ready", Status.Offline)
 		return Status.Offline
 
 	while client.get_status() == HTTPClient.STATUS_REQUESTING && timer < timeout * 10:
@@ -47,9 +52,11 @@ func request(endpoint, method = HTTPClient.METHOD_GET, body = null, headers = nu
 			OS.delay_msec(500)
 
 	if timer >= timeout * 10:
+		emit_signal("request_ready", Status.Offline)
 		return Status.Offline
 
 	if client.get_status() != HTTPClient.STATUS_BODY && client.get_status() != HTTPClient.STATUS_CONNECTED:
+		emit_signal("request_ready", Status.Offline)
 		return Status.Offline
 
 	if client.has_response():
@@ -75,6 +82,8 @@ func request(endpoint, method = HTTPClient.METHOD_GET, body = null, headers = nu
 		print("bytes got: ", rb.size())
 		var text = rb.get_string_from_ascii()
 		print("Text: ", text)
+		emit_signal("request_ready", Status.Online, JSON.parse(text))
 		return JSON.parse(text)
 		
+	emit_signal("request_ready", Status.Online, null)
 	return null
