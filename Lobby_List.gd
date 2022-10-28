@@ -22,6 +22,9 @@ func _on_To_Main_Menu_pressed():
 func _on_CreateLobby_pressed():
 	get_tree().change_scene("res://Lobby.tscn")
 
-func _on_get_lobbylyst(result, _response_code, _headers, body):
-	if HTTPAuth.verifyRequest(result) != HTTPAuth.Status.Online:
+func _on_get_lobbylyst(result, response_code, _headers, bodyString):
+	var response = HTTPAuth.parseResponse(result, response_code, bodyString)
+	if response[0] != HTTPAuth.Status.Online || response[1] == null:
 		return
+	var lobbylist = response[1]
+	print(lobbylist)
