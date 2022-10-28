@@ -20,11 +20,11 @@ func _ready():
 
 #Return to main menu
 func _on_To_Main_Menu_pressed():
-	get_tree().change_scene("res://Main_Menu.tscn")
+	get_tree().change_scene("res://scenes/main_menu/Main_Menu.tscn")
 
 #Goes to the lobby screen to create a lobby
 func _on_CreateLobby_pressed():
-	get_tree().change_scene("res://Lobby.tscn")
+	get_tree().change_scene("res://scenes/lobby/Lobby.tscn")
 
 func _on_get_lobbylyst(result, response_code, _headers, bodyString):
 	var response = Request.parseResponse(result, response_code, bodyString)

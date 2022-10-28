@@ -19,15 +19,15 @@ func _ready():
 
 #Starting starts the game
 func _on_Start_pressed():
-	get_tree().change_scene("res://Game.tscn")
+	get_tree().change_scene("res://scenes/game/Game.tscn")
 
 #returns to main menu if you were in single player, and returns to lobby list is from multiplayuer
 func _on_Leave_pressed():
 	if StartVars.singlePlayer:
 		StartVars.singlePlayer = false
-		get_tree().change_scene("res://Main_Menu.tscn")
+		get_tree().change_scene("res://scenes/main_menu/Main_Menu.tscn")
 	else:
-		get_tree().change_scene("res://Lobby_List.tscn")
+		get_tree().change_scene("res://scenes/lobby_list/Lobby_List.tscn")
 
 #Shows the options overlay menu
 func _on_Options_pressed():

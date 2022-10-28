@@ -33,6 +33,6 @@ func _on_Resume_pressed():
 func _on_Leave_pressed():
 	if StartVars.singlePlayer:
 		StartVars.singlePlayer = false
-		get_tree().change_scene("res://Main_Menu.tscn")
+		get_tree().change_scene("res://scenes/main_menu/Main_Menu.tscn")
 	else:
-		get_tree().change_scene("res://Lobby_List.tscn")
+		get_tree().change_scene("res://scenes/lobby_list/Lobby_List.tscn")

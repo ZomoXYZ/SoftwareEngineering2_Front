@@ -18,13 +18,13 @@ func _on_Singleplayer_pressed():
 	StartVars.singlePlayer = true
 	$AnimationPlayer.play("SinglePlayer_Transition")
 	yield($AnimationPlayer, "animation_finished")
-	get_tree().change_scene("res://Lobby.tscn")
+	get_tree().change_scene("res://scenes/lobby/Lobby.tscn")
 
 #Goes to lobby list
 func _on_Multiplayer_pressed():
 	$AnimationPlayer.play("MultiPlayer_Transition")
 	yield($AnimationPlayer, "animation_finished")
-	get_tree().change_scene("res://Lobby_List.tscn")
+	get_tree().change_scene("res://scenes/lobby_list/Lobby_List.tscn")
 
 
 func _on_Tutorial_pressed():

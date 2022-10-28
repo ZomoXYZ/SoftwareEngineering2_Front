@@ -1,13 +1,13 @@
 [gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://assets/fonts/ComicNeue-Regular.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://Main_Menu.gd" type="Script" id=2]
+[ext_resource path="res://scenes/main_menu/Main_Menu.gd" type="Script" id=2]
 [ext_resource path="res://assets/fonts/button_font.tres" type="DynamicFont" id=3]
 [ext_resource path="res://assets/styles/button_red.tres" type="StyleBox" id=4]
 [ext_resource path="res://assets/styles/button_green.tres" type="StyleBox" id=5]
 [ext_resource path="res://assets/styles/background.tres" type="StyleBox" id=6]
-[ext_resource path="res://PhysicsTriangle.tscn" type="PackedScene" id=7]
-[ext_resource path="res://PhysicsEllipse.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/main_menu/PhysicsTriangle.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/main_menu/PhysicsEllipse.tscn" type="PackedScene" id=8]
 
 [sub_resource type="DynamicFont" id=3]
 size = 86
