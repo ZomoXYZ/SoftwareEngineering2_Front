@@ -18,7 +18,6 @@ font_data = ExtResource( 6 )
 
 [sub_resource type="Animation" id=5]
 resource_name = "Intro_Transition"
-length = 0.7
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("../IntroPanel:rect_position:x")
 tracks/0/interp = 1
@@ -27,7 +26,7 @@ tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "points": PoolRealArray( 0, -0.25, 0, 0.3, 145.428, 70, -0.25, 0, 0.2, 57.2843, 70, -0.25, 0, 0.1, -290.907, 680, -0.2, -500.012, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.3, 0.5, 0.7 )
+"times": PoolRealArray( 0, 0.3, 0.7, 1 )
 }
 tracks/1/type = "bezier"
 tracks/1/path = NodePath("../IntroPanel:rect_position:y")
@@ -37,7 +36,7 @@ tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
 "points": PoolRealArray( -250, -0.25, 0, 0.2, -411.547, 250, -0.25, 0, 0.4, -37.1798, 250, -0.25, 0, 0.4, -37.1798, 250, -0.3, 2.56421, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.3, 0.5, 0.7 )
+"times": PoolRealArray( 0, 0.3, 0.7, 1 )
 }
 tracks/2/type = "bezier"
 tracks/2/path = NodePath("../IntroPanel:rect_rotation")
@@ -47,7 +46,7 @@ tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
 "points": PoolRealArray( 0, -0.25, 0, 0.2, -245.099, 26.9, -0.25, 0, 0.3, 0.160395, 26.9, -0.25, 0, 0.3, 58.9123, 87.5, -0.3, -65.6236, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.3, 0.5, 0.7 )
+"times": PoolRealArray( 0, 0.3, 0.7, 1 )
 }
 
 [sub_resource type="Animation" id=2]
@@ -248,6 +247,7 @@ align = 1
 valign = 1
 
 [node name="LobbyOptions" type="Panel" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_styles/panel = ExtResource( 7 )
@@ -343,7 +343,7 @@ text = "Point Goal"
 [node name="IntroPanel" type="Panel" parent="."]
 margin_top = -250.0
 margin_right = 480.0
-margin_bottom = -55.9996
+margin_bottom = -55.9994
 custom_styles/panel = ExtResource( 5 )
 
 [node name="IntroText" type="Label" parent="IntroPanel"]

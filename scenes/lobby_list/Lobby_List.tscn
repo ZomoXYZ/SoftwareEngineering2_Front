@@ -3,7 +3,7 @@
 [ext_resource path="res://scenes/lobby_list/Lobby_List.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/button_font.tres" type="DynamicFont" id=2]
 [ext_resource path="res://assets/styles/button_red.tres" type="StyleBox" id=3]
-[ext_resource path="res://assets/styles/background.tres" type="StyleBox" id=4]
+[ext_resource path="res://assets/styles/background2.tres" type="StyleBox" id=4]
 [ext_resource path="res://assets/styles/button_green.tres" type="StyleBox" id=5]
 
 [node name="LobbyList" type="Control"]

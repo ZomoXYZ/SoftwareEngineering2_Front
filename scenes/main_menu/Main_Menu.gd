@@ -22,7 +22,7 @@ func _on_Singleplayer_pressed():
 
 #Goes to lobby list
 func _on_Multiplayer_pressed():
-	$AnimationPlayer.play("MultiPlayer_Transition")
+	$AnimationPlayer.play("MultiPlayer_Transition2")
 	yield($AnimationPlayer, "animation_finished")
 	get_tree().change_scene("res://scenes/lobby_list/Lobby_List.tscn")
 

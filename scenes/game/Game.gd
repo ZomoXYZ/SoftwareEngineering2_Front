@@ -5,6 +5,10 @@ export(PackedScene) var cardScene
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if StartVars.singlePlayer:
+		$Pause/Panel/LobbyID.text = "Offline"
+	else:
+		$Pause/Panel/obbyID.text = "ID: 123456"
 	var cardInstance
 	$Pause.hide()
 	for i in 5:
