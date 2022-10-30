@@ -5,12 +5,17 @@ export(PackedScene) var cardScene
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	#First I check if this is a single player game or not, if so then I remove lobby ID and replace it with offline
 	if StartVars.singlePlayer:
 		$Pause/Panel/LobbyID.text = "Offline"
+		$Pause/PlayerList/KickPlayer.hide()
 	else:
 		$Pause/Panel/obbyID.text = "ID: 123456"
-	var cardInstance
+	
+	#Also hide Pause menu. This is important because the pause menu is an overlay
 	$Pause.hide()
+	#Spawning in cards
+	var cardInstance
 	for i in 5:
 		cardInstance = cardScene.instance()
 		cardInstance.set_rotation(PI / 2)
@@ -23,12 +28,15 @@ func _ready():
 
 #Pause shows pause overlay
 func _on_PauseButton_pressed():
+	#The pause animation changes the opacity of the pause menu, but having no opacity is not the same as hiding because it would still be tangible
+	#So we have to show() first then play the animation
 	$Pause.show()
 	$AnimationPlayer.play("Pause_Transition")
 	yield($AnimationPlayer, "animation_finished")
 
 #Resume hides the pause again
 func _on_Resume_pressed():
+	#Same as above but in reverse order, play the opacity change, then hide it so that buttons on main can be clicked
 	$AnimationPlayer.play_backwards("Pause_Transition")
 	yield($AnimationPlayer, "animation_finished")
 	$Pause.hide()

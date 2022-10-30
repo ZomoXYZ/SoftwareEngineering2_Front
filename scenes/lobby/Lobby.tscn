@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://assets/fonts/button_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/lobby/Lobby.gd" type="Script" id=2]
@@ -7,6 +7,9 @@
 [ext_resource path="res://assets/styles/button_green.tres" type="StyleBox" id=5]
 [ext_resource path="res://assets/fonts/ComicNeue-Regular.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://assets/styles/background2.tres" type="StyleBox" id=7]
+[ext_resource path="res://assets/sprites/Circle.png" type="Texture" id=8]
+[ext_resource path="res://assets/sprites/Triangle.png" type="Texture" id=9]
+[ext_resource path="res://assets/fonts/playerlist_font.tres" type="DynamicFont" id=10]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -15,6 +18,23 @@ size = 150
 outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 6 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.305882, 0.478431, 0.74902, 1 )
+corner_radius_top_right = 1024
+corner_radius_bottom_right = 1024
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.752941, 0.152941, 0.105882, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
 
 [sub_resource type="Animation" id=5]
 resource_name = "Intro_Transition"
@@ -47,6 +67,50 @@ tracks/2/enabled = true
 tracks/2/keys = {
 "points": PoolRealArray( 0, -0.25, 0, 0.2, -245.099, 26.9, -0.25, 0, 0.3, 0.160395, 26.9, -0.25, 0, 0.3, 58.9123, 87.5, -0.3, -65.6236, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.3, 0.7, 1 )
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "Leave_Transition"
+length = 0.4
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("../OutroPanel:custom_styles/panel:bg_color:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0.752941, -0.25, 0, 0.25, 0, 0.752941, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("../OutroPanel:custom_styles/panel:bg_color:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0.152941, -0.25, 0, 0.25, 0, 0.152941, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("../OutroPanel:custom_styles/panel:bg_color:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0.105882, -0.25, 0, 0.25, 0, 0.105882, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("../OutroPanel:custom_styles/panel:bg_color:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
 }
 
 [sub_resource type="Animation" id=2]
@@ -165,6 +229,129 @@ tracks/6/keys = {
 "points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
+tracks/7/type = "bezier"
+tracks/7/path = NodePath("../StartGamePanel:rect_position:x")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"points": PoolRealArray( -750, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/8/type = "bezier"
+tracks/8/path = NodePath("../StartGamePanel:rect_position:y")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"points": PoolRealArray( -305, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/9/type = "bezier"
+tracks/9/path = NodePath("../StartGamePanel/Circle:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/10/type = "bezier"
+tracks/10/path = NodePath("../StartGamePanel/Triangle:rotation_degrees")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/11/type = "bezier"
+tracks/11/path = NodePath("../OutroPanel:custom_styles/panel:bg_color:r")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"points": PoolRealArray( 0.752941, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/12/type = "bezier"
+tracks/12/path = NodePath("../OutroPanel:custom_styles/panel:bg_color:g")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"points": PoolRealArray( 0.152941, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/13/type = "bezier"
+tracks/13/path = NodePath("../OutroPanel:custom_styles/panel:bg_color:b")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"points": PoolRealArray( 0.105882, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/14/type = "bezier"
+tracks/14/path = NodePath("../OutroPanel:custom_styles/panel:bg_color:a")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "StartGame_Transition"
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("../StartGamePanel:rect_position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( -750, -0.25, 0, 0.25, 0, -100, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("../StartGamePanel:rect_position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( -305, -0.25, 0, 0.25, 0, -305, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("../StartGamePanel/Circle:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 360, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("../StartGamePanel/Triangle:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -360, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1 )
+}
 
 [node name="Lobby" type="Control"]
 anchor_right = 1.0
@@ -177,8 +364,76 @@ anchor_bottom = 1.0
 custom_styles/panel = ExtResource( 4 )
 
 [node name="PlayerList" type="VBoxContainer" parent="Background"]
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -147.0
+margin_top = 125.0
+margin_right = 148.0
+margin_bottom = 615.0
+rect_min_size = Vector2( 295, 0 )
+custom_constants/separation = 30
+
+[node name="Player1" type="Label" parent="Background/PlayerList"]
+margin_right = 295.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 0, 100 )
+custom_fonts/font = ExtResource( 10 )
+custom_styles/normal = ExtResource( 3 )
+text = "Player 
+1 "
+align = 2
+percent_visible = -0.142857
+
+[node name="PlayerIcon" type="Sprite" parent="Background/PlayerList/Player1"]
+position = Vector2( 70, 48 )
+scale = Vector2( 0.355556, 0.262598 )
+texture = ExtResource( 8 )
+
+[node name="Player2" type="Label" parent="Background/PlayerList"]
+margin_top = 130.0
+margin_right = 295.0
+margin_bottom = 230.0
+rect_min_size = Vector2( 0, 100 )
+custom_fonts/font = ExtResource( 10 )
+custom_styles/normal = ExtResource( 5 )
+text = "Player 2 "
+align = 2
+
+[node name="PlayerIcon" type="Sprite" parent="Background/PlayerList/Player2"]
+position = Vector2( 70, 48 )
+scale = Vector2( 0.355556, 0.262598 )
+texture = ExtResource( 8 )
+
+[node name="Player3" type="Label" parent="Background/PlayerList"]
+margin_top = 260.0
+margin_right = 295.0
+margin_bottom = 360.0
+rect_min_size = Vector2( 0, 100 )
+custom_fonts/font = ExtResource( 10 )
+custom_styles/normal = ExtResource( 5 )
+text = "Adjective 
+Noun "
+align = 2
+
+[node name="PlayerIcon" type="Sprite" parent="Background/PlayerList/Player3"]
+position = Vector2( 70, 48 )
+scale = Vector2( 0.355556, 0.262598 )
+texture = ExtResource( 8 )
+
+[node name="Player4" type="Label" parent="Background/PlayerList"]
+margin_top = 390.0
+margin_right = 295.0
+margin_bottom = 490.0
+rect_min_size = Vector2( 0, 100 )
+custom_fonts/font = ExtResource( 10 )
+custom_styles/normal = ExtResource( 5 )
+text = "Player 4 "
+align = 2
+
+[node name="PlayerIcon" type="Sprite" parent="Background/PlayerList/Player4"]
+position = Vector2( 70, 48 )
+scale = Vector2( 0.355556, 0.262598 )
+texture = ExtResource( 8 )
 
 [node name="BottomBar" type="HBoxContainer" parent="Background"]
 anchor_top = 1.0
@@ -341,6 +596,7 @@ custom_styles/normal = ExtResource( 5 )
 text = "Point Goal"
 
 [node name="IntroPanel" type="Panel" parent="."]
+visible = false
 margin_top = -250.0
 margin_right = 480.0
 margin_bottom = -55.9994
@@ -355,11 +611,44 @@ text = "LOBBY
 align = 1
 valign = 1
 
+[node name="StartGamePanel" type="Panel" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -750.0
+margin_top = -305.0
+margin_right = -7.0
+margin_bottom = 1158.0
+custom_styles/panel = SubResource( 6 )
+
+[node name="Circle" type="Sprite" parent="StartGamePanel"]
+position = Vector2( 647.5, 646 )
+scale = Vector2( 0.324691, 0.324691 )
+texture = ExtResource( 8 )
+
+[node name="Triangle" type="Sprite" parent="StartGamePanel"]
+position = Vector2( 726.5, 793 )
+scale = Vector2( 0.325, 0.325 )
+texture = ExtResource( 9 )
+flip_h = true
+
+[node name="OutroPanel" type="Panel" parent="."]
+visible = false
+margin_left = -52.0
+margin_top = -8.0
+margin_right = 511.0
+margin_bottom = 905.0
+custom_styles/panel = SubResource( 8 )
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../LobbyOptions")
 anims/Intro_Transition = SubResource( 5 )
+anims/Leave_Transition = SubResource( 10 )
 anims/Options_Transition = SubResource( 2 )
 anims/RESET = SubResource( 3 )
+anims/StartGame_Transition = SubResource( 7 )
 
 [connection signal="pressed" from="Background/BottomBar/Leave" to="." method="_on_Leave_pressed"]
 [connection signal="pressed" from="Background/BottomBar/Options" to="." method="_on_Options_pressed"]

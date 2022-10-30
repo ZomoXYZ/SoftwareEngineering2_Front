@@ -15,7 +15,9 @@ func _ready():
 
 #goes straight to lobby
 func _on_Singleplayer_pressed():
+	#Using start vars as a flag to make sure our lobbies oriten themselves right
 	StartVars.singlePlayer = true
+	#Play animation before switching scene
 	$AnimationPlayer.play("SinglePlayer_Transition")
 	yield($AnimationPlayer, "animation_finished")
 	get_tree().change_scene("res://scenes/lobby/Lobby.tscn")
