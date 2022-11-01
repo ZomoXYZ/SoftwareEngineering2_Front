@@ -8,3 +8,7 @@ lib/
 
 # MacOS stuff
 .DS_Store
+
+# Godot stuff
+*.import
+*.log
