@@ -1,15 +1,16 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/styles/background.tres" type="StyleBox" id=1]
 [ext_resource path="res://assets/styles/button_red.tres" type="StyleBox" id=2]
 [ext_resource path="res://assets/styles/button_green.tres" type="StyleBox" id=3]
 [ext_resource path="res://assets/sprites/cards/FreeCard.png" type="Texture" id=4]
 [ext_resource path="res://assets/sprites/cards/Back.png" type="Texture" id=5]
-[ext_resource path="res://scenes/card/Card.gd" type="Script" id=6]
+[ext_resource path="res://scenes/game/Game.gd" type="Script" id=6]
 [ext_resource path="res://assets/sprites/Circle.png" type="Texture" id=7]
 [ext_resource path="res://assets/fonts/button_font.tres" type="DynamicFont" id=8]
 [ext_resource path="res://assets/styles/background2.tres" type="StyleBox" id=9]
 [ext_resource path="res://assets/fonts/playerlist_font.tres" type="DynamicFont" id=10]
+[ext_resource path="res://scenes/card/Card.tscn" type="PackedScene" id=11]
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 1, 1, 1, 1 )
@@ -120,6 +121,7 @@ tracks/3/keys = {
 
 [node name="Game" type="Node"]
 script = ExtResource( 6 )
+cardScene = ExtResource( 11 )
 
 [node name="Background" type="Panel" parent="."]
 anchor_right = 1.0

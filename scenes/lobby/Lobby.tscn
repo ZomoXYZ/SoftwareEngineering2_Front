@@ -382,7 +382,6 @@ custom_styles/normal = ExtResource( 3 )
 text = "Player 
 1 "
 align = 2
-percent_visible = -0.142857
 
 [node name="PlayerIcon" type="Sprite" parent="Background/PlayerList/Player1"]
 position = Vector2( 70, 48 )

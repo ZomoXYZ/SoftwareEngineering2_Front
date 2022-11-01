@@ -1,4 +1,4 @@
-extends Control
+extends Node
 
 #Terrible way to do this yet alas
 var cards = [

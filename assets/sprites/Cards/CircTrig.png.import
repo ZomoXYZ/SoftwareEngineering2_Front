@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/CircTrig.png-3223d65e1d099e6dc9c306bd79b771d7.stex"
+path="res://.import/CircTrig.png-bdbce18b30ed82fd251f46485d6ad141.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Cards/CircTrig.png"
-dest_files=[ "res://.import/CircTrig.png-3223d65e1d099e6dc9c306bd79b771d7.stex" ]
+source_file="res://assets/sprites/cards/CircTrig.png"
+dest_files=[ "res://.import/CircTrig.png-bdbce18b30ed82fd251f46485d6ad141.stex" ]
 
 [params]
 

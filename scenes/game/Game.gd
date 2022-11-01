@@ -10,7 +10,7 @@ func _ready():
 		$Pause/Panel/LobbyID.text = "Offline"
 		$Pause/PlayerList/KickPlayer.hide()
 	else:
-		$Pause/Panel/obbyID.text = "ID: 123456"
+		$Pause/Panel/LobbyID.text = "ID: 123456"
 	
 	#Also hide Pause menu. This is important because the pause menu is an overlay
 	$Pause.hide()
