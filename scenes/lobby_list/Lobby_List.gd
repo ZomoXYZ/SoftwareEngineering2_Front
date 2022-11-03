@@ -1,6 +1,6 @@
 extends Control
 
-
+export(PackedScene) var lobbyButtonScene
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -36,11 +36,13 @@ func _on_To_Main_Menu_pressed():
 
 #Goes to the lobby screen to create a lobby
 func _on_CreateLobby_pressed():
-	Request.createRequest(self, "_on_Lobby_created", "/lobby", HTTPClient.METHOD_POST)
+	if Request.token != "":
+		Request.createRequest(self, "_on_Lobby_created", "/lobby", HTTPClient.METHOD_POST)
 	
 
 func _on_Lobby_created(result, response_code, _headers, bodyString):
-	print(bodyString)
+	print(_headers)
+	print(bodyString.get_string_from_utf8())
 	#Standard animation procedure
 	$OutroPanel.show()
 	$AnimationPlayer.play("Outro_Transition")
@@ -53,3 +55,7 @@ func _on_get_lobbylyst(result, response_code, _headers, bodyString):
 		return
 	var lobbylist = response[1]
 	print(lobbylist)
+	var lobbyButton
+	for lobby in lobbylist:
+		lobbyButton = lobbyButtonScene.instance()
+		$Background/Lobbies.add_child(lobbyButton)
