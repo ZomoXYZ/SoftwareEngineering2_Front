@@ -36,6 +36,11 @@ func _on_To_Main_Menu_pressed():
 
 #Goes to the lobby screen to create a lobby
 func _on_CreateLobby_pressed():
+	Request.createRequest(self, "_on_Lobby_created", "/lobby", HTTPClient.METHOD_POST)
+	
+
+func _on_Lobby_created(result, response_code, _headers, bodyString):
+	print(bodyString)
 	#Standard animation procedure
 	$OutroPanel.show()
 	$AnimationPlayer.play("Outro_Transition")
