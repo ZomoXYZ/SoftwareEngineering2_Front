@@ -41,20 +41,28 @@ func _on_CreateLobby_pressed():
 	
 
 func _on_Lobby_created(result, response_code, _headers, bodyString):
-	print(_headers)
-	print(bodyString.get_string_from_utf8())
-	#Standard animation procedure
+	# parse response
+	var response = Request.parseResponse(result, response_code, bodyString)
+	if response[0] != Request.Status.Online || response[1] == null:
+		return
+	var lobbydata = response[1]
+	print(lobbydata)
+
+	# Standard animation procedure
 	$OutroPanel.show()
 	$AnimationPlayer.play("Outro_Transition")
 	yield($AnimationPlayer, "animation_finished")
 	get_tree().change_scene("res://scenes/lobby/Lobby.tscn")
 
 func _on_get_lobbylyst(result, response_code, _headers, bodyString):
+	# parse response
 	var response = Request.parseResponse(result, response_code, bodyString)
 	if response[0] != Request.Status.Online || response[1] == null:
 		return
 	var lobbylist = response[1]
 	print(lobbylist)
+
+	# display buttons
 	var lobbyButton
 	for lobby in lobbylist:
 		lobbyButton = lobbyButtonScene.instance()
