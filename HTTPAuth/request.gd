@@ -1,9 +1,9 @@
 extends Node
 
 const Schema = "http"
-const Host = "localhost"
+const Host = "10.242.225.140"
 const Port = 8080
-const Path = ""
+const Path = "/api"
 const BASE_URL = "%s://%s:%s%s" % [Schema, Host, Port, Path]
 
 var token = ""
@@ -63,7 +63,7 @@ func parseResponse(result, response_code, body):
 	print(bodyString)
 
 	if jsonResult.error != OK:
-		print("Error loading token from Server's JSON: %s" % jsonResult.error)
+		print("Error loading token from Server's JSON: %s\n\nRaw Body:\n%s" % [jsonResult.error, bodyString])
 		return [Status.Error, null]
 
 	return [Status.Online, jsonResult.result]
