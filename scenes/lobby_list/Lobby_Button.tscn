@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/styles/button_red.tres" type="StyleBox" id=1]
 [ext_resource path="res://assets/styles/button_green.tres" type="StyleBox" id=2]
 [ext_resource path="res://assets/fonts/button_font.tres" type="DynamicFont" id=3]
+[ext_resource path="res://scenes/lobby_list/Lobby_Button.gd" type="Script" id=4]
 
 [node name="LobbyButton" type="Button"]
 margin_right = 156.0
@@ -14,3 +15,4 @@ custom_styles/pressed = ExtResource( 1 )
 custom_styles/disabled = ExtResource( 2 )
 custom_styles/normal = ExtResource( 2 )
 text = "Lobby:"
+script = ExtResource( 4 )

@@ -57,13 +57,16 @@ func _on_Lobby_created(result, response_code, _headers, bodyString):
 func _on_get_lobbylyst(result, response_code, _headers, bodyString):
 	# parse response
 	var response = Request.parseResponse(result, response_code, bodyString)
+	print(bodyString.get_string_from_utf8())
+	print(response)
 	if response[0] != Request.Status.Online || response[1] == null:
 		return
 	var lobbylist = response[1]
 	print(lobbylist)
+	
 
 	# display buttons
 	var lobbyButton
-	for lobby in lobbylist:
+	for lobby in lobbylist['lobbies']:
 		lobbyButton = lobbyButtonScene.instance()
 		$Background/Lobbies.add_child(lobbyButton)
