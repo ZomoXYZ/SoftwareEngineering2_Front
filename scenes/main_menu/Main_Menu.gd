@@ -7,6 +7,8 @@ export(PackedScene) var ellipseScene
 func _ready():
 	randomize()
 	Request.authorizeSession()
+	Request.connect("user_online", self, "_on_user_online")
+	Request.connect("user_offline", self, "_on_user_offline")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -66,3 +68,9 @@ func _on_EffectTimer_timeout():
 
 	# Spawn the shape by adding it to the Main scene.
 	add_child(shape)
+
+func _on_user_online(PlayerNameAdjective, PlayerNameNoun, PlayerPicture):
+	print("User Online, Name: %s %s, Picture: %s" % [PlayerNameAdjective, PlayerNameNoun, PlayerPicture])
+
+func _on_user_offline():
+	print("User Offline")

@@ -8,7 +8,12 @@ const BASE_URL = "%s://%s:%s%s" % [Schema, Host, Port, Path]
 
 var token = ""
 var lastChecked = -1
-	
+
+signal user_online(PlayerNameAdjective, PlayerNameNoun, PlayerPicture)
+signal user_offline()
+
+enum Status {Online, Offline, Error}
+
 # createRequest(self, "_on_request_complete")
 func createRequest(root, callback, endpoint, method = HTTPClient.METHOD_GET, body = null, noToken = false):
 	assert(noToken || token != "")
@@ -24,23 +29,34 @@ func createRequest(root, callback, endpoint, method = HTTPClient.METHOD_GET, bod
 	if !noToken:
 		headers.append("Authorization: %s" % token)
 		
+	# convert body
 	var bodyStr = ""
 	if body != null:
 		bodyStr = JSON.print(body)
 	
+	# print request
+	var headersPrintString = ""
+	for h in headers:
+		headersPrintString += "\n\t" + h 
+	var bodyPrintString = ""
+	if bodyStr != "":
+		bodyPrintString = "\n\t" + bodyStr
+	
+	print("Requesting %s%s%s%s" % [BASE_URL, endpoint, headersPrintString, bodyPrintString])
+	
+	# get errors
 	var error = http_request.request(BASE_URL + endpoint, headers, Schema.to_lower() == "https", method, bodyStr)
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
 
-enum Status {Online, Offline, Error}
-
 # returns: [status, body]
 func parseResponse(result, response_code, body):
+	# check result for errors
 	if result != HTTPRequest.RESULT_SUCCESS:
-		print("OFFLINE")
+		print("Request Offline")
 		return [Status.Offline, null]
-	print("ONLINE")
-
+	
+	# check response codes
 	if response_code == 401:
 		print("Request Error")
 		return [Status.Error, null]
@@ -54,18 +70,19 @@ func parseResponse(result, response_code, body):
 		print("Unknown Response Code %s" % response_code)
 		return [Status.Error, null]
 
+	# convert body
 	var bodyString = body.get_string_from_utf8()
-	
 	if bodyString == "":
 		return [Status.Online, null]
 	
 	var jsonResult = JSON.parse(bodyString)
-	print(bodyString)
-
+	print("Response Raw Body: %s" % bodyString)
+	
 	if jsonResult.error != OK:
 		print("Error loading token from Server's JSON: %s\n\nRaw Body:\n%s" % [jsonResult.error, bodyString])
 		return [Status.Error, null]
 
+	# return Json body
 	return [Status.Online, jsonResult.result]
 
 func authorizeSession(force = false):
@@ -73,11 +90,17 @@ func authorizeSession(force = false):
 	# TODO make this an hour if they have a token
 	if force || (lastChecked != -1 && lastChecked > Time.get_ticks_msec() - 15 * 1000):
 		print("Checking too quick")
+		if token != "" && UserData.PlayerNameAdjective != -1 && UserData.PlayerNameNoun != -1 && UserData.PlayerPicture != -1:
+			emit_signal("user_online", UserData.PlayerNameAdjective, UserData.PlayerNameNoun, UserData.PlayerPicture)
+			return
+		else:
+			emit_signal("user_offline")
 		return
 	
 	lastChecked = Time.get_ticks_msec()
 	
 	if token != "":
+		# TODO confirm token
 		print("TODO confirm token")
 		return
 	
@@ -86,6 +109,7 @@ func authorizeSession(force = false):
 func _on_get_token(result, response_code, _headers, bodyString):
 	var response = parseResponse(result, response_code, bodyString)
 	if response[0] != Status.Online || response[1] == null:
+		emit_signal("user_offline")
 		return
 		
 	token = response[1].token
@@ -100,8 +124,9 @@ func _on_get_token(result, response_code, _headers, bodyString):
 func _on_get_userdata(result, response_code, _headers, bodyString):
 	var response = parseResponse(result, response_code, bodyString)
 	if response[0] != Status.Online || response[1] == null:
+		emit_signal("user_offline")
 		return
 	
 	var playerData = response[1]
 	UserData.setUserData(playerData)
-	print("Name: %s %s, Picture: %s" % [playerData.name.adjective, playerData.name.noun, playerData.picture])
+	emit_signal("user_online", UserData.PlayerNameAdjective, UserData.PlayerNameNoun, UserData.PlayerPicture)
