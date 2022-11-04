@@ -4,6 +4,7 @@ export(PackedScene) var lobbyButtonScene
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
+var remember = 100
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -64,9 +65,24 @@ func _on_get_lobbylyst(result, response_code, _headers, bodyString):
 	var lobbylist = response[1]
 	print(lobbylist)
 	
-
 	# display buttons
 	var lobbyButton
 	for lobby in lobbylist['lobbies']:
 		lobbyButton = lobbyButtonScene.instance()
 		$Background/Lobbies.add_child(lobbyButton)
+	remember = 50 * $Background/Lobbies.get_child_count()
+	$Background/VSlider.max_value = remember
+	$Background/VSlider.value = remember
+
+
+func _on_VSlider_value_changed(value):
+	var current
+	var vector
+	var temp = value
+	value = remember-value
+	remember = temp
+	for child in $Background/Lobbies.get_child_count():
+		current = $Background/Lobbies.get_child(child)
+		vector = current.get_position()
+		current.set_position(Vector2(0,vector.y - value))
+		
