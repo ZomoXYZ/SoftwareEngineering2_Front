@@ -1,9 +1,9 @@
 extends Node
 
 const Schema = "http"
-const Host = "10.242.225.140"
-const Port = 8080
-const Path = "/api"
+const Host = "wan.zomo.land"
+const Port = 80
+const Path = "/api/v1"
 const BASE_URL = "%s://%s:%s%s" % [Schema, Host, Port, Path]
 
 var token = ""
