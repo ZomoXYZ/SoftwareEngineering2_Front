@@ -1,10 +1,12 @@
 extends Node
 
-const Schema = "https"
+const Schema_http = "https"
+const Schema_ws = "wss"
 const Host = "wan.zomo.dev"
 const Port = 443
 const Path = "/api/v1"
-const BASE_URL = "%s://%s:%s%s" % [Schema, Host, Port, Path]
+const BASE_URL = "%s://%s:%s%s" % [Schema_http, Host, Port, Path]
+const WS_URL = "%s://%s:%s%s/ws" % [Schema_ws, Host, Port, Path]
 
 var token = ""
 var lastChecked = -1
