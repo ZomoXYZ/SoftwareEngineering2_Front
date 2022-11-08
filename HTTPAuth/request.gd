@@ -1,8 +1,8 @@
 extends Node
 
-const Schema = "http"
-const Host = "wan.zomo.land"
-const Port = 80
+const Schema = "https"
+const Host = "wan.zomo.dev"
+const Port = 443
 const Path = "/api/v1"
 const BASE_URL = "%s://%s:%s%s" % [Schema, Host, Port, Path]
 
