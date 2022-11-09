@@ -16,3 +16,5 @@ custom_styles/disabled = ExtResource( 2 )
 custom_styles/normal = ExtResource( 2 )
 text = "Lobby:"
 script = ExtResource( 4 )
+
+[connection signal="pressed" from="." to="." method="_on_LobbyButton_pressed"]

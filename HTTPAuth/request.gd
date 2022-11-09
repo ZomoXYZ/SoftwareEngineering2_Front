@@ -47,7 +47,7 @@ func createRequest(root, callback, endpoint, method = HTTPClient.METHOD_GET, bod
 	print("Requesting %s%s%s%s" % [BASE_URL, endpoint, headersPrintString, bodyPrintString])
 	
 	# get errors
-	var error = http_request.request(BASE_URL + endpoint, headers, Schema.to_lower() == "https", method, bodyStr)
+	var error = http_request.request(BASE_URL + endpoint, headers, Schema_http.to_lower() == "https", method, bodyStr)
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
 
@@ -78,7 +78,7 @@ func parseResponse(result, response_code, body):
 		return [Status.Online, null]
 	
 	var jsonResult = JSON.parse(bodyString)
-	print("Response Raw Body: %s" % bodyString)
+	#print("Response Raw Body: %s" % bodyString)
 	
 	if jsonResult.error != OK:
 		print("Error loading token from Server's JSON: %s\n\nRaw Body:\n%s" % [jsonResult.error, bodyString])

@@ -47,7 +47,6 @@ func _on_Lobby_created(result, response_code, _headers, bodyString):
 	if response[0] != Request.Status.Online || response[1] == null:
 		return
 	var lobbydata = response[1]
-	print(lobbydata)
 
 	# Standard animation procedure
 	$OutroPanel.show()
@@ -58,17 +57,17 @@ func _on_Lobby_created(result, response_code, _headers, bodyString):
 func _on_get_lobbylyst(result, response_code, _headers, bodyString):
 	# parse response
 	var response = Request.parseResponse(result, response_code, bodyString)
-	print(bodyString.get_string_from_utf8())
-	print(response)
+	#print(bodyString.get_string_from_utf8())
 	if response[0] != Request.Status.Online || response[1] == null:
 		return
 	var lobbylist = response[1]
-	print(lobbylist)
 	
 	# display buttons
 	var lobbyButton
 	for lobby in lobbylist['lobbies']:
 		lobbyButton = lobbyButtonScene.instance()
+		lobbyButton.code = lobby['code']
+		lobbyButton.id = lobby['id']
 		$Background/Lobbies.add_child(lobbyButton)
 	remember = 50 * $Background/Lobbies.get_child_count()
 	$Background/VSlider.max_value = remember
