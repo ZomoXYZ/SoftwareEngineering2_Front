@@ -1,10 +1,6 @@
 extends Control
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
 #There might be a better way to do this but this is the only thing I found thro google
 #We preload the image from files so we can use this variable is needeth beedeth
 var button_empty = preload("res://assets/styles/button_empty.tres")
@@ -46,6 +42,16 @@ func _ready():
 	$StartGamePanel.hide()
 	$LobbyOptions.hide()
 	$OutroPanel.hide()
+	$Background/Panel/Start.hide()
+	if StartVars.isHost:
+		$Background/Panel/Start.show()
+	else:
+		$LobbyOptions/Panel/ButtonContainer/KickPlayer.add_stylebox_override("normal", button_empty)
+		$LobbyOptions/Panel/ButtonContainer/KickPlayer.add_stylebox_override("pressed", button_empty)
+		$LobbyOptions/Panel/ButtonContainer/SetPassword.add_stylebox_override("normal", button_empty)
+		$LobbyOptions/Panel/ButtonContainer/SetPassword.add_stylebox_override("pressed", button_empty)
+		$LobbyOptions/Panel/ButtonContainer/PointGoal.add_stylebox_override("normal", button_empty)
+		$LobbyOptions/Panel/ButtonContainer/PointGoal.add_stylebox_override("pressed", button_empty)
 	#We show the intro and play the animation then hide the intro
 	$IntroPanel.show()
 	$AnimationPlayer.play("Intro_Transition")
@@ -60,12 +66,13 @@ func _ready():
 #Starting starts the game
 func _on_Start_pressed():
 	#Hide into panel here in case the button gets pressed during the intro animation
-	$IntroPanel.hide()
-	#Standard animation procedure
-	$StartGamePanel.show()
-	$AnimationPlayer.play("StartGame_Transition")
-	yield($AnimationPlayer, "animation_finished")
-	get_tree().change_scene("res://scenes/game/Game.tscn")
+	if StartVars.isHost:
+		$IntroPanel.hide()
+		#Standard animation procedure
+		$StartGamePanel.show()
+		$AnimationPlayer.play("StartGame_Transition")
+		yield($AnimationPlayer, "animation_finished")
+		get_tree().change_scene("res://scenes/game/Game.tscn")
 
 #returns to main menu if you were in single player, and returns to lobby list is from multiplayuer
 func _on_Leave_pressed():
@@ -74,6 +81,7 @@ func _on_Leave_pressed():
 	$IntroPanel.hide()
 	$Background/BottomBar.hide()
 	#Standard animation procedure
+	StartVars.isHost = false
 	$OutroPanel.show()
 	$AnimationPlayer.play("Leave_Transition")
 	yield($AnimationPlayer, "animation_finished")
