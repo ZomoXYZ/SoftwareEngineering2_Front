@@ -47,12 +47,8 @@ func _on_Lobby_created(result, response_code, _headers, bodyString):
 	if response[0] != Request.Status.Online || response[1] == null:
 		return
 	var lobbydata = response[1]
-
-	# Standard animation procedure
-	$OutroPanel.show()
-	$AnimationPlayer.play("Outro_Transition")
-	yield($AnimationPlayer, "animation_finished")
-	get_tree().change_scene("res://scenes/lobby/Lobby.tscn")
+	
+	LobbyConn.join(lobbydata['id'])
 
 func _on_get_lobbylyst(result, response_code, _headers, bodyString):
 	# parse response
@@ -84,3 +80,11 @@ func _on_VSlider_value_changed(value):
 		current = $Background/Lobbies.get_child(child)
 		vector = current.get_position()
 		current.set_position(Vector2(0,vector.y - value))
+		
+		
+func _lobby_joined():
+	# Standard animation procedure
+	$OutroPanel.show()
+	$AnimationPlayer.play("Outro_Transition")
+	yield($AnimationPlayer, "animation_finished")
+	get_tree().change_scene("res://scenes/lobby/Lobby.tscn")
