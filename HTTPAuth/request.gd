@@ -1,13 +1,5 @@
 extends Node
 
-const Schema_http = "https"
-const Schema_ws = "wss"
-const Host = "wan.zomo.dev"
-const Port = 80
-const Path = "/api/v1"
-const BASE_URL = "%s://%s:%s%s" % [Schema_http, Host, Port, Path]
-const WS_URL = "%s://%s:%s%s/ws" % [Schema_ws, Host, Port, Path]
-
 var token = ""
 var lastChecked = -1
 
@@ -44,10 +36,10 @@ func createRequest(root, callback, endpoint, method = HTTPClient.METHOD_GET, bod
 	if bodyStr != "":
 		bodyPrintString = "\n\t" + bodyStr
 	
-	print("Requesting %s%s%s%s" % [BASE_URL, endpoint, headersPrintString, bodyPrintString])
+	print("Requesting %s%s%s%s" % [RequestEnv.BASE_URL, endpoint, headersPrintString, bodyPrintString])
 	
 	# get errors
-	var error = http_request.request(BASE_URL + endpoint, headers, Schema_http.to_lower() == "https", method, bodyStr)
+	var error = http_request.request(RequestEnv.BASE_URL + endpoint, headers, RequestEnv.Schema_http.to_lower() == "https", method, bodyStr)
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
 

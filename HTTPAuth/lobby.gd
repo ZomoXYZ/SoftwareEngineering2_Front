@@ -19,7 +19,7 @@ func _ready():
 	client.connect("data_received", self, "_data")
 	client.connect("server_close_request", self, "_server_close_request")
 
-func _process(delta):
+func _process(_delta):
 	client.poll()
 
 func join(lobbyid):
@@ -30,9 +30,9 @@ func join(lobbyid):
 	Host = null
 	Players = []
 	# try connecting
-	var err = client.connect_to_url(Request.WS_URL)
+	var err = client.connect_to_url(RequestEnv.WS_URL)
 	if err != OK:
-		print("Error Connecting to %s, %s" % [Request.WS_URL, err])
+		print("Error Connecting to %s, %s" % [RequestEnv.WS_URL, err])
 		ID = ""
 		
 func send(message):
@@ -79,12 +79,12 @@ func command_authorized():
 	
 func command_joined(args):
 	# joined the lobby and received data about the lobby
-	var data = JSON.parse(args[0])
+	var data = JSON.parse(args[0]).result
 	# set variables
 	Authorized = true
-	ID = data["id"]
-	Code = data["code"]
-	Host = data["host"]
-	Players = data["players"]
+	ID = data.id
+	Code = data.code
+	Host = data.host
+	Players = data.players
 
 	emit_signal("joined_lobby")
