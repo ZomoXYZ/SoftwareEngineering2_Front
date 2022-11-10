@@ -19,6 +19,7 @@ func _ready():
 func _on_Singleplayer_pressed():
 	#Using start vars as a flag to make sure our lobbies oriten themselves right
 	StartVars.singlePlayer = true
+	StartVars.isHost = true
 	#Play animation before switching scene
 	$AnimationPlayer.play("SinglePlayer_Transition")
 	yield($AnimationPlayer, "animation_finished")
