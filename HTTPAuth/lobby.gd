@@ -47,12 +47,12 @@ func _connected(_proto):
 func _data():
 	var args = receiveCommand()
 	var command = args.pop_front()
+	# print("Command: %s, Args: %s" % [command, args])
 	match(command):
 		"authorized":
 			command_authorized()
 		"joined":
 			command_joined(args)
-	print("Command: %s, Args: %s" % [command, args])
 
 func _closed(was_clean_close):
 	if was_clean_close:
