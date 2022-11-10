@@ -1,11 +1,15 @@
 extends Node
 
 var client = WebSocketClient.new()
-var LobbyId = ""
 var Authorized = false
 
+var ID = ""
+var Code = ""
+var Host = null
+var Players = []
+
 signal disconnected()
-signal joined_lobby(data)
+signal joined_lobby()
 signal game_start()
 
 func _ready():
@@ -20,13 +24,16 @@ func _process(delta):
 
 func join(lobbyid):
 	# set variables
-	LobbyId = lobbyid
 	Authorized = false
+	ID = lobbyid
+	Code = ""
+	Host = null
+	Players = []
 	# try connecting
 	var err = client.connect_to_url(Request.WS_URL)
 	if err != OK:
 		print("Error Connecting to %s, %s" % [Request.WS_URL, err])
-		LobbyId = ""
+		ID = ""
 		
 func send(message):
 	print("> %s" % message)
@@ -67,8 +74,17 @@ func _server_close_request(code, reason):
 	print("Server requested close (Code %s): %s" % [code, reason])
 
 func command_authorized():
-	send("join %s" % LobbyId)
+	# authorized session, can join the lobby now
+	send("join %s" % ID)
 	
 func command_joined(args):
+	# joined the lobby and received data about the lobby
 	var data = JSON.parse(args[0])
-	emit_signal("joined_lobby", data)
+	# set variables
+	Authorized = true
+	ID = data["id"]
+	Code = data["code"]
+	Host = data["host"]
+	Players = data["players"]
+
+	emit_signal("joined_lobby")
