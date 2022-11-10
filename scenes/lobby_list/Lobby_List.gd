@@ -84,4 +84,3 @@ func _on_VSlider_value_changed(value):
 		current = $Background/Lobbies.get_child(child)
 		vector = current.get_position()
 		current.set_position(Vector2(0,vector.y - value))
-		

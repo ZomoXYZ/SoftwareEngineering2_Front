@@ -8,6 +8,8 @@ extends Control
 #There might be a better way to do this but this is the only thing I found thro google
 #We preload the image from files so we can use this variable is needeth beedeth
 var button_empty = preload("res://assets/styles/button_empty.tres")
+var button_green = preload("res://assets/styles/button_green.tres")
+var button_red = preload("res://assets/styles/button_red.tres")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,8 +21,11 @@ func _ready():
 		$Background/PlayerList/Player3.text = "Medium \nBot "
 		$Background/PlayerList/Player4.text = "Hard \nBot "
 	else:
+		var lobby
+		var current
+		var ID
 		#If online, then I set all the other players slots to empty and hid their playerIcons
-		$Background/Panel/LobbyID.text = "ID: 123456"
+		$Background/Panel/LobbyID.text = "ID: %s" %ID
 		$Background/PlayerList/Player2.add_stylebox_override("normal", button_empty)
 		$Background/PlayerList/Player2.text = ""
 		$Background/PlayerList/Player2/PlayerIcon.hide()
@@ -30,6 +35,12 @@ func _ready():
 		$Background/PlayerList/Player4.add_stylebox_override("normal", button_empty)
 		$Background/PlayerList/Player4.text = ""
 		$Background/PlayerList/Player4/PlayerIcon.hide()
+		for player in lobby:
+			current = $Background/PlayerList.get_child(player)
+			current.text = "hello"
+			current.add_stylebox_override("normal", button_green)
+			if player == 0:
+				current.add_stylebox_override("normal", button_red)
 		
 	#Very important to make sure the transitions are hidden
 	$StartGamePanel.hide()
