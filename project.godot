@@ -19,6 +19,7 @@ config/icon="res://icon.png"
 StartVars="*res://Start_Vars.gd"
 Request="*res://HTTPAuth/request.gd"
 UserData="*res://HTTPAuth/userdata.gd"
+LobbyConn="*res://HTTPAuth/lobby.gd"
 
 [display]
 
