@@ -20,7 +20,7 @@ func _ready():
 	client.connect("data_received", self, "_data")
 	client.connect("server_close_request", self, "_server_close_request")
 
-func _process(_delta):
+func _process(delta):
 	client.poll()
 
 func join(lobbyid):
@@ -36,6 +36,17 @@ func join(lobbyid):
 	if err != OK:
 		print("Error Connecting to %s, %s" % [RequestEnv.WS_URL, err])
 		ID = ""
+
+func leave():
+	client.close()
+
+	Authorized = false
+	ID = ""
+	Code = ""
+	Host = null
+	Players = []
+
+	emit_signal("disconnected")
 		
 func send(message):
 	print("> %s" % message)
@@ -60,6 +71,11 @@ func _data():
 	# print("Command: %s, Args: %s" % [command, args])
 
 	match(command):
+		# ping
+		"ping":
+			send("pong")
+
+		# responses
 		"authorized":
 			command_authorized()
 		"unauthorized":
@@ -102,12 +118,7 @@ func _error():
 
 func _server_close_request(code, reason):
 	print("Server requested close (Code %s): %s" % [code, reason])
-
-	Authorized = false
-	ID = ""
-	Code = ""
-	Host = null
-	Players = []
+	leave()
 
 func command_authorized():
 	# authorized session, can join the lobby now
