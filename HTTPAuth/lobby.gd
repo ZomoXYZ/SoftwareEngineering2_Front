@@ -38,7 +38,7 @@ func join(lobbyid):
 		ID = ""
 
 func leave():
-	client.close()
+	client.disconnect_from_host()
 
 	Authorized = false
 	ID = ""
