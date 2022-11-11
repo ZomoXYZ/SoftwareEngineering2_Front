@@ -29,6 +29,7 @@ func join(lobbyid):
 	Code = ""
 	Host = null
 	Players = []
+
 	# try connecting
 	var err = client.connect_to_url(RequestEnv.WS_URL)
 	if err != OK:
@@ -39,7 +40,7 @@ func send(message):
 	print("> %s" % message)
 	client.get_peer(1).put_packet(message.to_utf8())
 	
-func receiveCommand():
+func receive():
 	var message = client.get_peer(1).get_packet().get_string_from_utf8()
 	print("< %s" % message)
 	return Array(message.split(" "))
@@ -52,14 +53,36 @@ func _connected(_proto):
 	send(command)
 
 func _data():
-	var args = receiveCommand()
+	var args = receive()
 	var command = args.pop_front()
+
 	# print("Command: %s, Args: %s" % [command, args])
+
 	match(command):
 		"authorized":
 			command_authorized()
+		"unauthorized":
+			command_unauthorized()
+
 		"joined":
 			command_joined(args)
+
+		# errors
+		"error":
+			command_error_(args)
+
+		"badcommand":
+			command_error_badcommand(args)
+		"badlobby":
+			command_error_badlobby(args)
+		
+		"lobbyfull":
+			command_error_lobbyfull()
+		"lobbyinprogress":
+			command_error_lobbyinprogress()
+
+		_:
+			print("Unknown command: %s" % command)
 
 func _closed(was_clean_close):
 	if was_clean_close:
@@ -67,19 +90,42 @@ func _closed(was_clean_close):
 	else:
 		print("Closed websocket poorly")
 
+	Authorized = false
+	ID = ""
+	Code = ""
+	Host = null
+	Players = []
+
 func _error():
 	print("Fat L")
 
 func _server_close_request(code, reason):
 	print("Server requested close (Code %s): %s" % [code, reason])
 
+	Authorized = false
+	ID = ""
+	Code = ""
+	Host = null
+	Players = []
+
 func command_authorized():
 	# authorized session, can join the lobby now
 	send("join %s" % ID)
+
+func command_unauthorized():
+	# bad authorization, abort
+	print("Unauthorized session")
 	
+	Authorized = false
+	ID = ""
+	Code = ""
+	Host = null
+	Players = []
+
 func command_joined(args):
 	# joined the lobby and received data about the lobby
 	var data = JSON.parse(args[0]).result
+
 	# set variables
 	Authorized = true
 	ID = data.id
@@ -88,3 +134,24 @@ func command_joined(args):
 	Players = data.players
 
 	emit_signal("joined_lobby")
+
+
+func command_error_(args):
+	# generic error
+	print("Generic error: %s" % args.join(" "))
+
+func command_error_badcommand(args):
+	# bad command
+	print("Bad command: %s" % args.join(" "))
+
+func command_error_badlobby(args):
+	# bad lobby
+	print("Bad lobby: %s" % args.join(" "))
+
+func command_error_lobbyfull():
+	# lobby full
+	print("Lobby full")
+
+func command_error_lobbyinprogress():
+	# lobby in progress
+	print("Lobby in progress")
