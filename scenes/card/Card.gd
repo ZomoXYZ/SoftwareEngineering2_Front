@@ -22,11 +22,42 @@ var cards = [
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var type
+	var rand = randi() % cards.size()
 	randomize()
 	#This will probably need to be changed later for server integration
-	var card = cards[randi() % cards.size()]
+	var card = cards[rand]
 	$Card.texture_normal = load(card)
-
+	match rand:
+		1:
+			type = "2Circ"
+		2:
+			type = "2Circ2Trig"
+		3:
+			type = "2Trig"
+		4:
+			type = "2Trig2Circ"
+		5:
+			type = "Circ"
+		6:
+			type = "CircTrig"
+		7:
+			type = "FreeCard"
+		8:
+			type = "GreenFreeCard"
+		9:
+			type = "Inv2Circ"
+		10:
+			type = "Inv2Trig"
+		11:
+			type = "InvCirc"
+		12:
+			type = "InvTrig"
+		13:
+			type = "RedFreeCard"
+		14:
+			type = "Trig"
+		15:
+			type = "TrigCirc"
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
