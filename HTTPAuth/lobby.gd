@@ -11,7 +11,7 @@ var Players = []
 signal disconnected()
 signal joined_lobby()
 signal game_start()
-signal player_updated()
+signal players_updated()
 
 func _ready():
 	client.connect("connection_closed", self, "_closed")

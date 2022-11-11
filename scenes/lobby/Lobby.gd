@@ -10,8 +10,7 @@ var button_red = preload("res://assets/styles/button_red.tres")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
-	LobbyConn.connect("player_joined", self, "_on_player_joined")
-	LobbyConn.connect("player_left", self, "_on_player_left")
+	LobbyConn.connect("players_updated", self, "_on_players_updated")
 	
 	#Check is single lobby or not
 	if StartVars.singlePlayer:
@@ -68,7 +67,7 @@ func _ready():
 #func _process(delta):
 #	pass
 
-func _on_player_updated():
+func _on_players_updated():
 	var players = LobbyConn.Players
 	var current
 	for i in range(len(players)):
