@@ -76,6 +76,22 @@ func _on_EffectTimer_timeout():
 
 func _on_user_online(PlayerNameAdjective, PlayerNameNoun, PlayerPicture):
 	print("User Online, Name: %s %s, Picture: %s" % [PlayerNameAdjective, PlayerNameNoun, PlayerPicture])
+	$Background/Adjective.text = "%s" %PlayerNameAdjective
+	$Background/Noun.text = "%s" %PlayerNameNoun
+	$Background/Picture.text = "%s" %PlayerPicture
+	#min and max are &%$(%$&(
 
 func _on_user_offline():
 	print("User Offline")
+
+
+func _on_Adjective_pressed():
+	var rand = randi() % 101
+	UserData.setUserAdj(rand)
+	$Background/Adjective.text = "%s" %rand
+
+
+func _on_Noun_pressed():
+	var rand = randi() % 101
+	UserData.setUserNoun(rand)
+	$Background/Noun.text = "%s" %rand

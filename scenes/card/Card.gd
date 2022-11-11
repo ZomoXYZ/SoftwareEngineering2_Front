@@ -22,8 +22,8 @@ var cards = [
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var type
-	var rand = randi() % 15
 	randomize()
+	var rand = randi() % 15
 	match rand:
 		1:
 			type = "2Circ"
