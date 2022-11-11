@@ -86,12 +86,12 @@ func _on_user_offline():
 
 
 func _on_Adjective_pressed():
-	var rand = randi() % 101
+	var rand = randi() % 80 + 10
 	UserData.setUserAdj(rand)
 	$Background/Adjective.text = "%s" %rand
 
 
 func _on_Noun_pressed():
-	var rand = randi() % 101
+	var rand = randi() % 80 + 10
 	UserData.setUserNoun(rand)
 	$Background/Noun.text = "%s" %rand
