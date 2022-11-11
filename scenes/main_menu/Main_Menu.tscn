@@ -314,10 +314,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 93.0
-margin_top = 279.0
-margin_right = 388.0
-margin_bottom = 718.001
+margin_left = -147.0
+margin_top = -147.5
+margin_right = 148.0
+margin_bottom = 291.501
 custom_constants/separation = 30
 
 [node name="Singleplayer" type="Button" parent="Background/CanvasLayer/ButtonContainer"]

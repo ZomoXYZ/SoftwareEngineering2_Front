@@ -5,10 +5,12 @@ export(PackedScene) var ellipseScene
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	var fix = Vector2(93,297)
 	randomize()
 	Request.authorizeSession()
 	Request.connect("user_online", self, "_on_user_online")
 	Request.connect("user_offline", self, "_on_user_offline")
+	$Background/CanvasLayer/ButtonContainer.set_position(fix)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
