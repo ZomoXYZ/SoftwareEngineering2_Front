@@ -9,6 +9,10 @@ var button_red = preload("res://assets/styles/button_red.tres")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
+	LobbyConn.connect("player_joined", self, "_on_player_joined")
+	LobbyConn.connect("player_left", self, "_on_player_left")
+	
 	#Check is single lobby or not
 	if StartVars.singlePlayer:
 		#If single player I went ahead and set bots and changed the lobby ID to offline
@@ -63,6 +67,15 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+func _on_player_updated():
+	var players = LobbyConn.Players
+	var current
+	for i in range(len(players)):
+		current = $Background/PlayerList.get_child(i + 1)
+		current.text = "%s %s" % [players[i]['name']['adjective'], players[i]['name']['noun']]
+		current.add_stylebox_override("normal", button_green)
+	
 
 #Starting starts the game
 func _on_Start_pressed():
