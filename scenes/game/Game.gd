@@ -43,6 +43,7 @@ func _on_Resume_pressed():
 
 #Returns to the lobby list or main menu if this is a multi or single player game
 func _on_Leave_pressed():
+	LobbyConn.leave()
 	if StartVars.singlePlayer:
 		StartVars.singlePlayer = false
 		get_tree().change_scene("res://scenes/main_menu/Main_Menu.tscn")

@@ -89,6 +89,8 @@ func _on_Start_pressed():
 
 #returns to main menu if you were in single player, and returns to lobby list is from multiplayuer
 func _on_Leave_pressed():
+	
+	LobbyConn.leave()
 	#Hide into panel here in case the button gets pressed during the intro animation
 	#Also hide bottom bar to ensure the playter cant inturrupt the animation
 	$IntroPanel.hide()
