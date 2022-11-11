@@ -39,7 +39,9 @@ func _on_Tutorial_pressed():
 
 
 func _on_Credits_pressed():
-	pass # Replace with function body.
+	$AnimationPlayer.play("Unused_Transition")
+	yield($AnimationPlayer, "animation_finished")
+	get_tree().change_scene("res://scenes/credits/Credits.tscn")
 
 #Function for creating the background effect shapes
 #Code vaguely stolen from here: https://docs.godotengine.org/en/stable/getting_started/first_2d_game/05.the_main_game_scene.html
