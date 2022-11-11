@@ -17,9 +17,12 @@ func _ready():
 		$Background/PlayerList/Player3.text = "Medium \nBot "
 		$Background/PlayerList/Player4.text = "Hard \nBot "
 	else:
-		var lobby
+		var players = LobbyConn.Players
+		var host = LobbyConn.Host
+		var ID = LobbyConn.Code
 		var current
-		var ID
+		$Background/PlayerList/Player1.text = "%s %s" % [host.name['adjective'], host.name['noun']]
+		$Background/PlayerList/Player1.add_stylebox_override("normal", button_red)
 		#If online, then I set all the other players slots to empty and hid their playerIcons
 		$Background/Panel/LobbyID.text = "ID: %s" %ID
 		$Background/PlayerList/Player2.add_stylebox_override("normal", button_empty)
@@ -31,12 +34,10 @@ func _ready():
 		$Background/PlayerList/Player4.add_stylebox_override("normal", button_empty)
 		$Background/PlayerList/Player4.text = ""
 		$Background/PlayerList/Player4/PlayerIcon.hide()
-		for player in lobby:
-			current = $Background/PlayerList.get_child(player)
-			current.text = "hello"
+		for i in range(1, len(players)):
+			current = $Background/PlayerList.get_child(i+1)
+			current.text = players[i]['adjective'] + " " + players[i]['noun']
 			current.add_stylebox_override("normal", button_green)
-			if player == 0:
-				current.add_stylebox_override("normal", button_red)
 		
 	#Very important to make sure the transitions are hidden
 	$StartGamePanel.hide()
