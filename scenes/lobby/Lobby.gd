@@ -34,8 +34,8 @@ func _ready():
 		$Background/PlayerList/Player4.add_stylebox_override("normal", button_empty)
 		$Background/PlayerList/Player4.text = ""
 		$Background/PlayerList/Player4/PlayerIcon.hide()
-		for i in range(1, len(players)):
-			current = $Background/PlayerList.get_child(i)
+		for i in range(len(players)):
+			current = $Background/PlayerList.get_child(i + 1)
 			current.text = "%s %s" % [players[i]['name']['adjective'], players[i]['name']['noun']]
 			current.add_stylebox_override("normal", button_green)
 		
