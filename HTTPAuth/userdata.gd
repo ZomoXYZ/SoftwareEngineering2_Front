@@ -37,3 +37,30 @@ func setUserData(data):
 	file.open("user://userdata.dat", File.WRITE)
 	file.store_string(content)
 	file.close()
+
+func setUserAdj(adj):
+	setUserData({
+		"name": {
+			"adjective": adj,
+			"noun": PlayerNameNoun
+		},
+		"picture": PlayerPicture
+	})
+
+func setUserNoun(noun):
+	setUserData({
+		"name": {
+			"adjective": PlayerNameAdjective,
+			"noun": noun
+		},
+		"picture": PlayerPicture
+	})
+
+func setUserPic(pic):
+	setUserData({
+		"name": {
+			"adjective": PlayerNameAdjective,
+			"noun": PlayerNameNoun
+		},
+		"picture": pic
+	})
