@@ -1,6 +1,7 @@
 extends Node
 
 var client = WebSocketClient.new()
+var toPoll = false
 var Authorized = false
 
 var ID = ""
@@ -21,7 +22,8 @@ func _ready():
 	client.connect("server_close_request", self, "_server_close_request")
 
 func _process(delta):
-	client.poll()
+	if toPoll:
+		client.poll()
 
 func join(lobbyid):
 	# set variables
@@ -33,6 +35,7 @@ func join(lobbyid):
 
 	# try connecting
 	var err = client.connect_to_url(RequestEnv.WS_URL)
+	toPoll = true;
 	if err != OK:
 		print("Error Connecting to %s, %s" % [RequestEnv.WS_URL, err])
 		ID = ""
@@ -112,6 +115,8 @@ func _closed(was_clean_close):
 	Code = ""
 	Host = null
 	Players = []
+
+	toPoll = false;
 
 func _error():
 	print("Fat L")
