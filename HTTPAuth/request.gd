@@ -2,6 +2,7 @@ extends Node
 
 var token = ""
 var lastChecked = -1
+var online = false
 
 signal user_online()
 signal user_offline()
@@ -85,17 +86,21 @@ func authorizeSession(force = false):
 	if force || (lastChecked != -1 && lastChecked > Time.get_ticks_msec() - 15 * 1000):
 		print("Checking too quick")
 		if token != "" && UserData.PlayerNameAdjective != -1 && UserData.PlayerNameNoun != -1 && UserData.PlayerPicture != -1:
-			emit_signal("user_online")
+			print("known online")
+			set_online()
 			return
 		else:
-			emit_signal("user_offline")
+			print("known offline")
+			set_offline()
 		return
 	
 	lastChecked = Time.get_ticks_msec()
 	
 	if token != "":
-		# TODO confirm token
-		print("TODO confirm token")
+		var body = {
+			"token": token
+		}
+		createRequest(self, "_on_get_token", "/authorization", HTTPClient.METHOD_POST, body, true)
 		return
 	
 	createRequest(self, "_on_get_token", "/authorization", HTTPClient.METHOD_GET, null, true)
@@ -103,7 +108,7 @@ func authorizeSession(force = false):
 func _on_get_token(result, response_code, _headers, bodyString):
 	var response = parseResponse(result, response_code, bodyString)
 	if response[0] != Status.Online || response[1] == null:
-		emit_signal("user_offline")
+		set_offline()
 		return
 		
 	token = response[1].token
@@ -118,9 +123,17 @@ func _on_get_token(result, response_code, _headers, bodyString):
 func _on_get_userdata(result, response_code, _headers, bodyString):
 	var response = parseResponse(result, response_code, bodyString)
 	if response[0] != Status.Online || response[1] == null:
-		emit_signal("user_offline")
+		set_offline()
 		return
 	
 	var playerData = response[1]
 	UserData.setUserData(playerData)
+	set_online()
+
+func set_online():
+	online = true
 	emit_signal("user_online")
+
+func set_offline():
+	online = false
+	emit_signal("user_offline")

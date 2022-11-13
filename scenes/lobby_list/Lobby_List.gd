@@ -8,13 +8,8 @@ var remember = 100
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	# temp online checker
-	# TODO make a better online check system
-	# my vote is to not allow this page to be acceessed at all
-	if Request.token != "":
-		Request.createRequest(self, "_on_get_lobbylyst", "/lobbylist")
-	
 	LobbyConn.connect("joined_lobby", self, "_lobby_joined")
+	Request.createRequest(self, "_on_get_lobbylyst", "/lobbylist")
 	#Standard animation procedure
 	$IntroPanel.show()
 	$AnimationPlayer.play("Intro_Transition")
@@ -22,7 +17,6 @@ func _ready():
 	#Hide all animation objects
 	$IntroPanel.hide()
 	$OutroPanel.hide()
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
