@@ -17,8 +17,12 @@ func _ready():
 	#Spawning in cards
 	var cardInstance
 	for i in 5:
+		randomize()
+		var rand = randi() % 15
+
 		cardInstance = cardScene.instance()
 		cardInstance.set_rotation(PI / 2)
+		cardInstance.CardValue = rand
 		$Background/HandBox.add_child(cardInstance)
 
 
