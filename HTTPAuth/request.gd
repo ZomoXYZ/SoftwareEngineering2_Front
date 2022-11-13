@@ -3,7 +3,7 @@ extends Node
 var token = ""
 var lastChecked = -1
 
-signal user_online(PlayerNameAdjective, PlayerNameNoun, PlayerPicture)
+signal user_online()
 signal user_offline()
 
 enum Status {Online, Offline, Error}
@@ -85,7 +85,7 @@ func authorizeSession(force = false):
 	if force || (lastChecked != -1 && lastChecked > Time.get_ticks_msec() - 15 * 1000):
 		print("Checking too quick")
 		if token != "" && UserData.PlayerNameAdjective != -1 && UserData.PlayerNameNoun != -1 && UserData.PlayerPicture != -1:
-			emit_signal("user_online", UserData.PlayerNameAdjective, UserData.PlayerNameNoun, UserData.PlayerPicture)
+			emit_signal("user_online")
 			return
 		else:
 			emit_signal("user_offline")

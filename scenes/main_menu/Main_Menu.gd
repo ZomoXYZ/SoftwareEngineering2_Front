@@ -74,11 +74,11 @@ func _on_EffectTimer_timeout():
 	# Spawn the shape by adding it to the Main scene.
 	add_child(shape)
 
-func _on_user_online(PlayerNameAdjective, PlayerNameNoun, PlayerPicture):
-	print("User Online, Name: %s %s, Picture: %s" % [PlayerNameAdjective, PlayerNameNoun, PlayerPicture])
-	$Background/Adjective.text = "%s" %PlayerNameAdjective
-	$Background/Noun.text = "%s" %PlayerNameNoun
-	$Background/Picture.text = "%s" %PlayerPicture
+func _on_user_online():
+	print("User Online, Name: %s %s, Picture: %s" % [UserData.PlayerNameAdjective, UserData.PlayerNameNoun, UserData.PlayerPicture])
+	$Background/Adjective.text = "%s" % UserData.PlayerNameAdjective
+	$Background/Noun.text = "%s" % UserData.PlayerNameNoun
+	$Background/Picture.text = "%s" % UserData.PlayerPicture
 	#min and max are &%$(%$&(
 
 func _on_user_offline():
