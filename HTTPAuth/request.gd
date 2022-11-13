@@ -123,4 +123,4 @@ func _on_get_userdata(result, response_code, _headers, bodyString):
 	
 	var playerData = response[1]
 	UserData.setUserData(playerData)
-	emit_signal("user_online", UserData.PlayerNameAdjective, UserData.PlayerNameNoun, UserData.PlayerPicture)
+	emit_signal("user_online")
