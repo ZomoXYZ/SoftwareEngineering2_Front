@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://assets/fonts/ComicNeue-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/main_menu/Main_Menu.gd" type="Script" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://assets/styles/background.tres" type="StyleBox" id=6]
 [ext_resource path="res://scenes/main_menu/PhysicsTriangle.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/main_menu/PhysicsEllipse.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/styles/button_red_disabled.tres" type="StyleBox" id=9]
+[ext_resource path="res://assets/styles/button_green_disabled.tres" type="StyleBox" id=10]
 
 [sub_resource type="DynamicFont" id=3]
 size = 86
@@ -351,10 +353,11 @@ custom_constants/separation = 30
 margin_right = 295.0
 margin_bottom = 87.0
 size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_fonts/font = ExtResource( 3 )
 custom_styles/hover = ExtResource( 5 )
 custom_styles/pressed = ExtResource( 4 )
-custom_styles/disabled = ExtResource( 5 )
+custom_styles/disabled = ExtResource( 10 )
 custom_styles/normal = ExtResource( 5 )
 text = "Singleplayer"
 
@@ -362,12 +365,15 @@ text = "Singleplayer"
 margin_top = 117.0
 margin_right = 295.0
 margin_bottom = 204.0
+rect_pivot_offset = Vector2( -620, 737.5 )
 size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_fonts/font = ExtResource( 3 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 5 )
-custom_styles/disabled = ExtResource( 4 )
+custom_styles/disabled = ExtResource( 9 )
 custom_styles/normal = ExtResource( 4 )
+disabled = true
 text = "Multiplayer"
 
 [node name="Tutorial" type="Button" parent="Background/CanvasLayer/ButtonContainer"]
@@ -375,10 +381,11 @@ margin_top = 234.0
 margin_right = 295.0
 margin_bottom = 321.0
 size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_fonts/font = ExtResource( 3 )
 custom_styles/hover = ExtResource( 5 )
 custom_styles/pressed = ExtResource( 4 )
-custom_styles/disabled = ExtResource( 5 )
+custom_styles/disabled = ExtResource( 10 )
 custom_styles/normal = ExtResource( 5 )
 text = "Tutorial"
 
@@ -387,10 +394,11 @@ margin_top = 351.0
 margin_right = 295.0
 margin_bottom = 439.0
 size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_fonts/font = ExtResource( 3 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 5 )
-custom_styles/disabled = ExtResource( 4 )
+custom_styles/disabled = ExtResource( 9 )
 custom_styles/normal = ExtResource( 4 )
 text = "Credits"
 
