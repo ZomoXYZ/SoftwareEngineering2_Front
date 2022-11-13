@@ -60,6 +60,17 @@ func receive():
 	print("< %s" % message)
 	return Array(message.split(" "))
 
+func updateLobby(arg):
+	# read json from string
+	var data = JSON.parse(arg).result
+
+	# set variables
+	Authorized = true
+	ID = data.id
+	Code = data.code
+	Host = data.host
+	Players = data.players
+
 func _connected(_proto):
 	print("Connected to websocket")
 	client.get_peer(1).set_write_mode(WebSocketPeer.WRITE_MODE_TEXT)
@@ -86,6 +97,12 @@ func _data():
 
 		"joined":
 			command_joined(args)
+		"rejected":
+			command_rejected()
+
+		# lobby
+		"playerupdate":
+			command_lobby_playerupdate(args)
 
 		# errors
 		"error":
@@ -141,17 +158,16 @@ func command_unauthorized():
 
 func command_joined(args):
 	# joined the lobby and received data about the lobby
-	var data = JSON.parse(args[0]).result
-
-	# set variables
-	Authorized = true
-	ID = data.id
-	Code = data.code
-	Host = data.host
-	Players = data.players
-
+	updateLobby(args[0])
 	emit_signal("joined_lobby")
 
+func command_rejected():
+	leave()
+
+func command_lobby_playerupdate(args):
+	# player updated (joined/left)
+	updateLobby(args[0])
+	emit_signal("players_updated")
 
 func command_error_(args):
 	# generic error
