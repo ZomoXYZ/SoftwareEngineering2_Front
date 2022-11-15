@@ -11,6 +11,10 @@ var button_red = preload("res://assets/styles/button_red.tres")
 func _ready():
 	
 	LobbyConn.connect("players_updated", self, "_on_players_updated")
+	LobbyConn.connect("game_starting", self, "_on_game_starting")
+
+	if LobbyConn.IsStarted:
+		_on_game_starting()
 	
 	#Check is single lobby or not
 	if StartVars.singlePlayer:
@@ -80,12 +84,16 @@ func _on_players_updated():
 func _on_Start_pressed():
 	#Hide into panel here in case the button gets pressed during the intro animation
 	if StartVars.isHost:
-		$IntroPanel.hide()
-		#Standard animation procedure
+		LobbyConn.send("start")
+
+func _on_game_starting():
+	if StartVars.isHost:
 		$StartGamePanel.show()
-		$AnimationPlayer.play("StartGame_Transition")
-		yield($AnimationPlayer, "animation_finished")
-		get_tree().change_scene("res://scenes/game/Game.tscn")
+	$IntroPanel.hide()
+	#Standard animation procedure
+	$AnimationPlayer.play("StartGame_Transition")
+	yield($AnimationPlayer, "animation_finished")
+	get_tree().change_scene("res://scenes/game/Game.tscn")
 
 #returns to main menu if you were in single player, and returns to lobby list is from multiplayuer
 func _on_Leave_pressed():

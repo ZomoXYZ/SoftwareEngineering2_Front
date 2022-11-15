@@ -20,7 +20,7 @@ func resetVariables():
 
 signal disconnected()
 signal joined_lobby()
-signal game_start()
+signal game_starting()
 signal players_updated()
 
 func _ready():
@@ -167,9 +167,9 @@ func command_lobby_playerupdate(args):
 	updateLobby(args[0])
 	emit_signal("players_updated")
 
-func command_lobby_starting(args):
+func command_lobby_starting():
 	# game starting
-	inLobby = false
+	InLobby = false
 	emit_signal("game_start")
 
 func command_error_(args):
