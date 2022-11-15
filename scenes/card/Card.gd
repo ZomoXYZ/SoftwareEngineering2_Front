@@ -9,8 +9,6 @@ enum Cards {
 	CircleTriangle1
 	CircleTriangle2
 
-	CircleFree
-
 	Triangle1
 	Triangle2
 	TriangleInverted1
@@ -19,9 +17,9 @@ enum Cards {
 	TriangleCircle1
 	TriangleCircle2
 
-	TriangleFree
-
 	Free
+	CircleFree
+	TriangleFree
 
 	Back # will never receive this from the server
 }
@@ -32,6 +30,14 @@ var CardValue = -1
 func CardAsset(card):
 	var cardName = Cards.keys()[card]
 	return "assets/sprites/cards/%s.png" % cardName
+
+# CardAsset(Cards.Circle1)
+func CardName(card):
+	return Cards.keys()[card]
+
+# CardAsset("Circle1")
+func CardInt(name):
+	return Card.get(name)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
