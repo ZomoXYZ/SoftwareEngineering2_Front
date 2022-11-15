@@ -31,12 +31,12 @@ func CardAsset(card):
 	var cardName = Cards.keys()[card]
 	return "assets/sprites/cards/%s.png" % cardName
 
-# CardAsset(Cards.Circle1)
+# CardName(Cards.Circle1)
 func CardName(card):
 	return Cards.keys()[card]
 
-# CardAsset("Circle1")
-func CardInt(name):
+# CardValue("Circle1")
+func CardValue(name):
 	return Card.get(name)
 
 # Called when the node enters the scene tree for the first time.
