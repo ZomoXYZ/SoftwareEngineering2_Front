@@ -8,6 +8,15 @@ var ID = ""
 var Code = ""
 var Host = null
 var Players = []
+var InLobby = true
+
+func resetVariables():
+	ID = ""
+	Code = ""
+	Host = null
+	Players = []
+	InLobby = true
+
 
 signal disconnected()
 signal joined_lobby()
@@ -28,10 +37,8 @@ func _process(delta):
 func join(lobbyid):
 	# set variables
 	Authorized = false
+	resetVariables()
 	ID = lobbyid
-	Code = ""
-	Host = null
-	Players = []
 
 	# try connecting
 	var err = client.connect_to_url(RequestEnv.WS_URL)
@@ -42,13 +49,8 @@ func join(lobbyid):
 
 func leave():
 	client.disconnect_from_host()
-
 	Authorized = false
-	ID = ""
-	Code = ""
-	Host = null
-	Players = []
-
+	resetVariables()
 	emit_signal("disconnected")
 		
 func send(message):
@@ -104,6 +106,9 @@ func _data():
 		"playerupdate":
 			command_lobby_playerupdate(args)
 
+		"starting":
+			command_lobby_starting()
+
 		# errors
 		"error":
 			command_error_(args)
@@ -128,12 +133,8 @@ func _closed(was_clean_close):
 		print("Closed websocket poorly")
 
 	Authorized = false
-	ID = ""
-	Code = ""
-	Host = null
-	Players = []
-
-	toPoll = false;
+	resetVariables()
+	toPoll = false
 
 func _error():
 	print("Fat L")
@@ -151,10 +152,7 @@ func command_unauthorized():
 	print("Unauthorized session")
 	
 	Authorized = false
-	ID = ""
-	Code = ""
-	Host = null
-	Players = []
+	resetVariables()
 
 func command_joined(args):
 	# joined the lobby and received data about the lobby
@@ -168,6 +166,11 @@ func command_lobby_playerupdate(args):
 	# player updated (joined/left)
 	updateLobby(args[0])
 	emit_signal("players_updated")
+
+func command_lobby_starting(args):
+	# game starting
+	inLobby = false
+	emit_signal("game_start")
 
 func command_error_(args):
 	# generic error
