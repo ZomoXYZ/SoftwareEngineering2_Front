@@ -13,7 +13,7 @@ func _ready():
 	LobbyConn.connect("players_updated", self, "_on_players_updated")
 	LobbyConn.connect("game_starting", self, "_on_game_starting")
 
-	if LobbyConn.IsStarted:
+	if !LobbyConn.InLobby:
 		_on_game_starting()
 	
 	#Check is single lobby or not
