@@ -170,7 +170,7 @@ func command_lobby_playerupdate(args):
 func command_lobby_starting():
 	# game starting
 	InLobby = false
-	emit_signal("game_start")
+	emit_signal("game_starting")
 
 func command_error_(args):
 	# generic error
