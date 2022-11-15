@@ -87,8 +87,7 @@ func _on_Start_pressed():
 		LobbyConn.send("start")
 
 func _on_game_starting():
-	if StartVars.isHost:
-		$StartGamePanel.show()
+	$StartGamePanel.show()
 	$IntroPanel.hide()
 	#Standard animation procedure
 	$AnimationPlayer.play("StartGame_Transition")
