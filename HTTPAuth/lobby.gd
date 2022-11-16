@@ -14,7 +14,7 @@ var DiscardPile = -1
 var Cards = []
 
 func isHost():
-	return Host != null and Host['id'] == ID
+	return Request.online and Host != null and Host['id'] == UserData.ID
 
 func resetVariables():
 	ID = ""

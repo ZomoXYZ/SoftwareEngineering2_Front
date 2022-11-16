@@ -1,5 +1,6 @@
 extends Node
 
+var ID = ""
 var PlayerNameAdjective = -1
 var PlayerNameNoun = -1
 var PlayerPicture = -1
