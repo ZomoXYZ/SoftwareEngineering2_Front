@@ -216,7 +216,6 @@ margin_left = -13.0
 margin_top = -184.0
 margin_right = 9.0
 margin_bottom = 16.0
-rect_clip_content = true
 alignment = 1
 
 [node name="Pause" type="Panel" parent="."]

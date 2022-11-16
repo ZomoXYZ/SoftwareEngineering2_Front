@@ -28,6 +28,8 @@ enum Cards {
 }
 
 var selfValue = -1
+var selected = false
+
 func selfName():
 	return CardName(selfValue)
 
