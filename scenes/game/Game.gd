@@ -6,22 +6,30 @@ export(PackedScene) var cardScene
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#First I check if this is a single player game or not, if so then I remove lobby ID and replace it with offline
+	var cardInstance
+	randomize()
+	#spawning cards
 	if StartVars.singlePlayer:
 		$Pause/Panel/LobbyID.text = "Offline"
 		$Pause/PlayerList/KickPlayer.hide()
+		for i in 5:
+			var rand = randi() % 15
+			cardInstance = cardScene.instance()
+			cardInstance.set_rotation(PI / 2)
+			cardInstance.selfValue = rand
+			$Background/HandBox.add_child(cardInstance)
 	else:
 		$Pause/Panel/LobbyID.text = "ID: 123456"
+		for i in len(LobbyConn.Cards):
+			cardInstance = cardScene.instance()
+			cardInstance.set_rotation(PI / 2)
+			cardInstance.selfValue = LobbyConn.Cards[i]
+			$Background/HandBox.add_child(cardInstance)
 	
 	#Also hide Pause menu. This is important because the pause menu is an overlay
 	$Pause.hide()
-	#Spawning in cards
-	var cardInstance
-	for i in len(LobbyConn.Cards):
-		randomize()
-		cardInstance = cardScene.instance()
-		cardInstance.set_rotation(PI / 2)
-		cardInstance.selfValue = LobbyConn.Cards[i]
-		$Background/HandBox.add_child(cardInstance)
+
+
 	
 	#Connects the card buttons
 	var currentCard
@@ -35,6 +43,7 @@ func _on_Card_pressed(card):
 	var position = card.get_child(0).get_position()
 	card.get_child(0).set_position(Vector2(position.x, position.y-30))
 	for cardObj in $Background/HandBox.get_children():
+		cardObj.get_child(0).get_child(0).show()
 		if cardObj.selfName() in playsWith:
 			cardObj.get_child(0).get_child(0).hide()
 
@@ -44,12 +53,12 @@ func _on_Card_pressed(card):
 				var tempPos = cardObj.get_child(0).get_position()
 				cardObj.get_child(0).set_position(Vector2(tempPos.x, position.y+30))
 				cardObj.selected = false
-				print("hi")
 				for cardObj2 in $Background/HandBox.get_children():
 					cardObj2.get_child(0).get_child(0).hide()
+					print('hi')
 			else:
 				cardObj.selected = true
-		cardObj.get_child(0).get_child(0).show()
+		#cardObj.get_child(0).get_child(0).show()
 		var tempPos = cardObj.get_child(0).get_position()
 		#card.get_child(0).set_position(Vector2(tempPos.x, position.y))
 
