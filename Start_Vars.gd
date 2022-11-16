@@ -2,7 +2,6 @@ extends Node
 
 #Checks if you are accessing a lobby via single or multiplayer
 var singlePlayer = false
-var isHost = false
 
 """Circle1
 Circle2
@@ -26,6 +25,7 @@ TriangleFree
 
 Free"""
 
+# TODO convert to enum vals
 var validHands = {
 	"Circle1":["Circle1", "CircleInverted1"],
 	"Circle2":["Circle2","CircleInverted2","Triangle2"],

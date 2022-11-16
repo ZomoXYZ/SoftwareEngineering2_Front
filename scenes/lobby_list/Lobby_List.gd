@@ -42,7 +42,6 @@ func _on_Lobby_created(result, response_code, _headers, bodyString):
 	if response[0] != Request.Status.Online || response[1] == null:
 		return
 	var lobbydata = response[1]
-	StartVars.isHost = true
 	
 	LobbyConn.join(lobbydata['id'])
 

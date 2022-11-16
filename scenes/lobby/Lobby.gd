@@ -8,20 +8,21 @@ var button_red = preload("res://assets/styles/button_red.tres")
 
 func connect_signals():
 	if StartVars.singlePlayer:
-		print("singleplayer")
-		# singleplayer in the end will be a separate file with its own signals
-		# we should be able to use it just like we use LobbyConn
+		LobbySP.connect("game_starting", self, "_on_game_starting")
+		LobbySP.connect("disconnected", self, "_on_disconnected")
+		LobbySP.initiate()
 	else:
 		LobbyConn.connect("players_updated", self, "_on_players_updated")
 		LobbyConn.connect("game_starting", self, "_on_game_starting")
 		LobbyConn.connect("disconnected", self, "_on_disconnected")
 
+		# just in case we missed the signal
+		if !LobbyConn.InLobby:
+			_on_game_starting()
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	connect_signals()
-
-	if !LobbyConn.InLobby:
-		_on_game_starting()
 	
 	#Check is single lobby or not
 	fill_players()
@@ -31,7 +32,7 @@ func _ready():
 	$LobbyOptions.hide()
 	$OutroPanel.hide()
 	
-	if StartVars.isHost or StartVars.singlePlayer:
+	if StartVars.singlePlayer or LobbyConn.isHost():
 		$Background/Panel/Start.show()
 	else:
 		$Background/Panel/Start.hide()
@@ -43,12 +44,6 @@ func _ready():
 	yield($AnimationPlayer, "animation_finished")
 	$IntroPanel.hide()
 
-func generate_bot_data():
-	var bot_data = []
-	for i in 3:
-		bot_data.append(UserData.objFrom("Bot", str(i+1), 25))
-	return bot_data
-
 func fill_players():
 	# variables
 	var players = []
@@ -56,10 +51,10 @@ func fill_players():
 
 	# fill variables
 	if StartVars.singlePlayer:
-		players = [UserData.asObj()] + generate_bot_data()
+		players = LobbySP.getAllPlayers()
 		code = "1234"
 	else:
-		players = [LobbyConn.Host] + LobbyConn.players
+		players = LobbyConn.getAllPlayers()
 		code = LobbyConn.Code
 		
 	# show lobby code
@@ -86,8 +81,8 @@ func _on_players_updated():
 #Starting starts the game
 func _on_Start_pressed():
 	if StartVars.singlePlayer:
-		_on_game_starting()
-	elif StartVars.isHost:
+		LobbySP.start()
+	else:
 		LobbyConn.send("start")
 
 func _on_game_starting():
@@ -101,7 +96,7 @@ func _on_game_starting():
 #returns to main menu if you were in single player, and returns to lobby list is from multiplayuer
 func _on_Leave_pressed():
 	if StartVars.singlePlayer:
-		_on_disconnected()
+		LobbySP.leave()
 	else:
 		LobbyConn.leave()
 
@@ -133,8 +128,6 @@ func _on_disconnected():
 	$AnimationPlayer.play("Leave_Transition")
 	yield($AnimationPlayer, "animation_finished")
 	#Then check which screen to return to
-	
-	StartVars.isHost = false
 
 	if StartVars.singlePlayer:
 		StartVars.singlePlayer = false

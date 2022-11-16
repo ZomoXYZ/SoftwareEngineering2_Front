@@ -61,11 +61,6 @@ func _on_Card_pressed(card):
 				else:
 					cardObj.selected = true
 				
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
 #Pause shows pause overlay
 func _on_PauseButton_pressed():
 	#The pause animation changes the opacity of the pause menu, but having no opacity is not the same as hiding because it would still be tangible
