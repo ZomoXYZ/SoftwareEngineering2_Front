@@ -1,0 +1,8 @@
+res://scenes/main_menu/Main_Menu.tscn
+res://assets/styles/logo_background.tres
+res://HTTPAuth/lobby.gd
+res://scenes/main_menu/Main_Menu.gd
+res://HTTPAuth/request.gd
+res://assets/styles/button_green.tres
+res://HTTPAuth/userdata.gd
+res://assets/styles/button_red.tres

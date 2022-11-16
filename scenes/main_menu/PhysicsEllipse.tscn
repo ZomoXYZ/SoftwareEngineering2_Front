@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://assets/sprites/Circle.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/Circle.png" type="Texture2D" id=1]
 [ext_resource path="res://scenes/main_menu/PhysicsEllipse.gd" type="Script" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
@@ -10,7 +10,7 @@ height = 18.0
 [node name="PhysicsEllipse" type="RigidBody2D"]
 script = ExtResource( 2 )
 
-[node name="Ellipse" type="Sprite" parent="."]
+[node name="Ellipse" type="Sprite2D" parent="."]
 position = Vector2( 1.19209e-07, 4 )
 rotation = 1.5708
 scale = Vector2( 0.2, 0.2 )
@@ -20,6 +20,6 @@ texture = ExtResource( 1 )
 rotation = 1.5708
 shape = SubResource( 1 )
 
-[node name="EllipseVisNotifier" type="VisibilityNotifier2D" parent="."]
+[node name="EllipseVisNotifier" type="VisibleOnScreenNotifier2D" parent="."]
 
 [connection signal="screen_exited" from="EllipseVisNotifier" to="." method="_on_EllipseVisNotifier_screen_exited"]

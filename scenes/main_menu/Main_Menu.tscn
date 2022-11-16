@@ -1,462 +1,253 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=19 format=3 uid="uid://n3aeb8bertsg"]
 
-[ext_resource path="res://assets/fonts/ComicNeue-Regular.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://scenes/main_menu/Main_Menu.gd" type="Script" id=2]
-[ext_resource path="res://assets/fonts/button_font.tres" type="DynamicFont" id=3]
-[ext_resource path="res://assets/styles/button_red.tres" type="StyleBox" id=4]
-[ext_resource path="res://assets/styles/button_green.tres" type="StyleBox" id=5]
-[ext_resource path="res://assets/styles/background.tres" type="StyleBox" id=6]
-[ext_resource path="res://scenes/main_menu/PhysicsTriangle.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/main_menu/PhysicsEllipse.tscn" type="PackedScene" id=8]
-[ext_resource path="res://assets/styles/button_red_disabled.tres" type="StyleBox" id=9]
-[ext_resource path="res://assets/styles/button_green_disabled.tres" type="StyleBox" id=10]
+[ext_resource type="Script" path="res://scenes/main_menu/Main_Menu.gd" id="2"]
+[ext_resource type="StyleBox" path="res://assets/styles/background.tres" id="4_pxjq7"]
+[ext_resource type="StyleBox" uid="uid://hgk6f5x18ic1" path="res://assets/styles/button_green.tres" id="5_cuyl1"]
+[ext_resource type="StyleBox" uid="uid://hgk6f5x18ic1" path="res://assets/styles/button_green_disabled.tres" id="6_8mqqk"]
+[ext_resource type="PackedScene" path="res://scenes/main_menu/PhysicsTriangle.tscn" id="7"]
+[ext_resource type="StyleBox" uid="uid://hgk6f5x18ic1" path="res://assets/styles/button_red.tres" id="7_6uik5"]
+[ext_resource type="PackedScene" path="res://scenes/main_menu/PhysicsEllipse.tscn" id="8"]
+[ext_resource type="StyleBox" uid="uid://648wxnv4x6j2" path="res://assets/styles/logo_background.tres" id="9_mnoon"]
+[ext_resource type="StyleBox" uid="uid://hgk6f5x18ic1" path="res://assets/styles/button_red_disabled.tres" id="10"]
+[ext_resource type="FontFile" uid="uid://dcwvcumdom530" path="res://assets/fonts/ComicNeue-Regular.ttf" id="10_20qa8"]
 
-[sub_resource type="DynamicFont" id=3]
-size = 86
-font_data = ExtResource( 1 )
-
-[sub_resource type="CapsuleShape2D" id=4]
-radius = 73.9995
-height = 150.001
-
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id="11"]
 resource_name = "MultiPlayer_Transition2"
 length = 0.4
 step = 0.01
-tracks/0/type = "bezier"
-tracks/0/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"points": PoolRealArray( 93, -0.25, 0, 0.25, 0, 1400, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.33 )
-}
-tracks/1/type = "bezier"
-tracks/1/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"points": PoolRealArray( 279, -0.25, 0, 0.25, 0, -200, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.33 )
-}
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_size:x")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"points": PoolRealArray( 295, -0.25, 0, 0.25, 0, 3000, -0.24, -1485.62, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.33 )
-}
-tracks/3/type = "bezier"
-tracks/3/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_size:y")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"points": PoolRealArray( 439.001, -0.25, 0, 0.25, 0, 3000, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.33 )
-}
-tracks/4/type = "bezier"
-tracks/4/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_rotation")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 90, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.33 )
-}
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id="5"]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
+tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("Center Buttons/ButtonContainer:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 93, 279 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Logo/LogoBackground:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ true ]
-}
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_position:x")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"points": PoolRealArray( 93, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/3/type = "bezier"
-tracks/3/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_position:y")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"points": PoolRealArray( 279, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/4/type = "bezier"
-tracks/4/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_size:x")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"points": PoolRealArray( 295, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/5/type = "bezier"
-tracks/5/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_size:y")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"points": PoolRealArray( 439.001, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/6/type = "bezier"
-tracks/6/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_rotation")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/7/type = "value"
-tracks/7/path = NodePath("Background/CanvasLayer/ButtonContainer/Singleplayer:custom_styles/normal")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ ExtResource( 5 ) ]
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id="6"]
 resource_name = "Screen_Transition"
 length = 0.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.5, 0.6, 1.1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 93, 279 ), Vector2( 95, 251 ), Vector2( 93, 865 ), Vector2( 95, 1081 ), Vector2( 94, 354 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Logo/LogoBackground:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ true, false, false ]
-}
-
-[sub_resource type="Animation" id=9]
-resource_name = "SinglePlayer_Transition"
-length = 0.4
-tracks/0/type = "bezier"
-tracks/0/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_rotation")
+tracks/0/path = NodePath("LogoBackground:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 90, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.4 )
-}
-tracks/1/type = "bezier"
-tracks/1/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_size:x")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"points": PoolRealArray( 295, -0.25, 0, 0.25, 0, 3000, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.4 )
-}
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_size:y")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"points": PoolRealArray( 439.001, -0.25, 0, 0.25, 0, 3000, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.4 )
-}
-tracks/3/type = "bezier"
-tracks/3/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_position:x")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"points": PoolRealArray( 93, -0.25, 0, 0.25, 0, 500, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.4 )
-}
-tracks/4/type = "bezier"
-tracks/4/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_position:y")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"points": PoolRealArray( 279, -0.25, 0, 0.25, 0, -200, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.4 )
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("Background/CanvasLayer/ButtonContainer/Singleplayer:custom_styles/normal")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0, 0.1, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [ ExtResource( 5 ) ]
+"values": [true, false, false]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id="9"]
+resource_name = "SinglePlayer_Transition"
+length = 0.4
+
+[sub_resource type="Animation" id="7"]
 resource_name = "Unused_Transition"
 length = 0.6
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("Center Buttons/ButtonContainer:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"points": PoolRealArray( 93, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/1/type = "bezier"
-tracks/1/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"points": PoolRealArray( 279, -0.25, 0, 0.211899, -237.386, 925, -0.2, -361.253, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.4 )
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Logo/LogoBackground:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
 }
 
-[sub_resource type="Curve2D" id=8]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y6r1n"]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 480, 0, 0, 0, 0, 0, 480, 856, 0, 0, 0, 0, 0, 856, 0, 0, 0, 0, 0, 0 )
+"MultiPlayer_Transition2": SubResource("11"),
+"RESET": SubResource("5"),
+"Screen_Transition": SubResource("6"),
+"SinglePlayer_Transition": SubResource("9"),
+"Unused_Transition": SubResource("7")
 }
+
+[sub_resource type="CapsuleShape2D" id="4"]
+radius = 144.0
+height = 866.0
+
+[sub_resource type="Curve2D" id="Curve2D_vxqhb"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1080, 0, 0, 0, 0, 0, 1080, 1920, 0, 0, 0, 0, 0, 1920, 0, 0, 0, 0, 0, 0)
+}
+point_count = 5
 
 [node name="MainMenu" type="Node"]
-script = ExtResource( 2 )
-triangleScene = ExtResource( 7 )
-ellipseScene = ExtResource( 8 )
-
-[node name="Background" type="Panel" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_styles/panel = ExtResource( 6 )
-
-[node name="Adjective" type="Button" parent="Background"]
-margin_right = 195.0
-margin_bottom = 75.0
-rect_min_size = Vector2( 195, 75 )
-custom_fonts/font = ExtResource( 3 )
-custom_styles/hover = ExtResource( 5 )
-custom_styles/pressed = ExtResource( 4 )
-custom_styles/normal = ExtResource( 5 )
-
-[node name="Noun" type="Button" parent="Background"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -195.0
-margin_bottom = 75.0
-rect_min_size = Vector2( 195, 75 )
-custom_fonts/font = ExtResource( 3 )
-custom_styles/hover = ExtResource( 5 )
-custom_styles/pressed = ExtResource( 4 )
-custom_styles/normal = ExtResource( 5 )
-
-[node name="Picture" type="Label" parent="Background"]
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_top = -56.0
-margin_right = 40.0
-custom_fonts/font = ExtResource( 3 )
-
-[node name="CanvasLayer" type="CanvasLayer" parent="Background"]
-layer = 128
-
-[node name="ButtonContainer" type="VBoxContainer" parent="Background/CanvasLayer"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = 93.0
-margin_top = 279.0
-margin_right = 388.0
-margin_bottom = 718.001
-custom_constants/separation = 30
-
-[node name="Singleplayer" type="Button" parent="Background/CanvasLayer/ButtonContainer"]
-margin_right = 295.0
-margin_bottom = 87.0
-size_flags_vertical = 3
-custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 3 )
-custom_styles/hover = ExtResource( 5 )
-custom_styles/pressed = ExtResource( 4 )
-custom_styles/disabled = ExtResource( 10 )
-custom_styles/normal = ExtResource( 5 )
-text = "Singleplayer"
-
-[node name="Multiplayer" type="Button" parent="Background/CanvasLayer/ButtonContainer"]
-margin_top = 117.0
-margin_right = 295.0
-margin_bottom = 204.0
-rect_pivot_offset = Vector2( -620, 737.5 )
-size_flags_vertical = 3
-custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 3 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 5 )
-custom_styles/disabled = ExtResource( 9 )
-custom_styles/normal = ExtResource( 4 )
-disabled = true
-text = "Multiplayer"
-
-[node name="Tutorial" type="Button" parent="Background/CanvasLayer/ButtonContainer"]
-margin_top = 234.0
-margin_right = 295.0
-margin_bottom = 321.0
-size_flags_vertical = 3
-custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 3 )
-custom_styles/hover = ExtResource( 5 )
-custom_styles/pressed = ExtResource( 4 )
-custom_styles/disabled = ExtResource( 10 )
-custom_styles/normal = ExtResource( 5 )
-text = "Tutorial"
-
-[node name="Credits" type="Button" parent="Background/CanvasLayer/ButtonContainer"]
-margin_top = 351.0
-margin_right = 295.0
-margin_bottom = 439.0
-size_flags_vertical = 3
-custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 3 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 5 )
-custom_styles/disabled = ExtResource( 9 )
-custom_styles/normal = ExtResource( 4 )
-text = "Credits"
-
-[node name="Logo" type="StaticBody2D" parent="."]
-position = Vector2( 236, 165 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="LogoBackground" type="Panel" parent="Logo"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -143.0
-margin_top = -72.0
-margin_right = 152.0
-margin_bottom = 75.0
-custom_styles/panel = ExtResource( 4 )
-
-[node name="LogoLabel" type="Label" parent="Logo/LogoBackground"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -119.5
-margin_top = -51.5
-margin_right = 110.5
-margin_bottom = 48.5
-custom_fonts/font = SubResource( 3 )
-text = "WAN®"
-align = 1
-
-[node name="LogoCollisions" type="CollisionShape2D" parent="Logo"]
-position = Vector2( 3.99998, 0.999985 )
-rotation = 1.5708
-shape = SubResource( 4 )
+script = ExtResource("2")
+triangleScene = ExtResource("7")
+ellipseScene = ExtResource("8")
 
 [node name="EffectTimer" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/MultiPlayer_Transition2 = SubResource( 11 )
-anims/RESET = SubResource( 5 )
-anims/Screen_Transition = SubResource( 6 )
-anims/SinglePlayer_Transition = SubResource( 9 )
-anims/Unused_Transition = SubResource( 7 )
+libraries = {
+"": SubResource("AnimationLibrary_y6r1n")
+}
+
+[node name="Background" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("4_pxjq7")
+
+[node name="UserInfo" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Adjective" type="Button" parent="UserInfo"]
+layout_mode = 0
+offset_right = 195.0
+offset_bottom = 75.0
+
+[node name="Noun" type="Button" parent="UserInfo"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -195.0
+offset_bottom = 75.0
+grow_horizontal = 0
+
+[node name="Picture" type="Label" parent="UserInfo"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -56.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="ButtonCenter" type="CenterContainer" parent="."]
+anchors_preset = -1
+anchor_top = 0.25
+anchor_right = 1.0
+anchor_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ButtonContainer" type="VBoxContainer" parent="ButtonCenter"]
+layout_mode = 2
+offset_left = 144.0
+offset_top = 244.0
+offset_right = 935.0
+offset_bottom = 1004.0
+
+[node name="Singleplayer" type="Button" parent="ButtonCenter/ButtonContainer"]
+layout_mode = 2
+offset_right = 791.0
+offset_bottom = 187.0
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+theme_override_styles/normal = ExtResource("5_cuyl1")
+theme_override_styles/hover = ExtResource("5_cuyl1")
+theme_override_styles/pressed = ExtResource("5_cuyl1")
+theme_override_styles/disabled = ExtResource("6_8mqqk")
+theme_override_styles/focus = ExtResource("6_8mqqk")
+text = "Singleplayer"
+
+[node name="Multiplayer" type="Button" parent="ButtonCenter/ButtonContainer"]
+layout_mode = 2
+offset_top = 191.0
+offset_right = 791.0
+offset_bottom = 378.0
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+theme_override_styles/normal = ExtResource("7_6uik5")
+theme_override_styles/hover = ExtResource("7_6uik5")
+theme_override_styles/pressed = ExtResource("7_6uik5")
+theme_override_styles/disabled = ExtResource("10")
+theme_override_styles/focus = ExtResource("7_6uik5")
+disabled = true
+text = "Multiplayer"
+
+[node name="Tutorial" type="Button" parent="ButtonCenter/ButtonContainer"]
+layout_mode = 2
+offset_top = 382.0
+offset_right = 791.0
+offset_bottom = 569.0
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+theme_override_styles/normal = ExtResource("5_cuyl1")
+theme_override_styles/hover = ExtResource("5_cuyl1")
+theme_override_styles/pressed = ExtResource("5_cuyl1")
+theme_override_styles/disabled = ExtResource("6_8mqqk")
+theme_override_styles/focus = ExtResource("5_cuyl1")
+text = "Tutorial"
+
+[node name="Credits" type="Button" parent="ButtonCenter/ButtonContainer"]
+layout_mode = 2
+offset_top = 573.0
+offset_right = 791.0
+offset_bottom = 760.0
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+theme_override_styles/normal = ExtResource("7_6uik5")
+theme_override_styles/hover = ExtResource("7_6uik5")
+theme_override_styles/pressed = ExtResource("7_6uik5")
+theme_override_styles/disabled = ExtResource("10")
+theme_override_styles/focus = ExtResource("7_6uik5")
+text = "Credits"
+
+[node name="LogoBackground" type="Panel" parent="."]
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.25
+grow_horizontal = 2
+theme_override_styles/panel = ExtResource("9_mnoon")
+
+[node name="LogoLabel" type="Label" parent="LogoBackground"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -261.0
+offset_top = -116.0
+offset_right = 261.0
+offset_bottom = 117.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("10_20qa8")
+theme_override_font_sizes/font_size = 200
+text = "WAN®"
+
+[node name="Logo" type="StaticBody2D" parent="LogoBackground"]
+
+[node name="LogoCollisions" type="CollisionShape2D" parent="LogoBackground/Logo"]
+visible = false
+position = Vector2(432, 144)
+rotation = 1.5708
+shape = SubResource("4")
 
 [node name="ShapePath" type="Path2D" parent="."]
-curve = SubResource( 8 )
+curve = SubResource("Curve2D_vxqhb")
 
 [node name="ShapeSpawnLocation" type="PathFollow2D" parent="ShapePath"]
 
-[connection signal="pressed" from="Background/Adjective" to="." method="_on_Adjective_pressed"]
-[connection signal="pressed" from="Background/Noun" to="." method="_on_Noun_pressed"]
-[connection signal="pressed" from="Background/CanvasLayer/ButtonContainer/Singleplayer" to="." method="_on_Singleplayer_pressed"]
-[connection signal="pressed" from="Background/CanvasLayer/ButtonContainer/Multiplayer" to="." method="_on_Multiplayer_pressed"]
-[connection signal="pressed" from="Background/CanvasLayer/ButtonContainer/Tutorial" to="." method="_on_Tutorial_pressed"]
-[connection signal="pressed" from="Background/CanvasLayer/ButtonContainer/Credits" to="." method="_on_Credits_pressed"]
 [connection signal="timeout" from="EffectTimer" to="." method="_on_EffectTimer_timeout"]
+[connection signal="pressed" from="UserInfo/Adjective" to="." method="_on_Adjective_pressed"]
+[connection signal="pressed" from="UserInfo/Noun" to="." method="_on_Noun_pressed"]

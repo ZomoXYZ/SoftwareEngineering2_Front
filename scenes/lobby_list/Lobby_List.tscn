@@ -1,11 +1,11 @@
 [gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/lobby_list/Lobby_List.gd" type="Script" id=1]
-[ext_resource path="res://assets/fonts/button_font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/fonts/button_font.tres" type="FontFile" id=2]
 [ext_resource path="res://assets/styles/button_red.tres" type="StyleBox" id=3]
 [ext_resource path="res://assets/styles/background2.tres" type="StyleBox" id=4]
 [ext_resource path="res://assets/styles/button_green.tres" type="StyleBox" id=5]
-[ext_resource path="res://assets/fonts/ComicNeue-Regular.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://assets/fonts/ComicNeue-Regular.ttf" type="FontFile" id=6]
 [ext_resource path="res://scenes/lobby_list/Lobby_Button.tscn" type="PackedScene" id=7]
 
 [sub_resource type="StyleBoxFlat" id=1]
@@ -20,7 +20,7 @@ corner_radius_top_right = 30
 corner_radius_bottom_right = 30
 corner_radius_bottom_left = 30
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="FontFile" id=2]
 size = 172
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 6 )
@@ -46,8 +46,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 0.752941, -0.25, 0, 0.25, 0, 0.752941, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.4 )
+"points": PackedFloat32Array( 0.752941, -0.25, 0, 0.25, 0, 0.752941, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0, 0.4 )
 }
 tracks/1/type = "bezier"
 tracks/1/path = NodePath("IntroPanel:custom_styles/panel:bg_color:g")
@@ -56,8 +56,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 0.152941, -0.25, 0, 0.25, 0, 0.152941, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.4 )
+"points": PackedFloat32Array( 0.152941, -0.25, 0, 0.25, 0, 0.152941, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0, 0.4 )
 }
 tracks/2/type = "bezier"
 tracks/2/path = NodePath("IntroPanel:custom_styles/panel:bg_color:b")
@@ -66,8 +66,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"points": PoolRealArray( 0.105882, -0.25, 0, 0.25, 0, 0.105882, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.4 )
+"points": PackedFloat32Array( 0.105882, -0.25, 0, 0.25, 0, 0.105882, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0, 0.4 )
 }
 tracks/3/type = "bezier"
 tracks/3/path = NodePath("IntroPanel:custom_styles/panel:bg_color:a")
@@ -76,8 +76,8 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.4 )
+"points": PackedFloat32Array( 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0, 0.4 )
 }
 tracks/4/type = "bezier"
 tracks/4/path = NodePath("IntroPanel/IntroText:custom_colors/font_color:r")
@@ -86,8 +86,8 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"points": PoolRealArray( 0.752941, -0.25, 0, 0.25, 0, 0.752941, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0.4, 1 )
+"points": PackedFloat32Array( 0.752941, -0.25, 0, 0.25, 0, 0.752941, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0.4, 1 )
 }
 tracks/5/type = "bezier"
 tracks/5/path = NodePath("IntroPanel/IntroText:custom_colors/font_color:g")
@@ -96,8 +96,8 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"points": PoolRealArray( 0.152941, -0.25, 0, 0.25, 0, 0.152941, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0.4, 1 )
+"points": PackedFloat32Array( 0.152941, -0.25, 0, 0.25, 0, 0.152941, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0.4, 1 )
 }
 tracks/6/type = "bezier"
 tracks/6/path = NodePath("IntroPanel/IntroText:custom_colors/font_color:b")
@@ -106,8 +106,8 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"points": PoolRealArray( 0.105882, -0.25, 0, 0.25, 0, 0.105882, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0.4, 1 )
+"points": PackedFloat32Array( 0.105882, -0.25, 0, 0.25, 0, 0.105882, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0.4, 1 )
 }
 tracks/7/type = "bezier"
 tracks/7/path = NodePath("IntroPanel/IntroText:custom_colors/font_color:a")
@@ -116,8 +116,8 @@ tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0.4, 1 )
+"points": PackedFloat32Array( 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0.4, 1 )
 }
 tracks/8/type = "value"
 tracks/8/path = NodePath("IntroPanel/IntroText:custom_fonts/font")
@@ -126,8 +126,8 @@ tracks/8/loop_wrap = true
 tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/keys = {
-"times": PoolRealArray( 1 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 1 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ SubResource( 2 ) ]
 }
@@ -142,8 +142,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 0.486275, -0.25, 0, 0.25, 0, 0.486275, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.4 )
+"points": PackedFloat32Array( 0.486275, -0.25, 0, 0.25, 0, 0.486275, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0, 0.4 )
 }
 tracks/1/type = "bezier"
 tracks/1/path = NodePath("OutroPanel:custom_styles/panel:bg_color:g")
@@ -152,8 +152,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 0.752941, -0.25, 0, 0.25, 0, 0.752941, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.4 )
+"points": PackedFloat32Array( 0.752941, -0.25, 0, 0.25, 0, 0.752941, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0, 0.4 )
 }
 tracks/2/type = "bezier"
 tracks/2/path = NodePath("OutroPanel:custom_styles/panel:bg_color:b")
@@ -162,8 +162,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"points": PoolRealArray( 0.305882, -0.25, 0, 0.25, 0, 0.305882, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.4 )
+"points": PackedFloat32Array( 0.305882, -0.25, 0, 0.25, 0, 0.305882, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0, 0.4 )
 }
 tracks/3/type = "bezier"
 tracks/3/path = NodePath("OutroPanel:custom_styles/panel:bg_color:a")
@@ -172,8 +172,8 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.4 )
+"points": PackedFloat32Array( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0, 0.4 )
 }
 
 [sub_resource type="Animation" id=4]
@@ -185,8 +185,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 0.752941, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"points": PackedFloat32Array( 0.752941, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0 )
 }
 tracks/1/type = "bezier"
 tracks/1/path = NodePath("IntroPanel:custom_styles/panel:bg_color:g")
@@ -195,8 +195,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 0.152941, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"points": PackedFloat32Array( 0.152941, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0 )
 }
 tracks/2/type = "bezier"
 tracks/2/path = NodePath("IntroPanel:custom_styles/panel:bg_color:b")
@@ -205,8 +205,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"points": PoolRealArray( 0.105882, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"points": PackedFloat32Array( 0.105882, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0 )
 }
 tracks/3/type = "bezier"
 tracks/3/path = NodePath("IntroPanel:custom_styles/panel:bg_color:a")
@@ -215,8 +215,8 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"points": PackedFloat32Array( 1, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0 )
 }
 tracks/4/type = "bezier"
 tracks/4/path = NodePath("IntroPanel/IntroText:custom_colors/font_color:r")
@@ -225,8 +225,8 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"points": PoolRealArray( 0.752941, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"points": PackedFloat32Array( 0.752941, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0 )
 }
 tracks/5/type = "bezier"
 tracks/5/path = NodePath("IntroPanel/IntroText:custom_colors/font_color:g")
@@ -235,8 +235,8 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"points": PoolRealArray( 0.152941, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"points": PackedFloat32Array( 0.152941, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0 )
 }
 tracks/6/type = "bezier"
 tracks/6/path = NodePath("IntroPanel/IntroText:custom_colors/font_color:b")
@@ -245,8 +245,8 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"points": PoolRealArray( 0.105882, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"points": PackedFloat32Array( 0.105882, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0 )
 }
 tracks/7/type = "bezier"
 tracks/7/path = NodePath("IntroPanel/IntroText:custom_colors/font_color:a")
@@ -255,8 +255,8 @@ tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"points": PackedFloat32Array( 1, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0 )
 }
 tracks/8/type = "value"
 tracks/8/path = NodePath("IntroPanel/IntroText:custom_fonts/font")
@@ -265,8 +265,8 @@ tracks/8/loop_wrap = true
 tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ SubResource( 2 ) ]
 }
@@ -277,8 +277,8 @@ tracks/9/loop_wrap = true
 tracks/9/imported = false
 tracks/9/enabled = true
 tracks/9/keys = {
-"points": PoolRealArray( 0.486275, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"points": PackedFloat32Array( 0.486275, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0 )
 }
 tracks/10/type = "bezier"
 tracks/10/path = NodePath("OutroPanel:custom_styles/panel:bg_color:g")
@@ -287,8 +287,8 @@ tracks/10/loop_wrap = true
 tracks/10/imported = false
 tracks/10/enabled = true
 tracks/10/keys = {
-"points": PoolRealArray( 0.752941, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"points": PackedFloat32Array( 0.752941, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0 )
 }
 tracks/11/type = "bezier"
 tracks/11/path = NodePath("OutroPanel:custom_styles/panel:bg_color:b")
@@ -297,8 +297,8 @@ tracks/11/loop_wrap = true
 tracks/11/imported = false
 tracks/11/enabled = true
 tracks/11/keys = {
-"points": PoolRealArray( 0.305882, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"points": PackedFloat32Array( 0.305882, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0 )
 }
 tracks/12/type = "bezier"
 tracks/12/path = NodePath("OutroPanel:custom_styles/panel:bg_color:a")
@@ -307,8 +307,8 @@ tracks/12/loop_wrap = true
 tracks/12/imported = false
 tracks/12/enabled = true
 tracks/12/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"points": PackedFloat32Array( 1, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0 )
 }
 
 [node name="LobbyList" type="Control"]
@@ -325,36 +325,36 @@ custom_styles/panel = ExtResource( 4 )
 [node name="Lobbies" type="VBoxContainer" parent="Background"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 40.0
-margin_top = 250.0
-margin_right = -40.0
-margin_bottom = -150.0
+offset_left = 40.0
+offset_top = 250.0
+offset_right = -40.0
+offset_bottom = -150.0
 custom_constants/separation = 20
 
 [node name="TopCover" type="Panel" parent="Background"]
 anchor_right = 1.0
-margin_bottom = 231.0
+offset_bottom = 231.0
 custom_styles/panel = ExtResource( 4 )
 
 [node name="BottomCover" type="Panel" parent="Background"]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -124.0
+offset_top = -124.0
 custom_styles/panel = ExtResource( 4 )
 
 [node name="TopButtons" type="VBoxContainer" parent="Background"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -147.5
-margin_top = 30.0
-margin_right = 147.5
-margin_bottom = 210.0
+offset_left = -147.5
+offset_top = 30.0
+offset_right = 147.5
+offset_bottom = 210.0
 custom_constants/separation = 30
 
 [node name="CreateLobby" type="Button" parent="Background/TopButtons"]
-margin_right = 295.0
-margin_bottom = 75.0
+offset_right = 295.0
+offset_bottom = 75.0
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = ExtResource( 5 )
@@ -364,9 +364,9 @@ custom_styles/normal = ExtResource( 5 )
 text = "Create Lobby"
 
 [node name="JoinbyID" type="Button" parent="Background/TopButtons"]
-margin_top = 105.0
-margin_right = 295.0
-margin_bottom = 180.0
+offset_top = 105.0
+offset_right = 295.0
+offset_bottom = 180.0
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = ExtResource( 3 )
@@ -380,10 +380,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -147.5
-margin_top = -105.0
-margin_right = 147.5
-margin_bottom = -30.0
+offset_left = -147.5
+offset_top = -105.0
+offset_right = 147.5
+offset_bottom = -30.0
 custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = ExtResource( 3 )
 custom_styles/pressed = ExtResource( 5 )
@@ -392,11 +392,11 @@ custom_styles/normal = ExtResource( 3 )
 text = "Main Menu"
 
 [node name="VSlider" type="VSlider" parent="Background"]
-margin_left = 20.0
-margin_top = 250.0
-margin_right = 36.0
-margin_bottom = 703.0
-rect_min_size = Vector2( 0, 200 )
+offset_left = 20.0
+offset_top = 250.0
+offset_right = 36.0
+offset_bottom = 703.0
+minimum_size = Vector2( 0, 200 )
 size_flags_vertical = 3
 value = 100.0
 tick_count = 100
@@ -404,10 +404,10 @@ ticks_on_borders = true
 
 [node name="IntroPanel" type="Panel" parent="."]
 visible = false
-margin_left = -52.0
-margin_top = -8.0
-margin_right = 511.0
-margin_bottom = 905.0
+offset_left = -52.0
+offset_top = -8.0
+offset_right = 511.0
+offset_bottom = 905.0
 custom_styles/panel = SubResource( 1 )
 
 [node name="IntroText" type="Label" parent="IntroPanel"]
@@ -415,10 +415,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -246.5
-margin_top = -199.5
-margin_right = 299.5
-margin_bottom = 199.5
+offset_left = -246.5
+offset_top = -199.5
+offset_right = 299.5
+offset_bottom = 199.5
 custom_colors/font_color = Color( 0.752941, 0.152941, 0.105882, 1 )
 custom_fonts/font = SubResource( 2 )
 text = "Lobby 
@@ -428,10 +428,10 @@ valign = 1
 
 [node name="OutroPanel" type="Panel" parent="."]
 visible = false
-margin_left = -52.0
-margin_top = -8.0
-margin_right = 511.0
-margin_bottom = 905.0
+offset_left = -52.0
+offset_top = -8.0
+offset_right = 511.0
+offset_bottom = 905.0
 custom_styles/panel = SubResource( 5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

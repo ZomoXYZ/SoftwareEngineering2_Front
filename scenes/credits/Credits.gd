@@ -19,4 +19,4 @@ func _ready():
 
 
 func _on_ToMainMenu_pressed():
-	get_tree().change_scene("res://scenes/main_menu/Main_Menu.tscn")
+	get_tree().change_scene_to_file("res://scenes/main_menu/Main_Menu.tscn")

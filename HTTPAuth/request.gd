@@ -17,7 +17,7 @@ func createRequest(root, callback, endpoint, method = HTTPClient.METHOD_GET, bod
 	var http_request = HTTPRequest.new()
 	add_child(http_request)
 	http_request.set_timeout(1) # TODO change timeout time
-	http_request.connect("request_completed", root, callback)
+	http_request.connect("request_completed",Callable(root,callback))
 
 	# Some headers
 	var headers = [ "UUID: %s" % OS.get_unique_id() ]
@@ -27,7 +27,7 @@ func createRequest(root, callback, endpoint, method = HTTPClient.METHOD_GET, bod
 	# convert body
 	var bodyStr = ""
 	if body != null:
-		bodyStr = JSON.print(body)
+		bodyStr = JSON.stringify(body)
 	
 	# print request
 	var headersPrintString = ""
@@ -70,15 +70,14 @@ func parseResponse(result, response_code, body):
 	if bodyString == "":
 		return [Status.Online, null]
 	
-	var jsonResult = JSON.parse(bodyString)
-	#print("Response Raw Body: %s" % bodyString)
+	var bodyJson = JSON.parse_string(bodyString)
 	
-	if jsonResult.error != OK:
-		print("Error loading token from Server's JSON: %s\n\nRaw Body:\n%s" % [jsonResult.error, bodyString])
+	if bodyJson == null:
+		print("Error loading token from Server's JSON, Raw Body:\n    %s" % bodyString)
 		return [Status.Error, null]
 
 	# return Json body
-	return [Status.Online, jsonResult.result]
+	return [Status.Online, bodyJson]
 
 func authorizeSession(force = false):
 	# only run every 15 seconds at most

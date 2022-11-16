@@ -1,6 +1,6 @@
 extends Node
 
-var client = WebSocketClient.new()
+var client = WebSocketMultiplayerPeer.new()
 var toPoll = false
 var Authorized = false
 
@@ -28,11 +28,10 @@ signal game_starting()
 signal players_updated()
 
 func _ready():
-	client.connect("connection_closed", self, "_closed")
-	client.connect("connection_error", self, "_error")
-	client.connect("connection_established", self, "_connected")
-	client.connect("data_received", self, "_data")
-	client.connect("server_close_request", self, "_server_close_request")
+	client.connect("connection_failed", Callable(self,"_on_connection_failed"))
+	client.connect("connection_succeeded", Callable(self,"_on_connection_succeeded"))
+	client.connect("server_disconnected", Callable(self,"_on_server_disconnected"))
+	client.connect("peer_packet", Callable(self,"_on_peer_packet"))
 
 func _process(delta):
 	if toPoll:
@@ -45,7 +44,7 @@ func join(lobbyid):
 	ID = lobbyid
 
 	# try connecting
-	var err = client.connect_to_url(RequestEnv.WS_URL)
+	var err = client.create_client(RequestEnv.WS_URL)
 	toPoll = true;
 	if err != OK:
 		print("Error Connecting to %s, %s" % [RequestEnv.WS_URL, err])
@@ -56,19 +55,16 @@ func leave():
 	Authorized = false
 	resetVariables()
 	emit_signal("disconnected")
-		
+
 func send(message):
 	print("> %s" % message)
-	client.get_peer(1).put_packet(message.to_utf8())
-	
-func receive():
-	var message = client.get_peer(1).get_packet().get_string_from_utf8()
-	print("< %s" % message)
-	return Array(message.split(" "))
+	client.get_peer(0).put_packet(message.to_utf8_buffer())
 
 func updateLobby(arg):
 	# read json from string
-	var data = JSON.parse(arg).result
+	var test_json_conv = JSON.new()
+	test_json_conv.parse(arg)
+	var data = test_json_conv.result.get_data()
 
 	# set variables
 	Authorized = true
@@ -77,15 +73,35 @@ func updateLobby(arg):
 	Host = data.host
 	Players = data.players
 
-func _connected(_proto):
+func _on_connection_succeeded():
 	print("Connected to websocket")
-	client.get_peer(1).set_write_mode(WebSocketPeer.WRITE_MODE_TEXT)
+	client.set_write_mode(WebSocketPeer.WRITE_MODE_TEXT)
 	# we connected, time to authorize the session
 	var command = "authorization %s %s" % [Request.token, OS.get_unique_id()];
 	send(command)
 
-func _data():
-	var args = receive()
+func _on_connection_failed():
+	print("Websocket Connection Failed")
+	Authorized = false
+	resetVariables()
+	toPoll = false
+
+func _on_server_disconnected():
+	print("Websocket Connection Closed")
+	Authorized = false
+	resetVariables()
+	toPoll = false
+
+func _on_peer_packet(peerIndex):
+	if peerIndex != 0:
+		print("RECEIVING DATA from other peer? should always be 0 but is now ", peerIndex)
+		return
+	
+	var message = client.get_peer(0).get_packet().get_string_from_utf8()
+	print("< %s" % message)
+	return Array(message.split(" "))
+
+func _data(args):
 	var command = args.pop_front()
 
 	# print("Command: %s, Args: %s" % [command, args])
@@ -130,19 +146,6 @@ func _data():
 		_:
 			print("Unknown command: %s" % command)
 
-func _closed(was_clean_close):
-	if was_clean_close:
-		print("Closed websocket cleanly")
-	else:
-		print("Closed websocket poorly")
-
-	Authorized = false
-	resetVariables()
-	toPoll = false
-
-func _error():
-	print("Fat L")
-
 func _server_close_request(code, reason):
 	print("Server requested close (Code %s): %s" % [code, reason])
 	leave()
@@ -174,22 +177,24 @@ func command_lobby_playerupdate(args):
 func command_lobby_starting(args):
 	# game starting
 	InLobby = false
-	var state = JSON.parse(args[0]).result
+	var test_json_conv = JSON.new()
+	test_json_conv.parse(args[0])
+	var state = test_json_conv.result.get_data()
 	DiscardPile = state.discardPile
 	Cards = state.cards
 	emit_signal("game_starting")
 
 func command_error_(args):
 	# generic error
-	print("Generic error: %s" % args.join(" "))
+	print("Generic error: %s" % " ".join(args))
 
 func command_error_badcommand(args):
 	# bad command
-	print("Bad command: %s" % args.join(" "))
+	print("Bad command: %s" % " ".join(args))
 
 func command_error_badlobby(args):
 	# bad lobby
-	print("Bad lobby: %s" % args.join(" "))
+	print("Bad lobby: %s" % " ".join(args))
 
 func command_error_lobbyfull():
 	# lobby full

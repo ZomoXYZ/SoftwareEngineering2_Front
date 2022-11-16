@@ -2,12 +2,12 @@
 
 [ext_resource path="res://assets/styles/button_red.tres" type="StyleBox" id=1]
 [ext_resource path="res://assets/styles/button_green.tres" type="StyleBox" id=2]
-[ext_resource path="res://assets/fonts/button_font.tres" type="DynamicFont" id=3]
+[ext_resource path="res://assets/fonts/button_font.tres" type="FontFile" id=3]
 [ext_resource path="res://scenes/lobby_list/Lobby_Button.gd" type="Script" id=4]
 
 [node name="LobbyButton" type="Button"]
-margin_right = 156.0
-margin_bottom = 20.0
+offset_right = 156.0
+offset_bottom = 20.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 3 )
 custom_styles/hover = ExtResource( 2 )

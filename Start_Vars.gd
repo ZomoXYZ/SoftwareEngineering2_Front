@@ -4,28 +4,6 @@ extends Node
 var singlePlayer = false
 var isHost = false
 
-"""Circle1
-Circle2
-CircleInverted1
-CircleInverted2
-
-CircleTriangle1
-CircleTriangle2
-
-CircleFree
-
-Triangle1
-Triangle2
-TriangleInverted1
-TriangleInverted2
-
-TriangleCircle1
-TriangleCircle2
-
-TriangleFree
-
-Free"""
-
 var validHands = {
 	"Circle1":["Circle1", "CircleInverted1"],
 	"Circle2":["Circle2","CircleInverted2","Triangle2"],

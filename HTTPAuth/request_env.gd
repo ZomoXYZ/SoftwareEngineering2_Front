@@ -10,8 +10,8 @@ const Path = "/api/v1"
 # const Schema_ws = "ws"
 # const Host = "localhost"
 # const Port = 8080
-# const Path = ""
+# const Path3D = ""
 
-const BASE_URL = "%s://%s:%s%s" % [Schema_http, Host, Port, Path]
-const WS_URL = "%s://%s:%s%s/ws" % [Schema_ws, Host, Port, Path]
+var BASE_URL = "%s://%s:%s%s" % [Schema_http, Host, Port, Path]
+var WS_URL = "%s://%s:%s%s/ws" % [Schema_ws, Host, Port, Path]
 

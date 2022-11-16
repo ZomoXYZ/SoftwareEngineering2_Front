@@ -1,6 +1,6 @@
 extends Control
 
-export(PackedScene) var lobbyButtonScene
+@export var lobbyButtonScene: PackedScene
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -8,12 +8,12 @@ var remember = 100
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	LobbyConn.connect("joined_lobby", self, "_lobby_joined")
+	LobbyConn.connect("joined_lobby",Callable(self,"_lobby_joined"))
 	Request.createRequest(self, "_on_get_lobbylyst", "/lobbylist")
 	#Standard animation procedure
 	$IntroPanel.show()
 	$AnimationPlayer.play("Intro_Transition")
-	yield($AnimationPlayer, "animation_finished")
+	await $AnimationPlayer.animation_finished
 	#Hide all animation objects
 	$IntroPanel.hide()
 	$OutroPanel.hide()
@@ -27,8 +27,8 @@ func _on_To_Main_Menu_pressed():
 	#Standard animation procedure
 	$OutroPanel.show()
 	$AnimationPlayer.play("Outro_Transition")
-	yield($AnimationPlayer, "animation_finished")
-	get_tree().change_scene("res://scenes/main_menu/Main_Menu.tscn")
+	await $AnimationPlayer.animation_finished
+	get_tree().change_scene_to_file("res://scenes/main_menu/Main_Menu.tscn")
 
 #Goes to the lobby screen to create a lobby
 func _on_CreateLobby_pressed():
@@ -44,7 +44,7 @@ func _on_Lobby_created(result, response_code, _headers, bodyString):
 	var lobbydata = response[1]
 	StartVars.isHost = true
 	
-	LobbyConn.join(lobbydata['id'])
+	lobbydata['id'].join(LobbyConn)
 
 func _on_get_lobbylyst(result, response_code, _headers, bodyString):
 	# parse response
@@ -57,7 +57,7 @@ func _on_get_lobbylyst(result, response_code, _headers, bodyString):
 	# display buttons
 	var lobbyButton
 	for lobby in lobbylist['lobbies']:
-		lobbyButton = lobbyButtonScene.instance()
+		lobbyButton = lobbyButtonScene.instantiate()
 		lobbyButton.code = lobby['code']
 		lobbyButton.id = lobby['id']
 		$Background/Lobbies.add_child(lobbyButton)
@@ -82,5 +82,5 @@ func _lobby_joined():
 	# Standard animation procedure
 	$OutroPanel.show()
 	$AnimationPlayer.play("Outro_Transition")
-	yield($AnimationPlayer, "animation_finished")
-	get_tree().change_scene("res://scenes/lobby/Lobby.tscn")
+	await $AnimationPlayer.animation_finished
+	get_tree().change_scene_to_file("res://scenes/lobby/Lobby.tscn")

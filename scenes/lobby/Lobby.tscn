@@ -1,19 +1,19 @@
 [gd_scene load_steps=20 format=2]
 
-[ext_resource path="res://assets/fonts/button_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/fonts/button_font.tres" type="FontFile" id=1]
 [ext_resource path="res://scenes/lobby/Lobby.gd" type="Script" id=2]
 [ext_resource path="res://assets/styles/button_red.tres" type="StyleBox" id=3]
 [ext_resource path="res://assets/styles/background.tres" type="StyleBox" id=4]
 [ext_resource path="res://assets/styles/button_green.tres" type="StyleBox" id=5]
-[ext_resource path="res://assets/fonts/ComicNeue-Regular.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://assets/fonts/ComicNeue-Regular.ttf" type="FontFile" id=6]
 [ext_resource path="res://assets/styles/background2.tres" type="StyleBox" id=7]
-[ext_resource path="res://assets/sprites/Circle.png" type="Texture" id=8]
-[ext_resource path="res://assets/sprites/Triangle.png" type="Texture" id=9]
-[ext_resource path="res://assets/fonts/playerlist_font.tres" type="DynamicFont" id=10]
+[ext_resource path="res://assets/sprites/Circle.png" type="Texture2D" id=8]
+[ext_resource path="res://assets/sprites/Triangle.png" type="Texture2D" id=9]
+[ext_resource path="res://assets/fonts/playerlist_font.tres" type="FontFile" id=10]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="FontFile" id=4]
 size = 150
 outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
@@ -39,34 +39,34 @@ corner_radius_bottom_left = 30
 [sub_resource type="Animation" id=5]
 resource_name = "Intro_Transition"
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("../IntroPanel:rect_position:x")
+tracks/0/path = NodePath("../IntroPanel:position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.3, 145.428, 70, -0.25, 0, 0.2, 57.2843, 70, -0.25, 0, 0.1, -290.907, 680, -0.2, -500.012, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.3, 0.7, 1 )
+"points": PackedFloat32Array( 0, -0.25, 0, 0.3, 145.428, 70, -0.25, 0, 0.2, 57.2843, 70, -0.25, 0, 0.1, -290.907, 680, -0.2, -500.012, 0.25, 0 ),
+"times": PackedFloat32Array( 0, 0.3, 0.7, 1 )
 }
 tracks/1/type = "bezier"
-tracks/1/path = NodePath("../IntroPanel:rect_position:y")
+tracks/1/path = NodePath("../IntroPanel:position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( -250, -0.25, 0, 0.2, -411.547, 250, -0.25, 0, 0.4, -37.1798, 250, -0.25, 0, 0.4, -37.1798, 250, -0.3, 2.56421, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.3, 0.7, 1 )
+"points": PackedFloat32Array( -250, -0.25, 0, 0.2, -411.547, 250, -0.25, 0, 0.4, -37.1798, 250, -0.25, 0, 0.4, -37.1798, 250, -0.3, 2.56421, 0.25, 0 ),
+"times": PackedFloat32Array( 0, 0.3, 0.7, 1 )
 }
 tracks/2/type = "bezier"
-tracks/2/path = NodePath("../IntroPanel:rect_rotation")
+tracks/2/path = NodePath("../IntroPanel:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.2, -245.099, 26.9, -0.25, 0, 0.3, 0.160395, 26.9, -0.25, 0, 0.3, 58.9123, 87.5, -0.3, -65.6236, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.3, 0.7, 1 )
+"points": PackedFloat32Array( 0, -0.25, 0, 0.2, -245.099, 26.9, -0.25, 0, 0.3, 0.160395, 26.9, -0.25, 0, 0.3, 58.9123, 87.5, -0.3, -65.6236, 0.25, 0 ),
+"times": PackedFloat32Array( 0, 0.3, 0.7, 1 )
 }
 
 [sub_resource type="Animation" id=10]
@@ -79,8 +79,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 0.752941, -0.25, 0, 0.25, 0, 0.752941, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.4 )
+"points": PackedFloat32Array( 0.752941, -0.25, 0, 0.25, 0, 0.752941, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0, 0.4 )
 }
 tracks/1/type = "bezier"
 tracks/1/path = NodePath("../OutroPanel:custom_styles/panel:bg_color:g")
@@ -89,8 +89,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 0.152941, -0.25, 0, 0.25, 0, 0.152941, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.4 )
+"points": PackedFloat32Array( 0.152941, -0.25, 0, 0.25, 0, 0.152941, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0, 0.4 )
 }
 tracks/2/type = "bezier"
 tracks/2/path = NodePath("../OutroPanel:custom_styles/panel:bg_color:b")
@@ -99,8 +99,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"points": PoolRealArray( 0.105882, -0.25, 0, 0.25, 0, 0.105882, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.4 )
+"points": PackedFloat32Array( 0.105882, -0.25, 0, 0.25, 0, 0.105882, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0, 0.4 )
 }
 tracks/3/type = "bezier"
 tracks/3/path = NodePath("../OutroPanel:custom_styles/panel:bg_color:a")
@@ -109,8 +109,8 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.4 )
+"points": PackedFloat32Array( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0, 0.4 )
 }
 
 [sub_resource type="Animation" id=2]
@@ -123,8 +123,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.4 )
+"points": PackedFloat32Array( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0, 0.4 )
 }
 tracks/1/type = "bezier"
 tracks/1/path = NodePath(".:modulate:g")
@@ -133,8 +133,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.4 )
+"points": PackedFloat32Array( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0, 0.4 )
 }
 tracks/2/type = "bezier"
 tracks/2/path = NodePath(".:modulate:b")
@@ -143,8 +143,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.4 )
+"points": PackedFloat32Array( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0, 0.4 )
 }
 tracks/3/type = "bezier"
 tracks/3/path = NodePath(".:modulate:a")
@@ -153,8 +153,8 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.4 )
+"points": PackedFloat32Array( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0, 0.4 )
 }
 
 [sub_resource type="Animation" id=3]
@@ -166,8 +166,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"points": PackedFloat32Array( 1, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0 )
 }
 tracks/1/type = "bezier"
 tracks/1/path = NodePath(".:modulate:g")
@@ -176,8 +176,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"points": PackedFloat32Array( 1, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0 )
 }
 tracks/2/type = "bezier"
 tracks/2/path = NodePath(".:modulate:b")
@@ -186,8 +186,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"points": PackedFloat32Array( 1, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0 )
 }
 tracks/3/type = "bezier"
 tracks/3/path = NodePath(".:modulate:a")
@@ -196,58 +196,58 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"points": PackedFloat32Array( 1, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0 )
 }
 tracks/4/type = "bezier"
-tracks/4/path = NodePath("../IntroPanel:rect_position:x")
+tracks/4/path = NodePath("../IntroPanel:position:x")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"points": PackedFloat32Array( 0, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0 )
 }
 tracks/5/type = "bezier"
-tracks/5/path = NodePath("../IntroPanel:rect_position:y")
+tracks/5/path = NodePath("../IntroPanel:position:y")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"points": PoolRealArray( -250, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"points": PackedFloat32Array( -250, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0 )
 }
 tracks/6/type = "bezier"
-tracks/6/path = NodePath("../IntroPanel:rect_rotation")
+tracks/6/path = NodePath("../IntroPanel:rotation")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"points": PackedFloat32Array( 0, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0 )
 }
 tracks/7/type = "bezier"
-tracks/7/path = NodePath("../StartGamePanel:rect_position:x")
+tracks/7/path = NodePath("../StartGamePanel:position:x")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"points": PoolRealArray( -750, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"points": PackedFloat32Array( -750, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0 )
 }
 tracks/8/type = "bezier"
-tracks/8/path = NodePath("../StartGamePanel:rect_position:y")
+tracks/8/path = NodePath("../StartGamePanel:position:y")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/keys = {
-"points": PoolRealArray( -305, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"points": PackedFloat32Array( -305, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0 )
 }
 tracks/9/type = "bezier"
 tracks/9/path = NodePath("../StartGamePanel/Circle:rotation_degrees")
@@ -256,8 +256,8 @@ tracks/9/loop_wrap = true
 tracks/9/imported = false
 tracks/9/enabled = true
 tracks/9/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"points": PackedFloat32Array( 0, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0 )
 }
 tracks/10/type = "bezier"
 tracks/10/path = NodePath("../StartGamePanel/Triangle:rotation_degrees")
@@ -266,8 +266,8 @@ tracks/10/loop_wrap = true
 tracks/10/imported = false
 tracks/10/enabled = true
 tracks/10/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"points": PackedFloat32Array( 0, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0 )
 }
 tracks/11/type = "bezier"
 tracks/11/path = NodePath("../OutroPanel:custom_styles/panel:bg_color:r")
@@ -276,8 +276,8 @@ tracks/11/loop_wrap = true
 tracks/11/imported = false
 tracks/11/enabled = true
 tracks/11/keys = {
-"points": PoolRealArray( 0.752941, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"points": PackedFloat32Array( 0.752941, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0 )
 }
 tracks/12/type = "bezier"
 tracks/12/path = NodePath("../OutroPanel:custom_styles/panel:bg_color:g")
@@ -286,8 +286,8 @@ tracks/12/loop_wrap = true
 tracks/12/imported = false
 tracks/12/enabled = true
 tracks/12/keys = {
-"points": PoolRealArray( 0.152941, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"points": PackedFloat32Array( 0.152941, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0 )
 }
 tracks/13/type = "bezier"
 tracks/13/path = NodePath("../OutroPanel:custom_styles/panel:bg_color:b")
@@ -296,8 +296,8 @@ tracks/13/loop_wrap = true
 tracks/13/imported = false
 tracks/13/enabled = true
 tracks/13/keys = {
-"points": PoolRealArray( 0.105882, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"points": PackedFloat32Array( 0.105882, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0 )
 }
 tracks/14/type = "bezier"
 tracks/14/path = NodePath("../OutroPanel:custom_styles/panel:bg_color:a")
@@ -306,31 +306,31 @@ tracks/14/loop_wrap = true
 tracks/14/imported = false
 tracks/14/enabled = true
 tracks/14/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"points": PackedFloat32Array( 1, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0 )
 }
 
 [sub_resource type="Animation" id=7]
 resource_name = "StartGame_Transition"
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("../StartGamePanel:rect_position:x")
+tracks/0/path = NodePath("../StartGamePanel:position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( -750, -0.25, 0, 0.25, 0, -100, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 1 )
+"points": PackedFloat32Array( -750, -0.25, 0, 0.25, 0, -100, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0, 1 )
 }
 tracks/1/type = "bezier"
-tracks/1/path = NodePath("../StartGamePanel:rect_position:y")
+tracks/1/path = NodePath("../StartGamePanel:position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( -305, -0.25, 0, 0.25, 0, -305, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 1 )
+"points": PackedFloat32Array( -305, -0.25, 0, 0.25, 0, -305, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0, 1 )
 }
 tracks/2/type = "bezier"
 tracks/2/path = NodePath("../StartGamePanel/Circle:rotation_degrees")
@@ -339,8 +339,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 360, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5, 1 )
+"points": PackedFloat32Array( 0, -0.25, 0, 0.25, 0, 360, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0, 0.5, 1 )
 }
 tracks/3/type = "bezier"
 tracks/3/path = NodePath("../StartGamePanel/Triangle:rotation_degrees")
@@ -349,8 +349,8 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -360, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5, 1 )
+"points": PackedFloat32Array( 0, -0.25, 0, 0.25, 0, -360, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0, 0.5, 1 )
 }
 
 [node name="Lobby" type="Control"]
@@ -366,70 +366,70 @@ custom_styles/panel = ExtResource( 4 )
 [node name="PlayerList" type="VBoxContainer" parent="Background"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -200.0
-margin_top = 125.0
-margin_right = 200.0
-margin_bottom = 615.0
-rect_min_size = Vector2( 295, 0 )
+offset_left = -200.0
+offset_top = 125.0
+offset_right = 200.0
+offset_bottom = 615.0
+minimum_size = Vector2( 295, 0 )
 custom_constants/separation = 30
 
 [node name="Player1" type="Label" parent="Background/PlayerList"]
-margin_right = 400.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 0, 100 )
+offset_right = 400.0
+offset_bottom = 100.0
+minimum_size = Vector2( 0, 100 )
 custom_fonts/font = ExtResource( 10 )
 custom_styles/normal = ExtResource( 3 )
 text = "Player 
 1 "
 align = 2
 
-[node name="PlayerIcon" type="Sprite" parent="Background/PlayerList/Player1"]
+[node name="PlayerIcon" type="Sprite2D" parent="Background/PlayerList/Player1"]
 position = Vector2( 70, 48 )
 scale = Vector2( 0.355556, 0.262598 )
 texture = ExtResource( 8 )
 
 [node name="Player2" type="Label" parent="Background/PlayerList"]
-margin_top = 130.0
-margin_right = 400.0
-margin_bottom = 230.0
-rect_min_size = Vector2( 0, 100 )
+offset_top = 130.0
+offset_right = 400.0
+offset_bottom = 230.0
+minimum_size = Vector2( 0, 100 )
 custom_fonts/font = ExtResource( 10 )
 custom_styles/normal = ExtResource( 5 )
 text = "Player 2 "
 align = 2
 
-[node name="PlayerIcon" type="Sprite" parent="Background/PlayerList/Player2"]
+[node name="PlayerIcon" type="Sprite2D" parent="Background/PlayerList/Player2"]
 position = Vector2( 70, 48 )
 scale = Vector2( 0.355556, 0.262598 )
 texture = ExtResource( 8 )
 
 [node name="Player3" type="Label" parent="Background/PlayerList"]
-margin_top = 260.0
-margin_right = 400.0
-margin_bottom = 360.0
-rect_min_size = Vector2( 0, 100 )
+offset_top = 260.0
+offset_right = 400.0
+offset_bottom = 360.0
+minimum_size = Vector2( 0, 100 )
 custom_fonts/font = ExtResource( 10 )
 custom_styles/normal = ExtResource( 5 )
 text = "Adjective 
 Noun "
 align = 2
 
-[node name="PlayerIcon" type="Sprite" parent="Background/PlayerList/Player3"]
+[node name="PlayerIcon" type="Sprite2D" parent="Background/PlayerList/Player3"]
 position = Vector2( 70, 48 )
 scale = Vector2( 0.355556, 0.262598 )
 texture = ExtResource( 8 )
 
 [node name="Player4" type="Label" parent="Background/PlayerList"]
-margin_top = 390.0
-margin_right = 400.0
-margin_bottom = 490.0
-rect_min_size = Vector2( 0, 100 )
+offset_top = 390.0
+offset_right = 400.0
+offset_bottom = 490.0
+minimum_size = Vector2( 0, 100 )
 custom_fonts/font = ExtResource( 10 )
 custom_styles/normal = ExtResource( 5 )
 text = "Player 4 "
 align = 2
 
-[node name="PlayerIcon" type="Sprite" parent="Background/PlayerList/Player4"]
+[node name="PlayerIcon" type="Sprite2D" parent="Background/PlayerList/Player4"]
 position = Vector2( 70, 48 )
 scale = Vector2( 0.355556, 0.262598 )
 texture = ExtResource( 8 )
@@ -438,15 +438,15 @@ texture = ExtResource( 8 )
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 30.0
-margin_top = -105.0
-margin_right = -30.0
-margin_bottom = -30.0
+offset_left = 30.0
+offset_top = -105.0
+offset_right = -30.0
+offset_bottom = -30.0
 custom_constants/separation = 30
 
 [node name="Leave" type="Button" parent="Background/BottomBar"]
-margin_right = 195.0
-margin_bottom = 75.0
+offset_right = 195.0
+offset_bottom = 75.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 1 )
 custom_styles/hover = ExtResource( 3 )
@@ -456,9 +456,9 @@ custom_styles/normal = ExtResource( 3 )
 text = "Leave"
 
 [node name="Options" type="Button" parent="Background/BottomBar"]
-margin_left = 225.0
-margin_right = 420.0
-margin_bottom = 75.0
+offset_left = 225.0
+offset_right = 420.0
+offset_bottom = 75.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 1 )
 custom_styles/hover = ExtResource( 5 )
@@ -470,10 +470,10 @@ text = "Options"
 [node name="Panel" type="Panel" parent="Background"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 92.0
-margin_top = 30.0
-margin_right = -93.0
-margin_bottom = -135.0
+offset_left = 92.0
+offset_top = 30.0
+offset_right = -93.0
+offset_bottom = -135.0
 custom_styles/panel = SubResource( 1 )
 
 [node name="Start" type="Button" parent="Background/Panel"]
@@ -481,9 +481,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -147.5
-margin_top = -75.0
-margin_right = 147.5
+offset_left = -147.5
+offset_top = -75.0
+offset_right = 147.5
 custom_fonts/font = ExtResource( 1 )
 custom_styles/hover = ExtResource( 5 )
 custom_styles/pressed = ExtResource( 3 )
@@ -493,7 +493,7 @@ text = "Start Game"
 
 [node name="LobbyID" type="Label" parent="Background/Panel"]
 anchor_right = 1.0
-margin_bottom = 72.0
+offset_bottom = 72.0
 custom_fonts/font = ExtResource( 1 )
 custom_styles/normal = ExtResource( 5 )
 text = "ID: 123456"
@@ -510,15 +510,15 @@ custom_styles/panel = ExtResource( 7 )
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 30.0
-margin_top = -105.0
-margin_right = -30.0
-margin_bottom = -30.0
+offset_left = 30.0
+offset_top = -105.0
+offset_right = -30.0
+offset_bottom = -30.0
 custom_constants/separation = 30
 
 [node name="BackToLobby" type="Button" parent="LobbyOptions/BottomBar"]
-margin_right = 420.0
-margin_bottom = 75.0
+offset_right = 420.0
+offset_bottom = 75.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 1 )
 custom_styles/hover = ExtResource( 3 )
@@ -530,18 +530,18 @@ text = "Back To Lobby"
 [node name="Panel" type="Panel" parent="LobbyOptions"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 92.0
-margin_top = 30.0
-margin_right = -93.0
-margin_bottom = -135.0
+offset_left = 92.0
+offset_top = 30.0
+offset_right = -93.0
+offset_bottom = -135.0
 custom_styles/panel = SubResource( 1 )
 
 [node name="Options" type="Label" parent="LobbyOptions/Panel"]
 anchor_right = 1.0
-margin_left = -64.0
-margin_top = -14.0
-margin_right = 68.0
-margin_bottom = 98.0
+offset_left = -64.0
+offset_top = -14.0
+offset_right = 68.0
+offset_bottom = 98.0
 custom_fonts/font = ExtResource( 1 )
 custom_styles/normal = ExtResource( 3 )
 text = "Lobby Options"
@@ -553,15 +553,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -147.5
-margin_top = -219.0
-margin_right = 147.5
-margin_bottom = 61.0
+offset_left = -147.5
+offset_top = -219.0
+offset_right = 147.5
+offset_bottom = 61.0
 custom_constants/separation = 30
 
 [node name="SetPassword" type="Button" parent="LobbyOptions/Panel/ButtonContainer"]
-margin_right = 295.0
-margin_bottom = 73.0
+offset_right = 295.0
+offset_bottom = 73.0
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 1 )
 custom_styles/hover = ExtResource( 5 )
@@ -571,9 +571,9 @@ custom_styles/normal = ExtResource( 5 )
 text = "Set Password"
 
 [node name="KickPlayer" type="Button" parent="LobbyOptions/Panel/ButtonContainer"]
-margin_top = 103.0
-margin_right = 295.0
-margin_bottom = 176.0
+offset_top = 103.0
+offset_right = 295.0
+offset_bottom = 176.0
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 1 )
 custom_styles/hover = ExtResource( 3 )
@@ -583,9 +583,9 @@ custom_styles/normal = ExtResource( 3 )
 text = "Kick Player"
 
 [node name="PointGoal" type="Button" parent="LobbyOptions/Panel/ButtonContainer"]
-margin_top = 206.0
-margin_right = 295.0
-margin_bottom = 280.0
+offset_top = 206.0
+offset_right = 295.0
+offset_bottom = 280.0
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 1 )
 custom_styles/hover = ExtResource( 5 )
@@ -596,9 +596,9 @@ text = "Point Goal"
 
 [node name="IntroPanel" type="Panel" parent="."]
 visible = false
-margin_top = -250.0
-margin_right = 480.0
-margin_bottom = -55.9994
+offset_top = -250.0
+offset_right = 480.0
+offset_bottom = -55.9994
 custom_styles/panel = ExtResource( 5 )
 
 [node name="IntroText" type="Label" parent="IntroPanel"]
@@ -616,18 +616,18 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -750.0
-margin_top = -305.0
-margin_right = -7.0
-margin_bottom = 1158.0
+offset_left = -750.0
+offset_top = -305.0
+offset_right = -7.0
+offset_bottom = 1158.0
 custom_styles/panel = SubResource( 6 )
 
-[node name="Circle" type="Sprite" parent="StartGamePanel"]
+[node name="Circle" type="Sprite2D" parent="StartGamePanel"]
 position = Vector2( 647.5, 646 )
 scale = Vector2( 0.324691, 0.324691 )
 texture = ExtResource( 8 )
 
-[node name="Triangle" type="Sprite" parent="StartGamePanel"]
+[node name="Triangle" type="Sprite2D" parent="StartGamePanel"]
 position = Vector2( 726.5, 793 )
 scale = Vector2( 0.325, 0.325 )
 texture = ExtResource( 9 )
@@ -635,10 +635,10 @@ flip_h = true
 
 [node name="OutroPanel" type="Panel" parent="."]
 visible = false
-margin_left = -52.0
-margin_top = -8.0
-margin_right = 511.0
-margin_bottom = 905.0
+offset_left = -52.0
+offset_top = -8.0
+offset_right = 511.0
+offset_bottom = 905.0
 custom_styles/panel = SubResource( 8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

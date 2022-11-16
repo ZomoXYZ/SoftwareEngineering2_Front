@@ -10,4 +10,4 @@ func _ready():
 func _on_LobbyButton_pressed():
 	#Connects to the websocket
 	print("Pressed LobbyButton")
-	LobbyConn.join(id)
+	id.join(LobbyConn)

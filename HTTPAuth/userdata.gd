@@ -5,19 +5,17 @@ var PlayerNameNoun = -1
 var PlayerPicture = -1
 
 func getUserData():
-	var file = File.new()
-	file.open("user://userdata.dat", File.READ)
-	var content = file.get_as_text()
-	file.close()
-	var jsonResult = JSON.parse(content)
-	if jsonResult.error != OK || !jsonResult.result.has('name') || !jsonResult.result.name.has('adjective') || !jsonResult.result.name.has('noun') || !jsonResult.result.has('picture'):
+	var file = FileAccess.open("user://userdata.dat", FileAccess.READ)
+	var contentString = file.get_as_text()
+	var contentJson = JSON.parse_string(contentString)
+	if contentJson == null || !contentJson.has('name') || !contentJson.name.has('adjective') || !contentJson.name.has('noun') || !contentJson.has('picture'):
 		return null
 	
-	PlayerNameAdjective = jsonResult.result.name.adjective
-	PlayerNameNoun = jsonResult.result.name.noun
-	PlayerPicture = jsonResult.result.picture
+	PlayerNameAdjective = contentJson.name.adjective
+	PlayerNameNoun = contentJson.name.noun
+	PlayerPicture = contentJson.picture
 
-	return jsonResult.result
+	return contentJson
 
 
 func setUserData(data):
@@ -29,14 +27,12 @@ func setUserData(data):
 
 	var name = data.name
 	var picture = data.picture
-	var content = JSON.print({
+	var content = JSON.stringify({
 		"name": name,
 		"picture": picture
 	})
-	var file = File.new()
-	file.open("user://userdata.dat", File.WRITE)
+	var file = FileAccess.open("user://userdata.dat", FileAccess.WRITE)
 	file.store_string(content)
-	file.close()
 
 func setUserAdj(adj):
 	setUserData({
