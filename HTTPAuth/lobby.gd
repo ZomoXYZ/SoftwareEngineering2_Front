@@ -10,13 +10,17 @@ var Host = null
 var Players = []
 var InLobby = true
 
+var DiscardPile = -1
+var Cards = []
+
 func resetVariables():
 	ID = ""
 	Code = ""
 	Host = null
 	Players = []
 	InLobby = true
-
+	DiscardPile = -1
+	Cards = []
 
 signal disconnected()
 signal joined_lobby()
@@ -107,7 +111,7 @@ func _data():
 			command_lobby_playerupdate(args)
 
 		"starting":
-			command_lobby_starting()
+			command_lobby_starting(args)
 
 		# errors
 		"error":
@@ -167,9 +171,12 @@ func command_lobby_playerupdate(args):
 	updateLobby(args[0])
 	emit_signal("players_updated")
 
-func command_lobby_starting():
+func command_lobby_starting(args):
 	# game starting
 	InLobby = false
+	var state = JSON.parse(args[0]).result
+	DiscardPile = state.discardPile
+	Cards = state.cards
 	emit_signal("game_starting")
 
 func command_error_(args):

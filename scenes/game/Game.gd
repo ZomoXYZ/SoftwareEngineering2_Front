@@ -16,13 +16,11 @@ func _ready():
 	$Pause.hide()
 	#Spawning in cards
 	var cardInstance
-	for i in 5:
+	for i in len(LobbyConn.Cards):
 		randomize()
-		var rand = randi() % 15
-
 		cardInstance = cardScene.instance()
 		cardInstance.set_rotation(PI / 2)
-		cardInstance.selfValue = rand
+		cardInstance.selfValue = LobbyConn.Cards[i]
 		$Background/HandBox.add_child(cardInstance)
 	
 	#Connects the card buttons
