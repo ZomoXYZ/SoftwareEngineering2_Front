@@ -109,6 +109,8 @@ var validHands = {
 		
 }
 
+# returns a list of card types that can be played with the given cards
+# returns null if the card list is empty
 func getValidCards(cards):
 	if cards.size() == 0:
 		return null
