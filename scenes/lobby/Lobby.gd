@@ -1,84 +1,87 @@
 extends Control
 
-
 #There might be a better way to do this but this is the only thing I found thro google
 #We preload the image from files so we can use this variable is needeth beedeth
 var button_empty = preload("res://assets/styles/button_empty.tres")
 var button_green = preload("res://assets/styles/button_green.tres")
 var button_red = preload("res://assets/styles/button_red.tres")
 
+func connect_signals():
+	if StartVars.singlePlayer:
+		print("singleplayer")
+		# singleplayer in the end will be a separate file with its own signals
+		# we should be able to use it just like we use LobbyConn
+	else:
+		LobbyConn.connect("players_updated", self, "_on_players_updated")
+		LobbyConn.connect("game_starting", self, "_on_game_starting")
+		LobbyConn.connect("disconnected", self, "_on_disconnected")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	LobbyConn.connect("players_updated", self, "_on_players_updated")
-	LobbyConn.connect("game_starting", self, "_on_game_starting")
-	LobbyConn.connect("disconnected", self, "_on_disconnected")
+	connect_signals()
 
 	if !LobbyConn.InLobby:
 		_on_game_starting()
 	
 	#Check is single lobby or not
-	if StartVars.singlePlayer:
-		#If single player I went ahead and set bots and changed the lobby ID to offline
-		$Background/Panel/LobbyID.text = "Offline"
-		$Background/PlayerList/Player2.text = "Easy \nBot "
-		$Background/PlayerList/Player3.text = "Medium \nBot "
-		$Background/PlayerList/Player4.text = "Hard \nBot "
-	else:
-		var players = LobbyConn.Players
-		var host = LobbyConn.Host
-		var ID = LobbyConn.Code
-		var current
-		$Background/PlayerList/Player1.text = "%s %s" % [host.name['adjective'], host.name['noun']]
-		$Background/PlayerList/Player1.add_stylebox_override("normal", button_red)
-		#If online, then I set all the other players slots to empty and hid their playerIcons
-		$Background/Panel/LobbyID.text = "ID: %s" %ID
-		$Background/PlayerList/Player2.add_stylebox_override("normal", button_empty)
-		$Background/PlayerList/Player2.text = ""
-		$Background/PlayerList/Player2/PlayerIcon.hide()
-		$Background/PlayerList/Player3.add_stylebox_override("normal", button_empty)
-		$Background/PlayerList/Player3.text = ""
-		$Background/PlayerList/Player3/PlayerIcon.hide()
-		$Background/PlayerList/Player4.add_stylebox_override("normal", button_empty)
-		$Background/PlayerList/Player4.text = ""
-		$Background/PlayerList/Player4/PlayerIcon.hide()
-		for i in range(len(players)):
-			current = $Background/PlayerList.get_child(i + 1)
-			current.text = "%s %s" % [players[i]['name']['adjective'], players[i]['name']['noun']]
-			current.add_stylebox_override("normal", button_green)
+	fill_players()
 		
 	#Very important to make sure the transitions are hidden
 	$StartGamePanel.hide()
 	$LobbyOptions.hide()
 	$OutroPanel.hide()
-	$Background/Panel/Start.hide()
-	if StartVars.isHost:
+	
+	if StartVars.isHost or StartVars.singlePlayer:
 		$Background/Panel/Start.show()
 	else:
-		$LobbyOptions/Panel/ButtonContainer/KickPlayer.add_stylebox_override("normal", button_empty)
-		$LobbyOptions/Panel/ButtonContainer/KickPlayer.add_stylebox_override("pressed", button_empty)
-		$LobbyOptions/Panel/ButtonContainer/SetPassword.add_stylebox_override("normal", button_empty)
-		$LobbyOptions/Panel/ButtonContainer/SetPassword.add_stylebox_override("pressed", button_empty)
-		$LobbyOptions/Panel/ButtonContainer/PointGoal.add_stylebox_override("normal", button_empty)
-		$LobbyOptions/Panel/ButtonContainer/PointGoal.add_stylebox_override("pressed", button_empty)
-	#We show the intro and play the animation then hide the intro
+		$Background/Panel/Start.hide()
+		$Background/BottomBar/Options.disabled = true
+
+	#intro animation
 	$IntroPanel.show()
 	$AnimationPlayer.play("Intro_Transition")
 	yield($AnimationPlayer, "animation_finished")
 	$IntroPanel.hide()
 
+func generate_bot_data():
+	var bot_data = []
+	for i in 3:
+		bot_data.append(UserData.objFrom("Bot", str(i+1), 25))
+	return bot_data
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func fill_players():
+	# variables
+	var players = []
+	var code = ""
+
+	# fill variables
+	if StartVars.singlePlayer:
+		players = [UserData.asObj()] + generate_bot_data()
+		code = "1234"
+	else:
+		players = [LobbyConn.Host] + LobbyConn.players
+		code = LobbyConn.Code
+		
+	# show lobby code
+	$Background/Panel/LobbyID.text = "ID: %s" % code
+
+	# fill player list
+	for i in 4:
+		var current = $Background/PlayerList.get_child(i)
+		if i < len(players):
+			current.text = "%s %s" % [players[i]['name']['adjective'], players[i]['name']['noun']]
+			current.get_node("PlayerIcon").show()
+			if i == 0:
+				current.add_stylebox_override("normal", button_red)
+			else:
+				current.add_stylebox_override("normal", button_green)
+		else:
+			current.text = ""
+			current.get_node("PlayerIcon").hide()
+			current.add_stylebox_override("normal", button_empty)
 
 func _on_players_updated():
-	var players = LobbyConn.Players
-	var current
-	for i in range(len(players)):
-		current = $Background/PlayerList.get_child(i + 1)
-		current.text = "%s %s" % [players[i]['name']['adjective'], players[i]['name']['noun']]
-		current.add_stylebox_override("normal", button_green)
-	
+	fill_players()
 
 #Starting starts the game
 func _on_Start_pressed():
@@ -126,12 +129,13 @@ func _on_disconnected():
 	$IntroPanel.hide()
 	$Background/BottomBar.hide()
 	#Standard animation procedure
-	StartVars.isHost = false
 	$OutroPanel.show()
 	$AnimationPlayer.play("Leave_Transition")
 	yield($AnimationPlayer, "animation_finished")
 	#Then check which screen to return to
 	
+	StartVars.isHost = false
+
 	if StartVars.singlePlayer:
 		StartVars.singlePlayer = false
 		get_tree().change_scene("res://scenes/main_menu/Main_Menu.tscn")

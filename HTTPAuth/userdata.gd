@@ -4,6 +4,17 @@ var PlayerNameAdjective = -1
 var PlayerNameNoun = -1
 var PlayerPicture = -1
 
+func asObj():
+	return objFrom(PlayerNameAdjective, PlayerNameNoun, PlayerPicture)
+
+func objFrom(adjective, noun, picture):
+	var obj = {}
+	obj["name"] = {}
+	obj.name["adjective"] = adjective
+	obj.name["noun"] = noun
+	obj["picture"] = picture
+	return obj
+
 func getUserData():
 	var file = File.new()
 	file.open("user://userdata.dat", File.READ)
