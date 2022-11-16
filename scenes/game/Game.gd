@@ -41,26 +41,25 @@ func _on_Card_pressed(card):
 	#card.selected = true
 	var playsWith = StartVars.validHands[card.selfName()]
 	var position = card.get_child(0).get_position()
-	card.get_child(0).set_position(Vector2(position.x, position.y-30))
-	for cardObj in $Background/HandBox.get_children():
-		cardObj.get_child(0).get_child(0).show()
-		if cardObj.selfName() in playsWith:
-			cardObj.get_child(0).get_child(0).hide()
+	if !card.get_child(0).get_child(0).is_visible():
+		card.get_child(0).set_position(Vector2(position.x, position.y-30))
+		for cardObj in $Background/HandBox.get_children():
+			cardObj.get_child(0).get_child(0).show()
+			if cardObj.selfName() in playsWith:
+				cardObj.get_child(0).get_child(0).hide()
 
-		#TODO: FIX THIS
-		if card == cardObj:
-			if cardObj.selected:
-				var tempPos = cardObj.get_child(0).get_position()
-				cardObj.get_child(0).set_position(Vector2(tempPos.x, position.y+30))
-				cardObj.selected = false
-				for cardObj2 in $Background/HandBox.get_children():
-					cardObj2.get_child(0).get_child(0).hide()
-					print('hi')
-			else:
-				cardObj.selected = true
-		#cardObj.get_child(0).get_child(0).show()
-		var tempPos = cardObj.get_child(0).get_position()
-		#card.get_child(0).set_position(Vector2(tempPos.x, position.y))
+			#TODO: FIX THIS
+			if card == cardObj:
+				if cardObj.selected:
+					var tempPos = cardObj.get_child(0).get_position()
+					cardObj.get_child(0).set_position(Vector2(tempPos.x, position.y+30))
+					cardObj.selected = false
+					for cardObj2 in $Background/HandBox.get_children():
+						cardObj2.get_child(0).get_child(0).hide()
+					break
+				else:
+					cardObj.selected = true
+				
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
