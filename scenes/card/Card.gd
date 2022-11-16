@@ -1,5 +1,8 @@
 extends Node
 
+#Signal because godot signal stummy upid
+signal pressed_with_val(val)
+
 enum Cards {
 	Circle1
 	Circle2
@@ -24,7 +27,9 @@ enum Cards {
 	Back # will never receive this from the server
 }
 
-var CardValue = -1
+var selfValue = -1
+func selfName():
+	return CardName(selfValue)
 
 # CardAsset(Cards.Circle1)
 func CardAsset(card):
@@ -41,10 +46,14 @@ func CardValue(name):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if (CardValue == -1):
+	if (selfValue == -1):
 		print("CARD VALUE NOT SET")
-	$Card.texture_normal = load(CardAsset(CardValue))
+	$Card.texture_normal = load(CardAsset(selfValue))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+
+func _on_Card_pressed():
+	emit_signal("pressed_with_val", self)

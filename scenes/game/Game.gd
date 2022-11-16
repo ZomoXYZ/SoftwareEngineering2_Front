@@ -22,9 +22,21 @@ func _ready():
 
 		cardInstance = cardScene.instance()
 		cardInstance.set_rotation(PI / 2)
-		cardInstance.CardValue = rand
+		cardInstance.selfValue = rand
 		$Background/HandBox.add_child(cardInstance)
+	
+	#Connects the card buttons
+	var currentCard
+	for cardWrapper in $Background/HandBox.get_children():
+		cardWrapper.connect("pressed_with_val", self, "_on_Card_pressed")
+		
 
+func _on_Card_pressed(card):
+	var playsWith = StartVars.validHands[card.selfName()]
+	
+	for cardObj in $Background/HandBox.get_children():
+		if cardObj.selfName() in playsWith:
+			print(cardObj.selfName())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
