@@ -9,9 +9,9 @@ var button_red = preload("res://assets/styles/button_red.tres")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
 	LobbyConn.connect("players_updated", self, "_on_players_updated")
 	LobbyConn.connect("game_starting", self, "_on_game_starting")
+	LobbyConn.connect("disconnected", self, "_on_disconnected")
 
 	if !LobbyConn.InLobby:
 		_on_game_starting()
@@ -82,11 +82,10 @@ func _on_players_updated():
 
 #Starting starts the game
 func _on_Start_pressed():
-	#Hide into panel here in case the button gets pressed during the intro animation
 	if StartVars.singlePlayer:
 		_on_game_starting()
 	elif StartVars.isHost:
-			LobbyConn.send("start")
+		LobbyConn.send("start")
 
 func _on_game_starting():
 	$StartGamePanel.show()
@@ -98,23 +97,10 @@ func _on_game_starting():
 
 #returns to main menu if you were in single player, and returns to lobby list is from multiplayuer
 func _on_Leave_pressed():
-	
-	LobbyConn.leave()
-	#Hide into panel here in case the button gets pressed during the intro animation
-	#Also hide bottom bar to ensure the playter cant inturrupt the animation
-	$IntroPanel.hide()
-	$Background/BottomBar.hide()
-	#Standard animation procedure
-	StartVars.isHost = false
-	$OutroPanel.show()
-	$AnimationPlayer.play("Leave_Transition")
-	yield($AnimationPlayer, "animation_finished")
-	#Then check which screen to return to
 	if StartVars.singlePlayer:
-		StartVars.singlePlayer = false
-		get_tree().change_scene("res://scenes/main_menu/Main_Menu.tscn")
+		_on_disconnected()
 	else:
-		get_tree().change_scene("res://scenes/lobby_list/Lobby_List.tscn")
+		LobbyConn.leave()
 
 #Shows the options overlay menu
 func _on_Options_pressed():
@@ -133,3 +119,21 @@ func _on_BackToLobby_pressed():
 	$AnimationPlayer.play_backwards("Options_Transition")
 	yield($AnimationPlayer, "animation_finished")
 	$LobbyOptions.hide()
+
+func _on_disconnected():
+	#Hide into panel here in case the button gets pressed during the intro animation
+	#Also hide bottom bar to ensure the playter cant inturrupt the animation
+	$IntroPanel.hide()
+	$Background/BottomBar.hide()
+	#Standard animation procedure
+	StartVars.isHost = false
+	$OutroPanel.show()
+	$AnimationPlayer.play("Leave_Transition")
+	yield($AnimationPlayer, "animation_finished")
+	#Then check which screen to return to
+	
+	if StartVars.singlePlayer:
+		StartVars.singlePlayer = false
+		get_tree().change_scene("res://scenes/main_menu/Main_Menu.tscn")
+	else:
+		get_tree().change_scene("res://scenes/lobby_list/Lobby_List.tscn")

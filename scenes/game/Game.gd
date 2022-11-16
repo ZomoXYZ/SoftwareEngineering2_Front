@@ -5,14 +5,17 @@ export(PackedScene) var cardScene
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	LobbyConn.connect("disconnected", self, "_on_disconnected")
+
 	#First I check if this is a single player game or not, if so then I remove lobby ID and replace it with offline
 	var cardInstance
-	randomize()
+
 	#spawning cards
 	if StartVars.singlePlayer:
 		$Pause/Panel/LobbyID.text = "Offline"
 		$Pause/PlayerList/KickPlayer.hide()
 		for i in 5:
+			randomize()
 			var rand = randi() % 15
 			cardInstance = cardScene.instance()
 			cardInstance.set_rotation(PI / 2)
@@ -28,8 +31,6 @@ func _ready():
 	
 	#Also hide Pause menu. This is important because the pause menu is an overlay
 	$Pause.hide()
-
-
 	
 	#Connects the card buttons
 	var currentCard
@@ -82,9 +83,11 @@ func _on_Resume_pressed():
 
 #Returns to the lobby list or main menu if this is a multi or single player game
 func _on_Leave_pressed():
-	LobbyConn.leave()
 	if StartVars.singlePlayer:
 		StartVars.singlePlayer = false
 		get_tree().change_scene("res://scenes/main_menu/Main_Menu.tscn")
 	else:
-		get_tree().change_scene("res://scenes/lobby_list/Lobby_List.tscn")
+		LobbyConn.leave()
+
+func _on_disconnected():
+	get_tree().change_scene("res://scenes/lobby_list/Lobby_List.tscn")
