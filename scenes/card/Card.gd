@@ -37,7 +37,7 @@ func CardName(card):
 
 # CardValue("Circle1")
 func CardValue(name):
-	return Card.get(name)
+	return Cards.get(name)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
