@@ -83,8 +83,10 @@ func _on_players_updated():
 #Starting starts the game
 func _on_Start_pressed():
 	#Hide into panel here in case the button gets pressed during the intro animation
-	if StartVars.isHost:
-		LobbyConn.send("start")
+	if StartVars.singlePlayer:
+		_on_game_starting()
+	elif StartVars.isHost:
+			LobbyConn.send("start")
 
 func _on_game_starting():
 	$StartGamePanel.show()
