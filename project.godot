@@ -21,6 +21,7 @@ Request="*res://HTTPAuth/request.gd"
 UserData="*res://HTTPAuth/userdata.gd"
 LobbyConn="*res://HTTPAuth/lobby.gd"
 RequestEnv="*res://HTTPAuth/request_env.gd"
+LobbySP="*res://HTTPAuth/lobby_singleplayer.gd"
 
 [display]
 

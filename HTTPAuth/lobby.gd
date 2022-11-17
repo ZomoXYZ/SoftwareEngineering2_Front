@@ -13,6 +13,9 @@ var InLobby = true
 var DiscardPile = -1
 var Cards = []
 
+func isHost():
+	return Request.online and Host != null and Host['id'] == UserData.ID
+
 func resetVariables():
 	ID = ""
 	Code = ""
@@ -37,6 +40,9 @@ func _ready():
 func _process(delta):
 	if toPoll:
 		client.poll()
+
+func getAllPlayers():
+	return [Host] + Players
 
 func join(lobbyid):
 	# set variables
