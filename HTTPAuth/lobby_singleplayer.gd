@@ -45,7 +45,7 @@ func RandomCard():
 	if num < 12:
 		return num
 	else:
-		num = randi() % 3
+		num = randi() % 4
 		if num < 2:
 			return StartVars.Cards.Free
 		elif num == 2:
