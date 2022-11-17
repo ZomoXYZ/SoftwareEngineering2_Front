@@ -70,6 +70,34 @@ func _on_PauseButton_pressed():
 	#The pause animation changes the opacity of the pause menu, but having no opacity is not the same as hiding because it would still be tangible
 	#So we have to show() first then play the animation
 	$Pause.show()
+	if StartVars.singlePlayer:
+		#If single player I went ahead and set bots and changed the lobby ID to offline
+		$Pause/Panel/LobbyID.text = "Offline"
+		$Pause/PlayerList/Player2.text = "Easy \nBot "
+		$Pause/PlayerList/Player3.text = "Medium \nBot "
+		$Pause/PlayerList/Player4.text = "Hard \nBot "
+	else:
+		var players = LobbyConn.Players
+		var host = LobbyConn.Host
+		var ID = LobbyConn.Code
+		var current
+		$Pause/PlayerList/Player1.text = "%s %s" % [host.name['adjective'], host.name['noun']]
+		$Pause/PlayerList/Player1.add_stylebox_override("normal", button_red)
+		#If online, then I set all the other players slots to empty and hid their playerIcons
+		$Pause/Panel/LobbyID.text = "ID: %s" %ID
+		$Pause/PlayerList/Player2.add_stylebox_override("normal", button_empty)
+		$Pause/PlayerList/Player2.text = ""
+		$Pause/PlayerList/Player2/PlayerIcon.hide()
+		$Pause/PlayerList/Player3.add_stylebox_override("normal", button_empty)
+		$Pause/PlayerList/Player3.text = ""
+		$Pause/PlayerList/Player3/PlayerIcon.hide()
+		$Pause/PlayerList/Player4.add_stylebox_override("normal", button_empty)
+		$Pause/PlayerList/Player4.text = ""
+		$Pause/PlayerList/Player4/PlayerIcon.hide()
+		for i in range(len(players)):
+			current = $Background/PlayerList.get_child(i + 1)
+			current.text = "%s %s" % [players[i]['name']['adjective'], players[i]['name']['noun']]
+			current.add_stylebox_override("normal", button_green)
 	$AnimationPlayer.play("Pause_Transition")
 	yield($AnimationPlayer, "animation_finished")
 
