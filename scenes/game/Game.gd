@@ -1,5 +1,11 @@
 extends Node
 
+#There might be a better way to do this but this is the only thing I found thro google
+#We preload the image from files so we can use this variable is needeth beedeth
+var button_empty = preload("res://assets/styles/button_empty.tres")
+var button_green = preload("res://assets/styles/button_green.tres")
+var button_red = preload("res://assets/styles/button_red.tres")
+
 export(PackedScene) var cardScene
 
 func connect_signals():
