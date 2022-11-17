@@ -47,8 +47,8 @@ func RandomCard():
 	else:
 		num = randi() % 3
 		if num < 2:
-			return StartVars.Card.Free
+			return StartVars.Cards.Free
 		elif num == 2:
-			return StartVars.Card.CircleFree
+			return StartVars.Cards.CircleFree
 		else:
-			return StartVars.Card.TriangleFree
+			return StartVars.Cards.TriangleFree

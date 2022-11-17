@@ -114,6 +114,17 @@ var validHands = {
 func getValidCards(cards):
 	if cards.size() == 0:
 		return null
-	# TODO utilize multiple cards
-	return validHands[CardName(cards[0])]
+	
+	#Handling for the first card clicked
+	elif cards.size() == 1:
+		if CardName(cards[0]) == "Free":
+			return Cards.values()
+		elif CardName(cards[0]) == "CircleFree":
+			return validHands["Circle1"] + validHands["Circle2"] + validHands["CircleInverted1"] + validHands["CircleInverted2"]
+		elif CardName(cards[0]) == "TriangleFree":
+			return validHands["Triangle1"] + validHands["Triangle2"] + validHands["TriangleInverted1"] + validHands["TriangleInverted2"]
+		else:
+			return validHands[CardName(cards[0])]
+		
+	
 
