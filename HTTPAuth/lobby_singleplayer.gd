@@ -43,7 +43,7 @@ func RandomCard():
 
 	# is free card
 	if num < 12:
-		return StartVars.Card(num)
+		return num
 	else:
 		num = randi() % 3
 		if num < 2:
