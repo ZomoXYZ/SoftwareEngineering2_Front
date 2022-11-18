@@ -6,15 +6,26 @@ var Authorized = false
 
 var ID = ""
 var Code = ""
-var Host = null
+var Host = ""
 var Players = []
 var InLobby = true
 
 var DiscardPile = -1
 var Cards = []
 
+var Points = []
+var Turn = 0
+
+enum DrawFrom {
+	DRAW_FROM_DECK = 0,
+	DRAW_FROM_DISCARD
+}
+
+func isMyTurn():
+	return Turn == UserData.ID
+
 func isHost():
-	return Request.online and Host != null and Host['id'] == UserData.ID
+	return Host == UserData.ID
 
 func resetVariables():
 	ID = ""
@@ -25,10 +36,24 @@ func resetVariables():
 	DiscardPile = -1
 	Cards = []
 
+# general
 signal disconnected()
+
+# before lobby
 signal joined_lobby()
+
+# in lobby
 signal game_starting()
 signal players_updated()
+
+# in game
+signal player_turn(player)
+signal card_drew(from, card) # from: DrawFrom.DRAW_FROM_DECK or DrawFrom.DRAW_FROM_DISCARD
+signal card_discarded(card)
+signal cards_played(cards) # cards will be null if passed
+signal turn_ended(cards) # cards automatically drawn
+
+signal game_over(playerID) # playerID winner
 
 func _ready():
 	client.connect("connection_closed", self, "_closed")
@@ -40,9 +65,6 @@ func _ready():
 func _process(delta):
 	if toPoll:
 		client.poll()
-
-func getAllPlayers():
-	return [Host] + Players
 
 func join(lobbyid):
 	# set variables
@@ -57,12 +79,31 @@ func join(lobbyid):
 		print("Error Connecting to %s, %s" % [RequestEnv.WS_URL, err])
 		ID = ""
 
+func join_game():
+	send("ingame")
+
 func leave():
 	client.disconnect_from_host()
 	Authorized = false
 	resetVariables()
 	emit_signal("disconnected")
 		
+func draw(from):
+	send("draw %s" % from)
+		
+func discard(card):
+	send("discard %s" % card)
+		
+func play(cards):
+	if cards == null:
+		send("play")
+	else:
+		var cardsJson = JSON.print({
+			"cards": cards
+		})
+		send("play %s" % cardsJson)
+
+
 func send(message):
 	print("> %s" % message)
 	client.get_peer(1).put_packet(message.to_utf8())
@@ -118,6 +159,22 @@ func _data():
 
 		"starting":
 			command_lobby_starting(args)
+
+		# game
+		"turn":
+			command_game_turn(args)
+		"drew":
+			command_game_drew(args)
+		"discarded":
+			command_game_discarded(args)
+		"played":
+			command_game_played(args)
+		"passed":
+			command_game_passed()
+		"autodraw":
+			command_game_autodraw(args)
+		"gameover":
+			command_game_gameover(args)
 
 		# errors
 		"error":
@@ -184,6 +241,44 @@ func command_lobby_starting(args):
 	DiscardPile = state.discardPile
 	Cards = state.cards
 	emit_signal("game_starting")
+
+func command_game_turn(args):
+	var state = JSON.parse(args[0]).result
+	Cards = state.cards
+	DiscardPile = state.discardPile
+	Points = state.points
+	Turn = state.turn
+	emit_signal("player_turn", state.turn)
+
+func command_game_drew(args):
+	var drew = JSON.parse(args[0]).result
+	Cards.append(drew.card)
+	emit_signal("card_drew", drew.from, drew.card)
+
+func command_game_discarded(args):
+	var card = int(args[0])
+	Cards.erase(card)
+	DiscardPile = card
+	emit_signal("card_discarded", card)
+
+func command_game_played(args):
+	var cards = JSON.parse(args[0]).result.cards
+	for card in cards:
+		Cards.erase(card)
+	emit_signal("cards_played", cards)
+
+func command_game_passed():
+	emit_signal("cards_played", null)
+
+func command_game_autodraw(args):
+	var cards = JSON.parse(args[0]).result.cards
+	Cards = Cards + cards
+	emit_signal("turn_ended", cards)
+
+func command_game_gameover(args):
+	var playerid = args[0]
+	emit_signal("game_over", playerid)
+
 
 func command_error_(args):
 	# generic error
