@@ -554,5 +554,6 @@ anims/Pause_Transition = SubResource( 5 )
 anims/RESET = SubResource( 6 )
 
 [connection signal="pressed" from="Background/PauseButton" to="." method="_on_PauseButton_pressed"]
+[connection signal="pressed" from="Background/PlayArea/Submit" to="." method="_on_Submit_pressed"]
 [connection signal="pressed" from="Pause/BottomBar/Leave" to="." method="_on_Leave_pressed"]
 [connection signal="pressed" from="Pause/BottomBar/Resume" to="." method="_on_Resume_pressed"]
