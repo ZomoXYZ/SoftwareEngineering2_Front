@@ -47,18 +47,18 @@ func _ready():
 func fill_players():
 	# variables
 	var players = []
-	var code = ""
+	var codeText = ""
 
 	# fill variables
 	if StartVars.singlePlayer:
-		players = LobbySP.getAllPlayers()
-		code = "1234"
+		players = LobbySP.Players
+		codeText = "OFFLINE"
 	else:
-		players = LobbyConn.getAllPlayers()
-		code = LobbyConn.Code
+		players = LobbyConn.Players
+		codeText = "ID: %s" % LobbyConn.Code
 		
 	# show lobby code
-	$Background/Panel/LobbyID.text = "ID: %s" % code
+	$Background/Panel/LobbyID.text = codeText
 
 	# fill player list
 	for i in 4:

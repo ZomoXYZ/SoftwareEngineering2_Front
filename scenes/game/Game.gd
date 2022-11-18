@@ -13,6 +13,13 @@ func connect_signals():
 		LobbySP.connect("disconnected", self, "_on_disconnected")
 	else:
 		LobbyConn.connect("disconnected", self, "_on_disconnected")
+		LobbyConn.connect("player_turn", self, "_on_playerturn")
+		LobbyConn.connect("card_drew", self, "_on_carddrew")
+		LobbyConn.connect("card_discarded", self, "_on_carddiscarded")
+		LobbyConn.connect("cards_played", self, "_on_cardsplayed")
+		LobbyConn.connect("turn_ended", self, "_on_turnended")
+		LobbyConn.connect("game_over", self, "_on_gameover")
+		LobbyConn.join_game()
 
 func fill_cards():
 	var cards
@@ -70,40 +77,44 @@ func _on_Card_pressed(card):
 			child.setCanSelect(true)
 		else:
 			child.setCanSelect(false)
+
+func fill_players_pausebutton():
+	# variables
+	var players = []
+	var codeText = ""
+
+	# fill variables
+	if StartVars.singlePlayer:
+		players = LobbySP.getAllPlayers()
+		codeText = "OFFLINE"
+	else:
+		players = LobbyConn.getAllPlayers()
+		codeText = "ID: %s" % LobbyConn.Code
+		
+	# show lobby code
+	$Pause/Panel/LobbyID.text = codeText
+
+	# fill player list
+	for i in 4:
+		var current = $Pause/PlayerList.get_child(i)
+		if i < len(players):
+			current.text = "%s %s" % [players[i]['name']['adjective'], players[i]['name']['noun']]
+			current.get_node("PlayerIcon").show()
+			if i == 0:
+				current.add_stylebox_override("normal", button_red)
+			else:
+				current.add_stylebox_override("normal", button_green)
+		else:
+			current.text = ""
+			current.get_node("PlayerIcon").hide()
+			current.add_stylebox_override("normal", button_empty)
 				
 #Pause shows pause overlay
 func _on_PauseButton_pressed():
 	#The pause animation changes the opacity of the pause menu, but having no opacity is not the same as hiding because it would still be tangible
 	#So we have to show() first then play the animation
 	$Pause.show()
-	if StartVars.singlePlayer:
-		#If single player I went ahead and set bots and changed the lobby ID to offline
-		$Pause/Panel/LobbyID.text = "Offline"
-		$Pause/PlayerList/Player2.text = "Easy \nBot "
-		$Pause/PlayerList/Player3.text = "Medium \nBot "
-		$Pause/PlayerList/Player4.text = "Hard \nBot "
-	else:
-		var players = LobbyConn.Players
-		var host = LobbyConn.Host
-		var ID = LobbyConn.Code
-		var current
-		$Pause/PlayerList/Player1.text = "%s %s" % [host.name['adjective'], host.name['noun']]
-		$Pause/PlayerList/Player1.add_stylebox_override("normal", button_red)
-		#If online, then I set all the other players slots to empty and hid their playerIcons
-		$Pause/Panel/LobbyID.text = "ID: %s" %ID
-		$Pause/PlayerList/Player2.add_stylebox_override("normal", button_empty)
-		$Pause/PlayerList/Player2.text = ""
-		$Pause/PlayerList/Player2/PlayerIcon.hide()
-		$Pause/PlayerList/Player3.add_stylebox_override("normal", button_empty)
-		$Pause/PlayerList/Player3.text = ""
-		$Pause/PlayerList/Player3/PlayerIcon.hide()
-		$Pause/PlayerList/Player4.add_stylebox_override("normal", button_empty)
-		$Pause/PlayerList/Player4.text = ""
-		$Pause/PlayerList/Player4/PlayerIcon.hide()
-		for i in range(len(players)):
-			current = $Background/PlayerList.get_child(i + 1)
-			current.text = "%s %s" % [players[i]['name']['adjective'], players[i]['name']['noun']]
-			current.add_stylebox_override("normal", button_green)
+	fill_players_pausebutton()
 	$AnimationPlayer.play("Pause_Transition")
 	yield($AnimationPlayer, "animation_finished")
 
@@ -124,3 +135,30 @@ func _on_Leave_pressed():
 
 func _on_disconnected():
 	get_tree().change_scene("res://scenes/lobby_list/Lobby_List.tscn")
+
+func _on_playerturn(player):
+	if LobbyConn.isMyTurn():
+		print("My turn")
+	else:
+		print("Player %s's turn" % player)
+
+func _on_carddrew(from, card): # from: DrawFrom.DRAW_FROM_DECK or DrawFrom.DRAW_FROM_DISCARD
+	print("I drew %s from %s" % [StartVars.CardName(card), LobbyConn.DrawFrom.keys()[from]])
+
+func _on_carddiscarded(card):
+	print("I discarded %s" % StartVars.CardName(card))
+
+func _on_cardsplayed(cards): # cards will be null if passed
+	var cardStr = []
+	for card in cards:
+		cardStr.append(StartVars.CardName(card))
+	print("I played %s" % cardStr)
+
+func _on_turnended(cards): # cards automatically drawn
+	var cardStr = []
+	for card in cards:
+		cardStr.append(StartVars.CardName(card))
+	print("I finished my card by drawing %s" % cardStr)
+
+func _on_gameover(player): # playerID winner
+	print("Player %s won" % player)

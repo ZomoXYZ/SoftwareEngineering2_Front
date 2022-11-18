@@ -14,11 +14,9 @@ signal game_starting()
 
 func initiate():
 	Players = []
+	Players.append(UserData.objFrom("Human", "Player", 25))
 	for i in 3:
 		Players.append(UserData.objFrom("Bot", str(i+1), 25))
-
-func getAllPlayers():
-	return [UserData.asObj()] + Players
 
 func start():
 	Cards = generateCardHand()
