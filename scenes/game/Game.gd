@@ -85,10 +85,10 @@ func fill_players_pausebutton():
 
 	# fill variables
 	if StartVars.singlePlayer:
-		players = LobbySP.getAllPlayers()
+		players = LobbySP.Players
 		codeText = "OFFLINE"
 	else:
-		players = LobbyConn.getAllPlayers()
+		players = LobbyConn.Players
 		codeText = "ID: %s" % LobbyConn.Code
 		
 	# show lobby code
