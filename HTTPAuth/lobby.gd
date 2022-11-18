@@ -17,8 +17,8 @@ var Points = []
 var Turn = 0
 
 enum DrawFrom {
-	DRAW_FROM_DECK = 0,
-	DRAW_FROM_DISCARD
+	DECK = 0,
+	DISCARD
 }
 
 func isMyTurn():
