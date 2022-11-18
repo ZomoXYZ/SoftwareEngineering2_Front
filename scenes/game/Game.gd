@@ -3,6 +3,7 @@ extends Node
 #There might be a better way to do this but this is the only thing I found thro google
 #We preload the image from files so we can use this variable is needeth beedeth
 var button_empty = preload("res://assets/styles/button_empty.tres")
+var button_empty2 = preload("res://assets/styles/button_empty2.tres")
 var button_green = preload("res://assets/styles/button_green.tres")
 var button_red = preload("res://assets/styles/button_red.tres")
 
@@ -50,6 +51,7 @@ func _ready():
 		$Pause/Panel/LobbyID.text = "ID: %s" % LobbyConn.Code
 
 	fill_cards()
+	fill_players_gameturn()
 		
 
 func _on_Card_pressed(card):
@@ -108,6 +110,36 @@ func fill_players_pausebutton():
 			current.text = ""
 			current.get_node("PlayerIcon").hide()
 			current.add_stylebox_override("normal", button_empty)
+			
+func fill_players_gameturn():
+	# variables
+	var players = []
+
+	# fill variables
+	if StartVars.singlePlayer:
+		players = LobbySP.Players
+	else:
+		players = LobbyConn.Players
+
+	# fill player list
+	for i in 4:
+		var current = $Background/Players.get_child(i)
+		$Pause.hide()
+		if i < len(players):
+			current.get_node("Name").text = "%s %s" % [players[i]['name']['adjective'], players[i]['name']['noun']]
+			current.get_node("Score").text = 00
+			current.get_node("PlayerIcon").show()
+			if i == 0:
+				current.get_node("Highlight").add_stylebox_override("normal", button_red)
+				current.add_stylebox_override("normal", button_green)
+			else:
+				current.add_stylebox_override("normal", button_empty)
+				current.get_node("Highlight").add_stylebox_override("normal", button_green)
+		else:
+			current.get_node("PlayerIcon").hide()
+			current.add_stylebox_override("normal", button_empty)
+			for x in current:
+				x.hide()
 				
 #Pause shows pause overlay
 func _on_PauseButton_pressed():
