@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/styles/background.tres" type="StyleBox" id=1]
 [ext_resource path="res://assets/styles/button_red.tres" type="StyleBox" id=2]
 [ext_resource path="res://assets/styles/button_green.tres" type="StyleBox" id=3]
-[ext_resource path="res://assets/sprites/cards/Free.png" type="Texture" id=4]
+[ext_resource path="res://assets/styles/button_empty2.tres" type="StyleBox" id=4]
 [ext_resource path="res://assets/sprites/cards/Back.png" type="Texture" id=5]
 [ext_resource path="res://scenes/game/Game.gd" type="Script" id=6]
 [ext_resource path="res://assets/sprites/Circle.png" type="Texture" id=7]
@@ -183,7 +183,7 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -210.0
-margin_top = -416.0
+margin_top = -421.0
 margin_right = 210.0
 margin_bottom = -200.0
 custom_styles/panel = SubResource( 1 )
@@ -197,20 +197,23 @@ margin_left = -178.0
 margin_top = -90.5
 margin_right = 179.0
 margin_bottom = 10.5
-
-[node name="DiscardPile" type="TextureButton" parent="Background/DrawPileBox"]
-margin_right = 176.0
-margin_bottom = 101.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture_normal = ExtResource( 4 )
-expand = true
-stretch_mode = 4
+
+[node name="CardRotate" parent="Background/DrawPileBox" instance=ExtResource( 11 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 176.0
+margin_bottom = 176.0
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+isDiscard = true
 
 [node name="DrawPile" type="TextureButton" parent="Background/DrawPileBox"]
 margin_left = 180.0
 margin_right = 357.0
-margin_bottom = 101.0
+margin_bottom = 176.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture_normal = ExtResource( 5 )
@@ -232,9 +235,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Player1" type="Panel" parent="Background/Players"]
-margin_left = 256.0
+margin_left = 250.0
 margin_top = 160.0
-margin_right = 256.0
+margin_right = 250.0
 margin_bottom = 160.0
 custom_styles/panel = ExtResource( 13 )
 
@@ -358,9 +361,10 @@ margin_left = 10.0
 margin_top = 211.0
 margin_right = 219.0
 margin_bottom = 318.0
-custom_styles/panel = ExtResource( 13 )
+custom_styles/panel = ExtResource( 4 )
 
 [node name="Highlight" type="Panel" parent="Background/Players/Player4"]
+visible = false
 margin_left = 20.0
 margin_top = 4.0
 margin_right = 89.0
@@ -368,11 +372,13 @@ margin_bottom = 73.0
 custom_styles/panel = ExtResource( 3 )
 
 [node name="PlayerPic" type="Sprite" parent="Background/Players/Player4"]
+visible = false
 position = Vector2( 59, 37 )
 scale = Vector2( 0.214198, 0.152545 )
 texture = ExtResource( 7 )
 
 [node name="Name" type="Label" parent="Background/Players/Player4"]
+visible = false
 margin_left = 89.0
 margin_top = 1.0
 margin_right = 209.0
@@ -383,6 +389,7 @@ valign = 1
 autowrap = true
 
 [node name="Score" type="Label" parent="Background/Players/Player4"]
+visible = false
 margin_left = 10.0
 margin_top = 58.0
 margin_right = 96.0
