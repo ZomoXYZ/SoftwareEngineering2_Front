@@ -191,13 +191,13 @@ func _on_cardsplayed(cards): # cards will be null if passed
 	var cardStr = []
 	for card in cards:
 		cardStr.append(StartVars.CardName(card))
-	print("I played %s" % cardStr)
+	print("I played %s" % StartVars.godot_sucks_join_array(cardStr, ", "))
 
 func _on_turnended(cards): # cards automatically drawn
 	var cardStr = []
 	for card in cards:
 		cardStr.append(StartVars.CardName(card))
-	print("I finished my card by drawing %s" % cardStr)
+	print("I finished my card by drawing %s" % StartVars.godot_sucks_join_array(cardStr, ", "))
 
 func _on_gameover(player): # playerID winner
 	print("Player %s won" % player)

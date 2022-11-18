@@ -3,6 +3,16 @@ extends Node
 #Checks if you are accessing a lobby via single or multiplayer
 var singlePlayer = false
 
+func godot_sucks_join_array(array, delimiter = " "):
+	var complete = ""
+	
+	for i in range(0,array.size()):
+		if i != 0:
+			complete += delimiter
+		complete += array[i]
+	
+	return complete
+
 #This is a horrendous amount of hardcoding, yet alas, I do not care
 var WanMos = [
 	["Circle2", "Triangle2"],

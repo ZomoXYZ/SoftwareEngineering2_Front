@@ -282,15 +282,15 @@ func command_game_gameover(args):
 
 func command_error_(args):
 	# generic error
-	print("Generic error: %s" % godot_sucks_join_array(args, " "))
+	print("Generic error: %s" % StartVars.godot_sucks_join_array(args))
 
 func command_error_badcommand(args):
 	# bad command
-	print("Bad command: %s" % godot_sucks_join_array(args, " "))
+	print("Bad command: %s" % StartVars.godot_sucks_join_array(args))
 
 func command_error_badlobby(args):
 	# bad lobby
-	print("Bad lobby: %s" % godot_sucks_join_array(args, " "))
+	print("Bad lobby: %s" % StartVars.godot_sucks_join_array(args))
 
 func command_error_lobbyfull():
 	# lobby full
@@ -299,13 +299,3 @@ func command_error_lobbyfull():
 func command_error_lobbyinprogress():
 	# lobby in progress
 	print("Lobby in progress")
-
-func godot_sucks_join_array(array, delimiter):
-	var complete = ""
-	
-	for i in range(0,array.size()):
-		if i != 0:
-			complete += delimiter
-		complete += array[i]
-	
-	return complete
