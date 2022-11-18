@@ -3,6 +3,17 @@ extends Node
 #Checks if you are accessing a lobby via single or multiplayer
 var singlePlayer = false
 
+#This is a horrendous amount of hardcoding, yet alas, I do not care
+var WanMos = [
+	["Circle2", "Triangle2"],
+	["Circle1", "Circle1", "Triangle2"],
+	["Circle2", "Triangle1", "Triangle1"],
+	["Circle1", "Circle1", "Triangle1", "Triangle1"],
+	["CircleTriangle2", "CircleInverted2"], 
+	["TriangleCircle2", "TriangleInverted2"],
+	
+]
+
 enum Cards {
 	Circle1 = 0
 	Circle2
@@ -114,6 +125,19 @@ var validHands = {
 func getValidCards(cards):
 	if cards.size() == 0:
 		return null
-	# TODO utilize multiple cards
-	return validHands[CardName(cards[0])]
+	
+	#Handling for the first card clicked
+	elif cards.size() == 1:
+		if CardName(cards[0]) == "Free":
+			return Cards.values()
+		elif CardName(cards[0]) == "CircleFree":
+			return validHands["Circle1"] + validHands["Circle2"] + validHands["CircleInverted1"] + validHands["CircleInverted2"]
+		elif CardName(cards[0]) == "TriangleFree":
+			return validHands["Triangle1"] + validHands["Triangle2"] + validHands["TriangleInverted1"] + validHands["TriangleInverted2"]
+		else:
+			return validHands[CardName(cards[0])]
+		
+	#Handling for other cards
+	else:
+		
 

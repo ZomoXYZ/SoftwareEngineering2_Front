@@ -45,10 +45,10 @@ func RandomCard():
 	if num < 12:
 		return num
 	else:
-		num = randi() % 3
+		num = randi() % 4
 		if num < 2:
-			return StartVars.Card.Free
+			return StartVars.Cards.Free
 		elif num == 2:
-			return StartVars.Card.CircleFree
+			return StartVars.Cards.CircleFree
 		else:
-			return StartVars.Card.TriangleFree
+			return StartVars.Cards.TriangleFree
