@@ -194,3 +194,6 @@ func _on_turnended(cards): # cards automatically drawn
 
 func _on_gameover(player): # playerID winner
 	print("Player %s won" % player)
+
+func _on_Submit_pressed():
+	print("Nineteen Eighty Four")

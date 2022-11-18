@@ -10,7 +10,6 @@ func connect_signals():
 	if StartVars.singlePlayer:
 		LobbySP.connect("game_starting", self, "_on_game_starting")
 		LobbySP.connect("disconnected", self, "_on_disconnected")
-		LobbySP.initiate()
 	else:
 		LobbyConn.connect("players_updated", self, "_on_players_updated")
 		LobbyConn.connect("game_starting", self, "_on_game_starting")
