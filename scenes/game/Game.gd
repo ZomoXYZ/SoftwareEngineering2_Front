@@ -130,15 +130,15 @@ func fill_players_gameturn():
 			current.get_node("Score").text = "%s" % 00
 			current.get_node("PlayerIcon").show()
 			if i == 0:
-				current.get_node("Highlight").add_stylebox_override("normal", button_red)
-				current.add_stylebox_override("normal", button_green)
+				current.get_node("Highlight").add_stylebox_override("panel", button_red)
+				current.add_stylebox_override("panel", button_green)
 			else:
-				current.add_stylebox_override("normal", button_empty)
-				current.get_node("Highlight").add_stylebox_override("normal", button_green)
+				current.add_stylebox_override("panel", button_empty)
+				current.get_node("Highlight").add_stylebox_override("panel", button_green)
 		else:
 			current.get_node("PlayerIcon").hide()
-			current.add_stylebox_override("normal", button_empty)
-			for x in current:
+			current.add_stylebox_override("panel", button_empty2)
+			for x in current.get_children():
 				x.hide()
 				
 #Pause shows pause overlay
