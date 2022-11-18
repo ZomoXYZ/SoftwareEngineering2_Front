@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://assets/styles/background.tres" type="StyleBox" id=1]
 [ext_resource path="res://assets/styles/button_red.tres" type="StyleBox" id=2]
@@ -11,6 +11,9 @@
 [ext_resource path="res://assets/styles/background2.tres" type="StyleBox" id=9]
 [ext_resource path="res://assets/fonts/playerlist_font.tres" type="DynamicFont" id=10]
 [ext_resource path="res://scenes/card/Card.tscn" type="PackedScene" id=11]
+[ext_resource path="res://assets/fonts/ComicNeue-Regular.ttf" type="DynamicFontData" id=12]
+[ext_resource path="res://assets/styles/button_empty.tres" type="StyleBox" id=13]
+[ext_resource path="res://assets/fonts/score_font.tres" type="DynamicFont" id=14]
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 1, 1, 1, 1 )
@@ -29,6 +32,12 @@ corner_radius_top_left = 30
 corner_radius_top_right = 30
 corner_radius_bottom_right = 30
 corner_radius_bottom_left = 30
+
+[sub_resource type="DynamicFont" id=7]
+size = 30
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 12 )
 
 [sub_resource type="StyleBoxEmpty" id=4]
 
@@ -218,7 +227,174 @@ margin_right = 9.0
 margin_bottom = 16.0
 alignment = 1
 
+[node name="Players" type="Label" parent="Background"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Player1" type="Panel" parent="Background/Players"]
+margin_left = 256.0
+margin_top = 160.0
+margin_right = 256.0
+margin_bottom = 160.0
+custom_styles/panel = ExtResource( 13 )
+
+[node name="Highlight" type="Panel" parent="Background/Players/Player1"]
+margin_left = 119.0
+margin_top = 283.0
+margin_right = 188.0
+margin_bottom = 352.0
+custom_styles/panel = ExtResource( 2 )
+
+[node name="PlayerPic" type="Sprite" parent="Background/Players/Player1"]
+position = Vector2( 158, 316 )
+scale = Vector2( 0.214198, 0.152545 )
+texture = ExtResource( 7 )
+
+[node name="Name" type="Label" parent="Background/Players/Player1"]
+margin_left = -116.0
+margin_top = 286.0
+margin_right = 125.0
+margin_bottom = 348.0
+custom_fonts/font = SubResource( 7 )
+text = "Player 1"
+align = 2
+valign = 1
+autowrap = true
+
+[node name="Score" type="Label" parent="Background/Players/Player1"]
+margin_left = 109.0
+margin_top = 338.0
+margin_right = 195.0
+margin_bottom = 400.0
+custom_fonts/font = SubResource( 7 )
+text = "00"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Player2" type="Panel" parent="Background/Players"]
+margin_left = 256.0
+margin_top = 160.0
+margin_right = 465.0
+margin_bottom = 264.0
+custom_styles/panel = ExtResource( 13 )
+
+[node name="Highlight" type="Panel" parent="Background/Players/Player2"]
+margin_left = 120.0
+margin_top = 2.0
+margin_right = 189.0
+margin_bottom = 71.0
+custom_styles/panel = ExtResource( 3 )
+
+[node name="PlayerPic" type="Sprite" parent="Background/Players/Player2"]
+position = Vector2( 159, 35 )
+scale = Vector2( 0.214198, 0.152545 )
+texture = ExtResource( 7 )
+
+[node name="Name" type="Label" parent="Background/Players/Player2"]
+margin_left = 6.0
+margin_top = 5.0
+margin_right = 126.0
+margin_bottom = 67.0
+custom_fonts/font = SubResource( 7 )
+text = "Player 2 "
+align = 2
+valign = 1
+autowrap = true
+
+[node name="Score" type="Label" parent="Background/Players/Player2"]
+margin_left = 110.0
+margin_top = 56.0
+margin_right = 196.0
+margin_bottom = 118.0
+custom_fonts/font = ExtResource( 14 )
+text = "08"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Player3" type="Panel" parent="Background/Players"]
+margin_left = 30.0
+margin_top = 15.0
+margin_right = 239.0
+margin_bottom = 122.0
+custom_styles/panel = ExtResource( 3 )
+
+[node name="Highlight" type="Panel" parent="Background/Players/Player3"]
+margin_left = 20.0
+margin_top = 4.0
+margin_right = 89.0
+margin_bottom = 73.0
+custom_styles/panel = ExtResource( 2 )
+
+[node name="PlayerPic" type="Sprite" parent="Background/Players/Player3"]
+position = Vector2( 59, 37 )
+scale = Vector2( 0.214198, 0.152545 )
+texture = ExtResource( 7 )
+
+[node name="Name" type="Label" parent="Background/Players/Player3"]
+margin_left = 89.0
+margin_top = 1.0
+margin_right = 209.0
+margin_bottom = 63.0
+custom_fonts/font = SubResource( 7 )
+text = "Player 3"
+valign = 1
+autowrap = true
+
+[node name="Score" type="Label" parent="Background/Players/Player3"]
+margin_left = 10.0
+margin_top = 58.0
+margin_right = 96.0
+margin_bottom = 120.0
+custom_fonts/font = ExtResource( 14 )
+text = "12"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Player4" type="Panel" parent="Background/Players"]
+margin_left = 10.0
+margin_top = 211.0
+margin_right = 219.0
+margin_bottom = 318.0
+custom_styles/panel = ExtResource( 13 )
+
+[node name="Highlight" type="Panel" parent="Background/Players/Player4"]
+margin_left = 20.0
+margin_top = 4.0
+margin_right = 89.0
+margin_bottom = 73.0
+custom_styles/panel = ExtResource( 3 )
+
+[node name="PlayerPic" type="Sprite" parent="Background/Players/Player4"]
+position = Vector2( 59, 37 )
+scale = Vector2( 0.214198, 0.152545 )
+texture = ExtResource( 7 )
+
+[node name="Name" type="Label" parent="Background/Players/Player4"]
+margin_left = 89.0
+margin_top = 1.0
+margin_right = 209.0
+margin_bottom = 63.0
+custom_fonts/font = SubResource( 7 )
+text = "Player 4"
+valign = 1
+autowrap = true
+
+[node name="Score" type="Label" parent="Background/Players/Player4"]
+margin_left = 10.0
+margin_top = 58.0
+margin_right = 96.0
+margin_bottom = 120.0
+custom_fonts/font = ExtResource( 14 )
+text = "08"
+align = 1
+valign = 1
+autowrap = true
+
 [node name="Pause" type="Panel" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_styles/panel = ExtResource( 1 )
