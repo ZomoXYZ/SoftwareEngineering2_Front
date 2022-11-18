@@ -139,5 +139,5 @@ func getValidCards(cards):
 		
 	#Handling for other cards
 	else:
-		
+		pass
 
