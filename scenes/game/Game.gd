@@ -54,6 +54,13 @@ func _ready():
 	fill_players_gameturn()
 		
 
+func get_selected_cards():
+	var selectedCards = []
+	for child in $Background/HandBox.get_children():
+		if child.selected:
+			selectedCards.append(child.selfValue)
+	return selectedCards
+
 func _on_Card_pressed(card):
 
 	# if it's selected, the user can deselect
@@ -64,10 +71,7 @@ func _on_Card_pressed(card):
 		card.select()
 
 	# get list of selected cards
-	var selectedCards = []
-	for child in $Background/HandBox.get_children():
-		if child.selected:
-			selectedCards.append(child.selfValue)
+	var selectedCards = get_selected_cards()
 
 	# figure out which cards can be selected, returns null if no cards are selected
 	var selectableCards = StartVars.getValidCards(selectedCards)
@@ -79,6 +83,7 @@ func _on_Card_pressed(card):
 			child.setCanSelect(true)
 		else:
 			child.setCanSelect(false)
+
 
 func fill_players_pausebutton():
 	# variables
@@ -171,11 +176,13 @@ func _on_disconnected():
 func _on_playerturn(player):
 	if LobbyConn.isMyTurn():
 		print("My turn")
+		LobbyConn.draw(LobbyConn.DrawFrom.DECK)
 	else:
 		print("Player %s's turn" % player)
 
 func _on_carddrew(from, card): # from: DrawFrom.DRAW_FROM_DECK or DrawFrom.DRAW_FROM_DISCARD
 	print("I drew %s from %s" % [StartVars.CardName(card), LobbyConn.DrawFrom.keys()[from]])
+	LobbyConn.discard(card)
 
 func _on_carddiscarded(card):
 	print("I discarded %s" % StartVars.CardName(card))
@@ -196,4 +203,11 @@ func _on_gameover(player): # playerID winner
 	print("Player %s won" % player)
 
 func _on_Submit_pressed():
-	print("Nineteen Eighty Four")
+	var playedAmount = 0
+	var selectedCards = get_selected_cards()
+	LobbyConn.play(selectedCards)
+	for child in $Background/HandBox.get_children():
+		if child.selected:
+			playedAmount+=1
+			child.hide()
+
