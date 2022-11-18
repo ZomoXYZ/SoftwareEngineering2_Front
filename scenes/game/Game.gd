@@ -37,6 +37,8 @@ func fill_cards():
 		cardInstance.set_rotation(PI / 2)
 		cardInstance.selfValue = cards[i]
 		$Background/HandBox.add_child(cardInstance)
+		# disabled for default
+		cardInstance.setCanSelect(false)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -50,7 +52,6 @@ func _ready():
 	else:
 		$Pause/Panel/LobbyID.text = "ID: %s" % LobbyConn.Code
 
-	fill_cards()
 	fill_players_gameturn()
 		
 
@@ -174,6 +175,8 @@ func _on_disconnected():
 	get_tree().change_scene("res://scenes/lobby_list/Lobby_List.tscn")
 
 func _on_playerturn(player):
+	fill_cards()
+	
 	if LobbyConn.isMyTurn():
 		print("My turn")
 		LobbyConn.draw(LobbyConn.DrawFrom.DECK)
@@ -185,15 +188,27 @@ func _on_carddrew(from, card): # from: DrawFrom.DRAW_FROM_DECK or DrawFrom.DRAW_
 	LobbyConn.discard(card)
 
 func _on_carddiscarded(card):
+	# allow cards to be interacted with
+	for child in $Background/HandBox.get_children():
+		child.deselect()
+		child.setCanSelect(true)
+	# temp print
 	print("I discarded %s" % StartVars.CardName(card))
 
 func _on_cardsplayed(cards): # cards will be null if passed
+	# disallow cards to be interacted with
+	for child in $Background/HandBox.get_children():
+		child.deselect()
+		child.setCanSelect(false)
+	
+	# temp print
 	var cardStr = []
 	for card in cards:
 		cardStr.append(StartVars.CardName(card))
 	print("I played %s" % StartVars.godot_sucks_join_array(cardStr, ", "))
 
 func _on_turnended(cards): # cards automatically drawn
+	# temp print
 	var cardStr = []
 	for card in cards:
 		cardStr.append(StartVars.CardName(card))
