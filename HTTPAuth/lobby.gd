@@ -252,19 +252,24 @@ func command_game_turn(args):
 
 func command_game_drew(args):
 	var drew = JSON.parse(args[0]).result
-	Cards.append(drew.card)
-	emit_signal("card_drew", drew.from, drew.card)
+	if isMyTurn():
+		Cards.append(drew.card)
+		emit_signal("card_drew", drew.from, drew.card)
+	else:
+		emit_signal("card_drew", drew.from, null)
 
 func command_game_discarded(args):
 	var card = int(args[0])
-	Cards.erase(card)
+	if isMyTurn():
+		Cards.erase(card)
 	DiscardPile = card
 	emit_signal("card_discarded", card)
 
 func command_game_played(args):
 	var cards = JSON.parse(args[0]).result.cards
-	for card in cards:
-		Cards.erase(card)
+	if isMyTurn():
+		for card in cards:
+			Cards.erase(card)
 	emit_signal("cards_played", cards)
 
 func command_game_passed():

@@ -176,36 +176,50 @@ func _on_disconnected():
 
 func _on_playerturn(player):
 	fill_cards()
-	
+
 	if LobbyConn.isMyTurn():
 		print("My turn")
 		LobbyConn.draw(LobbyConn.DrawFrom.DECK)
 	else:
 		print("Player %s's turn" % player)
 
-func _on_carddrew(from, card): # from: DrawFrom.DRAW_FROM_DECK or DrawFrom.DRAW_FROM_DISCARD
-	print("I drew %s from %s" % [StartVars.CardName(card), LobbyConn.DrawFrom.keys()[from]])
-	LobbyConn.discard(card)
+# from: DrawFrom.DRAW_FROM_DECK or DrawFrom.DRAW_FROM_DISCARD
+# card will be null if it isnt your turn
+func _on_carddrew(from, card):
+	if LobbyConn.isMyTurn():
+		print("I drew %s from %s" % [StartVars.CardName(card), LobbyConn.DrawFrom.keys()[from]])
+		LobbyConn.discard(card)
+	else
+		print("Player %s drew from %s" % [LobbyConn.CurrentPlayer, LobbyConn.DrawFrom.keys()[from]])
 
 func _on_carddiscarded(card):
-	# allow cards to be interacted with
-	for child in $Background/HandBox.get_children():
-		child.deselect()
-		child.setCanSelect(true)
-	# temp print
-	print("I discarded %s" % StartVars.CardName(card))
+	if LobbyConn.isMyTurn():
+		# allow cards to be interacted with
+		for child in $Background/HandBox.get_children():
+			child.deselect()
+			child.setCanSelect(true)
+		# temp print
+		print("I discarded %s" % StartVars.CardName(card))
+	else:
+		print("Player %s discarded %s" % [LobbyConn.CurrentPlayer, StartVars.CardName(card)])
 
 func _on_cardsplayed(cards): # cards will be null if passed
-	# disallow cards to be interacted with
-	for child in $Background/HandBox.get_children():
-		child.deselect()
-		child.setCanSelect(false)
-	
 	# temp print
 	var cardStr = []
 	for card in cards:
 		cardStr.append(StartVars.CardName(card))
-	print("I played %s" % StartVars.godot_sucks_join_array(cardStr, ", "))
+	cardStr = StartVars.godot_sucks_join_array(cardStr, ", ")
+
+	if LobbyConn.isMyTurn():
+		# disallow cards to be interacted with
+		for child in $Background/HandBox.get_children():
+			child.deselect()
+			child.setCanSelect(false)
+		
+		# temp print
+		print("I played %s" % cardStr)
+	else:
+		print("Player %s played %s" % [LobbyConn.CurrentPlayer, cardStr])
 
 func _on_turnended(cards): # cards automatically drawn
 	# temp print
