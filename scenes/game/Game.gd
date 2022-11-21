@@ -9,6 +9,20 @@ var button_red = preload("res://assets/styles/button_red.tres")
 
 export(PackedScene) var cardScene
 
+func playerIndexToNode(playerIndex):
+	var myIndex
+	for i in range(LobbyConn.Players.size()):
+		if LobbyConn.Players[i].ID == UserData.ID:
+			myIndex = i
+			break
+	
+	if playerIndex == myIndex:
+		return $Background/Players.get_node("Player1")
+	elif playerIndex < myIndex:
+		return $Background/Players.get_node("Player%s" % (playerIndex + 2))
+	else:
+		return $Background/Players.get_node("Player%s" % (playerIndex + 1))
+
 func connect_signals():
 	if StartVars.singlePlayer:
 		LobbySP.connect("disconnected", self, "_on_disconnected")
@@ -129,11 +143,11 @@ func fill_players_gameturn():
 		players = LobbySP.Players
 	else:
 		players = LobbyConn.Players
-		currentTurn = players[LobbyConn.Turn]
+		currentTurn = players[LobbyConn.getTurnIndex()]
 
 	# reset player states
 	for i in 4:
-		var current = $Background/Players.get_child(i)
+		var current = playerIndexToNode(i)
 		$Pause.hide()
 		if i < len(players):
 			current.get_node("Name").text = "%s %s" % [players[i]['name']['adjective'], players[i]['name']['noun']]
@@ -148,7 +162,7 @@ func fill_players_gameturn():
 				x.hide()
 	
 	# set current turn
-	var current = $Background/Players.get_child(LobbyConn.Turn)
+	var current = playerIndexToNode(LobbyConn.getTurnIndex())
 	current.get_node("Highlight").add_stylebox_override("panel", button_red)
 	current.add_stylebox_override("panel", button_green)
 	

@@ -14,7 +14,7 @@ var DiscardPile = -1
 var Cards = []
 
 var Points = []
-var Turn = 0
+var Turn = ""
 
 enum DrawFrom {
 	DECK = 0,
