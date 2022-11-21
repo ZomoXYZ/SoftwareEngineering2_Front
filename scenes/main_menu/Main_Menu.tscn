@@ -349,8 +349,8 @@ margin_bottom = 718.001
 custom_constants/separation = 30
 
 [node name="Singleplayer" type="Button" parent="CanvasLayer/ButtonContainer"]
-margin_right = 295.0
-margin_bottom = 87.0
+margin_right = 775.0
+margin_bottom = 193.0
 size_flags_vertical = 3
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_fonts/font = ExtResource( 3 )
@@ -361,9 +361,9 @@ custom_styles/normal = ExtResource( 5 )
 text = "Singleplayer"
 
 [node name="Multiplayer" type="Button" parent="CanvasLayer/ButtonContainer"]
-margin_top = 117.0
-margin_right = 295.0
-margin_bottom = 204.0
+margin_top = 223.0
+margin_right = 775.0
+margin_bottom = 417.0
 rect_pivot_offset = Vector2( -620, 737.5 )
 size_flags_vertical = 3
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
@@ -376,9 +376,9 @@ disabled = true
 text = "Multiplayer"
 
 [node name="Tutorial" type="Button" parent="CanvasLayer/ButtonContainer"]
-margin_top = 234.0
-margin_right = 295.0
-margin_bottom = 321.0
+margin_top = 447.0
+margin_right = 775.0
+margin_bottom = 641.0
 size_flags_vertical = 3
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_fonts/font = ExtResource( 3 )
@@ -389,9 +389,9 @@ custom_styles/normal = ExtResource( 5 )
 text = "Tutorial"
 
 [node name="Credits" type="Button" parent="CanvasLayer/ButtonContainer"]
-margin_top = 351.0
-margin_right = 295.0
-margin_bottom = 439.0
+margin_top = 671.0
+margin_right = 775.0
+margin_bottom = 865.0
 size_flags_vertical = 3
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_fonts/font = ExtResource( 3 )
@@ -447,6 +447,9 @@ anims/RESET = SubResource( 5 )
 anims/Screen_Transition = SubResource( 6 )
 anims/SinglePlayer_Transition = SubResource( 9 )
 anims/Unused_Transition = SubResource( 7 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
 
 [connection signal="pressed" from="Background/Adjective" to="." method="_on_Adjective_pressed"]
 [connection signal="pressed" from="Background/Noun" to="." method="_on_Noun_pressed"]

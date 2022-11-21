@@ -11,10 +11,14 @@ export(PackedScene) var cardScene
 
 func playerIndexToNode(playerIndex):
 	var myIndex
-	for i in range(LobbyConn.Players.size()):
-		if LobbyConn.Players[i].ID == UserData.ID:
-			myIndex = i
-			break
+	if !StartVars.singlePlayer:
+		for i in range(LobbyConn.Players.size()):
+			if LobbyConn.Players[i].ID == UserData.ID:
+				myIndex = i
+				break
+	else:
+		myIndex = 0
+		playerIndex = 0
 	
 	if playerIndex == myIndex:
 		return $Background/Players.get_node("Player1")
@@ -60,7 +64,7 @@ func fill_cards(enabled):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	connect_signals()
-
+	$Background/DrawPileBox/CardRotate/Card.set_rotation(PI/2)
 	# update UI
 	$Pause.hide()
 	if StartVars.singlePlayer:
