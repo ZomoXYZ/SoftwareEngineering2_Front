@@ -29,7 +29,7 @@ func isHost():
 
 func getTurnIndex():
 	for i in range(Players.size()):
-		if Players[i].ID == LobbyConn.Turn:
+		if Players[i].id == LobbyConn.Turn:
 			return i
 
 func resetVariables():

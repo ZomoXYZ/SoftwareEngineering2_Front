@@ -13,7 +13,7 @@ func playerIndexToNode(playerIndex):
 	var myIndex
 	if !StartVars.singlePlayer:
 		for i in range(LobbyConn.Players.size()):
-			if LobbyConn.Players[i].ID == UserData.ID:
+			if LobbyConn.Players[i].id == UserData.ID:
 				myIndex = i
 				break
 	else:
@@ -74,8 +74,8 @@ func _ready():
 		$Pause/PlayerList/KickPlayer.hide()
 	else:
 		$Pause/Panel/LobbyID.text = "ID: %s" % LobbyConn.Code
-
-	fill_players_gameturn()
+		
+	fill_players_gameturn(true)
 		
 func get_selected_cards():
 	var selectedCards = []
@@ -139,17 +139,15 @@ func fill_players_pausebutton():
 			current.get_node("PlayerIcon").hide()
 			current.add_stylebox_override("normal", button_empty)
 			
-func fill_players_gameturn():
+func fill_players_gameturn(beforeTurns=false):
 	# variables
 	var players = []
-	var currentTurn
 
 	# fill variables
 	if StartVars.singlePlayer:
 		players = LobbySP.Players
 	else:
 		players = LobbyConn.Players
-		currentTurn = players[LobbyConn.getTurnIndex()]
 
 	# reset player states
 	for i in 4:
@@ -167,10 +165,16 @@ func fill_players_gameturn():
 			for x in current.get_children():
 				x.hide()
 	
-	# set current turn
-	var current = playerIndexToNode(LobbyConn.getTurnIndex())
-	current.get_node("Highlight").add_stylebox_override("panel", button_red)
-	current.add_stylebox_override("panel", button_green)
+	if !beforeTurns:
+		# set current turn visually
+		var current
+		if StartVars.singlePlayer:
+			print("current turn, singleplayer, this will error because `current` is not defined")
+		else:
+			current = playerIndexToNode(LobbyConn.getTurnIndex())
+		
+		current.get_node("Highlight").add_stylebox_override("panel", button_red)
+		current.add_stylebox_override("panel", button_green)
 	
 #Pause shows pause overlay
 func _on_PauseButton_pressed():
@@ -204,6 +208,7 @@ func _on_disconnected():
 	get_tree().change_scene("res://scenes/lobby_list/Lobby_List.tscn")
 
 func _on_playerturn(player):
+	fill_players_gameturn()
 	fill_cards(false)
 
 	if LobbyConn.isMyTurn():
