@@ -121,12 +121,14 @@ func fill_players_pausebutton():
 func fill_players_gameturn():
 	# variables
 	var players = []
+	var currentTurn
 
 	# fill variables
 	if StartVars.singlePlayer:
 		players = LobbySP.Players
 	else:
 		players = LobbyConn.Players
+		currentTurn = players[LobbyConn.Turn]
 
 	# fill player list
 	for i in 4:
@@ -136,18 +138,16 @@ func fill_players_gameturn():
 			current.get_node("Name").text = "%s %s" % [players[i]['name']['adjective'], players[i]['name']['noun']]
 			current.get_node("Score").text = "%s" % 00
 			current.get_node("PlayerIcon").show()
-			if i == 0:
-				current.get_node("Highlight").add_stylebox_override("panel", button_red)
-				current.add_stylebox_override("panel", button_green)
-			else:
-				current.add_stylebox_override("panel", button_empty)
-				current.get_node("Highlight").add_stylebox_override("panel", button_green)
+			current.add_stylebox_override("panel", button_empty)
+			current.get_node("Highlight").add_stylebox_override("panel", button_green)
 		else:
 			current.get_node("PlayerIcon").hide()
 			current.add_stylebox_override("panel", button_empty2)
 			for x in current.get_children():
 				x.hide()
-				
+	currentTurn.get_node("Highlight").add_stylebox_override("panel", button_red)
+	currentTurn.add_stylebox_override("panel", button_green)
+	
 #Pause shows pause overlay
 func _on_PauseButton_pressed():
 	#The pause animation changes the opacity of the pause menu, but having no opacity is not the same as hiding because it would still be tangible
