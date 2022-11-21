@@ -207,6 +207,7 @@ func _closed(was_clean_close):
 	Authorized = false
 	resetVariables()
 	toPoll = false
+	leave()
 
 func _error():
 	print("Fat L")
