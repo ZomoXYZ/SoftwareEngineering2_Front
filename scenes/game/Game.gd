@@ -74,7 +74,9 @@ func _ready():
 		$Pause/PlayerList/KickPlayer.hide()
 	else:
 		$Pause/Panel/LobbyID.text = "ID: %s" % LobbyConn.Code
-		
+	
+	if !LobbyConn.isHost():
+		$Pause/PlayerList/KickPlayer.hide()
 	fill_players_gameturn(true)
 		
 func get_selected_cards():
