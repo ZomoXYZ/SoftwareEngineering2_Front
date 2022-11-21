@@ -20,14 +20,18 @@ func connect_signals():
 		LobbyConn.connect("cards_played", self, "_on_cardsplayed")
 		LobbyConn.connect("turn_ended", self, "_on_turnended")
 		LobbyConn.connect("game_over", self, "_on_gameover")
+		LobbyConn.connect("players_updated", self, "_on_playersupdated")
 		LobbyConn.join_game()
 
-func fill_cards():
+func fill_cards(enabled):
 	var cards
 	if StartVars.singlePlayer:
 		cards = LobbySP.Cards
 	else:
 		cards = LobbyConn.Cards
+
+	for child in $Background/HandBox.get_children():
+		child.queue_free()
 
 	# display at most 5 cards
 	var count = clamp(len(cards), 0, 5)
@@ -37,8 +41,7 @@ func fill_cards():
 		cardInstance.set_rotation(PI / 2)
 		cardInstance.selfValue = cards[i]
 		$Background/HandBox.add_child(cardInstance)
-		# disabled for default
-		cardInstance.setCanSelect(false)
+		cardInstance.setCanSelect(enabled)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -51,11 +54,9 @@ func _ready():
 		$Pause/PlayerList/KickPlayer.hide()
 	else:
 		$Pause/Panel/LobbyID.text = "ID: %s" % LobbyConn.Code
-	$Background/DrawPileBox/CardRotate.get_child(0).set_rotation(PI / 2)
-	fill_players_gameturn()
-	
-		
 
+	fill_players_gameturn()
+		
 func get_selected_cards():
 	var selectedCards = []
 	for child in $Background/HandBox.get_children():
@@ -130,7 +131,7 @@ func fill_players_gameturn():
 		players = LobbyConn.Players
 		currentTurn = players[LobbyConn.Turn]
 
-	# fill player list
+	# reset player states
 	for i in 4:
 		var current = $Background/Players.get_child(i)
 		$Pause.hide()
@@ -145,8 +146,11 @@ func fill_players_gameturn():
 			current.add_stylebox_override("panel", button_empty2)
 			for x in current.get_children():
 				x.hide()
-	currentTurn.get_node("Highlight").add_stylebox_override("panel", button_red)
-	currentTurn.add_stylebox_override("panel", button_green)
+	
+	# set current turn
+	var current = $Background/Players.get_child(LobbyConn.Turn)
+	current.get_node("Highlight").add_stylebox_override("panel", button_red)
+	current.add_stylebox_override("panel", button_green)
 	
 #Pause shows pause overlay
 func _on_PauseButton_pressed():
@@ -164,6 +168,10 @@ func _on_Resume_pressed():
 	yield($AnimationPlayer, "animation_finished")
 	$Pause.hide()
 
+func _on_Submit_pressed():
+	var selectedCards = get_selected_cards()
+	LobbyConn.play(selectedCards)
+
 #Returns to the lobby list or main menu if this is a multi or single player game
 func _on_Leave_pressed():
 	if StartVars.singlePlayer:
@@ -176,7 +184,7 @@ func _on_disconnected():
 	get_tree().change_scene("res://scenes/lobby_list/Lobby_List.tscn")
 
 func _on_playerturn(player):
-	fill_cards()
+	fill_cards(false)
 
 	if LobbyConn.isMyTurn():
 		print("My turn")
@@ -195,16 +203,16 @@ func _on_carddrew(from, card):
 
 func _on_carddiscarded(card):
 	if LobbyConn.isMyTurn():
-		# allow cards to be interacted with
-		for child in $Background/HandBox.get_children():
-			child.deselect()
-			child.setCanSelect(true)
+		fill_cards(true)
 		# temp print
 		print("I discarded %s" % StartVars.CardName(card))
 	else:
+		fill_cards(false)
 		print("Player %s discarded %s" % [LobbyConn.Turn, StartVars.CardName(card)])
 
 func _on_cardsplayed(cards): # cards will be null if passed
+	fill_cards(false)
+
 	# temp print
 	var cardStr = []
 	for card in cards:
@@ -212,14 +220,10 @@ func _on_cardsplayed(cards): # cards will be null if passed
 	cardStr = StartVars.godot_sucks_join_array(cardStr, ", ")
 
 	if LobbyConn.isMyTurn():
-		# disallow cards to be interacted with
-		for child in $Background/HandBox.get_children():
-			child.deselect()
-			child.setCanSelect(false)
-		
 		# temp print
 		print("I played %s" % cardStr)
 	else:
+		# temp print
 		print("Player %s played %s" % [LobbyConn.Turn, cardStr])
 
 func _on_turnended(cards): # cards automatically drawn
@@ -232,10 +236,5 @@ func _on_turnended(cards): # cards automatically drawn
 func _on_gameover(player): # playerID winner
 	print("Player %s won" % player)
 
-func _on_Submit_pressed():
-	var playedAmount = 0
-	var selectedCards = get_selected_cards()
-	LobbyConn.play(selectedCards)
-	#for child in $Background/HandBox.get_children():
-		#child.hide()
-
+func _on_playersupdated():
+	fill_players_gameturn()
