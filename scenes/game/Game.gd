@@ -51,8 +51,9 @@ func _ready():
 		$Pause/PlayerList/KickPlayer.hide()
 	else:
 		$Pause/Panel/LobbyID.text = "ID: %s" % LobbyConn.Code
-
+	$Background/DrawPileBox/CardRotate.get_child(0).set_rotation(PI / 2)
 	fill_players_gameturn()
+	
 		
 
 func get_selected_cards():
@@ -189,8 +190,8 @@ func _on_carddrew(from, card):
 	if LobbyConn.isMyTurn():
 		print("I drew %s from %s" % [StartVars.CardName(card), LobbyConn.DrawFrom.keys()[from]])
 		LobbyConn.discard(card)
-	else
-		print("Player %s drew from %s" % [LobbyConn.CurrentPlayer, LobbyConn.DrawFrom.keys()[from]])
+	else:
+		print("Player %s drew from %s" % [LobbyConn.Turn, LobbyConn.DrawFrom.keys()[from]])
 
 func _on_carddiscarded(card):
 	if LobbyConn.isMyTurn():
@@ -201,7 +202,7 @@ func _on_carddiscarded(card):
 		# temp print
 		print("I discarded %s" % StartVars.CardName(card))
 	else:
-		print("Player %s discarded %s" % [LobbyConn.CurrentPlayer, StartVars.CardName(card)])
+		print("Player %s discarded %s" % [LobbyConn.Turn, StartVars.CardName(card)])
 
 func _on_cardsplayed(cards): # cards will be null if passed
 	# temp print
@@ -219,7 +220,7 @@ func _on_cardsplayed(cards): # cards will be null if passed
 		# temp print
 		print("I played %s" % cardStr)
 	else:
-		print("Player %s played %s" % [LobbyConn.CurrentPlayer, cardStr])
+		print("Player %s played %s" % [LobbyConn.Turn, cardStr])
 
 func _on_turnended(cards): # cards automatically drawn
 	# temp print
@@ -235,8 +236,6 @@ func _on_Submit_pressed():
 	var playedAmount = 0
 	var selectedCards = get_selected_cards()
 	LobbyConn.play(selectedCards)
-	for child in $Background/HandBox.get_children():
-		if child.selected:
-			playedAmount+=1
-			child.hide()
+	#for child in $Background/HandBox.get_children():
+		#child.hide()
 

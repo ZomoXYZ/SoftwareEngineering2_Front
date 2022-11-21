@@ -9,7 +9,7 @@ func _ready():
 	Request.connect("user_offline", self, "_on_user_offline")
 	var fix = Vector2(93,297)
 	Request.authorizeSession()
-	$Background/ButtonContainer.set_position(fix)
+	$CanvasLayer/ButtonContainer.set_position(fix)
 
 	# if already online, assume we're still online until told otherwise
 	if Request.online:
@@ -82,11 +82,11 @@ func _on_user_online():
 	$Background/Noun.text = "%s" % UserData.PlayerNameNoun
 	$Background/Picture.text = "%s" % UserData.PlayerPicture
 	#min and max are &%$(%$&(
-	$Background/ButtonContainer/Multiplayer.set_disabled(false)
+	$CanvasLayer/ButtonContainer/Multiplayer.set_disabled(false)
 
 func _on_user_offline():
 	print("User Offline")
-	$Background/ButtonContainer/Multiplayer.set_disabled(true)
+	$CanvasLayer/ButtonContainer/Multiplayer.set_disabled(true)
 
 func _on_Adjective_pressed():
 	var rand = randi() % 80 + 10

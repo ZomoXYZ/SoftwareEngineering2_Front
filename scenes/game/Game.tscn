@@ -241,7 +241,8 @@ alignment = 1
 
 [node name="Players" type="Label" parent="Background"]
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 0.395
+margin_bottom = 516.065
 
 [node name="Player1" type="Panel" parent="Background/Players"]
 anchor_left = 0.837
@@ -495,7 +496,7 @@ rect_min_size = Vector2( 295, 0 )
 custom_constants/separation = 30
 
 [node name="Player1" type="Label" parent="Pause/PlayerList"]
-margin_right = 400.0
+margin_right = 399.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 0, 100 )
 custom_fonts/font = ExtResource( 10 )
@@ -511,7 +512,7 @@ texture = ExtResource( 7 )
 
 [node name="Player2" type="Label" parent="Pause/PlayerList"]
 margin_top = 130.0
-margin_right = 400.0
+margin_right = 399.0
 margin_bottom = 230.0
 rect_min_size = Vector2( 0, 100 )
 custom_fonts/font = ExtResource( 10 )
@@ -526,7 +527,7 @@ texture = ExtResource( 7 )
 
 [node name="Player3" type="Label" parent="Pause/PlayerList"]
 margin_top = 260.0
-margin_right = 400.0
+margin_right = 399.0
 margin_bottom = 360.0
 rect_min_size = Vector2( 0, 100 )
 custom_fonts/font = ExtResource( 10 )
@@ -542,7 +543,7 @@ texture = ExtResource( 7 )
 
 [node name="Player4" type="Label" parent="Pause/PlayerList"]
 margin_top = 390.0
-margin_right = 400.0
+margin_right = 399.0
 margin_bottom = 490.0
 rect_min_size = Vector2( 0, 100 )
 custom_fonts/font = ExtResource( 10 )
@@ -557,7 +558,7 @@ texture = ExtResource( 7 )
 
 [node name="KickPlayer" type="Button" parent="Pause/PlayerList"]
 margin_top = 520.0
-margin_right = 400.0
+margin_right = 399.0
 margin_bottom = 604.0
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 8 )

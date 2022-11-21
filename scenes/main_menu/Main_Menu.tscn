@@ -29,7 +29,7 @@ resource_name = "MultiPlayer_Transition2"
 length = 0.4
 step = 0.01
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("Background/ButtonContainer:rect_position:x")
+tracks/0/path = NodePath("CanvasLayer/ButtonContainer:rect_position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -39,7 +39,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.33 )
 }
 tracks/1/type = "bezier"
-tracks/1/path = NodePath("Background/ButtonContainer:rect_position:y")
+tracks/1/path = NodePath("CanvasLayer/ButtonContainer:rect_position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -49,7 +49,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.33 )
 }
 tracks/2/type = "bezier"
-tracks/2/path = NodePath("Background/ButtonContainer:rect_size:x")
+tracks/2/path = NodePath("CanvasLayer/ButtonContainer:rect_size:x")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -59,7 +59,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.33 )
 }
 tracks/3/type = "bezier"
-tracks/3/path = NodePath("Background/ButtonContainer:rect_size:y")
+tracks/3/path = NodePath("CanvasLayer/ButtonContainer:rect_size:y")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -69,7 +69,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 0.33 )
 }
 tracks/4/type = "bezier"
-tracks/4/path = NodePath("Background/ButtonContainer:rect_rotation")
+tracks/4/path = NodePath("CanvasLayer/ButtonContainer:rect_rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -82,7 +82,7 @@ tracks/4/keys = {
 [sub_resource type="Animation" id=5]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Background/ButtonContainer:rect_position")
+tracks/0/path = NodePath("CanvasLayer/ButtonContainer:rect_position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -106,7 +106,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 tracks/2/type = "bezier"
-tracks/2/path = NodePath("Background/ButtonContainer:rect_position:x")
+tracks/2/path = NodePath("CanvasLayer/ButtonContainer:rect_position:x")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -116,7 +116,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 )
 }
 tracks/3/type = "bezier"
-tracks/3/path = NodePath("Background/ButtonContainer:rect_position:y")
+tracks/3/path = NodePath("CanvasLayer/ButtonContainer:rect_position:y")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -126,7 +126,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 )
 }
 tracks/4/type = "bezier"
-tracks/4/path = NodePath("Background/ButtonContainer:rect_size:x")
+tracks/4/path = NodePath("CanvasLayer/ButtonContainer:rect_size:x")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -136,7 +136,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0 )
 }
 tracks/5/type = "bezier"
-tracks/5/path = NodePath("Background/ButtonContainer:rect_size:y")
+tracks/5/path = NodePath("CanvasLayer/ButtonContainer:rect_size:y")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -146,7 +146,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0 )
 }
 tracks/6/type = "bezier"
-tracks/6/path = NodePath("Background/ButtonContainer:rect_rotation")
+tracks/6/path = NodePath("CanvasLayer/ButtonContainer:rect_rotation")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -156,7 +156,7 @@ tracks/6/keys = {
 "times": PoolRealArray( 0 )
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("Background/ButtonContainer/Singleplayer:custom_styles/normal")
+tracks/7/path = NodePath("CanvasLayer/ButtonContainer/Singleplayer:custom_styles/normal")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
@@ -172,7 +172,7 @@ tracks/7/keys = {
 resource_name = "Screen_Transition"
 length = 0.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("Background/ButtonContainer:rect_position")
+tracks/0/path = NodePath("CanvasLayer/ButtonContainer:rect_position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -200,7 +200,7 @@ tracks/1/keys = {
 resource_name = "SinglePlayer_Transition"
 length = 0.4
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("Background/ButtonContainer:rect_rotation")
+tracks/0/path = NodePath("CanvasLayer/ButtonContainer:rect_rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -210,7 +210,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.4 )
 }
 tracks/1/type = "bezier"
-tracks/1/path = NodePath("Background/ButtonContainer:rect_size:x")
+tracks/1/path = NodePath("CanvasLayer/ButtonContainer:rect_size:x")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -220,7 +220,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.4 )
 }
 tracks/2/type = "bezier"
-tracks/2/path = NodePath("Background/ButtonContainer:rect_size:y")
+tracks/2/path = NodePath("CanvasLayer/ButtonContainer:rect_size:y")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -230,7 +230,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.4 )
 }
 tracks/3/type = "bezier"
-tracks/3/path = NodePath("Background/ButtonContainer:rect_position:x")
+tracks/3/path = NodePath("CanvasLayer/ButtonContainer:rect_position:x")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -240,7 +240,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 0.4 )
 }
 tracks/4/type = "bezier"
-tracks/4/path = NodePath("Background/ButtonContainer:rect_position:y")
+tracks/4/path = NodePath("CanvasLayer/ButtonContainer:rect_position:y")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -250,7 +250,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0, 0.4 )
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("Background/ButtonContainer/Singleplayer:custom_styles/normal")
+tracks/5/path = NodePath("CanvasLayer/ButtonContainer/Singleplayer:custom_styles/normal")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -266,7 +266,7 @@ tracks/5/keys = {
 resource_name = "Unused_Transition"
 length = 0.6
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("Background/ButtonContainer:rect_position:x")
+tracks/0/path = NodePath("CanvasLayer/ButtonContainer:rect_position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -276,7 +276,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 )
 }
 tracks/1/type = "bezier"
-tracks/1/path = NodePath("Background/ButtonContainer:rect_position:y")
+tracks/1/path = NodePath("CanvasLayer/ButtonContainer:rect_position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -302,6 +302,104 @@ tracks/2/keys = {
 script = ExtResource( 2 )
 triangleScene = ExtResource( 7 )
 ellipseScene = ExtResource( 8 )
+
+[node name="Background" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = ExtResource( 6 )
+
+[node name="Adjective" type="Button" parent="Background"]
+margin_right = 195.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 195, 75 )
+custom_fonts/font = ExtResource( 3 )
+custom_styles/hover = ExtResource( 5 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/normal = ExtResource( 5 )
+
+[node name="Noun" type="Button" parent="Background"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -195.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 195, 75 )
+custom_fonts/font = ExtResource( 3 )
+custom_styles/hover = ExtResource( 5 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/normal = ExtResource( 5 )
+
+[node name="Picture" type="Label" parent="Background"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -56.0
+margin_right = 40.0
+custom_fonts/font = ExtResource( 3 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 128
+
+[node name="ButtonContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 93.0
+margin_top = 279.0
+margin_right = 388.0
+margin_bottom = 718.001
+custom_constants/separation = 30
+
+[node name="Singleplayer" type="Button" parent="CanvasLayer/ButtonContainer"]
+margin_right = 295.0
+margin_bottom = 87.0
+size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 3 )
+custom_styles/hover = ExtResource( 5 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/disabled = ExtResource( 10 )
+custom_styles/normal = ExtResource( 5 )
+text = "Singleplayer"
+
+[node name="Multiplayer" type="Button" parent="CanvasLayer/ButtonContainer"]
+margin_top = 117.0
+margin_right = 295.0
+margin_bottom = 204.0
+rect_pivot_offset = Vector2( -620, 737.5 )
+size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 3 )
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/disabled = ExtResource( 9 )
+custom_styles/normal = ExtResource( 4 )
+disabled = true
+text = "Multiplayer"
+
+[node name="Tutorial" type="Button" parent="CanvasLayer/ButtonContainer"]
+margin_top = 234.0
+margin_right = 295.0
+margin_bottom = 321.0
+size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 3 )
+custom_styles/hover = ExtResource( 5 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/disabled = ExtResource( 10 )
+custom_styles/normal = ExtResource( 5 )
+text = "Tutorial"
+
+[node name="Credits" type="Button" parent="CanvasLayer/ButtonContainer"]
+margin_top = 351.0
+margin_right = 295.0
+margin_bottom = 439.0
+size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 3 )
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/disabled = ExtResource( 9 )
+custom_styles/normal = ExtResource( 4 )
+text = "Credits"
 
 [node name="EffectTimer" type="Timer" parent="."]
 wait_time = 0.5
@@ -343,104 +441,6 @@ position = Vector2( 3.99998, 0.999985 )
 rotation = 1.5708
 shape = SubResource( 4 )
 
-[node name="Background" type="Panel" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_styles/panel = ExtResource( 6 )
-
-[node name="Adjective" type="Button" parent="Background"]
-margin_right = 195.0
-margin_bottom = 75.0
-rect_min_size = Vector2( 195, 75 )
-custom_fonts/font = ExtResource( 3 )
-custom_styles/hover = ExtResource( 5 )
-custom_styles/pressed = ExtResource( 4 )
-custom_styles/normal = ExtResource( 5 )
-
-[node name="Noun" type="Button" parent="Background"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -195.0
-margin_bottom = 75.0
-rect_min_size = Vector2( 195, 75 )
-custom_fonts/font = ExtResource( 3 )
-custom_styles/hover = ExtResource( 5 )
-custom_styles/pressed = ExtResource( 4 )
-custom_styles/normal = ExtResource( 5 )
-
-[node name="Picture" type="Label" parent="Background"]
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_top = -56.0
-margin_right = 40.0
-custom_fonts/font = ExtResource( 3 )
-
-[node name="ButtonContainer" type="VBoxContainer" parent="Background"]
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 93.0
-margin_top = -147.5
-margin_right = -92.0
-margin_bottom = -134.999
-custom_constants/separation = 30
-
-[node name="Singleplayer" type="Button" parent="Background/ButtonContainer"]
-margin_right = 295.0
-margin_bottom = 87.0
-size_flags_vertical = 3
-custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 3 )
-custom_styles/hover = ExtResource( 5 )
-custom_styles/pressed = ExtResource( 4 )
-custom_styles/disabled = ExtResource( 10 )
-custom_styles/normal = ExtResource( 5 )
-text = "Singleplayer"
-
-[node name="Multiplayer" type="Button" parent="Background/ButtonContainer"]
-margin_top = 117.0
-margin_right = 295.0
-margin_bottom = 204.0
-rect_pivot_offset = Vector2( -620, 737.5 )
-size_flags_vertical = 3
-custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 3 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 5 )
-custom_styles/disabled = ExtResource( 9 )
-custom_styles/normal = ExtResource( 4 )
-disabled = true
-text = "Multiplayer"
-
-[node name="Tutorial" type="Button" parent="Background/ButtonContainer"]
-margin_top = 234.0
-margin_right = 295.0
-margin_bottom = 321.0
-size_flags_vertical = 3
-custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 3 )
-custom_styles/hover = ExtResource( 5 )
-custom_styles/pressed = ExtResource( 4 )
-custom_styles/disabled = ExtResource( 10 )
-custom_styles/normal = ExtResource( 5 )
-text = "Tutorial"
-
-[node name="Credits" type="Button" parent="Background/ButtonContainer"]
-margin_top = 351.0
-margin_right = 295.0
-margin_bottom = 439.0
-size_flags_vertical = 3
-custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 3 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 5 )
-custom_styles/disabled = ExtResource( 9 )
-custom_styles/normal = ExtResource( 4 )
-text = "Credits"
-
-[node name="CanvasLayer" type="CanvasLayer" parent="Background"]
-layer = 128
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/MultiPlayer_Transition2 = SubResource( 11 )
 anims/RESET = SubResource( 5 )
@@ -448,10 +448,10 @@ anims/Screen_Transition = SubResource( 6 )
 anims/SinglePlayer_Transition = SubResource( 9 )
 anims/Unused_Transition = SubResource( 7 )
 
-[connection signal="timeout" from="EffectTimer" to="." method="_on_EffectTimer_timeout"]
 [connection signal="pressed" from="Background/Adjective" to="." method="_on_Adjective_pressed"]
 [connection signal="pressed" from="Background/Noun" to="." method="_on_Noun_pressed"]
-[connection signal="pressed" from="Background/ButtonContainer/Singleplayer" to="." method="_on_Singleplayer_pressed"]
-[connection signal="pressed" from="Background/ButtonContainer/Multiplayer" to="." method="_on_Multiplayer_pressed"]
-[connection signal="pressed" from="Background/ButtonContainer/Tutorial" to="." method="_on_Tutorial_pressed"]
-[connection signal="pressed" from="Background/ButtonContainer/Credits" to="." method="_on_Credits_pressed"]
+[connection signal="pressed" from="CanvasLayer/ButtonContainer/Singleplayer" to="." method="_on_Singleplayer_pressed"]
+[connection signal="pressed" from="CanvasLayer/ButtonContainer/Multiplayer" to="." method="_on_Multiplayer_pressed"]
+[connection signal="pressed" from="CanvasLayer/ButtonContainer/Tutorial" to="." method="_on_Tutorial_pressed"]
+[connection signal="pressed" from="CanvasLayer/ButtonContainer/Credits" to="." method="_on_Credits_pressed"]
+[connection signal="timeout" from="EffectTimer" to="." method="_on_EffectTimer_timeout"]
