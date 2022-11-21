@@ -199,13 +199,13 @@ margin_bottom = -20.0
 
 [node name="DrawPileBox" type="HBoxContainer" parent="Background"]
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
+anchor_bottom = 1.0
 margin_left = -178.0
-margin_top = -90.5
+margin_top = -517.0
 margin_right = 179.0
-margin_bottom = 10.5
+margin_bottom = -416.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -230,12 +230,12 @@ expand = true
 stretch_mode = 4
 
 [node name="HandBox" type="HBoxContainer" parent="Background"]
-anchor_top = 1.0
-anchor_right = 1.0
+anchor_top = 0.902
+anchor_right = 1.019
 anchor_bottom = 1.0
 margin_left = -13.0
-margin_top = -184.0
-margin_right = 9.0
+margin_top = -100.406
+margin_right = -0.120026
 margin_bottom = 16.0
 alignment = 1
 
@@ -244,10 +244,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Player1" type="Panel" parent="Background/Players"]
-margin_left = 250.0
-margin_top = 160.0
-margin_right = 250.0
-margin_bottom = 160.0
+anchor_left = 0.837
+anchor_top = 0.56
+anchor_right = 0.837
+anchor_bottom = 0.56
+margin_left = -151.76
+margin_top = -317.68
+margin_right = -151.76
+margin_bottom = -317.68
 custom_styles/panel = ExtResource( 13 )
 
 [node name="Highlight" type="Panel" parent="Background/Players/Player1"]
@@ -285,10 +289,14 @@ valign = 1
 autowrap = true
 
 [node name="Player2" type="Panel" parent="Background/Players"]
-margin_left = 256.0
-margin_top = 160.0
-margin_right = 465.0
-margin_bottom = 264.0
+anchor_left = 0.751
+anchor_top = 0.249
+anchor_right = 0.751
+anchor_bottom = 0.249
+margin_left = -104.48
+margin_top = -52.397
+margin_right = 104.52
+margin_bottom = 51.603
 custom_styles/panel = ExtResource( 13 )
 
 [node name="Highlight" type="Panel" parent="Background/Players/Player2"]
@@ -326,10 +334,14 @@ valign = 1
 autowrap = true
 
 [node name="Player3" type="Panel" parent="Background/Players"]
-margin_left = 30.0
-margin_top = 15.0
-margin_right = 239.0
-margin_bottom = 122.0
+anchor_left = 0.28
+anchor_top = 0.08
+anchor_right = 0.28
+anchor_bottom = 0.08
+margin_left = -104.4
+margin_top = -53.24
+margin_right = 104.6
+margin_bottom = 53.76
 custom_styles/panel = ExtResource( 3 )
 
 [node name="Highlight" type="Panel" parent="Background/Players/Player3"]
@@ -366,10 +378,14 @@ valign = 1
 autowrap = true
 
 [node name="Player4" type="Panel" parent="Background/Players"]
-margin_left = 10.0
-margin_top = 211.0
-margin_right = 219.0
-margin_bottom = 318.0
+anchor_left = 0.239
+anchor_top = 0.31
+anchor_right = 0.239
+anchor_bottom = 0.31
+margin_left = -104.72
+margin_top = -53.43
+margin_right = 104.28
+margin_bottom = 53.57
 custom_styles/panel = ExtResource( 4 )
 
 [node name="Highlight" type="Panel" parent="Background/Players/Player4"]
@@ -467,12 +483,14 @@ align = 1
 valign = 1
 
 [node name="PlayerList" type="VBoxContainer" parent="Pause"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -200.0
-margin_top = 125.0
-margin_right = 200.0
-margin_bottom = 729.0
+anchor_left = 0.083
+anchor_top = 0.147
+anchor_right = 0.917
+anchor_bottom = 0.855
+margin_left = 0.159996
+margin_top = -0.390999
+margin_right = -0.160034
+margin_bottom = -0.315002
 rect_min_size = Vector2( 295, 0 )
 custom_constants/separation = 30
 

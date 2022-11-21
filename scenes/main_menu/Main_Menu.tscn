@@ -11,6 +11,11 @@
 [ext_resource path="res://assets/styles/button_red_disabled.tres" type="StyleBox" id=9]
 [ext_resource path="res://assets/styles/button_green_disabled.tres" type="StyleBox" id=10]
 
+[sub_resource type="Curve2D" id=8]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 480, 0, 0, 0, 0, 0, 480, 856, 0, 0, 0, 0, 0, 856, 0, 0, 0, 0, 0, 0 )
+}
+
 [sub_resource type="DynamicFont" id=3]
 size = 86
 font_data = ExtResource( 1 )
@@ -24,7 +29,7 @@ resource_name = "MultiPlayer_Transition2"
 length = 0.4
 step = 0.01
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_position:x")
+tracks/0/path = NodePath("Background/ButtonContainer:rect_position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -34,7 +39,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.33 )
 }
 tracks/1/type = "bezier"
-tracks/1/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_position:y")
+tracks/1/path = NodePath("Background/ButtonContainer:rect_position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -44,7 +49,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.33 )
 }
 tracks/2/type = "bezier"
-tracks/2/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_size:x")
+tracks/2/path = NodePath("Background/ButtonContainer:rect_size:x")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -54,7 +59,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.33 )
 }
 tracks/3/type = "bezier"
-tracks/3/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_size:y")
+tracks/3/path = NodePath("Background/ButtonContainer:rect_size:y")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -64,7 +69,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 0.33 )
 }
 tracks/4/type = "bezier"
-tracks/4/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_rotation")
+tracks/4/path = NodePath("Background/ButtonContainer:rect_rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -77,7 +82,7 @@ tracks/4/keys = {
 [sub_resource type="Animation" id=5]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_position")
+tracks/0/path = NodePath("Background/ButtonContainer:rect_position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -101,7 +106,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 tracks/2/type = "bezier"
-tracks/2/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_position:x")
+tracks/2/path = NodePath("Background/ButtonContainer:rect_position:x")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -111,7 +116,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 )
 }
 tracks/3/type = "bezier"
-tracks/3/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_position:y")
+tracks/3/path = NodePath("Background/ButtonContainer:rect_position:y")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -121,7 +126,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 )
 }
 tracks/4/type = "bezier"
-tracks/4/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_size:x")
+tracks/4/path = NodePath("Background/ButtonContainer:rect_size:x")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -131,7 +136,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0 )
 }
 tracks/5/type = "bezier"
-tracks/5/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_size:y")
+tracks/5/path = NodePath("Background/ButtonContainer:rect_size:y")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -141,7 +146,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0 )
 }
 tracks/6/type = "bezier"
-tracks/6/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_rotation")
+tracks/6/path = NodePath("Background/ButtonContainer:rect_rotation")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -151,7 +156,7 @@ tracks/6/keys = {
 "times": PoolRealArray( 0 )
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("Background/CanvasLayer/ButtonContainer/Singleplayer:custom_styles/normal")
+tracks/7/path = NodePath("Background/ButtonContainer/Singleplayer:custom_styles/normal")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
@@ -167,7 +172,7 @@ tracks/7/keys = {
 resource_name = "Screen_Transition"
 length = 0.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_position")
+tracks/0/path = NodePath("Background/ButtonContainer:rect_position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -195,7 +200,7 @@ tracks/1/keys = {
 resource_name = "SinglePlayer_Transition"
 length = 0.4
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_rotation")
+tracks/0/path = NodePath("Background/ButtonContainer:rect_rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -205,7 +210,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.4 )
 }
 tracks/1/type = "bezier"
-tracks/1/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_size:x")
+tracks/1/path = NodePath("Background/ButtonContainer:rect_size:x")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -215,7 +220,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.4 )
 }
 tracks/2/type = "bezier"
-tracks/2/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_size:y")
+tracks/2/path = NodePath("Background/ButtonContainer:rect_size:y")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -225,7 +230,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.4 )
 }
 tracks/3/type = "bezier"
-tracks/3/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_position:x")
+tracks/3/path = NodePath("Background/ButtonContainer:rect_position:x")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -235,7 +240,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 0.4 )
 }
 tracks/4/type = "bezier"
-tracks/4/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_position:y")
+tracks/4/path = NodePath("Background/ButtonContainer:rect_position:y")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -245,7 +250,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0, 0.4 )
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("Background/CanvasLayer/ButtonContainer/Singleplayer:custom_styles/normal")
+tracks/5/path = NodePath("Background/ButtonContainer/Singleplayer:custom_styles/normal")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -261,7 +266,7 @@ tracks/5/keys = {
 resource_name = "Unused_Transition"
 length = 0.6
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_position:x")
+tracks/0/path = NodePath("Background/ButtonContainer:rect_position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -271,7 +276,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 )
 }
 tracks/1/type = "bezier"
-tracks/1/path = NodePath("Background/CanvasLayer/ButtonContainer:rect_position:y")
+tracks/1/path = NodePath("Background/ButtonContainer:rect_position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -293,15 +298,50 @@ tracks/2/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Curve2D" id=8]
-_data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 480, 0, 0, 0, 0, 0, 480, 856, 0, 0, 0, 0, 0, 856, 0, 0, 0, 0, 0, 0 )
-}
-
 [node name="MainMenu" type="Node"]
 script = ExtResource( 2 )
 triangleScene = ExtResource( 7 )
 ellipseScene = ExtResource( 8 )
+
+[node name="EffectTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="ShapePath" type="Path2D" parent="."]
+curve = SubResource( 8 )
+
+[node name="ShapeSpawnLocation" type="PathFollow2D" parent="ShapePath"]
+
+[node name="Logo" type="StaticBody2D" parent="."]
+position = Vector2( 236, 165 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="LogoBackground" type="Panel" parent="Logo"]
+margin_left = -143.0
+margin_top = -72.0
+margin_right = 152.0
+margin_bottom = 75.0
+custom_styles/panel = ExtResource( 4 )
+
+[node name="LogoLabel" type="Label" parent="Logo/LogoBackground"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -119.5
+margin_top = -51.5
+margin_right = 110.5
+margin_bottom = 48.5
+custom_fonts/font = SubResource( 3 )
+text = "WAN®"
+align = 1
+
+[node name="LogoCollisions" type="CollisionShape2D" parent="Logo"]
+position = Vector2( 3.99998, 0.999985 )
+rotation = 1.5708
+shape = SubResource( 4 )
 
 [node name="Background" type="Panel" parent="."]
 anchor_right = 1.0
@@ -335,21 +375,17 @@ margin_top = -56.0
 margin_right = 40.0
 custom_fonts/font = ExtResource( 3 )
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Background"]
-layer = 128
-
-[node name="ButtonContainer" type="VBoxContainer" parent="Background/CanvasLayer"]
-anchor_left = 0.5
+[node name="ButtonContainer" type="VBoxContainer" parent="Background"]
 anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
 margin_left = 93.0
-margin_top = 279.0
-margin_right = 388.0
-margin_bottom = 718.001
+margin_top = -147.5
+margin_right = -92.0
+margin_bottom = -134.999
 custom_constants/separation = 30
 
-[node name="Singleplayer" type="Button" parent="Background/CanvasLayer/ButtonContainer"]
+[node name="Singleplayer" type="Button" parent="Background/ButtonContainer"]
 margin_right = 295.0
 margin_bottom = 87.0
 size_flags_vertical = 3
@@ -361,7 +397,7 @@ custom_styles/disabled = ExtResource( 10 )
 custom_styles/normal = ExtResource( 5 )
 text = "Singleplayer"
 
-[node name="Multiplayer" type="Button" parent="Background/CanvasLayer/ButtonContainer"]
+[node name="Multiplayer" type="Button" parent="Background/ButtonContainer"]
 margin_top = 117.0
 margin_right = 295.0
 margin_bottom = 204.0
@@ -376,7 +412,7 @@ custom_styles/normal = ExtResource( 4 )
 disabled = true
 text = "Multiplayer"
 
-[node name="Tutorial" type="Button" parent="Background/CanvasLayer/ButtonContainer"]
+[node name="Tutorial" type="Button" parent="Background/ButtonContainer"]
 margin_top = 234.0
 margin_right = 295.0
 margin_bottom = 321.0
@@ -389,7 +425,7 @@ custom_styles/disabled = ExtResource( 10 )
 custom_styles/normal = ExtResource( 5 )
 text = "Tutorial"
 
-[node name="Credits" type="Button" parent="Background/CanvasLayer/ButtonContainer"]
+[node name="Credits" type="Button" parent="Background/ButtonContainer"]
 margin_top = 351.0
 margin_right = 295.0
 margin_bottom = 439.0
@@ -402,44 +438,8 @@ custom_styles/disabled = ExtResource( 9 )
 custom_styles/normal = ExtResource( 4 )
 text = "Credits"
 
-[node name="Logo" type="StaticBody2D" parent="."]
-position = Vector2( 236, 165 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="LogoBackground" type="Panel" parent="Logo"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -143.0
-margin_top = -72.0
-margin_right = 152.0
-margin_bottom = 75.0
-custom_styles/panel = ExtResource( 4 )
-
-[node name="LogoLabel" type="Label" parent="Logo/LogoBackground"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -119.5
-margin_top = -51.5
-margin_right = 110.5
-margin_bottom = 48.5
-custom_fonts/font = SubResource( 3 )
-text = "WAN®"
-align = 1
-
-[node name="LogoCollisions" type="CollisionShape2D" parent="Logo"]
-position = Vector2( 3.99998, 0.999985 )
-rotation = 1.5708
-shape = SubResource( 4 )
-
-[node name="EffectTimer" type="Timer" parent="."]
-wait_time = 0.5
-autostart = true
+[node name="CanvasLayer" type="CanvasLayer" parent="Background"]
+layer = 128
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/MultiPlayer_Transition2 = SubResource( 11 )
@@ -448,15 +448,10 @@ anims/Screen_Transition = SubResource( 6 )
 anims/SinglePlayer_Transition = SubResource( 9 )
 anims/Unused_Transition = SubResource( 7 )
 
-[node name="ShapePath" type="Path2D" parent="."]
-curve = SubResource( 8 )
-
-[node name="ShapeSpawnLocation" type="PathFollow2D" parent="ShapePath"]
-
+[connection signal="timeout" from="EffectTimer" to="." method="_on_EffectTimer_timeout"]
 [connection signal="pressed" from="Background/Adjective" to="." method="_on_Adjective_pressed"]
 [connection signal="pressed" from="Background/Noun" to="." method="_on_Noun_pressed"]
-[connection signal="pressed" from="Background/CanvasLayer/ButtonContainer/Singleplayer" to="." method="_on_Singleplayer_pressed"]
-[connection signal="pressed" from="Background/CanvasLayer/ButtonContainer/Multiplayer" to="." method="_on_Multiplayer_pressed"]
-[connection signal="pressed" from="Background/CanvasLayer/ButtonContainer/Tutorial" to="." method="_on_Tutorial_pressed"]
-[connection signal="pressed" from="Background/CanvasLayer/ButtonContainer/Credits" to="." method="_on_Credits_pressed"]
-[connection signal="timeout" from="EffectTimer" to="." method="_on_EffectTimer_timeout"]
+[connection signal="pressed" from="Background/ButtonContainer/Singleplayer" to="." method="_on_Singleplayer_pressed"]
+[connection signal="pressed" from="Background/ButtonContainer/Multiplayer" to="." method="_on_Multiplayer_pressed"]
+[connection signal="pressed" from="Background/ButtonContainer/Tutorial" to="." method="_on_Tutorial_pressed"]
+[connection signal="pressed" from="Background/ButtonContainer/Credits" to="." method="_on_Credits_pressed"]
