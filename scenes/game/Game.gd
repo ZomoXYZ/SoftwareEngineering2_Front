@@ -64,7 +64,9 @@ func fill_cards(enabled):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	connect_signals()
-	$Background/DrawPileBox/CardRotate/Card.set_rotation(PI/2)
+	var fix = Vector2(176,100)
+	$Background/DrawPileBox/CardRotate/Card.set_rotation(-PI)
+	$Background/DrawPileBox/CardRotate/Card.set_position(fix)
 	# update UI
 	$Pause.hide()
 	if StartVars.singlePlayer:

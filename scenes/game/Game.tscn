@@ -214,7 +214,6 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 176.0
 margin_bottom = 176.0
-rect_rotation = -90.0
 rect_pivot_offset = Vector2( 70, 70 )
 size_flags_horizontal = 3
 size_flags_vertical = 3

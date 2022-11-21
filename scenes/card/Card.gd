@@ -42,7 +42,7 @@ func _ready():
 			print("CARD VALUE NOT SET")
 		$Card.texture_normal = load(StartVars.CardAsset(selfValue))
 	else:
-		self.get_child(0).rect_rotation = -PI/2
+		#self.get_node("Card").set_rotation(PI/2) 
 		print("please help me")
 
 func _on_Card_pressed():
