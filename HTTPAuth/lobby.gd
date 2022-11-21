@@ -27,6 +27,11 @@ func isMyTurn():
 func isHost():
 	return Host == UserData.ID
 
+func getTurnIndex():
+	for i in range(Players.size()):
+		if Players[i].ID == Turn:
+			return i
+
 func resetVariables():
 	ID = ""
 	Code = ""
