@@ -264,7 +264,7 @@ func _on_turnended(cards): # cards automatically drawn
 	print("I finished my card by drawing %s" % StartVars.godot_sucks_join_array(cardStr, ", "))
 
 func _on_gameover(player): # playerID winner
-	print("Player %s won" % player)
+	get_tree().change_scene("res://scenes/lobby/Lobby.tscn")
 
 func _on_playersupdated():
 	fill_players_gameturn()
