@@ -90,6 +90,7 @@ func join_game():
 func leave():
 	client.disconnect_from_host()
 	Authorized = false
+	toPoll = false
 	resetVariables()
 	emit_signal("disconnected")
 		
@@ -204,9 +205,6 @@ func _closed(was_clean_close):
 	else:
 		print("Closed websocket poorly")
 
-	Authorized = false
-	resetVariables()
-	toPoll = false
 	leave()
 
 func _error():
