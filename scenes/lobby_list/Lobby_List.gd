@@ -94,23 +94,24 @@ func _lobby_joined():
 	get_tree().change_scene("res://scenes/lobby/Lobby.tscn")
 
 func _on_JoinbyID_pressed():
-	print("hi")
+	$Background/TopButtons/JoinbyID/LineEdit.clear()
 	$Background/TopButtons/JoinbyID/LineEdit.show()
+	$Background/TopButtons/JoinbyID/LineEdit.grab_focus()
 	
 func _on_LineEdit_text_entered(code):
 	$Background/TopButtons/JoinbyID/LineEdit.hide()
 	Request.createRequest(self, "_on_get_lobbylystcode", "/lobby/%s" %code)
 
 func _on_LineEdit_text_changed(new_text):
-	var old_caret_position = $Background/TopButtons/joinbyID/LineEdit.caret_position
+	var old_caret_position = $Background/TopButtons/JoinbyID/LineEdit.caret_position
 
 	var word = ''
 	var regex = RegEx.new()
 	regex.compile("[A-Z]")
 	for valid_character in regex.search_all(new_text.to_upper()):
 		word += valid_character.get_string()
-	$Background/TopButtons/joinbyID/LineEdit.set_text(word)
+	$Background/TopButtons/JoinbyID/LineEdit.set_text(word)
 
-	$Background/TopButtons/joinbyID/LineEdit.caret_position = old_caret_position
+	$Background/TopButtons/JoinbyID/LineEdit.caret_position = old_caret_position
 
 

@@ -392,6 +392,7 @@ align = 1
 max_length = 6
 expand_to_text_length = true
 placeholder_text = "Enter Code Here"
+caret_blink = true
 
 [node name="ToMainMenu" type="Button" parent="Background"]
 anchor_left = 0.5
