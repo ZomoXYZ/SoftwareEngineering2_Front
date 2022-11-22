@@ -150,14 +150,17 @@ func fill_players_gameturn(beforeTurns=false):
 		players = LobbySP.Players
 	else:
 		players = LobbyConn.Players
-
+	
 	# reset player states
 	for i in 4:
 		var current = playerIndexToNode(i)
 		$Pause.hide()
 		if i < len(players):
 			current.get_node("Name").text = "%s %s" % [players[i]['name']['adjective'], players[i]['name']['noun']]
-			current.get_node("Score").text = "%s" % 00
+			if beforeTurns:
+				current.get_node("Score").text = "%s" %00
+			else:
+				current.get_node("Score").text = "%s" %LobbyConn.Points[i]
 			current.get_node("PlayerIcon").show()
 			current.add_stylebox_override("panel", button_empty)
 			current.get_node("Highlight").add_stylebox_override("panel", button_green)
