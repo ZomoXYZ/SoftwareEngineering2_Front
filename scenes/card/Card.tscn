@@ -32,6 +32,5 @@ visible = false
 modulate = Color( 1, 1, 1, 0.603922 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_filter = 1
 
 [connection signal="pressed" from="Card" to="." method="_on_Card_pressed"]
