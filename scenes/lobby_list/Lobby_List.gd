@@ -15,6 +15,7 @@ func _ready():
 	$AnimationPlayer.play("Intro_Transition")
 	yield($AnimationPlayer, "animation_finished")
 	#Hide all animation objects
+	$Background/TopButtons/JoinbyID/LineEdit.hide()
 	$IntroPanel.hide()
 	$OutroPanel.hide()
 
@@ -63,7 +64,15 @@ func _on_get_lobbylyst(result, response_code, _headers, bodyString):
 	remember = 50 * $Background/Lobbies.get_child_count()
 	$Background/VSlider.max_value = remember
 	$Background/VSlider.value = remember
-
+	
+func _on_get_lobbylystcode(result, response_code, _headers, bodyString):
+	# parse response
+	var response = Request.parseResponse(result, response_code, bodyString)
+	#print(bodyString.get_string_from_utf8())
+	if response[0] != Request.Status.Online || response[1] == null:
+		return
+	var lobbyid = response[1].id
+	LobbyConn.join(lobbyid)
 
 func _on_VSlider_value_changed(value):
 	var current
@@ -83,3 +92,12 @@ func _lobby_joined():
 	$AnimationPlayer.play("Outro_Transition")
 	yield($AnimationPlayer, "animation_finished")
 	get_tree().change_scene("res://scenes/lobby/Lobby.tscn")
+
+func _on_JoinbyID_pressed():
+	print("hi")
+	$Background/TopButtons/JoinbyID/LineEdit.show()
+	
+func _on_LineEdit_text_entered(code):
+	$Background/TopButtons/JoinbyID/LineEdit.hide()
+	Request.createRequest(self, "_on_get_lobbylystcode", "/lobby/%s" %code)
+	
