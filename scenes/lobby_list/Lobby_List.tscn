@@ -389,6 +389,7 @@ custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_fonts/font = ExtResource( 9 )
 custom_styles/normal = ExtResource( 8 )
 align = 1
+max_length = 6
 expand_to_text_length = true
 placeholder_text = "Enter Code Here"
 
@@ -458,6 +459,7 @@ anims/RESET = SubResource( 4 )
 
 [connection signal="pressed" from="Background/TopButtons/CreateLobby" to="." method="_on_CreateLobby_pressed"]
 [connection signal="pressed" from="Background/TopButtons/JoinbyID" to="." method="_on_JoinbyID_pressed"]
+[connection signal="text_changed" from="Background/TopButtons/JoinbyID/LineEdit" to="." method="_on_LineEdit_text_changed"]
 [connection signal="text_entered" from="Background/TopButtons/JoinbyID/LineEdit" to="." method="_on_LineEdit_text_entered"]
 [connection signal="pressed" from="Background/ToMainMenu" to="." method="_on_To_Main_Menu_pressed"]
 [connection signal="value_changed" from="Background/VSlider" to="." method="_on_VSlider_value_changed"]

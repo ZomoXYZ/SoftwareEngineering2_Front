@@ -100,4 +100,7 @@ func _on_JoinbyID_pressed():
 func _on_LineEdit_text_entered(code):
 	$Background/TopButtons/JoinbyID/LineEdit.hide()
 	Request.createRequest(self, "_on_get_lobbylystcode", "/lobby/%s" %code)
-	
+
+func _on_LineEdit_text_changed(text):
+	pass
+
