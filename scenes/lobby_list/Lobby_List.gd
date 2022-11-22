@@ -101,6 +101,16 @@ func _on_LineEdit_text_entered(code):
 	$Background/TopButtons/JoinbyID/LineEdit.hide()
 	Request.createRequest(self, "_on_get_lobbylystcode", "/lobby/%s" %code)
 
-func _on_LineEdit_text_changed(text):
-	pass
+func _on_LineEdit_text_changed(new_text):
+	var old_caret_position = self.caret_position
+
+	var word = ''
+	var regex = RegEx.new()
+	regex.compile("[A-Z]")
+	for valid_character in regex.search_all(new_text.to_upper()):
+		word += valid_character.get_string()
+	self.set_text(word)
+
+	caret_position = old_caret_position
+
 
