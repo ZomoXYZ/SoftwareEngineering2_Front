@@ -74,13 +74,13 @@ func _on_EffectTimer_timeout():
 	shape.linear_velocity = velocity.rotated(direction)
 
 	# Spawn the shape by adding it to the Main scene.
-	add_child(shape)
+	$ShapeHolder.add_child(shape)
 
 func _on_user_online():
 	print("User Online, Name: %s %s, Picture: %s" % [UserData.PlayerNameAdjective, UserData.PlayerNameNoun, UserData.PlayerPicture])
-	$Background/Adjective.text = "%s" % UserData.PlayerNameAdjective
-	$Background/Noun.text = "%s" % UserData.PlayerNameNoun
-	$Background/Picture.text = "%s" % UserData.PlayerPicture
+	$Background/ConfigMenu/Adjective.text = "%s" % UserData.PlayerNameAdjective
+	$Background/ConfigMenu/Noun.text = "%s" % UserData.PlayerNameNoun
+	$Background/ConfigMenu/Picture.text = "%s" % UserData.PlayerPicture
 	#min and max are &%$(%$&(
 	$CanvasLayer/ButtonContainer/Multiplayer.set_disabled(false)
 
@@ -91,10 +91,23 @@ func _on_user_offline():
 func _on_Adjective_pressed():
 	var rand = randi() % 80 + 10
 	UserData.setUserAdj(rand)
-	$Background/Adjective.text = "%s" %rand
+	$Background/ConfigMenu/Adjective.text = "%s" %rand
 
 
 func _on_Noun_pressed():
 	var rand = randi() % 80 + 10
 	UserData.setUserNoun(rand)
-	$Background/Noun.text = "%s" %rand
+	$Background/ConfigMenu/Noun.text = "%s" %rand
+
+
+func _on_Config_pressed():
+	if $CanvasLayer.is_visible():
+		$CanvasLayer.hide()
+		$Logo.hide()
+		$ShapeHolder.hide()
+		$Background/ConfigMenu.show()
+	else:
+		$CanvasLayer.show()
+		$Logo.show()
+		$ShapeHolder.show()
+		$Background/ConfigMenu.hide()

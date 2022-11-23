@@ -11,11 +11,6 @@
 [ext_resource path="res://assets/styles/button_red_disabled.tres" type="StyleBox" id=9]
 [ext_resource path="res://assets/styles/button_green_disabled.tres" type="StyleBox" id=10]
 
-[sub_resource type="Curve2D" id=8]
-_data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 480, 0, 0, 0, 0, 0, 480, 856, 0, 0, 0, 0, 0, 856, 0, 0, 0, 0, 0, 0 )
-}
-
 [sub_resource type="DynamicFont" id=3]
 size = 86
 font_data = ExtResource( 1 )
@@ -298,6 +293,11 @@ tracks/2/keys = {
 "values": [ true, false ]
 }
 
+[sub_resource type="Curve2D" id=8]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 480, 0, 0, 0, 0, 0, 480, 856, 0, 0, 0, 0, 0, 856, 0, 0, 0, 0, 0, 0 )
+}
+
 [node name="MainMenu" type="Node"]
 script = ExtResource( 2 )
 triangleScene = ExtResource( 7 )
@@ -308,7 +308,32 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 custom_styles/panel = ExtResource( 6 )
 
-[node name="Adjective" type="Button" parent="Background"]
+[node name="ConfigMenu" type="Panel" parent="Background"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 30.0
+margin_top = 30.0
+margin_right = -30.0
+margin_bottom = -30.0
+custom_styles/panel = ExtResource( 4 )
+
+[node name="Noun" type="Button" parent="Background/ConfigMenu"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -205.0
+margin_top = 20.0
+margin_right = -10.0
+margin_bottom = 95.0
+rect_min_size = Vector2( 195, 75 )
+custom_fonts/font = ExtResource( 3 )
+custom_styles/hover = ExtResource( 5 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/normal = ExtResource( 5 )
+
+[node name="Adjective" type="Button" parent="Background/ConfigMenu"]
+margin_left = 10.0
+margin_top = 20.0
 margin_right = 195.0
 margin_bottom = 75.0
 rect_min_size = Vector2( 195, 75 )
@@ -317,35 +342,106 @@ custom_styles/hover = ExtResource( 5 )
 custom_styles/pressed = ExtResource( 4 )
 custom_styles/normal = ExtResource( 5 )
 
-[node name="Noun" type="Button" parent="Background"]
-anchor_left = 1.0
+[node name="Picture" type="Label" parent="Background/ConfigMenu"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -181.5
+margin_right = 40.0
+margin_bottom = -125.5
+custom_fonts/font = ExtResource( 3 )
+
+[node name="pfps" type="VBoxContainer" parent="Background/ConfigMenu"]
 anchor_right = 1.0
-margin_left = -195.0
-margin_bottom = 75.0
-rect_min_size = Vector2( 195, 75 )
+anchor_bottom = 1.0
+margin_top = 181.0
+
+[node name="Row1" type="HBoxContainer" parent="Background/ConfigMenu/pfps"]
+margin_right = 420.0
+margin_bottom = 150.0
+size_flags_vertical = 3
+
+[node name="Row2" type="HBoxContainer" parent="Background/ConfigMenu/pfps"]
+margin_top = 154.0
+margin_right = 420.0
+margin_bottom = 304.0
+size_flags_vertical = 3
+
+[node name="Row3" type="HBoxContainer" parent="Background/ConfigMenu/pfps"]
+margin_top = 308.0
+margin_right = 420.0
+margin_bottom = 458.0
+size_flags_vertical = 3
+
+[node name="Row4" type="HBoxContainer" parent="Background/ConfigMenu/pfps"]
+margin_top = 462.0
+margin_right = 420.0
+margin_bottom = 612.0
+size_flags_vertical = 3
+
+[node name="Config" type="Button" parent="Background"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -95.0
+margin_top = -95.0
+margin_right = -20.0
+margin_bottom = -20.0
+rect_min_size = Vector2( 75, 75 )
 custom_fonts/font = ExtResource( 3 )
 custom_styles/hover = ExtResource( 5 )
 custom_styles/pressed = ExtResource( 4 )
+custom_styles/focus = ExtResource( 5 )
 custom_styles/normal = ExtResource( 5 )
+text = "C"
 
-[node name="Picture" type="Label" parent="Background"]
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_top = -56.0
+[node name="ShapeHolder" type="Label" parent="."]
 margin_right = 40.0
-custom_fonts/font = ExtResource( 3 )
+margin_bottom = 14.0
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 128
+[node name="Logo" type="StaticBody2D" parent="."]
+position = Vector2( 236, 165 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="LogoBackground" type="Panel" parent="Logo"]
+margin_left = -143.0
+margin_top = -72.0
+margin_right = 152.0
+margin_bottom = 75.0
+custom_styles/panel = ExtResource( 4 )
+
+[node name="LogoLabel" type="Label" parent="Logo/LogoBackground"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -119.5
+margin_top = -51.5
+margin_right = 110.5
+margin_bottom = 48.5
+custom_fonts/font = SubResource( 3 )
+text = "WAN®"
+align = 1
+
+[node name="LogoCollisions" type="CollisionShape2D" parent="Logo"]
+position = Vector2( 3.99998, 0.999985 )
+rotation = 1.5708
+shape = SubResource( 4 )
+
+[node name="CanvasLayer" type="Label" parent="."]
+margin_right = 295.0
+margin_bottom = 14.0
 
 [node name="ButtonContainer" type="VBoxContainer" parent="CanvasLayer"]
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 93.0
-margin_top = -147.5
-margin_right = -92.0
-margin_bottom = -134.999
+margin_top = 272.0
+margin_right = 93.0
+margin_bottom = 704.001
 custom_constants/separation = 30
 
 [node name="Singleplayer" type="Button" parent="CanvasLayer/ButtonContainer"]
@@ -401,46 +497,6 @@ custom_styles/disabled = ExtResource( 9 )
 custom_styles/normal = ExtResource( 4 )
 text = "Credits"
 
-[node name="EffectTimer" type="Timer" parent="."]
-wait_time = 0.5
-autostart = true
-
-[node name="ShapePath" type="Path2D" parent="."]
-curve = SubResource( 8 )
-
-[node name="ShapeSpawnLocation" type="PathFollow2D" parent="ShapePath"]
-
-[node name="Logo" type="StaticBody2D" parent="."]
-position = Vector2( 236, 165 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="LogoBackground" type="Panel" parent="Logo"]
-margin_left = -143.0
-margin_top = -72.0
-margin_right = 152.0
-margin_bottom = 75.0
-custom_styles/panel = ExtResource( 4 )
-
-[node name="LogoLabel" type="Label" parent="Logo/LogoBackground"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -119.5
-margin_top = -51.5
-margin_right = 110.5
-margin_bottom = 48.5
-custom_fonts/font = SubResource( 3 )
-text = "WAN®"
-align = 1
-
-[node name="LogoCollisions" type="CollisionShape2D" parent="Logo"]
-position = Vector2( 3.99998, 0.999985 )
-rotation = 1.5708
-shape = SubResource( 4 )
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/MultiPlayer_Transition2 = SubResource( 11 )
 anims/RESET = SubResource( 5 )
@@ -448,11 +504,19 @@ anims/Screen_Transition = SubResource( 6 )
 anims/SinglePlayer_Transition = SubResource( 9 )
 anims/Unused_Transition = SubResource( 7 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-anchor_mode = 0
+[node name="ShapePath" type="Path2D" parent="."]
+visible = false
+curve = SubResource( 8 )
 
-[connection signal="pressed" from="Background/Adjective" to="." method="_on_Adjective_pressed"]
-[connection signal="pressed" from="Background/Noun" to="." method="_on_Noun_pressed"]
+[node name="ShapeSpawnLocation" type="PathFollow2D" parent="ShapePath"]
+
+[node name="EffectTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="pressed" from="Background/ConfigMenu/Noun" to="." method="_on_Noun_pressed"]
+[connection signal="pressed" from="Background/ConfigMenu/Adjective" to="." method="_on_Adjective_pressed"]
+[connection signal="pressed" from="Background/Config" to="." method="_on_Config_pressed"]
 [connection signal="pressed" from="CanvasLayer/ButtonContainer/Singleplayer" to="." method="_on_Singleplayer_pressed"]
 [connection signal="pressed" from="CanvasLayer/ButtonContainer/Multiplayer" to="." method="_on_Multiplayer_pressed"]
 [connection signal="pressed" from="CanvasLayer/ButtonContainer/Tutorial" to="." method="_on_Tutorial_pressed"]
