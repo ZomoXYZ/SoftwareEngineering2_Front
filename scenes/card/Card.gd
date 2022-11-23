@@ -1,6 +1,6 @@
 extends Node
 
-var selfValue = -1
+var selfValue = StartVars.Card.Back
 
 var selected = false
 var canSelect = true
@@ -28,25 +28,24 @@ func deselect():
 	$Card.set_position(pos)
 
 func setCanSelect(can):
+	if isDrawnCard:
+		return
+	
 	canSelect = can
 	if canSelect:
 		$Card/darken.hide()
 	else:
 		$Card/darken.show()
 
+func setValue(val):
+	selfValue = val
+	$Card.texture_normal = load(StartVars.CardAsset(selfValue))
+
 func selfName():
 	return StartVars.CardName(selfValue)
 
 func _ready():
-	if !isDiscard and !isDrawnCard:
-		if (selfValue == -1):
-			print("CARD VALUE NOT SET")
-		$Card.texture_normal = load(StartVars.CardAsset(selfValue))
-	elif isDrawnCard:
-		self.get_child(0).hide()
-	else:
-		#self.get_node("Card").set_rotation(PI/2) 
-		print("please help me")
+	$Card.texture_normal = load(StartVars.CardAsset(selfValue))
 
 func _on_Card_pressed():
 	#print("hi")
