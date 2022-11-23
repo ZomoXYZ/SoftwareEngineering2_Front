@@ -49,8 +49,7 @@ func fill_textures():
 		cards = LobbyConn.Cards
 	var count = 0
 	for child in $Background/HandBox.get_children():
-		child.get_child(0).texture_normal = load(StartVars.CardAsset(cards[count]))
-		child.selfValue = cards[count]
+		child.setValue(cards[count])
 		count += 1
 
 func fill_cards(enabled):
@@ -69,7 +68,7 @@ func fill_cards(enabled):
 		var cardInstance = cardScene.instance()
 		cardInstance.connect("pressed_with_val", self, "_on_Card_pressed")
 		cardInstance.set_rotation(PI / 2)
-		cardInstance.selfValue = cards[i]
+		cardInstance.setValue = cards[i]
 		$Background/HandBox.add_child(cardInstance)
 		cardInstance.setCanSelect(enabled)
 
@@ -248,10 +247,9 @@ func _on_playerturn(player):
 # card will be null if it isnt your turn
 func _on_carddrew(from, card):
 	if LobbyConn.isMyTurn():
-		$Background/DrawnCard.selfValue = card 
+		$Background/DrawnCard.setValue(card)
 		$Background/DrawnCard.setCanSelect(true)
-		$Background/DrawnCard.get_child(0).texture_normal = load(StartVars.CardAsset(card))
-		$Background/DrawnCard.get_child(0).show()
+		$Background/DrawnCard.show()
 		print("I drew %s from %s" % [StartVars.CardName(card), LobbyConn.DrawFrom.keys()[from]])
 		for child in $Background/HandBox.get_children():
 			child.setCanSelect(true)
@@ -263,7 +261,7 @@ func _on_carddrew(from, card):
 func _on_carddiscarded(card):
 	if LobbyConn.isMyTurn():
 		print(LobbyConn.Cards)
-		$Background/DrawnCard.get_child(0).hide()
+		$Background/DrawnCard.hide()
 		discardMode = false
 		fill_cards(true)
 		# temp print
