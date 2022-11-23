@@ -13,17 +13,6 @@ func godot_sucks_join_array(array, delimiter = " "):
 	
 	return complete
 
-#This is a horrendous amount of hardcoding, yet alas, I do not care
-var WanMos = [
-	["Circle2", "Triangle2"],
-	["Circle1", "Circle1", "Triangle2"],
-	["Circle2", "Triangle1", "Triangle1"],
-	["Circle1", "Circle1", "Triangle1", "Triangle1"],
-	["CircleTriangle2", "CircleInverted2"], 
-	["TriangleCircle2", "TriangleInverted2"],
-	
-]
-
 enum Cards {
 	Circle1 = 0
 	Circle2
@@ -64,71 +53,145 @@ func CardValue(name):
 var validHands = {
 	"Circle1": [
 		Cards.Circle1,
-		Cards.CircleInverted1
+		Cards.CircleInverted1,
+		Cards.Free,
+		Cards.CircleFree,
 	],
 		
 	"Circle2": [
 		Cards.Circle2,
 		Cards.CircleInverted2,
-		Cards.Triangle2
+		Cards.Triangle2,
+		Cards.Free,
+		Cards.CircleFree,
+		Cards.TriangleFree,
 	],
 		
 	"CircleInverted1": [
 		Cards.CircleInverted1,
-		Cards.Circle1
+		Cards.Circle1,
+		Cards.Free,
+		Cards.CircleFree,
 	],
 		
 	"CircleInverted2": [
 		Cards.CircleInverted2,
 		Cards.Circle2,
-		Cards.CircleTriangle2
+		Cards.CircleTriangle2,
+		Cards.Free,
+		Cards.CircleFree,
 	],
 		
 	"CircleTriangle1": [
 		Cards.CircleTriangle1,
-		Cards.TriangleCircle1
+		Cards.TriangleCircle1,
+		Cards.Free,
 	],
 		
 	"CircleTriangle2": [
 		Cards.CircleTriangle2,
 		Cards.TriangleCircle2,
-		Cards.CircleInverted2
+		Cards.CircleInverted2,
+		Cards.Free,
+		Cards.CircleFree,
+		Cards.TriangleFree,
 	],
 		
 	"Triangle1": [
 		Cards.Triangle1,
-		Cards.TriangleInverted1
+		Cards.TriangleInverted1,
+		Cards.Free,
+		Cards.TriangleFree,
 	],
 		
 	"Triangle2": [
 		Cards.Triangle2,
 		Cards.TriangleInverted2,
-		Cards.Circle2
+		Cards.Circle2,
+		Cards.Free,
+		Cards.CircleFree,
+		Cards.TriangleFree,
 	],
 		
 	"TriangleInverted1": [
 		Cards.TriangleInverted1,
-		Cards.Triangle1
+		Cards.Triangle1,
+		Cards.Free,
+		Cards.TriangleFree,
 	],
 		
 	"TriangleInverted2": [
 		Cards.TriangleInverted2,
 		Cards.Triangle2,
-		Cards.TriangleCircle2
+		Cards.TriangleCircle2,
+		Cards.Free,
+		Cards.TriangleFree,
 	],
 		
 	"TriangleCircle1": [
 		Cards.CircleTriangle1,
-		Cards.TriangleCircle1
+		Cards.TriangleCircle1,
+		Cards.Free,
 	],
 		
 	"TriangleCircle2": [
 		Cards.CircleTriangle2,
 		Cards.TriangleCircle2,
-		Cards.TriangleInverted2
+		Cards.TriangleInverted2,
+		Cards.Free,
+		Cards.CircleFree,
+		Cards.TriangleFree,
 	],
 		
 }
+
+#List of cards that can combine into different cards
+#We set the basic combinations here and then define composite ones
+#using unions of other combinations
+var cardCombos = {
+	"Triangle2": [
+		["Triangle2"], 
+		["Triangle1", "Triangle1"]
+	],
+	
+	"Circle2": [
+		["Circle2"], 
+		["Circle1", "Circle1"]
+	],
+	
+	"TriangleInverted2": [
+		["TriangleInverted2"], 
+		["TriangleInverted1", "TriangleInverted1"]
+	],
+	
+	"CircleInverted2": [
+		["CircleInverted2"],
+		["CircleInverted1", "CircleInverted1"]
+	],
+	
+	"CircleTriangle1": [
+		["CircleTriangle1"],
+		["Circle1", "Triangle1"]
+	],
+	
+	"TriangleCircle1": [
+		["TriangleCircle1"],
+		["Circle1", "Triangle1"]
+	],
+}
+
+func _ready():
+	cardCombos["CircleTriangle2"] = [
+		cardCombos["Triangle2"] + cardCombos["Circle2"],
+		cardCombos["CircleTriangle1"] + cardCombos["CircleTriangle1"],
+		["CircleTriangle2"]
+	]
+	cardCombos["TriangleCircle2"] = [
+		cardCombos["Triangle2"] + cardCombos["Circle2"],
+		cardCombos["TriangleCircle1"] + cardCombos["TriangleCircle1"],
+		["TriangleCircle2"]
+	]
+	
 
 # returns a list of card types that can be played with the given cards
 # returns null if the card list is empty
@@ -146,8 +209,9 @@ func getValidCards(cards):
 			return validHands["Triangle1"] + validHands["Triangle2"] + validHands["TriangleInverted1"] + validHands["TriangleInverted2"]
 		else:
 			return validHands[CardName(cards[0])]
-		
-	#Handling for other cards
+	
+	#Multiple cards selected
 	else:
 		pass
+		
 
