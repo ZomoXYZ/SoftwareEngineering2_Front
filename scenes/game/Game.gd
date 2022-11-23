@@ -54,10 +54,15 @@ func fill_textures():
 
 func fill_cards(enabled):
 	var cards
+	var discard
 	if StartVars.singlePlayer:
 		cards = LobbySP.Cards
+		discard = LobbySP.DiscardPile
 	else:
 		cards = LobbyConn.Cards
+		discard = LobbyConn.DiscardPile
+
+	$Background/DrawPileBox/CardRotate.setValue(discard)
 
 	for child in $Background/HandBox.get_children():
 		child.queue_free()
@@ -68,7 +73,7 @@ func fill_cards(enabled):
 		var cardInstance = cardScene.instance()
 		cardInstance.connect("pressed_with_val", self, "_on_Card_pressed")
 		cardInstance.set_rotation(PI / 2)
-		cardInstance.setValue = cards[i]
+		cardInstance.selfValue = cards[i]
 		$Background/HandBox.add_child(cardInstance)
 		cardInstance.setCanSelect(enabled)
 

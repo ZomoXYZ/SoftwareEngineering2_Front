@@ -6,6 +6,8 @@ var button_empty = preload("res://assets/styles/button_empty.tres")
 var button_green = preload("res://assets/styles/button_green.tres")
 var button_red = preload("res://assets/styles/button_red.tres")
 
+var animating = false
+
 func connect_signals():
 	if StartVars.singlePlayer:
 		LobbySP.connect("game_starting", self, "_on_game_starting")
@@ -40,7 +42,9 @@ func _ready():
 	#intro animation
 	$IntroPanel.show()
 	$AnimationPlayer.play("Intro_Transition")
+	animating = true
 	yield($AnimationPlayer, "animation_finished")
+	animating = false
 	$IntroPanel.hide()
 
 func fill_players():
@@ -89,33 +93,38 @@ func _on_game_starting():
 	$IntroPanel.hide()
 	#Standard animation procedure
 	$AnimationPlayer.play("StartGame_Transition")
+	animating = true
 	yield($AnimationPlayer, "animation_finished")
+	animating = false
 	get_tree().change_scene("res://scenes/game/Game.tscn")
 
 #returns to main menu if you were in single player, and returns to lobby list is from multiplayuer
 func _on_Leave_pressed():
-	if StartVars.singlePlayer:
-		LobbySP.leave()
-	else:
-		LobbyConn.leave()
+	if !animating:
+		if StartVars.singlePlayer:
+			LobbySP.leave()
+		else:
+			LobbyConn.leave()
 
 #Shows the options overlay menu
 func _on_Options_pressed():
-	#Hide into panel here in case the button gets pressed during the intro animation
-	$IntroPanel.hide()
-	#Standard animation procedure
-	$LobbyOptions.show()
-	$AnimationPlayer.play("Options_Transition")
-	yield($AnimationPlayer, "animation_finished")
+	if !animating:
+		#Hide into panel here in case the button gets pressed during the intro animation
+		$IntroPanel.hide()
+		#Standard animation procedure
+		$LobbyOptions.show()
+		$AnimationPlayer.play("Options_Transition")
+		yield($AnimationPlayer, "animation_finished")
 
 #Hides overlay when done with options menu
 func _on_BackToLobby_pressed():
-	#Hide into panel here in case the button gets pressed during the intro animation
-	$IntroPanel.hide()
-	#Standard animation procedure
-	$AnimationPlayer.play_backwards("Options_Transition")
-	yield($AnimationPlayer, "animation_finished")
-	$LobbyOptions.hide()
+	if !animating:
+		#Hide into panel here in case the button gets pressed during the intro animation
+		$IntroPanel.hide()
+		#Standard animation procedure
+		$AnimationPlayer.play_backwards("Options_Transition")
+		yield($AnimationPlayer, "animation_finished")
+		$LobbyOptions.hide()
 
 func _on_disconnected():
 	#Hide into panel here in case the button gets pressed during the intro animation

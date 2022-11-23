@@ -1,6 +1,6 @@
 extends Node
 
-var selfValue = StartVars.Card.Back
+var selfValue = StartVars.Cards.Back
 
 var selected = false
 var canSelect = true
