@@ -6,7 +6,7 @@ var button_empty = preload("res://assets/styles/button_empty.tres")
 var button_empty2 = preload("res://assets/styles/button_empty2.tres")
 var button_green = preload("res://assets/styles/button_green.tres")
 var button_red = preload("res://assets/styles/button_red.tres")
-
+var discardMode = false
 export(PackedScene) var cardScene
 
 func playerIndexToNode(playerIndex):
@@ -41,6 +41,18 @@ func connect_signals():
 		LobbyConn.connect("players_updated", self, "_on_playersupdated")
 		LobbyConn.join_game()
 
+func fill_textures():
+	var cards
+	if StartVars.singlePlayer:
+		cards = LobbySP.Cards
+	else:
+		cards = LobbyConn.Cards
+	var count = 0
+	for child in $Background/HandBox.get_children():
+		child.get_child(0).texture_normal = load(StartVars.CardAsset(cards[count]))
+		child.selfValue = cards[count]
+		count += 1
+
 func fill_cards(enabled):
 	var cards
 	if StartVars.singlePlayer:
@@ -63,6 +75,9 @@ func fill_cards(enabled):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$Background/DrawnCard.connect("pressed_with_val", self, "_on_Card_pressed")
+	$Background/DrawPileBox/CardRotate.connect("pressed_with_val", self, "_on_Card_pressed")
+	$Background/DrawnCard.set_mouse_filter(Control.MOUSE_FILTER_IGNORE)
 	connect_signals()
 	var fix = Vector2(176,100)
 	$Background/DrawPileBox/CardRotate/Card.set_rotation(-PI)
@@ -87,28 +102,33 @@ func get_selected_cards():
 	return selectedCards
 
 func _on_Card_pressed(card):
-
 	# if it's selected, the user can deselect
 	# if it's not selected, make sure it can be played first
-	if card.selected:
-		card.deselect()
-	elif card.canSelect:
-		card.select()
+	
+	if discardMode:
+		print(LobbyConn.Cards)
+		LobbyConn.discard(card.selfValue)
+	else:
+		if !card.isDrawnCard and !card.isDiscard:
+			if card.selected:
+				card.deselect()
+			elif card.canSelect:
+				card.select()
+				
+		# get list of selected cards
+		var selectedCards = get_selected_cards()
 
-	# get list of selected cards
-	var selectedCards = get_selected_cards()
+		# figure out which cards can be selected, returns null if no cards are selected
+		var selectableCards = StartVars.getValidCards(selectedCards)
 
-	# figure out which cards can be selected, returns null if no cards are selected
-	var selectableCards = StartVars.getValidCards(selectedCards)
-
-	# loop through cards, if any do not exist within selectableCards, grey them out
-	for child in $Background/HandBox.get_children():
-
-		if selectableCards == null or child.selfValue in selectableCards or child.selected:
-			child.setCanSelect(true)
-		else:
-			child.setCanSelect(false)
-
+		# loop through cards, if any do not exist within selectableCards, grey them out
+		if !card.isDrawnCard and !card.isDiscard:
+			for child in $Background/HandBox.get_children():
+				if selectableCards == null or child.selfValue in selectableCards or child.selected:
+					child.setCanSelect(true)
+				else:
+					child.setCanSelect(false)
+		#print("hi2")
 
 func fill_players_pausebutton():
 	# variables
@@ -198,8 +218,10 @@ func _on_Resume_pressed():
 	$Pause.hide()
 
 func _on_Submit_pressed():
-	var selectedCards = get_selected_cards()
-	LobbyConn.play(selectedCards)
+	if !discardMode:
+		var selectedCards = get_selected_cards()
+		print("hrre")
+		LobbyConn.play(selectedCards)
 
 #Returns to the lobby list or main menu if this is a multi or single player game
 func _on_Leave_pressed():
@@ -226,13 +248,23 @@ func _on_playerturn(player):
 # card will be null if it isnt your turn
 func _on_carddrew(from, card):
 	if LobbyConn.isMyTurn():
+		$Background/DrawnCard.selfValue = card 
+		$Background/DrawnCard.setCanSelect(true)
+		$Background/DrawnCard.get_child(0).texture_normal = load(StartVars.CardAsset(card))
+		$Background/DrawnCard.get_child(0).show()
 		print("I drew %s from %s" % [StartVars.CardName(card), LobbyConn.DrawFrom.keys()[from]])
-		LobbyConn.discard(card)
+		for child in $Background/HandBox.get_children():
+			child.setCanSelect(true)
+		discardMode = true
+		#LobbyConn.discard(card)
 	else:
 		print("Player %s drew from %s" % [LobbyConn.Turn, LobbyConn.DrawFrom.keys()[from]])
 
 func _on_carddiscarded(card):
 	if LobbyConn.isMyTurn():
+		print(LobbyConn.Cards)
+		$Background/DrawnCard.get_child(0).hide()
+		discardMode = false
 		fill_cards(true)
 		# temp print
 		print("I discarded %s" % StartVars.CardName(card))

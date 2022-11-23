@@ -253,6 +253,7 @@ margin_left = -151.76
 margin_top = -317.68
 margin_right = -151.76
 margin_bottom = -317.68
+mouse_filter = 1
 custom_styles/panel = ExtResource( 13 )
 
 [node name="Highlight" type="Panel" parent="Background/Players/Player1"]
@@ -425,6 +426,18 @@ text = "08"
 align = 1
 valign = 1
 autowrap = true
+
+[node name="DrawnCard" parent="Background" instance=ExtResource( 11 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 126.0
+margin_top = 420.0
+margin_right = 302.0
+margin_bottom = 596.0
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+isDrawnCard = true
 
 [node name="Pause" type="Panel" parent="."]
 visible = false
