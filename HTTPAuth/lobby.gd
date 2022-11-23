@@ -119,6 +119,12 @@ func receive():
 	print("< %s" % message)
 	return Array(message.split(" "))
 
+func removeCard(card):
+	for i in range(Cards.size()):
+		if Cards[i] == card:
+			Cards.remove(i)
+			break
+
 func updateLobby(arg):
 	# read json from string
 	var data = JSON.parse(arg).result
@@ -265,7 +271,7 @@ func command_game_drew(args):
 func command_game_discarded(args):
 	var card = int(args[0])
 	if isMyTurn():
-		Cards.erase(card)
+		removeCard(card)
 	DiscardPile = card
 	emit_signal("card_discarded", card)
 
@@ -273,7 +279,7 @@ func command_game_played(args):
 	var cards = JSON.parse(args[0]).result.cards
 	if isMyTurn():
 		for card in cards:
-			Cards.erase(card)
+			removeCard(card)
 	emit_signal("cards_played", cards)
 
 func command_game_passed():
