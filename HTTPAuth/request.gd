@@ -80,10 +80,26 @@ func parseResponse(result, response_code, body):
 	# return Json body
 	return [Status.Online, jsonResult.result]
 
+# force would be used when the user manually taps refresh
 func authorizeSession(force = false):
-	# only run every 15 seconds at most
-	# TODO make this an hour if they have a token
-	if force || (lastChecked != -1 && lastChecked > Time.get_ticks_msec() - 15 * 1000):
+	var shouldCheck = force
+	if !shouldCheck {
+		if lastChecked == -1 {
+			shouldCheck = true
+		} else {
+			var time
+			if online {
+				# youre online, check in 60 seconds
+				time = 60
+			} else {
+				# youre offline, check in 15 seconds
+				time = 15
+			}
+			shouldCheck = lastChecked + time * 1000 < Time.get_ticks_msec()
+		}
+	}
+	
+	if !shouldCheck:
 		print("Checking too quick")
 		if token != "" && UserData.PlayerNameAdjective != -1 && UserData.PlayerNameNoun != -1 && UserData.PlayerPicture != -1:
 			print("known online")
