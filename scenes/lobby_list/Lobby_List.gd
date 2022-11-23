@@ -128,5 +128,6 @@ func _on_Refresh_pressed():
 
 
 func _on_BackForText_pressed():
+	#This hides the textbox for clicking out
 	$Background/BackForText.hide()
 	$Background/TopButtons/JoinbyID/LineEdit.hide()

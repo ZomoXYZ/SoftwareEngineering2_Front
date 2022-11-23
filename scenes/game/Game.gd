@@ -323,11 +323,13 @@ func _on_gameover(player): # playerID winner
 func _on_playersupdated():
 	fill_players_gameturn()
 
+#This is an automatic message timer that waits before telling player the predet message. See fix_display_message()
 func message_timer():
 	fix_display_message(true)
 	yield(get_tree().create_timer(10),"timeout")
 	fix_display_message()
 
+#This displays a predetermined message in the play area
 func fix_display_message(override = false):
 	#display guide text in play area
 	if drawMode:
@@ -342,6 +344,7 @@ func fix_display_message(override = false):
 		$Background/PlayArea/DisplayMessage.text = ""
 
 func _on_DrawPile_pressed():
+	#If we are drawing, draw from deck and show drawn card
 	if drawMode:
 		drawMode = false
 		LobbyConn.draw(LobbyConn.DrawFrom.DECK)

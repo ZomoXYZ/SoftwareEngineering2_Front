@@ -148,6 +148,7 @@ func _on_disconnected():
 #Options menu options
 
 func _on_SetPassword_pressed():
+	#setup our textbox when button pressed
 	var pos = Vector2($LobbyOptions/Panel/ButtonContainer/SetPassword.rect_position.x,$LobbyOptions/Panel/ButtonContainer/SetPassword.rect_position.y+220)
 	$LobbyOptions/Panel/LineEdit.clear()
 	$LobbyOptions/Panel/LineEdit.set_position(pos)
@@ -162,9 +163,11 @@ func _on_KickPlayer_pressed():
 
 
 func _on_PointGoal_pressed():
+	#setup our textbox when button pressed
 	var pos = Vector2($LobbyOptions/Panel/ButtonContainer/PointGoal.rect_position.x,$LobbyOptions/Panel/ButtonContainer/PointGoal.rect_position.y+220)
 	$LobbyOptions/Panel/LineEdit.clear()
 	$LobbyOptions/Panel/LineEdit.set_position(pos)
+	#Note Change placeholder text here to the current point goal
 	$LobbyOptions/Panel/LineEdit.placeholder_text = 'Try "20"'
 	$LobbyOptions/Panel/LineEdit.show()
 	$LobbyOptions/Panel/BackForText.show()
@@ -173,11 +176,13 @@ func _on_PointGoal_pressed():
 
 func _on_LineEdit_text_entered(code):
 	$LobbyOptions/Panel/LineEdit.hide()
+	#Will need to check position to determine which textbox this is functioning as to send correct signal
 
 func _on_LineEdit_text_changed(new_text):
 	var old_caret_position = $LobbyOptions/Panel/LineEdit.caret_position
 	var word = ''
 	var regex = RegEx.new()
+	#Checks to see which textbox it is before restricting characters
 	if $LobbyOptions/Panel/LineEdit.placeholder_text == 'Try "20"':
 		regex.compile("[0-9]")
 	else:
@@ -188,5 +193,6 @@ func _on_LineEdit_text_changed(new_text):
 	$LobbyOptions/Panel/LineEdit.caret_position = old_caret_position
 
 func _on_BackForText_pressed():
+	#This hides the textbox for clicking out
 	$LobbyOptions/Panel/LineEdit.hide()
 	$LobbyOptions/Panel/BackForText.hide()

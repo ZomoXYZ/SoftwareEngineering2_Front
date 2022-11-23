@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://assets/styles/background.tres" type="StyleBox" id=1]
 [ext_resource path="res://assets/styles/button_red.tres" type="StyleBox" id=2]
@@ -45,6 +45,41 @@ outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 12 )
 
 [sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="Animation" id=9]
+resource_name = "Lose_Screen"
+length = 5.0
+step = 0.5
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("GameOver/Lose:rect_position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 40, -0.25, 0, 0.25, 0, 40, -0.25, 0, 0.25, 0, 40, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 2, 4 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("GameOver/Lose:rect_position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( -220, -0.25, 0, 0.25, 0, 326.5, -0.25, 0, 0.25, 0, 326.5, -0.25, 0, 0.5, 112.906, 1000, 0, 921.708, 0.5, -385.987 ),
+"times": PoolRealArray( 0, 2, 4, 5 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("GameOver/Lose:rect_rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 1, -39.8328, 47.1, -0.5, -57.2125, 0.5, -75.7877 ),
+"times": PoolRealArray( 0, 3.5, 4 )
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "Pause_Transition"
@@ -132,6 +167,110 @@ tracks/3/keys = {
 "points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("GameOver/Win:rect_position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 40, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("GameOver/Win:rect_position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 326.5, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("GameOver/Win:rect_rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/7/type = "bezier"
+tracks/7/path = NodePath("GameOver/Lose:rect_position:x")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"points": PoolRealArray( 40, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/8/type = "bezier"
+tracks/8/path = NodePath("GameOver/Lose:rect_position:y")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"points": PoolRealArray( 326.5, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/9/type = "bezier"
+tracks/9/path = NodePath("GameOver/Lose:rect_rotation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "Win_Screen"
+length = 5.0
+step = 0.5
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("GameOver/Win:rect_position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 40, -0.25, 0, 0.25, 0, 40, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 2 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("GameOver/Win:rect_position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 1000, -0.25, 0, 0.25, 0, 326.5, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 2 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("GameOver/Win:rect_rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( -360, -0.25, 0, 0.5, -79.9883, 0, -0.5, 149.5, 0.5, -60.5 ),
+"times": PoolRealArray( 0, 2.5 )
+}
+
+[sub_resource type="StyleBoxFlat" id=11]
+bg_color = Color( 0, 0, 0, 0.745098 )
+
+[sub_resource type="DynamicFont" id=12]
+size = 70
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 12 )
 
 [node name="Game" type="Node"]
 script = ExtResource( 6 )
@@ -600,8 +739,60 @@ custom_styles/normal = ExtResource( 2 )
 text = "Kick Player"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Lose_Screen = SubResource( 9 )
 anims/Pause_Transition = SubResource( 5 )
 anims/RESET = SubResource( 6 )
+anims/Win_Screen = SubResource( 10 )
+
+[node name="GameOver" type="Panel" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 11 )
+
+[node name="Win" type="Panel" parent="GameOver"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -200.0
+margin_top = -100.0
+margin_right = 200.0
+margin_bottom = 100.001
+rect_min_size = Vector2( 400, 200 )
+rect_pivot_offset = Vector2( 194, 99 )
+custom_styles/panel = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="GameOver/Win"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 12 )
+text = "You Wan!"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="Lose" type="Panel" parent="GameOver"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -200.0
+margin_top = -100.0
+margin_right = 200.0
+margin_bottom = 100.001
+rect_min_size = Vector2( 400, 200 )
+rect_pivot_offset = Vector2( 199, 103.5 )
+custom_styles/panel = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="GameOver/Lose"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 12 )
+text = "You Lost..."
+align = 1
+valign = 1
+uppercase = true
 
 [connection signal="pressed" from="Background/PauseButton" to="." method="_on_PauseButton_pressed"]
 [connection signal="pressed" from="Background/PlayArea/Submit" to="." method="_on_Submit_pressed"]
