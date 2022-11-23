@@ -19,7 +19,7 @@ func playerIndexToNode(playerIndex):
 				break
 	else:
 		myIndex = 0
-		playerIndex = 0
+		#playerIndex = 0
 	
 	if playerIndex == myIndex:
 		return $Background/Players.get_node("Player1")
@@ -42,16 +42,6 @@ func connect_signals():
 		LobbyConn.connect("players_updated", self, "_on_playersupdated")
 		LobbyConn.join_game()
 
-func fill_textures():
-	var cards
-	if StartVars.singlePlayer:
-		cards = LobbySP.Cards
-	else:
-		cards = LobbyConn.Cards
-	var count = 0
-	for child in $Background/HandBox.get_children():
-		child.setValue(cards[count])
-		count += 1
 
 func fill_cards(enabled):
 	var cards
@@ -101,6 +91,10 @@ func _ready():
 	if !LobbyConn.isHost():
 		$Pause/PlayerList/KickPlayer.hide()
 		fix_display_message(true)
+	
+	if StartVars.singlePlayer:
+		$Pause/PlayerList/KickPlayer.hide()
+	
 	fill_players_gameturn(true)
 	fill_cards(false)
 		
@@ -213,6 +207,7 @@ func fill_players_gameturn(beforeTurns=false):
 		var current
 		if StartVars.singlePlayer:
 			print("current turn, singleplayer, this will error because `current` is not defined")
+			current = 0
 		else:
 			current = playerIndexToNode(LobbyConn.getTurnIndex())
 		

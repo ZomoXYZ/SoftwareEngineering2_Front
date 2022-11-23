@@ -12,12 +12,15 @@ var NonPlayerCards = []
 signal disconnected()
 signal game_starting()
 
-func start():
+#Moved where this is to make lobby work
+func _ready():
 	Players = []
 	Players.append(UserData.objFrom("Human", "Player", 25))
 	for i in 3:
 		Players.append(UserData.objFrom("Bot", str(i+1), 25))
 
+
+func start():
 	Cards = generateCardHand()
 	NonPlayerCards = []
 	for i in 3:

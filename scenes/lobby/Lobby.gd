@@ -6,6 +6,7 @@ var button_empty = preload("res://assets/styles/button_empty.tres")
 var button_green = preload("res://assets/styles/button_green.tres")
 var button_red = preload("res://assets/styles/button_red.tres")
 
+
 var animating = false
 
 func connect_signals():
@@ -37,6 +38,9 @@ func _ready():
 	
 	if StartVars.singlePlayer or LobbyConn.isHost():
 		$Background/Panel/Start.show()
+		if StartVars.singlePlayer:
+			$LobbyOptions/Panel/ButtonContainer/KickPlayer.set_disabled(true)
+			$LobbyOptions/Panel/ButtonContainer/SetPassword.set_disabled(true)
 	else:
 		$Background/Panel/Start.hide()
 		$Background/BottomBar/Options.disabled = true

@@ -7,9 +7,11 @@ export(PackedScene) var ellipseScene
 func _ready():
 	Request.connect("user_online", self, "_on_user_online")
 	Request.connect("user_offline", self, "_on_user_offline")
-	var fix = Vector2(93,297)
+	var fixpos = Vector2(93,297)
+	var fixsiz = Vector2(0,14)
 	Request.authorizeSession()
-	$CanvasLayer/ButtonContainer.set_position(fix)
+	$CanvasLayer/ButtonContainer.set_position(fixpos)
+	$CanvasLayer.set_size(fixsiz)
 
 	# if already online, assume we're still online until told otherwise
 	if Request.online:
