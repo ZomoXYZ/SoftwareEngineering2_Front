@@ -8,6 +8,7 @@ var remember = 100
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$Background/BackForText.hide()
 	LobbyConn.connect("joined_lobby", self, "_lobby_joined")
 	Request.createRequest(self, "_on_get_lobbylyst", "/lobbylist")
 	#Standard animation procedure
@@ -96,10 +97,12 @@ func _lobby_joined():
 func _on_JoinbyID_pressed():
 	$Background/TopButtons/JoinbyID/LineEdit.clear()
 	$Background/TopButtons/JoinbyID/LineEdit.show()
+	$Background/BackForText.show()
 	$Background/TopButtons/JoinbyID/LineEdit.grab_focus()
 	
 func _on_LineEdit_text_entered(code):
 	$Background/TopButtons/JoinbyID/LineEdit.hide()
+	$Background/BackForText.hide()
 	Request.createRequest(self, "_on_get_lobbylystcode", "/lobby/%s" %code)
 
 func _on_LineEdit_text_changed(new_text):
@@ -114,4 +117,16 @@ func _on_LineEdit_text_changed(new_text):
 
 	$Background/TopButtons/JoinbyID/LineEdit.caret_position = old_caret_position
 
+func delete_children(node):
+	for n in node.get_children():
+		node.remove_child(n)
+		n.queue_free()
+	
+func _on_Refresh_pressed():
+	delete_children($Background/Lobbies)
+	Request.createRequest(self, "_on_get_lobbylyst", "/lobbylist")
 
+
+func _on_BackForText_pressed():
+	$Background/BackForText.hide()
+	$Background/TopButtons/JoinbyID/LineEdit.hide()

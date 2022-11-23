@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/styles/background.tres" type="StyleBox" id=1]
 [ext_resource path="res://assets/styles/button_red.tres" type="StyleBox" id=2]
@@ -32,6 +32,11 @@ corner_radius_top_left = 30
 corner_radius_top_right = 30
 corner_radius_bottom_right = 30
 corner_radius_bottom_left = 30
+
+[sub_resource type="DynamicFont" id=8]
+size = 48
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 12 )
 
 [sub_resource type="DynamicFont" id=7]
 size = 30
@@ -187,6 +192,19 @@ margin_top = -421.0
 margin_right = 210.0
 margin_bottom = -200.0
 custom_styles/panel = SubResource( 1 )
+
+[node name="DisplayMessage" type="Label" parent="Background/PlayArea"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_color = Color( 0, 0, 0, 0.45098 )
+custom_constants/line_spacing = -10
+custom_fonts/font = SubResource( 8 )
+text = "
+
+Choose a card to discard!"
+align = 1
+valign = 1
+autowrap = true
 
 [node name="Submit" type="Button" parent="Background/PlayArea"]
 modulate = Color( 1, 1, 1, 0 )
@@ -430,10 +448,10 @@ autowrap = true
 [node name="DrawnCard" parent="Background" instance=ExtResource( 11 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 126.0
-margin_top = 420.0
-margin_right = 302.0
-margin_bottom = 596.0
+margin_left = 130.0
+margin_top = 359.0
+margin_right = 306.0
+margin_bottom = 535.0
 rect_pivot_offset = Vector2( 70, 70 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -587,5 +605,6 @@ anims/RESET = SubResource( 6 )
 
 [connection signal="pressed" from="Background/PauseButton" to="." method="_on_PauseButton_pressed"]
 [connection signal="pressed" from="Background/PlayArea/Submit" to="." method="_on_Submit_pressed"]
+[connection signal="pressed" from="Background/DrawPileBox/DrawPile" to="." method="_on_DrawPile_pressed"]
 [connection signal="pressed" from="Pause/BottomBar/Leave" to="." method="_on_Leave_pressed"]
 [connection signal="pressed" from="Pause/BottomBar/Resume" to="." method="_on_Resume_pressed"]

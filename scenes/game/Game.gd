@@ -7,6 +7,7 @@ var button_empty2 = preload("res://assets/styles/button_empty2.tres")
 var button_green = preload("res://assets/styles/button_green.tres")
 var button_red = preload("res://assets/styles/button_red.tres")
 var discardMode = false
+var drawMode = false
 export(PackedScene) var cardScene
 
 func playerIndexToNode(playerIndex):
@@ -85,8 +86,11 @@ func _ready():
 	connect_signals()
 	var fix = Vector2(176,100)
 	$Background/DrawPileBox/CardRotate/Card.set_rotation(-PI)
+	$Background/DrawPileBox/CardRotate/Card.flip_v = true
+	$Background/DrawPileBox/CardRotate/Card.flip_h = true
 	$Background/DrawPileBox/CardRotate/Card.set_position(fix)
 	# update UI
+	$Background/DrawnCard.hide()
 	$Pause.hide()
 	if StartVars.singlePlayer:
 		$Pause/Panel/LobbyID.text = "Offline"
@@ -96,7 +100,9 @@ func _ready():
 	
 	if !LobbyConn.isHost():
 		$Pause/PlayerList/KickPlayer.hide()
+		fix_display_message(true)
 	fill_players_gameturn(true)
+	fill_cards(false)
 		
 func get_selected_cards():
 	var selectedCards = []
@@ -112,6 +118,14 @@ func _on_Card_pressed(card):
 	if discardMode:
 		print(LobbyConn.Cards)
 		LobbyConn.discard(card.selfValue)
+	elif drawMode:
+		if card.isDiscard:
+			drawMode = false
+			LobbyConn.draw(LobbyConn.DrawFrom.DISCARD)
+			$Background/DrawnCard.show()
+			$Background/DrawPileBox/CardRotate.setValue(15)
+			$Background/DrawPileBox/CardRotate/Card/darken.show()
+			message_timer()
 	else:
 		if !card.isDrawnCard and !card.isDiscard:
 			if card.selected:
@@ -222,7 +236,7 @@ func _on_Resume_pressed():
 	$Pause.hide()
 
 func _on_Submit_pressed():
-	if !discardMode:
+	if !discardMode and !drawMode:
 		var selectedCards = get_selected_cards()
 		print("hrre")
 		LobbyConn.play(selectedCards)
@@ -244,7 +258,9 @@ func _on_playerturn(player):
 
 	if LobbyConn.isMyTurn():
 		print("My turn")
-		LobbyConn.draw(LobbyConn.DrawFrom.DECK)
+		drawMode = true
+		$Background/DrawPileBox/CardRotate/Card/darken.hide()
+		message_timer()
 	else:
 		print("Player %s's turn" % player)
 
@@ -259,7 +275,7 @@ func _on_carddrew(from, card):
 		for child in $Background/HandBox.get_children():
 			child.setCanSelect(true)
 		discardMode = true
-		#LobbyConn.discard(card)
+		message_timer()
 	else:
 		print("Player %s drew from %s" % [LobbyConn.Turn, LobbyConn.DrawFrom.keys()[from]])
 
@@ -271,6 +287,7 @@ func _on_carddiscarded(card):
 		fill_cards(true)
 		# temp print
 		print("I discarded %s" % StartVars.CardName(card))
+		message_timer()
 	else:
 		fill_cards(false)
 		print("Player %s discarded %s" % [LobbyConn.Turn, StartVars.CardName(card)])
@@ -287,6 +304,7 @@ func _on_cardsplayed(cards): # cards will be null if passed
 	if LobbyConn.isMyTurn():
 		# temp print
 		print("I played %s" % cardStr)
+		message_timer()
 	else:
 		# temp print
 		print("Player %s played %s" % [LobbyConn.Turn, cardStr])
@@ -304,3 +322,29 @@ func _on_gameover(player): # playerID winner
 
 func _on_playersupdated():
 	fill_players_gameturn()
+
+func message_timer():
+	fix_display_message(true)
+	yield(get_tree().create_timer(10),"timeout")
+	fix_display_message()
+
+func fix_display_message(override = false):
+	#display guide text in play area
+	if drawMode:
+		$Background/PlayArea/DisplayMessage.text = "\nClick above to draw a card!"
+	elif discardMode:
+		$Background/PlayArea/DisplayMessage.text = "\n\nChoose a card to discard!"
+	else:
+		$Background/PlayArea/DisplayMessage.text = "\nPick your cards, then click here to play them!"
+	
+	#Override removes the text without checking current mode
+	if override:
+		$Background/PlayArea/DisplayMessage.text = ""
+
+func _on_DrawPile_pressed():
+	if drawMode:
+		drawMode = false
+		LobbyConn.draw(LobbyConn.DrawFrom.DECK)
+		$Background/DrawnCard.show()
+		$Background/DrawPileBox/CardRotate/Card/darken.show()
+		message_timer()

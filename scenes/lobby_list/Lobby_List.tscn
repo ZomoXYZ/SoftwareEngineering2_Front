@@ -345,6 +345,17 @@ anchor_bottom = 1.0
 margin_top = -124.0
 custom_styles/panel = ExtResource( 4 )
 
+[node name="BackForText" type="Button" parent="Background"]
+modulate = Color( 1, 1, 1, 0.658824 )
+anchor_left = -0.301
+anchor_top = -3.753
+anchor_right = 1.397
+anchor_bottom = 8.137
+margin_left = -68.205
+margin_top = 2512.06
+margin_right = 42.885
+margin_bottom = 2571.09
+
 [node name="TopButtons" type="VBoxContainer" parent="Background"]
 anchor_left = 0.5
 anchor_right = 0.5
@@ -410,6 +421,22 @@ custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
 text = "Main Menu"
 
+[node name="Refresh" type="Button" parent="Background"]
+anchor_left = 0.5
+anchor_top = 0.158
+anchor_right = 0.5
+anchor_bottom = 0.246
+margin_left = 156.0
+margin_top = 0.225998
+margin_right = 231.0
+margin_bottom = 0.161987
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 5 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 5 )
+custom_styles/normal = ExtResource( 5 )
+text = "O"
+
 [node name="VSlider" type="VSlider" parent="Background"]
 margin_left = 20.0
 margin_top = 250.0
@@ -458,9 +485,11 @@ anims/Intro_Transition = SubResource( 3 )
 anims/Outro_Transition = SubResource( 6 )
 anims/RESET = SubResource( 4 )
 
+[connection signal="pressed" from="Background/BackForText" to="." method="_on_BackForText_pressed"]
 [connection signal="pressed" from="Background/TopButtons/CreateLobby" to="." method="_on_CreateLobby_pressed"]
 [connection signal="pressed" from="Background/TopButtons/JoinbyID" to="." method="_on_JoinbyID_pressed"]
 [connection signal="text_changed" from="Background/TopButtons/JoinbyID/LineEdit" to="." method="_on_LineEdit_text_changed"]
 [connection signal="text_entered" from="Background/TopButtons/JoinbyID/LineEdit" to="." method="_on_LineEdit_text_entered"]
 [connection signal="pressed" from="Background/ToMainMenu" to="." method="_on_To_Main_Menu_pressed"]
+[connection signal="pressed" from="Background/Refresh" to="." method="_on_Refresh_pressed"]
 [connection signal="value_changed" from="Background/VSlider" to="." method="_on_VSlider_value_changed"]

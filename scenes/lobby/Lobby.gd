@@ -32,6 +32,8 @@ func _ready():
 	$StartGamePanel.hide()
 	$LobbyOptions.hide()
 	$OutroPanel.hide()
+	$LobbyOptions/Panel/LineEdit.hide()
+	$LobbyOptions/Panel/BackForText.hide()
 	
 	if StartVars.singlePlayer or LobbyConn.isHost():
 		$Background/Panel/Start.show()
@@ -142,3 +144,49 @@ func _on_disconnected():
 		get_tree().change_scene("res://scenes/main_menu/Main_Menu.tscn")
 	else:
 		get_tree().change_scene("res://scenes/lobby_list/Lobby_List.tscn")
+
+#Options menu options
+
+func _on_SetPassword_pressed():
+	var pos = Vector2($LobbyOptions/Panel/ButtonContainer/SetPassword.rect_position.x,$LobbyOptions/Panel/ButtonContainer/SetPassword.rect_position.y+220)
+	$LobbyOptions/Panel/LineEdit.clear()
+	$LobbyOptions/Panel/LineEdit.set_position(pos)
+	$LobbyOptions/Panel/LineEdit.placeholder_text = "Enter Pass Here"
+	$LobbyOptions/Panel/LineEdit.show()
+	$LobbyOptions/Panel/BackForText.show()
+	$LobbyOptions/Panel/LineEdit.grab_focus()
+
+
+func _on_KickPlayer_pressed():
+	pass # Replace with function body.
+
+
+func _on_PointGoal_pressed():
+	var pos = Vector2($LobbyOptions/Panel/ButtonContainer/PointGoal.rect_position.x,$LobbyOptions/Panel/ButtonContainer/PointGoal.rect_position.y+220)
+	$LobbyOptions/Panel/LineEdit.clear()
+	$LobbyOptions/Panel/LineEdit.set_position(pos)
+	$LobbyOptions/Panel/LineEdit.placeholder_text = 'Try "20"'
+	$LobbyOptions/Panel/LineEdit.show()
+	$LobbyOptions/Panel/BackForText.show()
+	$LobbyOptions/Panel/LineEdit.grab_focus()
+
+
+func _on_LineEdit_text_entered(code):
+	$LobbyOptions/Panel/LineEdit.hide()
+
+func _on_LineEdit_text_changed(new_text):
+	var old_caret_position = $LobbyOptions/Panel/LineEdit.caret_position
+	var word = ''
+	var regex = RegEx.new()
+	if $LobbyOptions/Panel/LineEdit.placeholder_text == 'Try "20"':
+		regex.compile("[0-9]")
+	else:
+		regex.compile("[A-Z]|[0-9]")
+	for valid_character in regex.search_all(new_text.to_upper()):
+		word += valid_character.get_string()
+	$LobbyOptions/Panel/LineEdit.set_text(word)
+	$LobbyOptions/Panel/LineEdit.caret_position = old_caret_position
+
+func _on_BackForText_pressed():
+	$LobbyOptions/Panel/LineEdit.hide()
+	$LobbyOptions/Panel/BackForText.hide()
