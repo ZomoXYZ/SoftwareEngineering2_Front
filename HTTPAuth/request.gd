@@ -83,21 +83,16 @@ func parseResponse(result, response_code, body):
 # force would be used when the user manually taps refresh
 func authorizeSession(force = false):
 	var shouldCheck = force
-	if !shouldCheck {
-		if lastChecked == -1 {
+	if !shouldCheck:
+		if lastChecked == -1:
 			shouldCheck = true
-		} else {
+		else:
 			var time
-			if online {
-				# youre online, check in 60 seconds
+			if online: # youre online, check in 60 seconds
 				time = 60
-			} else {
-				# youre offline, check in 15 seconds
+			else: # youre offline, check in 15 seconds
 				time = 15
-			}
 			shouldCheck = lastChecked + time * 1000 < Time.get_ticks_msec()
-		}
-	}
 	
 	if !shouldCheck:
 		print("Checking too quick")
