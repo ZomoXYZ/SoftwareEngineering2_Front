@@ -153,7 +153,7 @@ func _on_disconnected():
 
 func _on_SetPassword_pressed():
 	#setup our textbox when button pressed
-	var pos = Vector2($LobbyOptions/Panel/ButtonContainer/SetPassword.rect_position.x,$LobbyOptions/Panel/ButtonContainer/SetPassword.rect_position.y+220)
+	var pos = Vector2($LobbyOptions/Panel/ButtonContainer/PointGoal.rect_position.x,$LobbyOptions/Panel/ButtonContainer/PointGoal.rect_position.y-100)
 	$LobbyOptions/Panel/LineEdit.clear()
 	$LobbyOptions/Panel/LineEdit.set_position(pos)
 	$LobbyOptions/Panel/LineEdit.placeholder_text = "Enter Pass Here"
@@ -168,7 +168,7 @@ func _on_KickPlayer_pressed():
 
 func _on_PointGoal_pressed():
 	#setup our textbox when button pressed
-	var pos = Vector2($LobbyOptions/Panel/ButtonContainer/PointGoal.rect_position.x,$LobbyOptions/Panel/ButtonContainer/PointGoal.rect_position.y+220)
+	var pos = Vector2($LobbyOptions/Panel/ButtonContainer/PointGoal.rect_position.x,$LobbyOptions/Panel/ButtonContainer/PointGoal.rect_position.y-100)
 	$LobbyOptions/Panel/LineEdit.clear()
 	$LobbyOptions/Panel/LineEdit.set_position(pos)
 	#Note Change placeholder text here to the current point goal
@@ -180,6 +180,7 @@ func _on_PointGoal_pressed():
 
 func _on_LineEdit_text_entered(code):
 	$LobbyOptions/Panel/LineEdit.hide()
+	$LobbyOptions/Panel/BackForText.hide()
 	#Will need to check position to determine which textbox this is functioning as to send correct signal
 
 func _on_LineEdit_text_changed(new_text):

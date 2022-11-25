@@ -19,7 +19,6 @@ func playerIndexToNode(playerIndex):
 				break
 	else:
 		myIndex = 0
-		#playerIndex = 0
 	
 	if playerIndex == myIndex:
 		return $Background/Players.get_node("Player1")
@@ -95,6 +94,7 @@ func _ready():
 	if StartVars.singlePlayer:
 		$Pause/PlayerList/KickPlayer.hide()
 	
+	fix_display_message2(true)
 	fill_players_gameturn(true)
 	fill_cards(false)
 		
@@ -233,7 +233,11 @@ func _on_Resume_pressed():
 func _on_Submit_pressed():
 	if !discardMode and !drawMode:
 		var selectedCards = get_selected_cards()
-		print("hrre")
+		print(selectedCards.size())
+		if selectedCards.size() == 1:
+			print("hrre")
+			fix_display_message2()
+			return
 		LobbyConn.play(selectedCards)
 
 #Returns to the lobby list or main menu if this is a multi or single player game
@@ -309,6 +313,7 @@ func _on_turnended(cards): # cards automatically drawn
 	var cardStr = []
 	for card in cards:
 		cardStr.append(StartVars.CardName(card))
+	fix_display_message2(true)
 	print("I finished my card by drawing %s" % StartVars.godot_sucks_join_array(cardStr, ", "))
 
 func _on_gameover(player): # playerID winner
@@ -331,12 +336,23 @@ func fix_display_message(override = false):
 		$Background/PlayArea/DisplayMessage.text = "\nClick above to draw a card!"
 	elif discardMode:
 		$Background/PlayArea/DisplayMessage.text = "\n\nChoose a card to discard!"
+	#Override removes the text without checking current mode
+	elif override:
+		$Background/PlayArea/DisplayMessage.text = ""
 	else:
 		$Background/PlayArea/DisplayMessage.text = "\nPick your cards, then click here to play them!"
-	
+
+func fix_display_message2(override = false, message = ""):
+	#display guide text in play area
+	if drawMode:
+		$Background/DisplayMessage2.text = ""
+	elif discardMode:
+		$Background/DisplayMessage2.text = ""
 	#Override removes the text without checking current mode
-	if override:
-		$Background/PlayArea/DisplayMessage.text = ""
+	elif override:
+		$Background/DisplayMessage2.text = ""
+	else:
+		$Background/DisplayMessage2.text = "You can't play just one card! Play nothing to pass your turn."
 
 func _on_DrawPile_pressed():
 	#If we are drawing, draw from deck and show drawn card
