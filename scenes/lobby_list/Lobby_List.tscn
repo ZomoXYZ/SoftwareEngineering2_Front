@@ -10,34 +10,10 @@
 [ext_resource path="res://assets/styles/button_green_disabled.tres" type="StyleBox" id=8]
 [ext_resource path="res://assets/fonts/playerlist_font.tres" type="DynamicFont" id=9]
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.752941, 0.152941, 0.105882, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0, 0, 0, 1 )
-corner_radius_top_left = 30
-corner_radius_top_right = 30
-corner_radius_bottom_right = 30
-corner_radius_bottom_left = 30
-
 [sub_resource type="DynamicFont" id=2]
 size = 172
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 6 )
-
-[sub_resource type="StyleBoxFlat" id=5]
-bg_color = Color( 0.486275, 0.752941, 0.305882, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0, 0, 0, 1 )
-corner_radius_top_left = 30
-corner_radius_top_right = 30
-corner_radius_bottom_right = 30
-corner_radius_bottom_left = 30
 
 [sub_resource type="Animation" id=3]
 resource_name = "Intro_Transition"
@@ -313,6 +289,30 @@ tracks/12/keys = {
 "times": PoolRealArray( 0 )
 }
 
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.752941, 0.152941, 0.105882, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.486275, 0.752941, 0.305882, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
 [node name="LobbyList" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -346,6 +346,7 @@ margin_top = -124.0
 custom_styles/panel = ExtResource( 4 )
 
 [node name="BackForText" type="Button" parent="Background"]
+visible = false
 modulate = Color( 1, 1, 1, 0.658824 )
 anchor_left = -0.301
 anchor_top = -3.753
@@ -448,12 +449,17 @@ value = 100.0
 tick_count = 100
 ticks_on_borders = true
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Intro_Transition = SubResource( 3 )
+anims/Outro_Transition = SubResource( 6 )
+anims/RESET = SubResource( 4 )
+
 [node name="IntroPanel" type="Panel" parent="."]
 visible = false
-margin_left = -52.0
-margin_top = -8.0
-margin_right = 511.0
-margin_bottom = 905.0
+margin_left = -563.0
+margin_top = -481.0
+margin_right = 1083.0
+margin_bottom = 1454.0
 custom_styles/panel = SubResource( 1 )
 
 [node name="IntroText" type="Label" parent="IntroPanel"]
@@ -474,16 +480,11 @@ valign = 1
 
 [node name="OutroPanel" type="Panel" parent="."]
 visible = false
-margin_left = -52.0
-margin_top = -8.0
-margin_right = 511.0
-margin_bottom = 905.0
+margin_left = -560.0
+margin_top = -510.0
+margin_right = 1076.0
+margin_bottom = 1476.0
 custom_styles/panel = SubResource( 5 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Intro_Transition = SubResource( 3 )
-anims/Outro_Transition = SubResource( 6 )
-anims/RESET = SubResource( 4 )
 
 [connection signal="pressed" from="Background/BackForText" to="." method="_on_BackForText_pressed"]
 [connection signal="pressed" from="Background/TopButtons/CreateLobby" to="." method="_on_CreateLobby_pressed"]

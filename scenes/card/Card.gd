@@ -7,12 +7,13 @@ var canSelect = true
 
 export var isDiscard = false
 export var isDrawnCard = false
+export var anim = false
 
 #Signal because godot signal stummy upid
 signal pressed_with_val(val)
 
 func select():
-	if selected:
+	if !anim and selected:
 		return
 	selected = true
 	var pos = $Card.get_position()
@@ -20,7 +21,7 @@ func select():
 	$Card.set_position(pos)
 
 func deselect():
-	if !selected:
+	if !anim and !selected:
 		return
 	selected = false
 	var pos = $Card.get_position()
@@ -28,6 +29,8 @@ func deselect():
 	$Card.set_position(pos)
 
 func setCanSelect(can):
+	if anim:
+		return
 	if isDrawnCard:
 		return
 	
@@ -48,5 +51,5 @@ func _ready():
 	$Card.texture_normal = load(StartVars.CardAsset(selfValue))
 
 func _on_Card_pressed():
-	#print("hi")
-	emit_signal("pressed_with_val", self)
+	if !anim:
+		emit_signal("pressed_with_val", self)

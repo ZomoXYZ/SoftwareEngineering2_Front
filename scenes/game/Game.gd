@@ -8,6 +8,7 @@ var button_green = preload("res://assets/styles/button_green.tres")
 var button_red = preload("res://assets/styles/button_red.tres")
 var discardMode = false
 var drawMode = false
+var wanmo = false
 export(PackedScene) var cardScene
 
 func playerIndexToNode(playerIndex):
@@ -69,6 +70,9 @@ func fill_cards(enabled):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$CardPlayed.hide()
+	$TurnTransition.hide()
+	$GameOver.hide()
 	$Background/DrawnCard.connect("pressed_with_val", self, "_on_Card_pressed")
 	$Background/DrawPileBox/CardRotate.connect("pressed_with_val", self, "_on_Card_pressed")
 	$Background/DrawnCard.set_mouse_filter(Control.MOUSE_FILTER_IGNORE)
@@ -97,6 +101,8 @@ func _ready():
 	fix_display_message2(true)
 	fill_players_gameturn(true)
 	fill_cards(false)
+	$StartGame.show()
+	$AnimationPlayer.play("StartGame_Transition")
 		
 func get_selected_cards():
 	var selectedCards = []
@@ -116,7 +122,6 @@ func _on_Card_pressed(card):
 		if card.isDiscard:
 			drawMode = false
 			LobbyConn.draw(LobbyConn.DrawFrom.DISCARD)
-			$Background/DrawnCard.show()
 			$Background/DrawPileBox/CardRotate.setValue(15)
 			$Background/DrawPileBox/CardRotate/Card/darken.show()
 			message_timer()
@@ -234,7 +239,7 @@ func _on_Submit_pressed():
 	if !discardMode and !drawMode:
 		var selectedCards = get_selected_cards()
 		print(selectedCards.size())
-		if selectedCards.size() == 1:
+		if selectedCards.size() == 1 and (selectedCards[0] != 12 and selectedCards[0] != 13 and selectedCards[0] != 14 ): #12, 13, 14
 			print("hrre")
 			fix_display_message2()
 			return
@@ -254,7 +259,25 @@ func _on_disconnected():
 func _on_playerturn(player):
 	fill_players_gameturn()
 	fill_cards(false)
-
+	
+	#This is the only way I could get animations to work in the correct order
+	#This yield is for animations in _on_cards_played()
+	yield($AnimationPlayer, "animation_finished")
+	if wanmo:
+		$CardPlayed/WANMO.show()
+		$AnimationPlayer.play("WANMO")
+		yield($AnimationPlayer, "animation_finished")
+		wanmo = false
+	
+	$TurnTransition.show()
+	$StartGame.hide()
+	$CardPlayed.hide()
+	for child in $CardPlayed.get_children():
+		child.hide()
+	$AnimationPlayer.play("TurnTransition")
+	yield($AnimationPlayer, "animation_finished")
+	$TurnTransition.hide()
+	
 	if LobbyConn.isMyTurn():
 		print("My turn")
 		drawMode = true
@@ -292,6 +315,37 @@ func _on_carddiscarded(card):
 		print("Player %s discarded %s" % [LobbyConn.Turn, StartVars.CardName(card)])
 
 func _on_cardsplayed(cards): # cards will be null if passed
+	#Temporary identifier for cards played to show animations
+	if cards.size() == 0:
+		$CardPlayed/Pass.show()
+		$CardPlayed.show()
+		$AnimationPlayer.play("Pass")
+	elif cards.size() == 1:
+		$CardPlayed/FreeCard1/AnimCard.setValue(cards[0])
+		$CardPlayed.show()
+		$CardPlayed/FreeCard1.show()
+		$AnimationPlayer.play("FreeCard1")
+	elif cards.size() == 2:
+		$CardPlayed/P1C2/AnimCard.setValue(cards[0])
+		$CardPlayed/P1C2/AnimCard2.setValue(cards[1])
+		$CardPlayed.show()
+		$CardPlayed/P1C2.show()
+		$AnimationPlayer.play("P1C2")
+	elif cards.size() == 3:
+		$CardPlayed.show()
+		$CardPlayed/FreeCard1.show()
+		$AnimationPlayer.play("FreeCard1")
+	else:
+		wanmo = true
+		$CardPlayed/P3C21/AnimCard.setValue(cards[0])
+		$CardPlayed/P3C21/AnimCard2.setValue(cards[1])
+		$CardPlayed/WANMO/AnimCard.setValue(cards[2])
+		$CardPlayed/WANMO/AnimCard2.setValue(cards[3])
+		$CardPlayed.show()
+		$CardPlayed/P3C21.show()
+		$AnimationPlayer.play("P3C2-1")
+	
+
 	fill_cards(false)
 
 	# temp print
@@ -300,6 +354,7 @@ func _on_cardsplayed(cards): # cards will be null if passed
 		cardStr.append(StartVars.CardName(card))
 	cardStr = StartVars.godot_sucks_join_array(cardStr, ", ")
 
+	
 	if LobbyConn.isMyTurn():
 		# temp print
 		print("I played %s" % cardStr)
@@ -317,7 +372,16 @@ func _on_turnended(cards): # cards automatically drawn
 	print("I finished my card by drawing %s" % StartVars.godot_sucks_join_array(cardStr, ", "))
 
 func _on_gameover(player): # playerID winner
+	#yield($AnimationPlayer, "animation_finished")
 	LobbyConn.InLobby = true
+	$TurnTransition.hide()
+	$StartGame.hide()
+	$CardPlayed.hide()
+	$GameOver/Lose.hide()
+	$GameOver.show()
+	$GameOver/Win.show()
+	$AnimationPlayer.play("Win_Screen")
+	yield($AnimationPlayer, "animation_finished")
 	get_tree().change_scene("res://scenes/lobby/Lobby.tscn")
 
 func _on_playersupdated():
@@ -359,6 +423,5 @@ func _on_DrawPile_pressed():
 	if drawMode:
 		drawMode = false
 		LobbyConn.draw(LobbyConn.DrawFrom.DECK)
-		$Background/DrawnCard.show()
 		$Background/DrawPileBox/CardRotate/Card/darken.show()
 		message_timer()
