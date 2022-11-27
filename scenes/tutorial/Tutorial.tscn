@@ -1,0 +1,1164 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://assets/styles/background.tres" type="StyleBox" id=1]
+[ext_resource path="res://scenes/card/Card.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/styles/background2.tres" type="StyleBox" id=3]
+[ext_resource path="res://assets/fonts/playerlist_font.tres" type="DynamicFont" id=4]
+[ext_resource path="res://assets/styles/button_red.tres" type="StyleBox" id=5]
+[ext_resource path="res://assets/fonts/button_font.tres" type="DynamicFont" id=6]
+[ext_resource path="res://assets/styles/button_green.tres" type="StyleBox" id=7]
+[ext_resource path="res://assets/fonts/ComicNeue-Regular.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://scenes/tutorial/Tutorial.gd" type="Script" id=9]
+
+[sub_resource type="DynamicFont" id=1]
+size = 55
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 8 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "Leave_Transition"
+length = 0.6
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Background/MiddleCover:rect_position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Background/MiddleCover:rect_position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 251, -0.25, 0, 0.25, 0, -91, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Background/MiddleCover:rect_size:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 480, -0.25, 0, 0.25, 0, 806, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Background/MiddleCover:rect_size:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 476, -0.25, 0, 0.25, 0, 1216, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Background/MiddleCover:rect_position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Background/MiddleCover:rect_position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 251, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Background/MiddleCover:rect_size:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 480, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Background/MiddleCover:rect_size:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 476, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[node name="Tutorial" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 9 )
+
+[node name="Background" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = ExtResource( 3 )
+
+[node name="TopCover" type="Panel" parent="Background"]
+anchor_right = 1.0
+margin_bottom = 231.0
+custom_styles/panel = ExtResource( 3 )
+
+[node name="BottomCover" type="Panel" parent="Background"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -124.0
+custom_styles/panel = ExtResource( 3 )
+
+[node name="Next" type="Button" parent="Background"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 5.0
+margin_top = 149.0
+margin_right = 180.0
+margin_bottom = 224.0
+rect_min_size = Vector2( 175, 75 )
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 6 )
+custom_styles/hover = ExtResource( 7 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/disabled = ExtResource( 7 )
+custom_styles/normal = ExtResource( 7 )
+text = "Next"
+
+[node name="Back" type="Button" parent="Background"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -180.0
+margin_top = 149.0
+margin_right = -5.0
+margin_bottom = 224.0
+rect_min_size = Vector2( 175, 75 )
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 6 )
+custom_styles/hover = ExtResource( 5 )
+custom_styles/pressed = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 5 )
+custom_styles/normal = ExtResource( 5 )
+text = "Back"
+
+[node name="TopButtons" type="VBoxContainer" parent="Background"]
+anchor_right = 1.0
+margin_left = 17.0
+margin_top = 17.0
+margin_right = -17.0
+margin_bottom = 129.0
+custom_constants/separation = 30
+alignment = 1
+
+[node name="Title" type="Panel" parent="Background/TopButtons"]
+margin_right = 446.0
+margin_bottom = 112.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = ExtResource( 5 )
+
+[node name="Text" type="Label" parent="Background/TopButtons/Title"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 1 )
+text = "How to Play"
+align = 1
+valign = 1
+
+[node name="ToMainMenu" type="Button" parent="Background"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -147.5
+margin_top = -105.0
+margin_right = 147.5
+margin_bottom = -30.0
+custom_fonts/font = ExtResource( 6 )
+custom_styles/hover = ExtResource( 5 )
+custom_styles/pressed = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 5 )
+custom_styles/normal = ExtResource( 5 )
+text = "Main Menu"
+
+[node name="MiddleCover" type="Panel" parent="Background"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -175.5
+margin_bottom = 300.5
+custom_styles/panel = ExtResource( 1 )
+
+[node name="Part1" type="Panel" parent="Background/MiddleCover"]
+visible = false
+
+[node name="Label" type="Label" parent="Background/MiddleCover/Part1"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 458.0
+margin_bottom = 455.0
+custom_fonts/font = ExtResource( 4 )
+text = "WAN is a card game based on MATH!
+
+
+First let's learn about the different card types."
+autowrap = true
+
+[node name="Part2" type="Panel" parent="Background/MiddleCover"]
+visible = false
+
+[node name="Label" type="Label" parent="Background/MiddleCover/Part2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 458.0
+margin_bottom = 455.0
+custom_fonts/font = ExtResource( 4 )
+text = "Each card has an opposite as follows:"
+autowrap = true
+
+[node name="card" parent="Background/MiddleCover/Part2" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 8.0
+margin_top = 152.0
+margin_right = 104.0
+margin_bottom = 252.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 0
+
+[node name="card2" parent="Background/MiddleCover/Part2" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 117.0
+margin_top = 151.0
+margin_right = 213.0
+margin_bottom = 251.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 2
+
+[node name="card3" parent="Background/MiddleCover/Part2" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 266.0
+margin_top = 148.0
+margin_right = 362.0
+margin_bottom = 248.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 1
+
+[node name="card4" parent="Background/MiddleCover/Part2" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 372.0
+margin_top = 149.0
+margin_right = 468.0
+margin_bottom = 249.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 3
+
+[node name="card5" parent="Background/MiddleCover/Part2" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 8.0
+margin_top = 332.0
+margin_right = 104.0
+margin_bottom = 432.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 6
+
+[node name="card6" parent="Background/MiddleCover/Part2" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 114.0
+margin_top = 332.0
+margin_right = 210.0
+margin_bottom = 432.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 8
+
+[node name="card7" parent="Background/MiddleCover/Part2" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 268.0
+margin_top = 332.0
+margin_right = 364.0
+margin_bottom = 432.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 7
+
+[node name="card8" parent="Background/MiddleCover/Part2" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 371.0
+margin_top = 332.0
+margin_right = 467.0
+margin_bottom = 432.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 9
+
+[node name="Part3" type="Panel" parent="Background/MiddleCover"]
+visible = false
+
+[node name="Label" type="Label" parent="Background/MiddleCover/Part3"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 458.0
+margin_bottom = 455.0
+custom_fonts/font = ExtResource( 4 )
+text = "Card opposites can be played with one another!
+
+
+
+
+But theres even more ways to match cards..."
+autowrap = true
+
+[node name="card5" parent="Background/MiddleCover/Part3" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 10.0
+margin_top = 160.0
+margin_right = 106.0
+margin_bottom = 260.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 4
+
+[node name="card6" parent="Background/MiddleCover/Part3" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 117.0
+margin_top = 159.0
+margin_right = 213.0
+margin_bottom = 259.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 10
+
+[node name="card7" parent="Background/MiddleCover/Part3" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 261.0
+margin_top = 166.0
+margin_right = 357.0
+margin_bottom = 266.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 5
+
+[node name="card8" parent="Background/MiddleCover/Part3" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 369.0
+margin_top = 159.0
+margin_right = 465.0
+margin_bottom = 259.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 11
+
+[node name="Part4" type="Panel" parent="Background/MiddleCover"]
+visible = false
+
+[node name="Label" type="Label" parent="Background/MiddleCover/Part4"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 458.0
+margin_bottom = 455.0
+custom_fonts/font = ExtResource( 4 )
+text = "These cards combine into other ones!
+
+        +            =
+		
+		
+		
+        +            ="
+autowrap = true
+
+[node name="card5" parent="Background/MiddleCover/Part4" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 10.0
+margin_top = 147.0
+margin_right = 106.0
+margin_bottom = 247.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 0
+
+[node name="card6" parent="Background/MiddleCover/Part4" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 164.0
+margin_top = 152.0
+margin_right = 260.0
+margin_bottom = 252.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 0
+
+[node name="card7" parent="Background/MiddleCover/Part4" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 360.0
+margin_top = 156.0
+margin_right = 456.0
+margin_bottom = 256.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 1
+
+[node name="card8" parent="Background/MiddleCover/Part4" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 9.0
+margin_top = 336.0
+margin_right = 105.0
+margin_bottom = 436.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 2
+
+[node name="card9" parent="Background/MiddleCover/Part4" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 162.0
+margin_top = 335.0
+margin_right = 258.0
+margin_bottom = 435.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 2
+
+[node name="card10" parent="Background/MiddleCover/Part4" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 360.0
+margin_top = 339.0
+margin_right = 456.0
+margin_bottom = 439.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 3
+
+[node name="Part5" type="Panel" parent="Background/MiddleCover"]
+visible = false
+
+[node name="Label" type="Label" parent="Background/MiddleCover/Part5"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 458.0
+margin_bottom = 455.0
+custom_fonts/font = ExtResource( 4 )
+text = "
+        +            =
+
+		
+		
+		
+        +            ="
+autowrap = true
+
+[node name="card5" parent="Background/MiddleCover/Part5" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 13.0
+margin_top = 56.0
+margin_right = 109.0
+margin_bottom = 156.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 6
+
+[node name="card6" parent="Background/MiddleCover/Part5" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 161.0
+margin_top = 52.0
+margin_right = 257.0
+margin_bottom = 152.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 6
+
+[node name="card7" parent="Background/MiddleCover/Part5" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 361.0
+margin_top = 49.0
+margin_right = 457.0
+margin_bottom = 149.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 7
+
+[node name="card8" parent="Background/MiddleCover/Part5" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 10.0
+margin_top = 298.0
+margin_right = 106.0
+margin_bottom = 398.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 8
+
+[node name="card9" parent="Background/MiddleCover/Part5" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 161.0
+margin_top = 301.0
+margin_right = 257.0
+margin_bottom = 401.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 8
+
+[node name="card10" parent="Background/MiddleCover/Part5" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 364.0
+margin_top = 299.0
+margin_right = 460.0
+margin_bottom = 399.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 9
+
+[node name="Part6" type="Panel" parent="Background/MiddleCover"]
+visible = false
+
+[node name="Label" type="Label" parent="Background/MiddleCover/Part6"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 458.0
+margin_bottom = 455.0
+custom_fonts/font = ExtResource( 4 )
+text = "
+        +            =
+
+		
+		
+		
+        +            ="
+autowrap = true
+
+[node name="card5" parent="Background/MiddleCover/Part6" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 13.0
+margin_top = 56.0
+margin_right = 109.0
+margin_bottom = 156.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 4
+
+[node name="card6" parent="Background/MiddleCover/Part6" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 161.0
+margin_top = 52.0
+margin_right = 257.0
+margin_bottom = 152.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 4
+
+[node name="card7" parent="Background/MiddleCover/Part6" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 361.0
+margin_top = 49.0
+margin_right = 457.0
+margin_bottom = 149.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 5
+
+[node name="card8" parent="Background/MiddleCover/Part6" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 10.0
+margin_top = 298.0
+margin_right = 106.0
+margin_bottom = 398.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 10
+
+[node name="card9" parent="Background/MiddleCover/Part6" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 161.0
+margin_top = 301.0
+margin_right = 257.0
+margin_bottom = 401.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 10
+
+[node name="card10" parent="Background/MiddleCover/Part6" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 364.0
+margin_top = 299.0
+margin_right = 460.0
+margin_bottom = 399.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 11
+
+[node name="Part7" type="Panel" parent="Background/MiddleCover"]
+visible = false
+
+[node name="Label" type="Label" parent="Background/MiddleCover/Part7"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 458.0
+margin_bottom = 455.0
+custom_fonts/font = ExtResource( 4 )
+text = "To get one point you can either play 2 identical cards together, or 1 free card!
+
+
+                 or"
+autowrap = true
+
+[node name="card8" parent="Background/MiddleCover/Part7" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 71.0
+margin_top = 294.0
+margin_right = 167.0
+margin_bottom = 394.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 6
+
+[node name="card9" parent="Background/MiddleCover/Part7" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 79.0
+margin_top = 257.0
+margin_right = 175.0
+margin_bottom = 357.0
+rect_min_size = Vector2( 96, 100 )
+rect_rotation = -90.0
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 6
+
+[node name="card10" parent="Background/MiddleCover/Part7" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 323.0
+margin_top = 266.0
+margin_right = 419.0
+margin_bottom = 366.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 12
+
+[node name="Part8" type="Panel" parent="Background/MiddleCover"]
+visible = false
+
+[node name="Label" type="Label" parent="Background/MiddleCover/Part8"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 458.0
+margin_bottom = 455.0
+custom_fonts/font = ExtResource( 4 )
+text = "To get two points you can either play opposite cards, or 2 free cards!
+
+
+
+              or"
+autowrap = true
+
+[node name="card8" parent="Background/MiddleCover/Part8" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 26.0
+margin_top = 302.0
+margin_right = 122.0
+margin_bottom = 402.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 0
+
+[node name="card9" parent="Background/MiddleCover/Part8" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 79.0
+margin_top = 257.0
+margin_right = 175.0
+margin_bottom = 357.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 2
+
+[node name="card10" parent="Background/MiddleCover/Part8" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 258.0
+margin_top = 273.0
+margin_right = 354.0
+margin_bottom = 373.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 13
+
+[node name="card11" parent="Background/MiddleCover/Part8" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 369.0
+margin_top = 273.0
+margin_right = 465.0
+margin_bottom = 373.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 14
+
+[node name="Part9" type="Panel" parent="Background/MiddleCover"]
+visible = false
+
+[node name="Label" type="Label" parent="Background/MiddleCover/Part9"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 458.0
+margin_bottom = 455.0
+custom_fonts/font = ExtResource( 4 )
+text = "To get 3 points you need to play one of these:
+
+
+
+
+
+
+      (or 3 free cards)"
+autowrap = true
+
+[node name="card8" parent="Background/MiddleCover/Part9" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 100.0
+margin_top = 69.0
+margin_right = 196.0
+margin_bottom = 169.0
+rect_min_size = Vector2( 96, 100 )
+rect_rotation = -90.0
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 7
+
+[node name="card9" parent="Background/MiddleCover/Part9" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 281.0
+margin_top = 69.0
+margin_right = 377.0
+margin_bottom = 169.0
+rect_min_size = Vector2( 96, 100 )
+rect_rotation = -90.0
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 1
+
+[node name="card10" parent="Background/MiddleCover/Part9" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 41.0
+margin_top = 275.0
+margin_right = 137.0
+margin_bottom = 375.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 11
+
+[node name="card11" parent="Background/MiddleCover/Part9" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 325.0
+margin_top = 277.0
+margin_right = 421.0
+margin_bottom = 377.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 5
+
+[node name="card12" parent="Background/MiddleCover/Part9" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 327.0
+margin_top = 178.0
+margin_right = 423.0
+margin_bottom = 278.0
+rect_min_size = Vector2( 96, 100 )
+rect_rotation = -90.0
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 3
+
+[node name="card13" parent="Background/MiddleCover/Part9" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 46.0
+margin_top = 179.0
+margin_right = 142.0
+margin_bottom = 279.0
+rect_min_size = Vector2( 96, 100 )
+rect_rotation = -90.0
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 9
+
+[node name="Part10" type="Panel" parent="Background/MiddleCover"]
+visible = false
+
+[node name="Label" type="Label" parent="Background/MiddleCover/Part10"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 458.0
+margin_bottom = 455.0
+custom_fonts/font = ExtResource( 4 )
+text = "To get WAN MO point than 3 all you need to do is play 2 identical cards along with a 3 point hand! Like this:"
+autowrap = true
+
+[node name="card9" parent="Background/MiddleCover/Part10" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 102.0
+margin_top = 230.0
+margin_right = 198.0
+margin_bottom = 330.0
+rect_min_size = Vector2( 96, 100 )
+rect_rotation = -90.0
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 1
+
+[node name="card10" parent="Background/MiddleCover/Part10" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 102.0
+margin_top = 332.0
+margin_right = 198.0
+margin_bottom = 432.0
+rect_min_size = Vector2( 96, 100 )
+rect_rotation = -90.0
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 1
+
+[node name="card11" parent="Background/MiddleCover/Part10" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 328.0
+margin_top = 329.0
+margin_right = 424.0
+margin_bottom = 429.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 5
+
+[node name="card12" parent="Background/MiddleCover/Part10" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 332.0
+margin_top = 219.0
+margin_right = 428.0
+margin_bottom = 319.0
+rect_min_size = Vector2( 96, 100 )
+rect_rotation = -90.0
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 3
+
+[node name="Part11" type="Panel" parent="Background/MiddleCover"]
+visible = false
+
+[node name="Label" type="Label" parent="Background/MiddleCover/Part11"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 458.0
+margin_bottom = 455.0
+custom_fonts/font = ExtResource( 4 )
+text = "Free cards can be any card of their color!
+
+    ------------>
+	
+	
+	
+	    ------------>"
+autowrap = true
+
+[node name="card11" parent="Background/MiddleCover/Part11" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 19.0
+margin_top = 150.0
+margin_right = 115.0
+margin_bottom = 250.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 14
+
+[node name="card12" parent="Background/MiddleCover/Part11" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 335.0
+margin_top = 146.0
+margin_right = 431.0
+margin_bottom = 246.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 8
+
+[node name="card13" parent="Background/MiddleCover/Part11" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 336.0
+margin_top = 325.0
+margin_right = 432.0
+margin_bottom = 425.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 0
+
+[node name="card14" parent="Background/MiddleCover/Part11" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 19.0
+margin_top = 330.0
+margin_right = 115.0
+margin_bottom = 430.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 13
+
+[node name="Part12" type="Panel" parent="Background/MiddleCover"]
+visible = false
+
+[node name="Label" type="Label" parent="Background/MiddleCover/Part12"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 458.0
+margin_bottom = 455.0
+custom_fonts/font = ExtResource( 4 )
+text = "The WAN and Only super free card can take the place of ANY other card!!"
+autowrap = true
+
+[node name="card11" parent="Background/MiddleCover/Part12" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 187.0
+margin_top = 259.0
+margin_right = 283.0
+margin_bottom = 359.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 12
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Leave_Transition = SubResource( 2 )
+anims/RESET = SubResource( 3 )
+
+[connection signal="pressed" from="Background/Next" to="." method="_on_Next_pressed"]
+[connection signal="pressed" from="Background/Back" to="." method="_on_Back_pressed"]
+[connection signal="pressed" from="Background/ToMainMenu" to="." method="_on_ToMainMenu_pressed"]

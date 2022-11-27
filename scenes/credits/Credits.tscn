@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/fonts/button_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/styles/background2.tres" type="StyleBox" id=2]
@@ -6,12 +6,102 @@
 [ext_resource path="res://assets/styles/button_green.tres" type="StyleBox" id=4]
 [ext_resource path="res://assets/fonts/ComicNeue-Regular.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://scenes/credits/Credits.gd" type="Script" id=6]
+[ext_resource path="res://assets/styles/background.tres" type="StyleBox" id=7]
+[ext_resource path="res://scenes/card/Card.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/fonts/playerlist_font.tres" type="DynamicFont" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 size = 55
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 5 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "Leave_Transition"
+length = 0.6
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Background/MiddleCover:rect_position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Background/MiddleCover:rect_position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 251, -0.25, 0, 0.25, 0, -54, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Background/MiddleCover:rect_size:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 480, -0.25, 0, 0.25, 0, 806, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Background/MiddleCover:rect_size:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 476, -0.25, 0, 0.25, 0, 1205, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Background/MiddleCover:rect_position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Background/MiddleCover:rect_position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 251, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Background/MiddleCover:rect_size:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 480, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Background/MiddleCover:rect_size:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 476, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
 
 [node name="Credits" type="Control"]
 anchor_right = 1.0
@@ -91,4 +181,79 @@ custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
 text = "Main Menu"
 
+[node name="MiddleCover" type="Panel" parent="Background"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = 251.0
+margin_right = 480.0
+margin_bottom = 727.0
+custom_styles/panel = ExtResource( 7 )
+
+[node name="Part1" type="Panel" parent="Background/MiddleCover"]
+visible = false
+
+[node name="Label" type="Label" parent="Background/MiddleCover/Part1"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 458.0
+margin_bottom = 455.0
+custom_fonts/font = ExtResource( 9 )
+text = "Dr Curtis Wesley is the creator of WAN."
+autowrap = true
+
+[node name="Part2" type="Panel" parent="Background/MiddleCover"]
+visible = false
+
+[node name="Label" type="Label" parent="Background/MiddleCover/Part2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 458.0
+margin_bottom = 455.0
+custom_fonts/font = ExtResource( 9 )
+text = "Taylor Bell, Jake Rosch, and Alexander Wildman made up the dev team of college students who created this mobile app."
+autowrap = true
+
+[node name="Part3" type="Panel" parent="Background/MiddleCover"]
+visible = false
+
+[node name="Label" type="Label" parent="Background/MiddleCover/Part3"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 458.0
+margin_bottom = 455.0
+custom_fonts/font = ExtResource( 9 )
+text = "This is the WAN and Only, master of the cards, mascot of the game.
+
+
+
+
+TODO: DRAW WAN AND ONLY"
+autowrap = true
+
+[node name="card5" parent="Background/MiddleCover/Part3" instance=ExtResource( 8 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = 189.0
+margin_top = 212.0
+margin_right = 285.0
+margin_bottom = 312.0
+rect_min_size = Vector2( 96, 100 )
+rect_pivot_offset = Vector2( 70, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selfValue = 12
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Leave_Transition = SubResource( 2 )
+anims/RESET = SubResource( 3 )
+
+[connection signal="pressed" from="Background/Next" to="." method="_on_Next_pressed"]
 [connection signal="pressed" from="Background/ToMainMenu" to="." method="_on_ToMainMenu_pressed"]

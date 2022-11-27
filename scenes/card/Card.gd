@@ -1,6 +1,6 @@
 extends Node
 
-var selfValue = StartVars.Cards.Back
+export var selfValue = StartVars.Cards.Back
 
 var selected = false
 var canSelect = true
@@ -53,3 +53,4 @@ func _ready():
 func _on_Card_pressed():
 	if !anim:
 		emit_signal("pressed_with_val", self)
+

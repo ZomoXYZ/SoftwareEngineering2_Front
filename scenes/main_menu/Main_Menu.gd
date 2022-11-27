@@ -39,7 +39,9 @@ func _on_Multiplayer_pressed():
 
 
 func _on_Tutorial_pressed():
-	pass # Replace with function body.
+	$AnimationPlayer.play("Unused_Transition")
+	yield($AnimationPlayer, "animation_finished")
+	get_tree().change_scene("res://scenes/tutorial/Tutorial.tscn")
 
 
 func _on_Credits_pressed():

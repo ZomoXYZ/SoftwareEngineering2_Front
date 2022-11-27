@@ -70,6 +70,10 @@ func fill_cards(enabled):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	var fixpos = Vector2(-480,378)
+	var fixsiz = Vector2(480,248)
+	$TurnTransition/Box.set_position(fixpos)
+	$TurnTransition/Box.set_size(fixsiz)
 	$CardPlayed.hide()
 	$TurnTransition.hide()
 	$GameOver.hide()
