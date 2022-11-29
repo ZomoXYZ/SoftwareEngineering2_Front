@@ -193,6 +193,9 @@ func _ready():
 	]
 	
 
+func checkForWanMo(hand, selected):
+	pass
+
 # returns a list of card types that can be played with the given cards
 # returns null if the card list is empty
 func getValidCards(cards):
@@ -212,6 +215,14 @@ func getValidCards(cards):
 	
 	#Multiple cards selected
 	else:
-		pass
+		#sin^2 + cos^2 case
+		if cards == ["Triangle2", "Circle2"]:
+			pass
+		
+		elif cards == ["TriangleCircle2", "TriangleInverted2"]:
+			pass
+			
+		elif cards == ["CircleTriangle2", "CircleInverted2"]:
+			pass
 		
 
