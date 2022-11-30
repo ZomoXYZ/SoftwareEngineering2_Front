@@ -247,7 +247,7 @@ func _on_Submit_pressed():
 			print("hrre")
 			fix_display_message2()
 			return
-		LobbyConn.play(selectedCards)
+		LobbyConn.play(selectedCards, null)
 
 #Returns to the lobby list or main menu if this is a multi or single player game
 func _on_Leave_pressed():
@@ -318,7 +318,7 @@ func _on_carddiscarded(card):
 		fill_cards(false)
 		print("Player %s discarded %s" % [LobbyConn.Turn, StartVars.CardName(card)])
 
-func _on_cardsplayed(cards): # cards will be null if passed
+func _on_cardsplayed(handType, cards, wanmoPair): # cards will be null if passed
 	#Temporary identifier for cards played to show animations
 	if cards.size() == 0:
 		$CardPlayed/Pass.show()

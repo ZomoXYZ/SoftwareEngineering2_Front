@@ -21,6 +21,19 @@ enum DrawFrom {
 	DISCARD
 }
 
+enum HandTypes (
+	SINGLEFREE = 0,
+	PAIR,
+	PAIR_INVERTED,
+	DOUBLE_FREE,
+	TRIPLE_FREE,
+	DOUBLE_SHAPE_PAIR,
+	BIG_PAIR,
+	QUAD_FREE,
+	WANMO,
+	PASS,
+)
+
 func isMyTurn():
 	return Turn == UserData.ID
 
@@ -55,7 +68,7 @@ signal players_updated()
 signal player_turn(player)
 signal card_drew(from, card) # from: DrawFrom.DRAW_FROM_DECK or DrawFrom.DRAW_FROM_DISCARD
 signal card_discarded(card)
-signal cards_played(cards) # cards will be null if passed
+signal cards_played(handType, cards, wanmoPair) # cards and wanmoPair will be null if passed
 signal turn_ended(cards) # cards automatically drawn
 
 signal game_over(playerID) # playerID winner
@@ -100,14 +113,16 @@ func draw(from):
 func discard(card):
 	send("discard %s" % card)
 		
-func play(cards):
+func play(cards, wanmoPair):
 	if cards == null:
 		send("play")
 	else:
-		var cardsJson = JSON.print({
+		var cardsJson = {
 			"cards": cards
-		})
-		send("play %s" % cardsJson)
+		}
+		if wanmoPair != null:
+			cardsJson["wanmoPair"] = wanmoPair
+		send("play %s" % JSON.print(cardsJson))
 
 
 func send(message):
@@ -276,14 +291,17 @@ func command_game_discarded(args):
 	emit_signal("card_discarded", card)
 
 func command_game_played(args):
-	var cards = JSON.parse(args[0]).result.cards
+	var data = JSON.parse(args[0]).result
+	var cards = data.cards
+	var type = data.type
+	var wanmo = data.wanmo
 	if isMyTurn():
 		for card in cards:
 			removeCard(card)
-	emit_signal("cards_played", cards)
+	emit_signal("cards_played", type, cards, wanmo)
 
 func command_game_passed():
-	emit_signal("cards_played", null)
+	emit_signal("cards_played", HandTypes.PASS, null, null)
 
 func command_game_autodraw(args):
 	var cards = JSON.parse(args[0]).result.cards
