@@ -21,7 +21,7 @@ enum DrawFrom {
 	DISCARD
 }
 
-enum HandTypes (
+enum HandTypes {
 	SINGLEFREE = 0,
 	PAIR,
 	PAIR_INVERTED,
@@ -32,7 +32,7 @@ enum HandTypes (
 	QUAD_FREE,
 	WANMO,
 	PASS,
-)
+}
 
 func isMyTurn():
 	return Turn == UserData.ID

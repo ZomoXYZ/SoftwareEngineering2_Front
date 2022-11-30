@@ -15,24 +15,24 @@ func godot_sucks_join_array(array, delimiter = " "):
 
 enum Cards {
 	Circle1 = 0
-	Circle2
-	CircleInverted1
-	CircleInverted2
+	Circle2 #1
+	CircleInverted1 #2
+	CircleInverted2 #3
 
-	CircleTriangle1
-	CircleTriangle2
+	CircleTriangle1 #4
+	CircleTriangle2 #5
 
-	Triangle1
-	Triangle2
-	TriangleInverted1
-	TriangleInverted2
+	Triangle1 #6
+	Triangle2 #7
+	TriangleInverted1 #8
+	TriangleInverted2 #9
 
-	TriangleCircle1
-	TriangleCircle2
+	TriangleCircle1 #10
+	TriangleCircle2 #11
 
-	Free
-	CircleFree
-	TriangleFree
+	Free #12
+	CircleFree#13
+	TriangleFree#14
 
 	Back # will never receive this from the server
 }
@@ -193,12 +193,51 @@ func _ready():
 	]
 	
 
-func checkForWanMo(hand, selected):
-	pass
+func freeTypeCheck(free,card):
+	if free.selfValue == Cards.TriangleFree:
+		if card.selfValue == Cards.Triangle1 or card.selfValue == Cards.Triangle2 or card.selfValue == Cards.TriangleInverted1 or card.selfValue == Cards.TriangleInverted2:
+			return true
+		else:
+			return false
+	else:
+		if card.selfValue == Cards.Circle1 or card.selfValue == Cards.Circle2 or card.selfValue == Cards.CircleInverted1 or card.selfValue == Cards.CircleInverted2:
+			return true
+		else:
+			return false
 
+
+func checkForFreePair(card1, card2):
+	if card1.selfValue == Cards.CircleFree or card1.selfValue == Cards.TriangleFree:
+		return freeTypeCheck(card1, card2)
+	elif card2.selfValue == Cards.CircleFree or card2.selfValue == Cards.TriangleFree:
+		return freeTypeCheck(card2, card1)
+	elif card1.selfValue == Cards.Free:
+		return true
+	elif card2.selfValue == Cards.Free:
+		return true
+	else:
+		return false
+
+func custom_array_sort(a, b):
+	if int(a) > int(b):
+		return [int(b),int(a)]
+	else:
+		return [int(a),int(b)]
+
+func array_fixer(array):
+	var newArray = []
+	for item in array:
+		var counter = 0
+		for i in range(array.size()):
+			if i<array.size() and item == array[i]:
+				counter +=1
+		if counter> 2:
+			newArray += [item]
+	newArray +=[12,13,14]
+	return newArray
 # returns a list of card types that can be played with the given cards
 # returns null if the card list is empty
-func getValidCards(cards):
+func getValidCards(hand, cards):
 	if cards.size() == 0:
 		return null
 	
@@ -213,16 +252,47 @@ func getValidCards(cards):
 		else:
 			return validHands[CardName(cards[0])]
 	
+	#Check for WAN MO
+	elif cards.size() == 2:
+		#cards = cards.sort()
+		var x = custom_array_sort(cards[0],cards[1])
+		var validArray = []
+		
+		if x == [1,7] or x == [9,11]  or x ==  [3,5]:
+			print("help")
+			for child in hand.get_children():
+				print("got here")
+				if !child.selected:
+					for child2 in hand.get_children():
+						if !child2.selected and child.selfValue == child2.selfValue:
+							validArray += [child.selfValue,child2.selfValue]
+						elif !child2.selected and checkForFreePair(child, child2):
+							validArray +=  [child.selfValue,child2.selfValue]
+			print(validArray)
+			validArray = array_fixer(validArray)
+			return validArray
+		elif cards == []:
+			return []
+		else:
+			return []
+			
 	#Multiple cards selected
 	else:
+		print(cards)
 		#sin^2 + cos^2 case
-		if cards == ["Triangle2", "Circle2"]:
-			pass
-		
-		elif cards == ["TriangleCircle2", "TriangleInverted2"]:
-			pass
-			
-		elif cards == ["CircleTriangle2", "CircleInverted2"]:
-			pass
-		
+		if cards == [7, 1] or cards == [11, 9] or cards == [5, 3] or cards == [1,7] or cards == [9,11]  or cards ==  [3,5]:
+			print("help")
+			for child in hand.get_children():
+				print("got here")
+				if !child.selected:
+					for child2 in hand.get_children():
+						if !child2.selected and child.selfValue == child2.selfValue:
+							validHands += [CardName(child),CardName(child2)]
+						elif !child2.selected and checkForFreePair(child, child2):
+							validHands += [CardName(child),CardName(child2)]
+			return validHands
+		elif cards == []:
+			return validHands
+		else:
+			return []
 

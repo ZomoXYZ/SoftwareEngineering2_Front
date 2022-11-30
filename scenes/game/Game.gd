@@ -9,6 +9,7 @@ var button_red = preload("res://assets/styles/button_red.tres")
 var discardMode = false
 var drawMode = false
 var wanmo = false
+var wanmo_hand = []
 export(PackedScene) var cardScene
 
 func playerIndexToNode(playerIndex):
@@ -67,6 +68,16 @@ func fill_cards(enabled):
 		cardInstance.selfValue = cards[i]
 		$Background/HandBox.add_child(cardInstance)
 		cardInstance.setCanSelect(enabled)
+
+func wanmo_checker(hand):
+	var fix_array = []
+	for child in hand.size():
+		fix_array += [int(hand[child])]
+	fix_array.sort()
+	if fix_array == [1,7] or fix_array == [9,11]  or fix_array ==  [3,5]:
+		return true
+	else:
+		return false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -130,7 +141,31 @@ func _on_Card_pressed(card):
 			$Background/DrawPileBox/CardRotate/Card/darken.show()
 			message_timer()
 	else:
-		if !card.isDrawnCard and !card.isDiscard:
+		if !card.isDrawnCard and !card.isDiscard and wanmo:
+			if card.selected:
+				for child in $Background/HandBox.get_children():
+					if wanmo_hand.size() == 2 and child == wanmo_hand[0]:
+						child.deselect()
+					elif wanmo_hand.size() == 2 and  child == wanmo_hand[1]:
+						child.deselect()
+				if wanmo_hand.size() == 0:
+					wanmo = false
+					card.deselect()
+					wanmo_hand = []
+				else:
+					wanmo = false
+					wanmo_hand = []
+					for child in $Background/HandBox.get_children():
+						child.deselect()
+			elif card.canSelect:
+				card.select()
+				wanmo_hand += [card]
+				for child in $Background/HandBox.get_children():
+					if child.canSelect:
+						child.select()
+						wanmo_hand += [child]
+						break
+		elif !card.isDrawnCard and !card.isDiscard:
 			if card.selected:
 				card.deselect()
 			elif card.canSelect:
@@ -138,10 +173,17 @@ func _on_Card_pressed(card):
 				
 		# get list of selected cards
 		var selectedCards = get_selected_cards()
-
+		#var selectedCards = [StartVars.Cards.Triangle2, StartVars.Cards.Circle2]
+		
+		if selectedCards.size() == 2:
+			if wanmo_checker(selectedCards):
+				wanmo= true
+			else:
+				wanmo= false
 		# figure out which cards can be selected, returns null if no cards are selected
-		var selectableCards = StartVars.getValidCards(selectedCards)
-
+		var selectableCards = StartVars.getValidCards($Background/HandBox, selectedCards)
+		print("selectaben ",selectableCards)
+		print("wanmo ", wanmo_hand)
 		# loop through cards, if any do not exist within selectableCards, grey them out
 		if !card.isDrawnCard and !card.isDiscard:
 			for child in $Background/HandBox.get_children():
@@ -149,7 +191,6 @@ func _on_Card_pressed(card):
 					child.setCanSelect(true)
 				else:
 					child.setCanSelect(false)
-		#print("hi2")
 
 func fill_players_pausebutton():
 	# variables
