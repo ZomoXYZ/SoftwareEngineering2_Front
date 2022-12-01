@@ -69,12 +69,19 @@ func fill_cards(enabled):
 		$Background/HandBox.add_child(cardInstance)
 		cardInstance.setCanSelect(enabled)
 
+#checks if current selected cards are a WANMO compatible hand
 func wanmo_checker(hand):
 	var fix_array = []
+	#This fix array and sort basically just sorts the cards so I dont have to check 2 for each case
 	for child in hand.size():
 		fix_array += [int(hand[child])]
 	fix_array.sort()
+	
+	#First check normal pairings
 	if fix_array == [1,7] or fix_array == [9,11]  or fix_array ==  [3,5]:
+		return true
+	#This checks for free card placements
+	elif fix_array == [1,14] or fix_array == [7,13] or fix_array == [1,12] or fix_array == [7,12] or fix_array == [9,12] or fix_array == [11,12] or fix_array == [11,14] or fix_array ==  [3,12] or fix_array ==  [5,13] or fix_array ==  [5,12]:
 		return true
 	else:
 		return false
@@ -126,45 +133,55 @@ func get_selected_cards():
 			selectedCards.append(child.selfValue)
 	return selectedCards
 
+#This is for when a card is pressed, mainly validating a correct hand
 func _on_Card_pressed(card):
-	# if it's selected, the user can deselect
-	# if it's not selected, make sure it can be played first
-	
+	#first if we are in discard mode, then the selected card should be discarded
 	if discardMode:
 		print(LobbyConn.Cards)
 		LobbyConn.discard(card.selfValue)
+	#If we are in draw mode, then the selected card should be drawn
+	#NOTE: the draw pile is not a card instance so that is accounted or elsewhere not here
 	elif drawMode:
 		if card.isDiscard:
+			#LEave drawmode as we draw a card
 			drawMode = false
 			LobbyConn.draw(LobbyConn.DrawFrom.DISCARD)
 			$Background/DrawPileBox/CardRotate.setValue(15)
 			$Background/DrawPileBox/CardRotate/Card/darken.show()
 			message_timer()
+	#Else means we are selecting cards to play and must validate the hand
 	else:
+		#This first check just ensures they are selected something from their hand and not a different card on screen
+		#We also check if we are in wanmo mode, which means a wanmo can be played
 		if !card.isDrawnCard and !card.isDiscard and wanmo:
+			#First, if clicked card is already selected
 			if card.selected:
-				for child in $Background/HandBox.get_children():
-					if wanmo_hand.size() == 2 and child == wanmo_hand[0]:
-						child.deselect()
-					elif wanmo_hand.size() == 2 and  child == wanmo_hand[1]:
-						child.deselect()
+				#In wanmo mode, we check if a wanmo pair has been added, if not we loeave wanmo mode and deselect card
 				if wanmo_hand.size() == 0:
 					wanmo = false
 					card.deselect()
 					wanmo_hand = []
+				#If a pair has been selected, we deselected all cards selected to not allow the player to play an invaild 3-card hand
 				else:
 					wanmo = false
 					wanmo_hand = []
 					for child in $Background/HandBox.get_children():
 						child.deselect()
+			#If card clicked isnt selected and can be, this means it is a valid wanmo pair
 			elif card.canSelect:
+				#First we select it, but next we need to find its valid wanmo pair from hand
 				card.select()
-				wanmo_hand.append(card.selfValue)
+				wanmo_hand+=[card]
 				for child in $Background/HandBox.get_children():
-					if !child.selected and child.canSelect:
+					#This big if makes sure it finds an unselected matching pair, or a free card. 
+					#NOTE: Currently this doesnt validate if the free card should work, but it might already get validated elsewhere --I believe it does
+					#What i mean by validated elsewhere is that you cannot get to this point where the free card can be selected unless the free card is compatible with another card in hand
+					if !child.selected and child.canSelect and (card.selfValue == child.selfValue or child.selfValue == 12 or child.selfValue == 13 or child.selfValue == 14):
 						child.select()
-						wanmo_hand.append(child.selfValue)
+						wanmo_hand+=[child]
 						break
+		#Now address non wanmo cases
+		#If card is already selected we deselect it or vice versa
 		elif !card.isDrawnCard and !card.isDiscard:
 			if card.selected:
 				card.deselect()
@@ -175,6 +192,7 @@ func _on_Card_pressed(card):
 		var selectedCards = get_selected_cards()
 		#var selectedCards = [StartVars.Cards.Triangle2, StartVars.Cards.Circle2]
 		
+		#If selected cards is 2 then we check if its a valid wanmo hand
 		if selectedCards.size() == 2:
 			if wanmo_checker(selectedCards):
 				wanmo= true
@@ -280,29 +298,42 @@ func _on_Resume_pressed():
 	yield($AnimationPlayer, "animation_finished")
 	$Pause.hide()
 
+#This is when the play area is pressed to play cards
 func _on_Submit_pressed():
+	#Get selected cards
 	var selectedCards = get_selected_cards()
+	#First is the nonwanmo case
 	if !discardMode and !drawMode and !wanmo:
+		#If they attempt to play a lone card that isnt a free card we stop them
 		if selectedCards.size() == 1 and (selectedCards[0] != 12 and selectedCards[0] != 13 and selectedCards[0] != 14 ): #12, 13, 14
-			print("hrre")
 			fix_display_message2()
 			return
+		#Otherwise play the free card/hand
 		LobbyConn.play(selectedCards, null)
+	#If a wanmo is at play
 	elif !discardMode and !drawMode and wanmo:
+		#This fixes the get selected cards ti not include the wanmo pair
 		var fix_selectedCards = []
+		#If you somehow got here without playing 4 cards I just allow the play
 		if selectedCards.size() != 4:
 			wanmo = false
+			wanmo_hand = []
 			LobbyConn.play(selectedCards, null)
 		else:
-			#wanmo = false
+			#I have to fix wanmo hand here because I need it formatted differently to send to the server woth .play
+			#I dont do this before because it would break a lot of code I already have and im lazy
+			wanmo_hand = [wanmo_hand[0].selfValue, wanmo_hand[1].selfValue]
+			#Now we go through selkectedcards and only add cards to the fix_ if theyre not from the wanmo pairing
 			for child in selectedCards:
 				if child == wanmo_hand[0] or child == wanmo_hand[1]:
 					pass
 				else:
 					fix_selectedCards += [child]
 			print(fix_selectedCards,wanmo_hand)
+			#I was feeling aggressive here
 			print("loser",selectedCards)
 			LobbyConn.play(fix_selectedCards, wanmo_hand)
+			wanmo_hand = []
 
 #Returns to the lobby list or main menu if this is a multi or single player game
 func _on_Leave_pressed():
@@ -374,12 +405,12 @@ func _on_carddiscarded(card):
 		print("Player %s discarded %s" % [LobbyConn.Turn, StartVars.CardName(card)])
 
 func _on_cardsplayed(handType, cards, wanmoPair): # cards will be null if passed
-	#Temporary identifier for cards played to show animations
+	#I use the servers identifier to determine the correct animation to play
 	if cards == null || cards.size() == 0:
 		$CardPlayed/Pass.show()
 		$CardPlayed.show()
 		$AnimationPlayer.play("Pass")
-	elif wanmoPair != null and handType == LobbyConn.WANMO_BIG_PAIR:
+	elif wanmoPair != null and handType == LobbyConn.HandTypes.WANMO_BIG_PAIR:
 		$CardPlayed/P3C21/AnimCard.setValue(cards[0])
 		$CardPlayed/P3C21/AnimCard2.setValue(cards[1])
 		$CardPlayed/WANMO/AnimCard.setValue(wanmoPair[0])
@@ -387,7 +418,7 @@ func _on_cardsplayed(handType, cards, wanmoPair): # cards will be null if passed
 		$CardPlayed.show()
 		$CardPlayed/P3C21.show()
 		$AnimationPlayer.play("P3C2-1")
-	elif wanmoPair != null and handType == LobbyConn.WANMO_DOUBLE_SHAPE_PAIR:
+	elif wanmoPair != null and handType == LobbyConn.HandTypes.WANMO_DOUBLE_SHAPE_PAIR:
 		$CardPlayed/P3C22/AnimCard.setValue(cards[0])
 		$CardPlayed/P3C22/AnimCard2.setValue(cards[1])
 		$CardPlayed/WANMO/AnimCard.setValue(wanmoPair[0])
@@ -395,49 +426,49 @@ func _on_cardsplayed(handType, cards, wanmoPair): # cards will be null if passed
 		$CardPlayed.show()
 		$CardPlayed/P3C22.show()
 		$AnimationPlayer.play("P3C2-2")
-	elif handType == LobbyConn.SINGLEFREE:
+	elif handType == LobbyConn.HandTypes.SINGLEFREE:
 		$CardPlayed/FreeCard1/AnimCard.setValue(cards[0])
 		$CardPlayed.show()
 		$CardPlayed/FreeCard1.show()
 		$AnimationPlayer.play("FreeCard1")
-	elif handType == LobbyConn.PAIR:
+	elif handType == LobbyConn.HandTypes.PAIR:
 		$CardPlayed/P1C2/AnimCard.setValue(cards[0])
 		$CardPlayed/P1C2/AnimCard2.setValue(cards[1])
 		$CardPlayed.show()
 		$CardPlayed/P1C2.show()
 		$AnimationPlayer.play("P1C2")
-	elif handType == LobbyConn.PAIR_INVERTED:
+	elif handType == LobbyConn.HandTypes.PAIR_INVERTED:
 		$CardPlayed/P2C2/AnimCard.setValue(cards[0])
 		$CardPlayed/P2C2/AnimCard2.setValue(cards[1])
 		$CardPlayed.show()
 		$CardPlayed/P2C2.show()
 		$AnimationPlayer.play("P2C2")
-	elif handType == LobbyConn.BIG_PAIR:
+	elif handType == LobbyConn.HandTypes.BIG_PAIR:
 		$CardPlayed/P3C21/AnimCard.setValue(cards[0])
 		$CardPlayed/P3C21/AnimCard2.setValue(cards[1])
 		$CardPlayed.show()
 		$CardPlayed/P3C21.show()
 		$AnimationPlayer.play("P3C2-1")
-	elif handType == LobbyConn.DOUBLE_SHAPE_PAIR:
+	elif handType == LobbyConn.HandTypes.DOUBLE_SHAPE_PAIR:
 		$CardPlayed/P3C22/AnimCard.setValue(cards[0])
 		$CardPlayed/P3C22/AnimCard2.setValue(cards[1])
 		$CardPlayed.show()
 		$CardPlayed/P3C22.show()
 		$AnimationPlayer.play("P3C2-2")
-	elif handType == LobbyConn.DOUBLE_FREE:
+	elif handType == LobbyConn.HandTypes.DOUBLE_FREE:
 		$CardPlayed/FreeCard2/AnimCard.setValue(cards[0])
 		$CardPlayed/FreeCard2/AnimCard2.setValue(cards[1])
 		$CardPlayed.show()
 		$CardPlayed/FreeCard2.show()
 		$AnimationPlayer.play("FreeCard2")
-	elif handType == LobbyConn.TRIPLE_FREE:
+	elif handType == LobbyConn.HandTypes.TRIPLE_FREE:
 		$CardPlayed/FreeCard3/AnimCard.setValue(cards[0])
 		$CardPlayed/FreeCard3/AnimCard2.setValue(cards[1])
 		$CardPlayed/FreeCard3/AnimCard3.setValue(cards[2])
 		$CardPlayed.show()
 		$CardPlayed/FreeCard3.show()
 		$AnimationPlayer.play("FreeCard3")
-	elif handType == LobbyConn.QUAD_FREE:
+	elif handType == LobbyConn.HandTypes.QUAD_FREE:
 		$CardPlayed/FreeCard4/AnimCard.setValue(cards[0])
 		$CardPlayed/FreeCard4/AnimCard2.setValue(cards[1])
 		$CardPlayed/FreeCard4/AnimCard3.setValue(cards[2])
