@@ -361,7 +361,7 @@ func _on_carddiscarded(card):
 
 func _on_cardsplayed(handType, cards, wanmoPair): # cards will be null if passed
 	#Temporary identifier for cards played to show animations
-	if cards.size() == 0:
+	if cards == null || cards.size() == 0:
 		$CardPlayed/Pass.show()
 		$CardPlayed.show()
 		$AnimationPlayer.play("Pass")
@@ -389,24 +389,15 @@ func _on_cardsplayed(handType, cards, wanmoPair): # cards will be null if passed
 		$CardPlayed.show()
 		$CardPlayed/P3C21.show()
 		$AnimationPlayer.play("P3C2-1")
-	
 
 	fill_cards(false)
 
-	# temp print
-	var cardStr = []
-	for card in cards:
-		cardStr.append(StartVars.CardName(card))
-	cardStr = StartVars.godot_sucks_join_array(cardStr, ", ")
-
-	
 	if LobbyConn.isMyTurn():
 		# temp print
-		print("I played %s" % cardStr)
 		message_timer()
 	else:
 		# temp print
-		print("Player %s played %s" % [LobbyConn.Turn, cardStr])
+		pass
 
 func _on_turnended(cards): # cards automatically drawn
 	# temp print
