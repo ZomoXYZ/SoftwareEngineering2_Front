@@ -3083,6 +3083,7 @@ margin_right = 240.0
 custom_styles/panel = SubResource( 11 )
 
 [node name="FreeCard1" type="Panel" parent="CardPlayed"]
+visible = false
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -3112,6 +3113,7 @@ custom_fonts/font = SubResource( 23 )
 text = "1 Point"
 
 [node name="FreeCard2" type="Panel" parent="CardPlayed"]
+visible = false
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -3151,6 +3153,7 @@ custom_fonts/font = SubResource( 23 )
 text = "2 Points"
 
 [node name="FreeCard3" type="Panel" parent="CardPlayed"]
+visible = false
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -3200,6 +3203,7 @@ custom_fonts/font = SubResource( 23 )
 text = "3 Points"
 
 [node name="FreeCard4" type="Panel" parent="CardPlayed"]
+visible = false
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -3259,6 +3263,7 @@ custom_fonts/font = SubResource( 23 )
 text = "4 Points"
 
 [node name="P1C2" type="Panel" parent="CardPlayed"]
+visible = false
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -3299,6 +3304,7 @@ custom_fonts/font = SubResource( 23 )
 text = "1 Point"
 
 [node name="P2C2" type="Panel" parent="CardPlayed"]
+visible = false
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -3339,6 +3345,7 @@ custom_fonts/font = SubResource( 23 )
 text = "2 Points"
 
 [node name="P3C21" type="Panel" parent="CardPlayed"]
+visible = false
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -3369,7 +3376,7 @@ anim = true
 margin_left = 135.0
 margin_top = -159.0
 margin_right = 231.001
-margin_bottom = 17.0005
+margin_bottom = 17.0004
 rect_pivot_offset = Vector2( 70, 70 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -3386,6 +3393,7 @@ custom_fonts/font = SubResource( 23 )
 text = "3 Points"
 
 [node name="P3C22" type="Panel" parent="CardPlayed"]
+visible = false
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -3433,6 +3441,7 @@ custom_fonts/font = SubResource( 23 )
 text = "3 Points"
 
 [node name="WANMO" type="Panel" parent="CardPlayed"]
+visible = false
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -3504,6 +3513,7 @@ custom_fonts/font = SubResource( 23 )
 text = "Mo"
 
 [node name="Pass" type="Panel" parent="CardPlayed"]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
