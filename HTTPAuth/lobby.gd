@@ -122,7 +122,7 @@ func play(cards, wanmoPair):
 			"cards": cards
 		}
 		if wanmoPair != null:
-			cardsJson["wanmoPair"] = wanmoPair
+			cardsJson["wanmo"] = wanmoPair
 		send("play %s" % JSON.print(cardsJson))
 
 
