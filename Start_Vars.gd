@@ -271,8 +271,8 @@ func getValidCards(hand, cards):
 			print(validArray)
 			validArray = array_fixer(validArray)
 			return validArray
-		elif cards == []:
-			return []
+		elif x == [12,12] or x == [12,13] or x == [12,14] or x == [13,13] or x == [13,14] or x == [14,14]:
+			return [12,13,14]
 		else:
 			return []
 			

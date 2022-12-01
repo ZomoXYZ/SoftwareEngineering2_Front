@@ -303,10 +303,15 @@ func _on_Submit_pressed():
 	#Get selected cards
 	var selectedCards = get_selected_cards()
 	#First is the nonwanmo case
+	if selectedCards.size() == 3:
+		for child in selectedCards:
+			if child != 12 or child != 13 or child != 14:
+				message_timer2("Invaild hand, try another!")
+				break
 	if !discardMode and !drawMode and !wanmo:
 		#If they attempt to play a lone card that isnt a free card we stop them
 		if selectedCards.size() == 1 and (selectedCards[0] != 12 and selectedCards[0] != 13 and selectedCards[0] != 14 ): #12, 13, 14
-			fix_display_message2()
+			message_timer2()
 			return
 		#Otherwise play the free card/hand
 		LobbyConn.play(selectedCards, null)
@@ -477,10 +482,6 @@ func _on_cardsplayed(handType, cards, wanmoPair): # cards will be null if passed
 			$CardPlayed.show()
 			$CardPlayed/FreeCard4.show()
 			$AnimationPlayer.play("FreeCard4")
-		_:
-			$CardPlayed/Pass.show()
-			$CardPlayed.show()
-			$AnimationPlayer.play("Pass")
 
 	fill_cards(false)
 	if LobbyConn.isMyTurn():
@@ -520,6 +521,12 @@ func message_timer():
 	yield(get_tree().create_timer(10),"timeout")
 	fix_display_message()
 
+func message_timer2(message = ""):
+	fix_display_message2(false, message)
+	yield(get_tree().create_timer(5),"timeout")
+	fix_display_message2(true)
+	
+
 #This displays a predetermined message in the play area
 func fix_display_message(override = false):
 	#display guide text in play area
@@ -542,6 +549,8 @@ func fix_display_message2(override = false, message = ""):
 	#Override removes the text without checking current mode
 	elif override:
 		$Background/DisplayMessage2.text = ""
+	elif message != "":
+		$Background/DisplayMessage2.text = message
 	else:
 		$Background/DisplayMessage2.text = "You can't play just one card! Play nothing to pass your turn."
 
