@@ -148,8 +148,9 @@ func _on_Card_pressed(card):
 			drawMode = false
 			LobbyConn.draw(LobbyConn.DrawFrom.DISCARD)
 			$Background/DrawPileBox/CardRotate.setValue(15)
-			$Background/DrawPileBox/CardRotate/Card/darken.show()
-			message_timer()
+			$Background/DrawPileBox/CardRotate/Card/darken.show
+			if LobbyConn.isMyTurn():
+				message_timer()
 	#Else means we are selecting cards to play and must validate the hand
 	else:
 		#This first check just ensures they are selected something from their hand and not a different card on screen
@@ -575,4 +576,5 @@ func _on_DrawPile_pressed():
 		drawMode = false
 		LobbyConn.draw(LobbyConn.DrawFrom.DECK)
 		$Background/DrawPileBox/CardRotate/Card/darken.show()
-		message_timer()
+		if LobbyConn.isMyTurn():
+			message_timer()
