@@ -322,8 +322,6 @@ func _on_Submit_pressed():
 		LobbyConn.play(selectedCards, null)
 	#If a wanmo is at play
 	elif !discardMode and !drawMode and wanmo:
-		#This fixes the get selected cards ti not include the wanmo pair
-		var fix_selectedCards = []
 		#If you somehow got here without playing 4 cards I just allow the play
 		if selectedCards.size() != 4:
 			wanmo = false
@@ -332,17 +330,14 @@ func _on_Submit_pressed():
 		else:
 			#I have to fix wanmo hand here because I need it formatted differently to send to the server woth .play
 			#I dont do this before because it would break a lot of code I already have and im lazy
+			print("Wanmo hand: ", wanmo_hand)
 			wanmo_hand = [wanmo_hand[0].selfValue, wanmo_hand[1].selfValue]
-			#Now we go through selkectedcards and only add cards to the fix_ if theyre not from the wanmo pairing
-			for child in selectedCards:
-				if child == wanmo_hand[0] or child == wanmo_hand[1]:
-					pass
-				else:
-					fix_selectedCards += [child]
-			print(fix_selectedCards,wanmo_hand)
+			#Removes the wanmo cards from the slected cards
+			selectedCards.erase(wanmo_hand[0])
+			selectedCards.erase(wanmo_hand[1])
 			#I was feeling aggressive here
 			print("loser",selectedCards)
-			LobbyConn.play(fix_selectedCards, wanmo_hand)
+			LobbyConn.play(selectedCards, wanmo_hand)
 			wanmo_hand = []
 
 #Returns to the lobby list or main menu if this is a multi or single player game
