@@ -11,6 +11,7 @@ var PictureList = null
 
 var GotMeta = false
 
+signal user_updated()
 signal got_meta()
 
 func asObj():
@@ -39,6 +40,7 @@ func getUserData():
 
 	return jsonResult.result
 
+# doesnt send to server
 func setUserData(data):
 	assert(data.has('name') && data.name.has('adjective') && data.name.has('noun') && data.has('picture'))
 	
@@ -56,8 +58,24 @@ func setUserData(data):
 	file.open("user://userdata.dat", File.WRITE)
 	file.store_string(content)
 	file.close()
+	
+	emit_signal("user_updated")
+
+# sends to server
+func updateUserData(data):
+	assert(data.has('name') && data.name.has('adjective') && data.name.has('noun') && data.has('picture'))
+	Request.createRequest(self, "_on_update_userdata", "/self", HTTPClient.METHOD_POST, data)
+	
+func _on_update_userdata(result, response_code, _headers, bodyString):
+	var response = Request.parseResponse(result, response_code, bodyString)
+	if response[0] != Request.Status.Online:
+		return
+	
+	setUserData(response[1])
 
 func setUserAdj(adj):
+	if typeof(adj) == TYPE_STRING:
+		adj = int(adj)
 	setUserData({
 		"name": {
 			"adjective": adj,
@@ -67,6 +85,8 @@ func setUserAdj(adj):
 	})
 
 func setUserNoun(noun):
+	if typeof(noun) == TYPE_STRING:
+		noun = int(noun)
 	setUserData({
 		"name": {
 			"adjective": PlayerNameAdjective,
@@ -76,6 +96,8 @@ func setUserNoun(noun):
 	})
 
 func setUserPic(pic):
+	if typeof(pic) == TYPE_STRING:
+		pic = int(pic)
 	setUserData({
 		"name": {
 			"adjective": PlayerNameAdjective,
@@ -106,16 +128,13 @@ func _on_meta_names(result, response_code, _headers, bodyString):
 	print(NameNounList)
 
 	# if playerName is not set or is invalid, set it to a random name
-	var updateData = {}
+	print(PlayerNameAdjective, " ", typeof(PlayerNameAdjective), " ", typeof(NameAdjectiveList.keys()[0]))
 	if PlayerNameAdjective == -1 || !NameAdjectiveList.has(str(PlayerNameAdjective)):
 		var num = randi() % NameAdjectiveList.size()
-		updateData.name.adjectiive = NameAdjectiveList.keys()[num]
+		setUserAdj(NameAdjectiveList.keys()[num])
 	if PlayerNameNoun == -1 || !NameNounList.has(str(PlayerNameNoun)):
 		var num = randi() % NameNounList.size()
-		updateData.name.noun = NameNounList.keys()[num]
-
-	if updateData.size() > 0:
-		setUserData(updateData)
+		setUserNoun(NameNounList.keys()[num])
 	
 	# TODO check for pictures
 	if NameAdjectiveList != null && NameNounList != null:# && PictureList != null:

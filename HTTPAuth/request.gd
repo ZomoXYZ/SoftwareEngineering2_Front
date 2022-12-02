@@ -98,7 +98,7 @@ func authorizeSession(force = false):
 	
 	if !shouldCheck:
 		print("Checking too quick")
-		if token != "" && UserData.PlayerNameAdjective != -1 && UserData.PlayerNameNoun != -1 && UserData.PlayerPicture != -1:
+		if online:
 			print("known online")
 			set_online()
 			return

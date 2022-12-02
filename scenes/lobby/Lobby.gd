@@ -73,7 +73,8 @@ func fill_players():
 	for i in 4:
 		var current = $Background/PlayerList.get_child(i)
 		if i < len(players):
-			current.text = "%s %s" % [players[i]['name']['adjective'], players[i]['name']['noun']]
+			#current.text = "%s %s" % [players[i]['name']['adjective'], players[i]['name']['noun']]
+			current.text = "%s\n%s" % [UserData.getAdjective(players[i]['name']['adjective']), UserData.getNoun(players[i]['name']['noun'])]
 			current.get_node("PlayerIcon").show()
 			if i == 0:
 				current.add_stylebox_override("normal", button_red)

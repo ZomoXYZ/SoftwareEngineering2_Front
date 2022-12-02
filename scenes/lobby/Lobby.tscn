@@ -384,6 +384,7 @@ custom_styles/normal = ExtResource( 3 )
 text = "Player 
 1 "
 align = 2
+autowrap = true
 
 [node name="PlayerIcon" type="Sprite" parent="Background/PlayerList/Player1"]
 position = Vector2( 70, 48 )
@@ -399,6 +400,7 @@ custom_fonts/font = ExtResource( 10 )
 custom_styles/normal = ExtResource( 5 )
 text = "Player 2 "
 align = 2
+autowrap = true
 
 [node name="PlayerIcon" type="Sprite" parent="Background/PlayerList/Player2"]
 position = Vector2( 70, 48 )
@@ -415,6 +417,7 @@ custom_styles/normal = ExtResource( 5 )
 text = "Adjective 
 Noun "
 align = 2
+autowrap = true
 
 [node name="PlayerIcon" type="Sprite" parent="Background/PlayerList/Player3"]
 position = Vector2( 70, 48 )
@@ -430,6 +433,7 @@ custom_fonts/font = ExtResource( 10 )
 custom_styles/normal = ExtResource( 5 )
 text = "Player 4 "
 align = 2
+autowrap = true
 
 [node name="PlayerIcon" type="Sprite" parent="Background/PlayerList/Player4"]
 position = Vector2( 70, 48 )

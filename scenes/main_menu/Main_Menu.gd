@@ -7,6 +7,7 @@ export(PackedScene) var ellipseScene
 func _ready():
 	Request.connect("user_online", self, "_on_user_online")
 	Request.connect("user_offline", self, "_on_user_offline")
+	UserData.connect("user_updated", self, "_on_user_updated")
 	var fixpos = Vector2(93,297)
 	var fixsiz = Vector2(0,14)
 	Request.authorizeSession()
@@ -94,16 +95,19 @@ func _on_user_offline():
 	$CanvasLayer/ButtonContainer/Multiplayer.set_disabled(true)
 
 func _on_Adjective_pressed():
-	var rand = randi() % 80 + 10
-	UserData.setUserAdj(rand)
-	$Background/ConfigMenu/Adjective.text = "%s" %rand
+	var rand = randi() % UserData.NameAdjectiveList.size()
+	UserData.setUserAdj(UserData.NameAdjectiveList.keys()[rand])
+
 
 
 func _on_Noun_pressed():
-	var rand = randi() % 80 + 10
-	UserData.setUserNoun(rand)
-	$Background/ConfigMenu/Noun.text = "%s" %rand
+	var rand = randi() % UserData.NameNounList.size()
+	UserData.setUserNoun(UserData.NameNounList.keys()[rand])
 
+
+func _on_user_updated():
+	$Background/ConfigMenu/Noun.text = "%s" %UserData.getMyNoun()
+	$Background/ConfigMenu/Adjective.text = "%s" %UserData.getMyAdjective()
 
 func _on_Config_pressed():
 	print("hello %s %s aka %s %s" % [UserData.PlayerNameAdjective, UserData.PlayerNameNoun, UserData.getAdjective(UserData.PlayerNameAdjective), UserData.getNoun(UserData.PlayerNameNoun)])

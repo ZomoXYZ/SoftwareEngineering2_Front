@@ -235,7 +235,7 @@ func fill_players_pausebutton():
 	for i in 4:
 		var current = $Pause/PlayerList.get_child(i)
 		if i < len(players):
-			current.text = "%s %s" % [players[i]['name']['adjective'], players[i]['name']['noun']]
+			current.text = "%s\n%s" % [UserData.getAdjective(players[i]['name']['adjective']), UserData.getNoun(players[i]['name']['noun'])]
 			current.get_node("PlayerIcon").show()
 			if i == 0:
 				current.add_stylebox_override("normal", button_red)
@@ -261,7 +261,7 @@ func fill_players_gameturn(beforeTurns=false):
 		var current = playerIndexToNode(i)
 		$Pause.hide()
 		if i < len(players):
-			current.get_node("Name").text = "%s %s" % [players[i]['name']['adjective'], players[i]['name']['noun']]
+			current.get_node("Name").text = "%s %s" % [UserData.getAdjective(players[i]['name']['adjective']), UserData.getNoun(players[i]['name']['noun'])]
 			if beforeTurns:
 				current.get_node("Score").text = "%s" %00
 			else:
