@@ -146,6 +146,7 @@ func _on_get_userdata(result, response_code, _headers, bodyString):
 	var playerData = response[1]
 	UserData.setUserData(playerData)
 	UserData.ID = playerData.id
+	print("Welcome, %s %s (%s)" % [UserData.getMyAdjective(), UserData.getMyNoun(), UserData.ID])
 	set_online()
 
 func set_online():
