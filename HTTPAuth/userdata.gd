@@ -5,6 +5,14 @@ var PlayerNameAdjective = -1
 var PlayerNameNoun = -1
 var PlayerPicture = -1
 
+var NameAdjectiveList = null
+var NameNounList = null
+var PictureList = null
+
+var GotMeta = false
+
+signal got_meta()
+
 func asObj():
 	return objFrom(PlayerNameAdjective, PlayerNameNoun, PlayerPicture)
 
@@ -30,7 +38,6 @@ func getUserData():
 	PlayerPicture = jsonResult.result.picture
 
 	return jsonResult.result
-
 
 func setUserData(data):
 	assert(data.has('name') && data.name.has('adjective') && data.name.has('noun') && data.has('picture'))
@@ -76,3 +83,83 @@ func setUserPic(pic):
 		},
 		"picture": pic
 	})
+
+
+func retrieveMetaData():
+	if NameAdjectiveList == null || NameNounList == null:
+		Request.createRequest(self, "_on_meta_names", "/meta/names")
+	if PictureList == null:
+		# TODO get pictures
+		# Request.createRequest(self, "_on_meta_pictures", "/meta/pictures")
+		pass
+
+func _on_meta_names(result, response_code, _headers, bodyString):
+	var response = Request.parseResponse(result, response_code, bodyString)
+	if response[0] != Request.Status.Online || response[1] == null:
+		return
+	var data = response[1]
+	NameAdjectiveList = data.adjectives
+	NameNounList = data.nouns
+
+	print("got the lists")
+	print(NameAdjectiveList)
+	print(NameNounList)
+
+	# if playerName is not set or is invalid, set it to a random name
+	var updateData = {}
+	if PlayerNameAdjective == -1 || !NameAdjectiveList.has(str(PlayerNameAdjective)):
+		var num = randi() % NameAdjectiveList.size()
+		updateData.name.adjectiive = NameAdjectiveList.keys()[num]
+	if PlayerNameNoun == -1 || !NameNounList.has(str(PlayerNameNoun)):
+		var num = randi() % NameNounList.size()
+		updateData.name.noun = NameNounList.keys()[num]
+
+	if updateData.size() > 0:
+		setUserData(updateData)
+	
+	# TODO check for pictures
+	if NameAdjectiveList != null && NameNounList != null:# && PictureList != null:
+		GotMeta = true
+		emit_signal("got_meta")
+
+func _on_meta_pictures(result, response_code, _headers, bodyString):
+	var response = Request.parseResponse(result, response_code, bodyString)
+	if response[0] != Request.Status.Online || response[1] == null:
+		return
+	var data = response[1]
+	PictureList = data.pictures
+
+	print("got the list")
+	print(PictureList)
+
+	if PlayerPicture == -1 || !PictureList.has(str(PlayerPicture)):
+		var num = randi() % PictureList.size()
+		setUserPic(PictureList.keys()[num])
+	
+	if NameAdjectiveList != null && NameNounList != null && PictureList != null:
+		GotMeta = true
+		emit_signal("got_meta")
+
+func getAdjective(num):
+	if NameAdjectiveList == null || !NameAdjectiveList.has(str(num)):
+		return ""
+	return NameAdjectiveList[str(num)]
+
+func getNoun(num):
+	if NameNounList == null || !NameNounList.has(str(num)):
+		return ""
+	return NameNounList[str(num)]
+
+func getPicture(num):
+	if PictureList == null || !PictureList.has(str(num)):
+		return ""
+	return PictureList[str(num)]
+
+func getMyAdjective():
+	return getAdjective(PlayerNameAdjective)
+
+func getMyNoun():
+	return getNoun(PlayerNameNoun)
+
+func getMyPicture():
+	return getPicture(PlayerPicture)

@@ -4,6 +4,8 @@ var token = ""
 var lastChecked = -1
 var online = false
 
+var onlineWaitingMeta = false
+
 signal user_online()
 signal user_offline()
 
@@ -124,6 +126,8 @@ func _on_get_token(result, response_code, _headers, bodyString):
 		
 	token = response[1].token
 	print("Got token: %s" % token)
+
+	UserData.retrieveMetaData()
 	
 	var playerData = UserData.getUserData()
 	if playerData == null:
@@ -140,7 +144,15 @@ func _on_get_userdata(result, response_code, _headers, bodyString):
 	var playerData = response[1]
 	UserData.setUserData(playerData)
 	UserData.ID = playerData.id
-	set_online()
+	if UserData.GotMeta:
+		set_online()
+	else:
+		onlineWaitingMeta = true
+
+func _on_got_meta():
+	if onlineWaitingMeta:
+		onlineWaitingMeta = false
+		set_online()
 
 func set_online():
 	online = true

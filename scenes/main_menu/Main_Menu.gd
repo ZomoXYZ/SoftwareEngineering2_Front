@@ -82,8 +82,9 @@ func _on_EffectTimer_timeout():
 
 func _on_user_online():
 	print("User Online, Name: %s %s, Picture: %s" % [UserData.PlayerNameAdjective, UserData.PlayerNameNoun, UserData.PlayerPicture])
-	$Background/ConfigMenu/Adjective.text = "%s" % UserData.PlayerNameAdjective
-	$Background/ConfigMenu/Noun.text = "%s" % UserData.PlayerNameNoun
+	print("User Online, Name: %s %s, Picture: %s" % [UserData.getMyAdjective(), UserData.getMyNoun(), UserData.PlayerPicture])
+	$Background/ConfigMenu/Adjective.text = UserData.getMyAdjective()
+	$Background/ConfigMenu/Noun.text = UserData.getMyNoun()
 	$Background/ConfigMenu/Picture.text = "%s" % UserData.PlayerPicture
 	#min and max are &%$(%$&(
 	$CanvasLayer/ButtonContainer/Multiplayer.set_disabled(false)
@@ -105,6 +106,7 @@ func _on_Noun_pressed():
 
 
 func _on_Config_pressed():
+	print("hello %s %s aka %s %s" % [UserData.PlayerNameAdjective, UserData.PlayerNameNoun, UserData.getAdjective(UserData.PlayerNameAdjective), UserData.getNoun(UserData.PlayerNameNoun)])
 	if $CanvasLayer.is_visible():
 		$CanvasLayer.hide()
 		$Logo.hide()
