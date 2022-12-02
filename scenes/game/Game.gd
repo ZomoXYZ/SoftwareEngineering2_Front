@@ -553,8 +553,10 @@ func fix_display_message(override = false):
 	#Override removes the text without checking current mode
 	elif override:
 		$Background/PlayArea/DisplayMessage.text = ""
-	else:
+	elif LobbyConn.isMyTurn():
 		$Background/PlayArea/DisplayMessage.text = "\nPick your cards, then click here to play them!"
+	else:
+		$Background/PlayArea/DisplayMessage.text = ""
 
 func fix_display_message2(override = false, message = ""):
 	#display guide text in play area
