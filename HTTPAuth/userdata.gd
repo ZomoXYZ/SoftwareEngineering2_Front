@@ -74,7 +74,7 @@ func _on_update_userdata(result, response_code, _headers, bodyString):
 	setUserData(response[1])
 
 func setUserAdj(adj):
-	setUserData({
+	updateUserData({
 		"name": {
 			"adjective": int(adj),
 			"noun": PlayerNameNoun
@@ -83,7 +83,7 @@ func setUserAdj(adj):
 	})
 
 func setUserNoun(noun):
-	setUserData({
+	updateUserData({
 		"name": {
 			"adjective": PlayerNameAdjective,
 			"noun": int(noun)
@@ -92,7 +92,7 @@ func setUserNoun(noun):
 	})
 
 func setUserPic(pic):
-	setUserData({
+	updateUserData({
 		"name": {
 			"adjective": PlayerNameAdjective,
 			"noun": PlayerNameNoun
