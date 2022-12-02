@@ -514,11 +514,18 @@ func _on_gameover(player): # playerID winner
 	$StartGame.hide()
 	$CardPlayed.hide()
 	$GameOver/Lose.hide()
+	$GameOver/Win.hide()
 	$GameOver.show()
-	$GameOver/Win.show()
-	$AnimationPlayer.play("Win_Screen")
-	yield($AnimationPlayer, "animation_finished")
-	get_tree().change_scene("res://scenes/lobby/Lobby.tscn")
+	if LobbyConn.ID == player:
+		$GameOver/Win.show()
+		$AnimationPlayer.play("Win_Screen")
+		yield($AnimationPlayer, "animation_finished")
+		get_tree().change_scene("res://scenes/lobby/Lobby.tscn")
+	else:
+		$GameOver/Lose.show()
+		$AnimationPlayer.play("Lose_Screen")
+		yield($AnimationPlayer, "animation_finished")
+		get_tree().change_scene("res://scenes/lobby/Lobby.tscn")
 
 func _on_playersupdated():
 	fill_players_gameturn()
