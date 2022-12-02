@@ -4,12 +4,13 @@ var token = ""
 var lastChecked = -1
 var online = false
 
-var onlineWaitingMeta = false
-
 signal user_online()
 signal user_offline()
 
 enum Status {Online, Offline, Error}
+
+func _ready():
+	UserData.connect("got_meta", self, "_on_got_meta")
 
 # createRequest(self, "_on_request_complete")
 func createRequest(root, callback, endpoint, method = HTTPClient.METHOD_GET, body = null, noToken = false):
@@ -128,7 +129,8 @@ func _on_get_token(result, response_code, _headers, bodyString):
 	print("Got token: %s" % token)
 
 	UserData.retrieveMetaData()
-	
+
+func _on_got_meta():
 	var playerData = UserData.getUserData()
 	if playerData == null:
 		createRequest(self, "_on_get_userdata", "/self")
@@ -144,15 +146,7 @@ func _on_get_userdata(result, response_code, _headers, bodyString):
 	var playerData = response[1]
 	UserData.setUserData(playerData)
 	UserData.ID = playerData.id
-	if UserData.GotMeta:
-		set_online()
-	else:
-		onlineWaitingMeta = true
-
-func _on_got_meta():
-	if onlineWaitingMeta:
-		onlineWaitingMeta = false
-		set_online()
+	set_online()
 
 func set_online():
 	online = true
