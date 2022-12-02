@@ -131,7 +131,7 @@ func _on_get_token(result, response_code, _headers, bodyString):
 	UserData.retrieveMetaData()
 
 func _on_got_meta():
-	var playerData = UserData.getUserData()
+	var playerData = UserData.loadUserData()
 	if playerData == null:
 		createRequest(self, "_on_get_userdata", "/self")
 	else:
@@ -146,7 +146,7 @@ func _on_get_userdata(result, response_code, _headers, bodyString):
 	var playerData = response[1]
 	UserData.setUserData(playerData)
 	UserData.ID = playerData.id
-	print("Welcome, %s %s (%s)" % [UserData.getMyAdjective(), UserData.getMyNoun(), UserData.ID])
+	print("Welcome, %s %s %s (%s)" % [UserData.getMyAdjective(), UserData.getMyNoun(), UserData.getMyPicture(), UserData.ID])
 	set_online()
 
 func set_online():

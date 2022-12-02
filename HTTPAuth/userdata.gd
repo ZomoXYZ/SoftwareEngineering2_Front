@@ -7,6 +7,7 @@ var PlayerPicture = -1
 
 var NameAdjectiveList = null
 var NameNounList = null
+# PictureList is just an array of keys
 var PictureList = null
 
 var GotMeta = false
@@ -25,7 +26,7 @@ func objFrom(adjective, noun, picture):
 	obj["picture"] = picture
 	return obj
 
-func getUserData():
+func loadUserData():
 	var file = File.new()
 	file.open("user://userdata.dat", File.READ)
 	var content = file.get_as_text()
@@ -37,7 +38,7 @@ func getUserData():
 	PlayerNameAdjective = int(jsonResult.result.name.adjective)
 	PlayerNameNoun = int(jsonResult.result.name.noun)
 	PlayerPicture = int(jsonResult.result.picture)
-
+	
 	return jsonResult.result
 
 # doesnt send to server
@@ -116,36 +117,19 @@ func _on_meta_names(result, response_code, _headers, bodyString):
 	NameAdjectiveList = data.adjectives
 	NameNounList = data.nouns
 
-	print("got the lists")
-	print(NameAdjectiveList)
-	print(NameNounList)
-
-	# if playerName is not set or is invalid, set it to a random name
-	print(PlayerNameAdjective, " ", typeof(PlayerNameAdjective), " ", typeof(NameAdjectiveList.keys()[0]))
-	if PlayerNameAdjective == -1 || !NameAdjectiveList.has(str(PlayerNameAdjective)):
-		setUserAdj(StartVars.randomIntKey(NameAdjectiveList, PlayerNameAdjective))
-	if PlayerNameNoun == -1 || !NameNounList.has(str(PlayerNameNoun)):
-		setUserNoun(StartVars.randomIntKey(NameNounList, PlayerNameNoun))
-
-	# TODO get pictures
-	# Request.createRequest(self, "_on_meta_pictures", "/meta/pictures")
-	# TODO remove folllowing lines
-	GotMeta = true
-	emit_signal("got_meta")
+	Request.createRequest(self, "_on_meta_pictures", "/meta/pictures")
 
 func _on_meta_pictures(result, response_code, _headers, bodyString):
 	var response = Request.parseResponse(result, response_code, bodyString)
 	if response[0] != Request.Status.Online || response[1] == null:
 		return
 	var data = response[1]
-	PictureList = data.pictures
+	PictureList = data.avatars
 
-	print("got the list")
+	print("got the lists")
+	print(NameAdjectiveList)
+	print(NameNounList)
 	print(PictureList)
-
-	if PlayerPicture == -1 || !PictureList.has(str(PlayerPicture)):
-		var num = randi() % PictureList.size()
-		setUserPic(PictureList.keys()[num])
 	
 	GotMeta = true
 	emit_signal("got_meta")
@@ -161,9 +145,9 @@ func getNoun(num):
 	return NameNounList[str(num)]
 
 func getPicture(num):
-	if PictureList == null || !PictureList.has(str(num)):
+	if PictureList == null || !(num in PictureList):
 		return ""
-	return PictureList[str(num)]
+	return "/meta/picture/%s" % num
 
 func getMyAdjective():
 	return getAdjective(PlayerNameAdjective)
