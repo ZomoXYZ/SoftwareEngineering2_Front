@@ -13,6 +13,16 @@ func godot_sucks_join_array(array, delimiter = " "):
 	
 	return complete
 
+func randomKey(dictionary, ignore = ""):
+	while true:
+		var rand = randi() % UserData.NameAdjectiveList.size()
+		var key = dictionary.keys()[rand]
+		if str(key) != str(ignore):
+			return key
+
+func randomIntKey(dictionary, ignore = ""):
+	return int(randomKey(dictionary, ignore))
+
 enum Cards {
 	Circle1 = 0
 	Circle2 #1

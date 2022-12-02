@@ -124,11 +124,9 @@ func _on_meta_names(result, response_code, _headers, bodyString):
 	# if playerName is not set or is invalid, set it to a random name
 	print(PlayerNameAdjective, " ", typeof(PlayerNameAdjective), " ", typeof(NameAdjectiveList.keys()[0]))
 	if PlayerNameAdjective == -1 || !NameAdjectiveList.has(str(PlayerNameAdjective)):
-		var num = randi() % NameAdjectiveList.size()
-		setUserAdj(NameAdjectiveList.keys()[num])
+		setUserAdj(StartVars.randomIntKey(NameAdjectiveList, PlayerNameAdjective))
 	if PlayerNameNoun == -1 || !NameNounList.has(str(PlayerNameNoun)):
-		var num = randi() % NameNounList.size()
-		setUserNoun(NameNounList.keys()[num])
+		setUserNoun(StartVars.randomIntKey(NameNounList, PlayerNameNoun))
 	
 	# TODO check for pictures
 	if NameAdjectiveList != null && NameNounList != null:# && PictureList != null:

@@ -95,15 +95,10 @@ func _on_user_offline():
 	$CanvasLayer/ButtonContainer/Multiplayer.set_disabled(true)
 
 func _on_Adjective_pressed():
-	var rand = randi() % UserData.NameAdjectiveList.size()
-	UserData.setUserAdj(UserData.NameAdjectiveList.keys()[rand])
-
-
+	UserData.setUserAdj(StartVars.randomIntKey(UserData.NameAdjectiveList, UserData.PlayerNameAdjective))
 
 func _on_Noun_pressed():
-	var rand = randi() % UserData.NameNounList.size()
-	UserData.setUserNoun(UserData.NameNounList.keys()[rand])
-
+	UserData.setUserNoun(StartVars.randomIntKey(UserData.NameNounList, UserData.PlayerNameNoun))
 
 func _on_user_updated():
 	$Background/ConfigMenu/Noun.text = "%s" %UserData.getMyNoun()
