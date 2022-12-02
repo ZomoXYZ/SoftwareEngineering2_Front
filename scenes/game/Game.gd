@@ -284,6 +284,8 @@ func fill_players_gameturn(beforeTurns=false):
 		else:
 			current = playerIndexToNode(LobbyConn.getTurnIndex())
 		
+		var text = current.get_node("Name").text
+		$TurnTransition/Box/PlayerInfo.text = "%s's Turn" %text
 		current.get_node("Highlight").add_stylebox_override("panel", button_red)
 		current.add_stylebox_override("panel", button_green)
 	
