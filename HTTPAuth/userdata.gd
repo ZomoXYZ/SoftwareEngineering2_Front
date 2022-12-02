@@ -34,9 +34,9 @@ func getUserData():
 	if jsonResult.error != OK || !jsonResult.result.has('name') || !jsonResult.result.name.has('adjective') || !jsonResult.result.name.has('noun') || !jsonResult.result.has('picture'):
 		return null
 	
-	PlayerNameAdjective = jsonResult.result.name.adjective
-	PlayerNameNoun = jsonResult.result.name.noun
-	PlayerPicture = jsonResult.result.picture
+	PlayerNameAdjective = int(jsonResult.result.name.adjective)
+	PlayerNameNoun = int(jsonResult.result.name.noun)
+	PlayerPicture = int(jsonResult.result.picture)
 
 	return jsonResult.result
 
@@ -44,9 +44,9 @@ func getUserData():
 func setUserData(data):
 	assert(data.has('name') && data.name.has('adjective') && data.name.has('noun') && data.has('picture'))
 	
-	PlayerNameAdjective = data.name.adjective
-	PlayerNameNoun = data.name.noun
-	PlayerPicture = data.picture
+	PlayerNameAdjective = int(data.name.adjective)
+	PlayerNameNoun = int(data.name.noun)
+	PlayerPicture = int(data.picture)
 
 	var name = data.name
 	var picture = data.picture
@@ -74,36 +74,30 @@ func _on_update_userdata(result, response_code, _headers, bodyString):
 	setUserData(response[1])
 
 func setUserAdj(adj):
-	if typeof(adj) == TYPE_STRING:
-		adj = int(adj)
 	setUserData({
 		"name": {
-			"adjective": adj,
+			"adjective": int(adj),
 			"noun": PlayerNameNoun
 		},
 		"picture": PlayerPicture
 	})
 
 func setUserNoun(noun):
-	if typeof(noun) == TYPE_STRING:
-		noun = int(noun)
 	setUserData({
 		"name": {
 			"adjective": PlayerNameAdjective,
-			"noun": noun
+			"noun": int(noun)
 		},
 		"picture": PlayerPicture
 	})
 
 func setUserPic(pic):
-	if typeof(pic) == TYPE_STRING:
-		pic = int(pic)
 	setUserData({
 		"name": {
 			"adjective": PlayerNameAdjective,
 			"noun": PlayerNameNoun
 		},
-		"picture": pic
+		"picture": int(pic)
 	})
 
 
