@@ -102,12 +102,11 @@ func setUserPic(pic):
 
 
 func retrieveMetaData():
-	if NameAdjectiveList == null || NameNounList == null:
-		Request.createRequest(self, "_on_meta_names", "/meta/names")
-	if PictureList == null:
-		# TODO get pictures
-		# Request.createRequest(self, "_on_meta_pictures", "/meta/pictures")
-		pass
+	if NameAdjectiveList != null && NameNounList != null && PictureList != null:
+		GotMeta = true
+		emit_signal("got_meta")
+
+	Request.createRequest(self, "_on_meta_names", "/meta/names")
 
 func _on_meta_names(result, response_code, _headers, bodyString):
 	var response = Request.parseResponse(result, response_code, bodyString)
@@ -127,11 +126,12 @@ func _on_meta_names(result, response_code, _headers, bodyString):
 		setUserAdj(StartVars.randomIntKey(NameAdjectiveList, PlayerNameAdjective))
 	if PlayerNameNoun == -1 || !NameNounList.has(str(PlayerNameNoun)):
 		setUserNoun(StartVars.randomIntKey(NameNounList, PlayerNameNoun))
-	
-	# TODO check for pictures
-	if NameAdjectiveList != null && NameNounList != null:# && PictureList != null:
-		GotMeta = true
-		emit_signal("got_meta")
+
+	# TODO get pictures
+	# Request.createRequest(self, "_on_meta_pictures", "/meta/pictures")
+	# TODO remove folllowing lines
+	GotMeta = true
+	emit_signal("got_meta")
 
 func _on_meta_pictures(result, response_code, _headers, bodyString):
 	var response = Request.parseResponse(result, response_code, bodyString)
@@ -147,9 +147,8 @@ func _on_meta_pictures(result, response_code, _headers, bodyString):
 		var num = randi() % PictureList.size()
 		setUserPic(PictureList.keys()[num])
 	
-	if NameAdjectiveList != null && NameNounList != null && PictureList != null:
-		GotMeta = true
-		emit_signal("got_meta")
+	GotMeta = true
+	emit_signal("got_meta")
 
 func getAdjective(num):
 	if NameAdjectiveList == null || !NameAdjectiveList.has(str(num)):
