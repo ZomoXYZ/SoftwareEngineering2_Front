@@ -516,7 +516,7 @@ func _on_gameover(player): # playerID winner
 	$GameOver/Lose.hide()
 	$GameOver/Win.hide()
 	$GameOver.show()
-	if LobbyConn.ID == player:
+	if UserData.ID == player:
 		$GameOver/Win.show()
 		$AnimationPlayer.play("Win_Screen")
 		yield($AnimationPlayer, "animation_finished")
