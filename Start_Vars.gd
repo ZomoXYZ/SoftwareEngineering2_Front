@@ -94,7 +94,6 @@ var validHands = {
 		Cards.CircleInverted2,
 		Cards.Free,
 		Cards.CircleFree,
-		Cards.TriangleFree,
 	],
 		
 	"Triangle1": [
@@ -139,7 +138,6 @@ var validHands = {
 		Cards.TriangleCircle2,
 		Cards.TriangleInverted2,
 		Cards.Free,
-		Cards.CircleFree,
 		Cards.TriangleFree,
 	],
 		

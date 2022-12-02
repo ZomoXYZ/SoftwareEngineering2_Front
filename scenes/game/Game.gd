@@ -10,6 +10,7 @@ var discardMode = false
 var drawMode = false
 var wanmo = false
 var wanmo_hand = []
+var combining = false
 export(PackedScene) var cardScene
 
 func playerIndexToNode(playerIndex):
@@ -200,6 +201,10 @@ func _on_Card_pressed(card):
 				wanmo= false
 		# figure out which cards can be selected, returns null if no cards are selected
 		var selectableCards = StartVars.getValidCards($Background/HandBox, selectedCards)
+		
+		if combining:
+			selectableCards = StartVars.getValidCards($Background/HandBox, selectedCards)
+			
 		print("selectaben ",selectableCards)
 		print("wanmo ", wanmo_hand)
 		# loop through cards, if any do not exist within selectableCards, grey them out
@@ -411,77 +416,81 @@ func _on_carddiscarded(card):
 
 func _on_cardsplayed(handType, cards, wanmoPair): # cards will be null if passed
 	#I use the servers identifier to determine the correct animation to play
-	match (handType):
-		LobbyConn.HandTypes.PASS:
-			$CardPlayed/Pass.show()
-			$CardPlayed.show()
-			$AnimationPlayer.play("Pass")
-		LobbyConn.HandTypes.WANMO_BIG_PAIR:
-			$CardPlayed/P3C21/AnimCard.setValue(cards[0])
-			$CardPlayed/P3C21/AnimCard2.setValue(cards[1])
-			$CardPlayed/WANMO/AnimCard.setValue(wanmoPair[0])
-			$CardPlayed/WANMO/AnimCard2.setValue(wanmoPair[1])
-			$CardPlayed.show()
-			$CardPlayed/P3C21.show()
-			$AnimationPlayer.play("P3C2-1")
-		LobbyConn.HandTypes.WANMO_DOUBLE_SHAPE_PAIR:
-			$CardPlayed/P3C22/AnimCard.setValue(cards[0])
-			$CardPlayed/P3C22/AnimCard2.setValue(cards[1])
-			$CardPlayed/WANMO/AnimCard.setValue(wanmoPair[0])
-			$CardPlayed/WANMO/AnimCard2.setValue(wanmoPair[1])
-			$CardPlayed.show()
-			$CardPlayed/P3C22.show()
-			$AnimationPlayer.play("P3C2-2")
-		LobbyConn.HandTypes.SINGLEFREE:
-			$CardPlayed/FreeCard1/AnimCard.setValue(cards[0])
-			$CardPlayed.show()
-			$CardPlayed/FreeCard1.show()
-			$AnimationPlayer.play("FreeCard1")
-		LobbyConn.HandTypes.PAIR:
-			$CardPlayed/P1C2/AnimCard.setValue(cards[0])
-			$CardPlayed/P1C2/AnimCard2.setValue(cards[1])
-			$CardPlayed.show()
-			$CardPlayed/P1C2.show()
-			$AnimationPlayer.play("P1C2")
-		LobbyConn.HandTypes.PAIR_INVERTED:
-			$CardPlayed/P2C2/AnimCard.setValue(cards[0])
-			$CardPlayed/P2C2/AnimCard2.setValue(cards[1])
-			$CardPlayed.show()
-			$CardPlayed/P2C2.show()
-			$AnimationPlayer.play("P2C2")
-		LobbyConn.HandTypes.BIG_PAIR:
-			$CardPlayed/P3C21/AnimCard.setValue(cards[0])
-			$CardPlayed/P3C21/AnimCard2.setValue(cards[1])
-			$CardPlayed.show()
-			$CardPlayed/P3C21.show()
-			$AnimationPlayer.play("P3C2-1")
-		LobbyConn.HandTypes.DOUBLE_SHAPE_PAIR:
-			$CardPlayed/P3C22/AnimCard.setValue(cards[0])
-			$CardPlayed/P3C22/AnimCard2.setValue(cards[1])
-			$CardPlayed.show()
-			$CardPlayed/P3C22.show()
-			$AnimationPlayer.play("P3C2-2")
-		LobbyConn.HandTypes.DOUBLE_FREE:
-			$CardPlayed/FreeCard2/AnimCard.setValue(cards[0])
-			$CardPlayed/FreeCard2/AnimCard2.setValue(cards[1])
-			$CardPlayed.show()
-			$CardPlayed/FreeCard2.show()
-			$AnimationPlayer.play("FreeCard2")
-		LobbyConn.HandTypes.TRIPLE_FREE:
-			$CardPlayed/FreeCard3/AnimCard.setValue(cards[0])
-			$CardPlayed/FreeCard3/AnimCard2.setValue(cards[1])
-			$CardPlayed/FreeCard3/AnimCard3.setValue(cards[2])
-			$CardPlayed.show()
-			$CardPlayed/FreeCard3.show()
-			$AnimationPlayer.play("FreeCard3")
-		LobbyConn.HandTypes.QUAD_FREE:
-			$CardPlayed/FreeCard4/AnimCard.setValue(cards[0])
-			$CardPlayed/FreeCard4/AnimCard2.setValue(cards[1])
-			$CardPlayed/FreeCard4/AnimCard3.setValue(cards[2])
-			$CardPlayed/FreeCard4/AnimCard4.setValue(cards[2])
-			$CardPlayed.show()
-			$CardPlayed/FreeCard4.show()
-			$AnimationPlayer.play("FreeCard4")
+	print("on card played ", handType, typeof(handType), typeof(LobbyConn.HandTypes.PASS))
+
+	if handType == LobbyConn.HandTypes.PASS:
+		print("Pass animation")
+		$CardPlayed/Pass.show()
+		$CardPlayed.show()
+		$AnimationPlayer.play("Pass")
+	elif handType == LobbyConn.HandTypes.PAIR:
+		print("This should be a pair")
+		$CardPlayed/P1C2/AnimCard.setValue(cards[0])
+		$CardPlayed/P1C2/AnimCard2.setValue(cards[1])
+		$CardPlayed.show()
+		$CardPlayed/P1C2.show()
+		$AnimationPlayer.play("P1C2")
+	elif handType == LobbyConn.HandTypes.PAIR_INVERTED:
+		print("This should be a pair inverted")
+		$CardPlayed/P2C2/AnimCard.setValue(cards[0])
+		$CardPlayed/P2C2/AnimCard2.setValue(cards[1])
+		$CardPlayed.show()
+		$CardPlayed/P2C2.show()
+		$AnimationPlayer.play("P2C2")
+	elif handType == LobbyConn.HandTypes.WANMO_BIG_PAIR:
+		$CardPlayed/P3C21/AnimCard.setValue(cards[0])
+		$CardPlayed/P3C21/AnimCard2.setValue(cards[1])
+		$CardPlayed/WANMO/AnimCard.setValue(wanmoPair[0])
+		$CardPlayed/WANMO/AnimCard2.setValue(wanmoPair[1])
+		$CardPlayed.show()
+		$CardPlayed/P3C21.show()
+		$AnimationPlayer.play("P3C2-1")
+	elif handType == LobbyConn.HandTypes.WANMO_DOUBLE_SHAPE_PAIR:
+		$CardPlayed/P3C22/AnimCard.setValue(cards[0])
+		$CardPlayed/P3C22/AnimCard2.setValue(cards[1])
+		$CardPlayed/WANMO/AnimCard.setValue(wanmoPair[0])
+		$CardPlayed/WANMO/AnimCard2.setValue(wanmoPair[1])
+		$CardPlayed.show()
+		$CardPlayed/P3C22.show()
+		$AnimationPlayer.play("P3C2-2")
+	elif handType == LobbyConn.HandTypes.SINGLEFREE:
+		$CardPlayed/FreeCard1/AnimCard.setValue(cards[0])
+		$CardPlayed.show()
+		$CardPlayed/FreeCard1.show()
+		$AnimationPlayer.play("FreeCard1")
+	elif handType == LobbyConn.HandTypes.BIG_PAIR:
+		$CardPlayed/P3C21/AnimCard.setValue(cards[0])
+		$CardPlayed/P3C21/AnimCard2.setValue(cards[1])
+		$CardPlayed.show()
+		$CardPlayed/P3C21.show()
+		$AnimationPlayer.play("P3C2-1")
+	elif handType == LobbyConn.HandTypes.DOUBLE_SHAPE_PAIR:
+		$CardPlayed/P3C22/AnimCard.setValue(cards[0])
+		$CardPlayed/P3C22/AnimCard2.setValue(cards[1])
+		$CardPlayed.show()
+		$CardPlayed/P3C22.show()
+		$AnimationPlayer.play("P3C2-2")
+	elif handType == LobbyConn.HandTypes.DOUBLE_FREE:
+		$CardPlayed/FreeCard2/AnimCard.setValue(cards[0])
+		$CardPlayed/FreeCard2/AnimCard2.setValue(cards[1])
+		$CardPlayed.show()
+		$CardPlayed/FreeCard2.show()
+		$AnimationPlayer.play("FreeCard2")
+	elif handType == LobbyConn.HandTypes.TRIPLE_FREE:
+		$CardPlayed/FreeCard3/AnimCard.setValue(cards[0])
+		$CardPlayed/FreeCard3/AnimCard2.setValue(cards[1])
+		$CardPlayed/FreeCard3/AnimCard3.setValue(cards[2])
+		$CardPlayed.show()
+		$CardPlayed/FreeCard3.show()
+		$AnimationPlayer.play("FreeCard3")
+	elif handType == LobbyConn.HandTypes.QUAD_FREE:
+		$CardPlayed/FreeCard4/AnimCard.setValue(cards[0])
+		$CardPlayed/FreeCard4/AnimCard2.setValue(cards[1])
+		$CardPlayed/FreeCard4/AnimCard3.setValue(cards[2])
+		$CardPlayed/FreeCard4/AnimCard4.setValue(cards[2])
+		$CardPlayed.show()
+		$CardPlayed/FreeCard4.show()
+		$AnimationPlayer.play("FreeCard4")
 
 	fill_cards(false)
 	if LobbyConn.isMyTurn():
