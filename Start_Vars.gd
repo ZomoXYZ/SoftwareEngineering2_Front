@@ -266,7 +266,7 @@ func getValidCards(hand, cards):
 		var x = custom_array_sort(cards[0],cards[1])
 		var validArray = []
 		
-		if x == [1,7] or x == [9,11]  or x ==  [3,5]:
+		if x == [1,7] or x == [9,11]  or x ==  [3,5] or x == [1,14] or x == [7,13] or x == [1,12] or x == [7,12] or x == [9,12] or x == [11,12] or x == [11,14] or x ==  [3,12] or x ==  [5,13] or x ==  [5,12]:
 			print("help")
 			for child in hand.get_children():
 				print("got here")
