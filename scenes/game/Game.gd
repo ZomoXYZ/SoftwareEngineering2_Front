@@ -438,6 +438,7 @@ func _on_cardsplayed(handType, cards, wanmoPair): # cards will be null if passed
 		$CardPlayed/P2C2.show()
 		$AnimationPlayer.play("P2C2")
 	elif handType == LobbyConn.HandTypes.WANMO_BIG_PAIR:
+		wanmo = true
 		$CardPlayed/P3C21/AnimCard.setValue(cards[0])
 		$CardPlayed/P3C21/AnimCard2.setValue(cards[1])
 		$CardPlayed/WANMO/AnimCard.setValue(wanmoPair[0])
@@ -446,6 +447,7 @@ func _on_cardsplayed(handType, cards, wanmoPair): # cards will be null if passed
 		$CardPlayed/P3C21.show()
 		$AnimationPlayer.play("P3C2-1")
 	elif handType == LobbyConn.HandTypes.WANMO_DOUBLE_SHAPE_PAIR:
+		wanmo = true
 		$CardPlayed/P3C22/AnimCard.setValue(cards[0])
 		$CardPlayed/P3C22/AnimCard2.setValue(cards[1])
 		$CardPlayed/WANMO/AnimCard.setValue(wanmoPair[0])
