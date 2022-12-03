@@ -178,7 +178,7 @@ func _on_Card_pressed(card):
 					#This big if makes sure it finds an unselected matching pair, or a free card. 
 					#NOTE: Currently this doesnt validate if the free card should work, but it might already get validated elsewhere --I believe it does
 					#What i mean by validated elsewhere is that you cannot get to this point where the free card can be selected unless the free card is compatible with another card in hand
-					if !child.selected and child.canSelect and (card.selfValue == child.selfValue or child.selfValue == 12 or child.selfValue == 13 or child.selfValue == 14):
+					if !child.selected and child.canSelect and (card.selfValue == child.selfValue or StartVars.freeTypeCheck(child.selfValue, card.selfValue)):
 						child.select()
 						wanmo_hand+=[child]
 						break

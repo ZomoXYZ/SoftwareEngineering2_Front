@@ -203,15 +203,19 @@ func _ready():
 
 func freeTypeCheck(free,card):
 	if free.selfValue == Cards.TriangleFree:
-		if card.selfValue == Cards.Triangle1 or card.selfValue == Cards.Triangle2 or card.selfValue == Cards.TriangleInverted1 or card.selfValue == Cards.TriangleInverted2:
+		if card.selfValue == Cards.Triangle1 or card.selfValue == Cards.Triangle2 or card.selfValue == Cards.TriangleInverted1 or card.selfValue == Cards.TriangleInverted2 or card.selfValue == Cards.Free:
 			return true
 		else:
 			return false
+	elif free.selfValue == Cards.CircleFree:
+		if card.selfValue == Cards.Circle1 or card.selfValue == Cards.Circle2 or card.selfValue == Cards.CircleInverted1 or card.selfValue == Cards.CircleInverted2 or card.selfValue == Cards.Free:
+			return true
+		else:
+			return false
+	elif free.selfValue == Cards.Free:
+		return true
 	else:
-		if card.selfValue == Cards.Circle1 or card.selfValue == Cards.Circle2 or card.selfValue == Cards.CircleInverted1 or card.selfValue == Cards.CircleInverted2:
-			return true
-		else:
-			return false
+		return false
 
 
 func checkForFreePair(card1, card2):
