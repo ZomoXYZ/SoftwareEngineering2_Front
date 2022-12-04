@@ -98,7 +98,7 @@ func _on_Start_pressed():
 	if StartVars.singlePlayer:
 		LobbySP.start()
 	else:
-		LobbyConn.send("start")
+		LobbyConn.startGame()
 
 func _on_game_starting():
 	$StartGamePanel.show()

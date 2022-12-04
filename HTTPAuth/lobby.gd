@@ -5,6 +5,7 @@ var toPoll = false
 var Authorized = false
 
 var ID = ""
+var LOBBY_PASSWORD = ""
 var Code = ""
 var Host = ""
 var Players = []
@@ -81,15 +82,16 @@ func _ready():
 	client.connect("data_received", self, "_data")
 	client.connect("server_close_request", self, "_server_close_request")
 
-func _process(delta):
+func _process(_delta):
 	if toPoll:
 		client.poll()
 
-func join(lobbyid):
+func join(lobbyid, password = ""):
 	# set variables
 	Authorized = false
 	resetVariables()
 	ID = lobbyid
+	LOBBY_PASSWORD = password
 
 	# try connecting
 	var err = client.connect_to_url(RequestEnv.WS_URL)
@@ -113,6 +115,10 @@ func draw(from):
 		
 func discard(card):
 	send("discard %s" % card)
+		
+func startGame():
+	if isHost():
+		send("start")
 		
 func setPassword(password):
 	if isHost():
@@ -254,7 +260,10 @@ func _server_close_request(code, reason):
 
 func command_authorized():
 	# authorized session, can join the lobby now
-	send("join %s" % ID)
+	if LOBBY_PASSWORD != "":
+		send("join %s %s" % [ID, LOBBY_PASSWORD])
+	else:
+		send("join %s" % ID)
 
 func command_unauthorized():
 	# bad authorization, abort
