@@ -5,6 +5,9 @@ extends Control
 # var a = 2
 # var b = "text"
 var current = 0
+var clickable = false
+var play = load("res://WanAndOnlyPlay.png")
+var stand = load("res://WanAndOnlyStand.png")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -30,8 +33,23 @@ func _on_ToMainMenu_pressed():
 
 
 func _on_Next_pressed():
+	print(current)
 	$Background/MiddleCover.get_child(current).hide()
 	current += 1
+	if current == 2:
+		clickable = true
+	else:
+		clickable = false
+		
 	if current == $Background/MiddleCover.get_children().size():
 		current = 0
 	$Background/MiddleCover.get_child(current).show()
+
+
+func _on_Button_button_down():
+	if clickable:
+		$Background/MiddleCover/Part3/WanAndOnlyStand.texture = play
+		clickable = false
+		yield(get_tree().create_timer(2),"timeout")
+		$Background/MiddleCover/Part3/WanAndOnlyStand.texture = stand
+		clickable = true

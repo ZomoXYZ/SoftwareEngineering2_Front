@@ -7,7 +7,7 @@
 [ext_resource path="res://assets/fonts/ComicNeue-Regular.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://scenes/credits/Credits.gd" type="Script" id=6]
 [ext_resource path="res://assets/styles/background.tres" type="StyleBox" id=7]
-[ext_resource path="res://scenes/card/Card.tscn" type="PackedScene" id=8]
+[ext_resource path="res://WanAndOnlyStand.png" type="Texture" id=8]
 [ext_resource path="res://assets/fonts/playerlist_font.tres" type="DynamicFont" id=9]
 
 [sub_resource type="DynamicFont" id=1]
@@ -185,9 +185,8 @@ text = "Main Menu"
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_top = 251.0
-margin_right = 480.0
-margin_bottom = 727.0
+margin_top = -175.5
+margin_bottom = 300.5
 custom_styles/panel = ExtResource( 7 )
 
 [node name="Part1" type="Panel" parent="Background/MiddleCover"]
@@ -234,22 +233,20 @@ text = "This is the WAN and Only, master of the cards, mascot of the game.
 
 
 
-TODO: DRAW WAN AND ONLY"
+"
 autowrap = true
 
-[node name="card5" parent="Background/MiddleCover/Part3" instance=ExtResource( 8 )]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-margin_left = 189.0
-margin_top = 212.0
-margin_right = 285.0
-margin_bottom = 312.0
-rect_min_size = Vector2( 96, 100 )
-rect_pivot_offset = Vector2( 70, 70 )
-size_flags_horizontal = 3
-size_flags_vertical = 3
-selfValue = 12
+[node name="WanAndOnlyStand" type="Sprite" parent="Background/MiddleCover/Part3"]
+position = Vector2( 243, 238 )
+scale = Vector2( 0.619141, 0.619141 )
+texture = ExtResource( 8 )
+
+[node name="Button" type="Button" parent="Background/MiddleCover/Part3"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 130.0
+margin_top = 157.0
+margin_right = 368.0
+margin_bottom = 419.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Leave_Transition = SubResource( 2 )
@@ -257,3 +254,4 @@ anims/RESET = SubResource( 3 )
 
 [connection signal="pressed" from="Background/Next" to="." method="_on_Next_pressed"]
 [connection signal="pressed" from="Background/ToMainMenu" to="." method="_on_ToMainMenu_pressed"]
+[connection signal="button_down" from="Background/MiddleCover/Part3/Button" to="." method="_on_Button_button_down"]
