@@ -437,8 +437,12 @@ func _on_cardsplayed(handType, cards, wanmoPair): # cards will be null if passed
 		$AnimationPlayer.play("P2C2")
 	elif handType == LobbyConn.HandTypes.WANMO_BIG_PAIR:
 		wanmo = true
-		$CardPlayed/P3C21/AnimCard.setValue(cards[0])
-		$CardPlayed/P3C21/AnimCard2.setValue(cards[1])
+		if (cards[0] == StartVars.Cards.TriangleCircle2 or cards[0] == StartVars.Cards.CircleTriangle2) or ( cards[1] == StartVars.Cards.TriangleInverted2 or cards[1] == StartVars.Cards.CircleInverted2):
+			$CardPlayed/P3C21/AnimCard.setValue(cards[0])
+			$CardPlayed/P3C21/AnimCard2.setValue(cards[1])
+		else:
+			$CardPlayed/P3C21/AnimCard.setValue(cards[1])
+			$CardPlayed/P3C21/AnimCard2.setValue(cards[0])
 		$CardPlayed/WANMO/AnimCard.setValue(wanmoPair[0])
 		$CardPlayed/WANMO/AnimCard2.setValue(wanmoPair[1])
 		$CardPlayed.show()
@@ -459,8 +463,12 @@ func _on_cardsplayed(handType, cards, wanmoPair): # cards will be null if passed
 		$CardPlayed/FreeCard1.show()
 		$AnimationPlayer.play("FreeCard1")
 	elif handType == LobbyConn.HandTypes.BIG_PAIR:
-		$CardPlayed/P3C21/AnimCard.setValue(cards[0])
-		$CardPlayed/P3C21/AnimCard2.setValue(cards[1])
+		if (cards[0] == StartVars.Cards.TriangleCircle2 or cards[0] == StartVars.Cards.CircleTriangle2) or ( cards[1] == StartVars.Cards.TriangleInverted2 or cards[1] == StartVars.Cards.CircleInverted2):
+			$CardPlayed/P3C21/AnimCard.setValue(cards[0])
+			$CardPlayed/P3C21/AnimCard2.setValue(cards[1])
+		else:
+			$CardPlayed/P3C21/AnimCard.setValue(cards[1])
+			$CardPlayed/P3C21/AnimCard2.setValue(cards[0])
 		$CardPlayed.show()
 		$CardPlayed/P3C21.show()
 		$AnimationPlayer.play("P3C2-1")
