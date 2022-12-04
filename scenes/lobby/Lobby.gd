@@ -8,6 +8,7 @@ var button_red = preload("res://assets/styles/button_red.tres")
 
 
 var animating = false
+var kicking = false
 
 func connect_signals():
 	if StartVars.singlePlayer:
@@ -35,6 +36,10 @@ func _ready():
 	$OutroPanel.hide()
 	$LobbyOptions/Panel/LineEdit.hide()
 	$LobbyOptions/Panel/BackForText.hide()
+	$Background/ButtonP2.hide()
+	$Background/ButtonP3.hide()
+	$Background/ButtonP4.hide()
+	$LobbyOptions/Panel/ButtonContainer/SetPassword.hide()
 	
 	if StartVars.singlePlayer or LobbyConn.isHost():
 		$Background/Panel/Start.show()
@@ -115,14 +120,28 @@ func _on_Leave_pressed():
 
 #Shows the options overlay menu
 func _on_Options_pressed():
-	if !animating:
+	if !animating and kicking:
+		#Hide into panel here in case the button gets pressed during the intro animation
+		$IntroPanel.hide()
+		#Standard animation procedure
+		$LobbyOptions.show()
+		kicking = false
+		$Background/BottomBar/Options.text = "Options"
+		$Background/BottomBar/Leave.show()
+		$Background/Panel/Start.show()
+		$AnimationPlayer.play("Options_Transition")
+		yield($AnimationPlayer, "animation_finished")
+		$Background/ButtonP2.hide()
+		$Background/ButtonP3.hide()
+		$Background/ButtonP4.hide()
+	elif !animating:
 		#Hide into panel here in case the button gets pressed during the intro animation
 		$IntroPanel.hide()
 		#Standard animation procedure
 		$LobbyOptions.show()
 		$AnimationPlayer.play("Options_Transition")
 		yield($AnimationPlayer, "animation_finished")
-
+		
 #Hides overlay when done with options menu
 func _on_BackToLobby_pressed():
 	if !animating:
@@ -164,7 +183,21 @@ func _on_SetPassword_pressed():
 
 
 func _on_KickPlayer_pressed():
-	pass # Replace with function body.
+	if !animating:
+		#Hide into panel here in case the button gets pressed during the intro animation
+		$IntroPanel.hide()
+		$Background/BottomBar/Leave.hide()
+		$Background/Panel/Start.hide()
+		kicking = true
+		#Standard animation procedure
+		$AnimationPlayer.play_backwards("Options_Transition")
+		yield($AnimationPlayer, "animation_finished")
+		$LobbyOptions.hide()
+		$Background/BottomBar/Options.text = "Cancel"
+		$Background/ButtonP2.show()
+		$Background/ButtonP3.show()
+		$Background/ButtonP4.show()
+		
 
 
 func _on_PointGoal_pressed():
@@ -180,8 +213,10 @@ func _on_PointGoal_pressed():
 
 
 func _on_LineEdit_text_entered(code):
+	var text = code
 	$LobbyOptions/Panel/LineEdit.hide()
 	$LobbyOptions/Panel/BackForText.hide()
+	LobbyConn.setPointGoal(int(code))
 	#Will need to check position to determine which textbox this is functioning as to send correct signal
 
 func _on_LineEdit_text_changed(new_text):
@@ -202,3 +237,21 @@ func _on_BackForText_pressed():
 	#This hides the textbox for clicking out
 	$LobbyOptions/Panel/LineEdit.hide()
 	$LobbyOptions/Panel/BackForText.hide()
+
+
+func _on_ButtonP2_pressed():
+	if LobbyConn.Players.size() >= 2:
+		LobbyConn.kickPlayer(LobbyConn.Players[1].id)
+		fill_players()
+
+
+func _on_ButtonP3_pressed():
+	if LobbyConn.Players.size() >= 3:
+		LobbyConn.kickPlayer(LobbyConn.Players[2].id)
+		fill_players()
+
+
+func _on_ButtonP4_pressed():
+	if LobbyConn.Players.size() >= 4:
+		LobbyConn.kickPlayer(LobbyConn.Players[3].id)
+		fill_players()

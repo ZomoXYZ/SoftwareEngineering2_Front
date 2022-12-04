@@ -506,6 +506,33 @@ text = "ID: 123456"
 align = 1
 valign = 1
 
+[node name="ButtonP2" type="Button" parent="Background"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -204.0
+margin_top = 244.0
+margin_right = 211.0
+margin_bottom = 373.0
+
+[node name="ButtonP3" type="Button" parent="Background"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -205.0
+margin_top = 375.0
+margin_right = 210.0
+margin_bottom = 504.0
+
+[node name="ButtonP4" type="Button" parent="Background"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -206.0
+margin_top = 502.0
+margin_right = 209.0
+margin_bottom = 631.0
+
 [node name="LobbyOptions" type="Panel" parent="."]
 visible = false
 anchor_right = 1.0
@@ -688,6 +715,9 @@ custom_styles/panel = SubResource( 8 )
 [connection signal="pressed" from="Background/BottomBar/Leave" to="." method="_on_Leave_pressed"]
 [connection signal="pressed" from="Background/BottomBar/Options" to="." method="_on_Options_pressed"]
 [connection signal="pressed" from="Background/Panel/Start" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="Background/ButtonP2" to="." method="_on_ButtonP2_pressed"]
+[connection signal="pressed" from="Background/ButtonP3" to="." method="_on_ButtonP3_pressed"]
+[connection signal="pressed" from="Background/ButtonP4" to="." method="_on_ButtonP4_pressed"]
 [connection signal="pressed" from="LobbyOptions/BottomBar/BackToLobby" to="." method="_on_BackToLobby_pressed"]
 [connection signal="pressed" from="LobbyOptions/Panel/ButtonContainer/SetPassword" to="." method="_on_SetPassword_pressed"]
 [connection signal="pressed" from="LobbyOptions/Panel/ButtonContainer/KickPlayer" to="." method="_on_KickPlayer_pressed"]

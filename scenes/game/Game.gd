@@ -91,7 +91,9 @@ func wanmo_checker(hand):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var fixpos = Vector2(-480,378)
+	var fixsiz2 = Vector2(480,853)
 	var fixsiz = Vector2(480,248)
+	$Background.set_size(fixsiz2)
 	$TurnTransition/Box.set_position(fixpos)
 	$TurnTransition/Box.set_size(fixsiz)
 	$CardPlayed.hide()
