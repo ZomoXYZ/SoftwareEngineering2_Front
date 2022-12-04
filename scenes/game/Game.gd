@@ -139,12 +139,14 @@ func get_selected_cards():
 func _on_Card_pressed(card):
 	#first if we are in discard mode, then the selected card should be discarded
 	if discardMode:
+		Input.vibrate_handheld(50)
 		print(LobbyConn.Cards)
 		LobbyConn.discard(card.selfValue)
 	#If we are in draw mode, then the selected card should be drawn
 	#NOTE: the draw pile is not a card instance so that is accounted or elsewhere not here
 	elif drawMode:
 		if card.isDiscard:
+			Input.vibrate_handheld(50)
 			#LEave drawmode as we draw a card
 			drawMode = false
 			LobbyConn.draw(LobbyConn.DrawFrom.DISCARD)
@@ -159,6 +161,7 @@ func _on_Card_pressed(card):
 		if !card.isDrawnCard and !card.isDiscard and wanmo:
 			#First, if clicked card is already selected
 			if card.selected:
+				Input.vibrate_handheld(50)
 				#In wanmo mode, we check if a wanmo pair has been added, if not we loeave wanmo mode and deselect card
 				if wanmo_hand.size() == 0:
 					wanmo = false
@@ -172,6 +175,7 @@ func _on_Card_pressed(card):
 						child.deselect()
 			#If card clicked isnt selected and can be, this means it is a valid wanmo pair
 			elif card.canSelect:
+				Input.vibrate_handheld(50)
 				#First we select it, but next we need to find its valid wanmo pair from hand
 				card.select()
 				wanmo_hand+=[card]
@@ -186,6 +190,7 @@ func _on_Card_pressed(card):
 		#Now address non wanmo cases
 		#If card is already selected we deselect it or vice versa
 		elif !card.isDrawnCard and !card.isDiscard:
+			Input.vibrate_handheld(50)
 			if card.selected:
 				card.deselect()
 			elif card.canSelect:
@@ -303,6 +308,7 @@ func fill_players_gameturn(beforeTurns=false):
 	
 #Pause shows pause overlay
 func _on_PauseButton_pressed():
+	Input.vibrate_handheld(50)
 	#The pause animation changes the opacity of the pause menu, but having no opacity is not the same as hiding because it would still be tangible
 	#So we have to show() first then play the animation
 	$Pause.show()
@@ -312,6 +318,7 @@ func _on_PauseButton_pressed():
 
 #Resume hides the pause again
 func _on_Resume_pressed():
+	Input.vibrate_handheld(50)
 	#Same as above but in reverse order, play the opacity change, then hide it so that buttons on main can be clicked
 	$AnimationPlayer.play_backwards("Pause_Transition")
 	yield($AnimationPlayer, "animation_finished")
@@ -332,10 +339,12 @@ func _on_Submit_pressed():
 		if selectedCards.size() == 1 and (selectedCards[0] != 12 and selectedCards[0] != 13 and selectedCards[0] != 14 ): #12, 13, 14
 			message_timer2()
 			return
+		Input.vibrate_handheld(50)
 		#Otherwise play the free card/hand
 		LobbyConn.play(selectedCards, null)
 	#If a wanmo is at play
 	elif !discardMode and !drawMode and wanmo:
+		Input.vibrate_handheld(50)
 		#If you somehow got here without playing 4 cards I just allow the play
 		if selectedCards.size() != 4:
 			wanmo = false
@@ -356,6 +365,7 @@ func _on_Submit_pressed():
 
 #Returns to the lobby list or main menu if this is a multi or single player game
 func _on_Leave_pressed():
+	Input.vibrate_handheld(50)
 	if StartVars.singlePlayer:
 		StartVars.singlePlayer = false
 		get_tree().change_scene("res://scenes/main_menu/Main_Menu.tscn")
@@ -595,6 +605,7 @@ func fix_display_message2(override = false, message = ""):
 func _on_DrawPile_pressed():
 	#If we are drawing, draw from deck and show drawn card
 	if drawMode:
+		Input.vibrate_handheld(50)
 		drawMode = false
 		LobbyConn.draw(LobbyConn.DrawFrom.DECK)
 		$Background/DrawPileBox/CardRotate/Card/darken.show()
