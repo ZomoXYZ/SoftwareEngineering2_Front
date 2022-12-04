@@ -2698,9 +2698,9 @@ margin_right = -20.0
 margin_bottom = -20.0
 
 [node name="Players" type="Label" parent="Background"]
-anchor_right = 1.0
-anchor_bottom = 0.395
-margin_bottom = 516.065
+anchor_right = 0.953
+anchor_bottom = 1.0
+margin_right = 22.56
 
 [node name="Player1" type="Panel" parent="Background/Players"]
 anchor_left = 0.5
@@ -3657,7 +3657,7 @@ anchor_right = 1.0
 anchor_bottom = 0.5
 margin_left = -480.0
 margin_top = 378.0
-margin_right = 2400.0
+margin_right = 3360.0
 margin_bottom = 626.0
 rect_min_size = Vector2( 400, 200 )
 rect_rotation = -360.0

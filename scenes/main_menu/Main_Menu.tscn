@@ -295,7 +295,7 @@ tracks/2/keys = {
 
 [sub_resource type="Curve2D" id=8]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 480, 0, 0, 0, 0, 0, 480, 856, 0, 0, 0, 0, 0, 856, 0, 0, 0, 0, 0, 0 )
+"points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 480, 0, 0, 0, 0, 0, 477, 1437, 0, 0, 0, 0, 242, 1439, 0, 0, 0, 0, 3, 1437, 0, 0, 0, 0, 0, 0 )
 }
 
 [node name="MainMenu" type="Node"]
@@ -342,13 +342,7 @@ custom_styles/hover = ExtResource( 5 )
 custom_styles/pressed = ExtResource( 4 )
 custom_styles/normal = ExtResource( 5 )
 
-[node name="Picture" type="Label" parent="Background/ConfigMenu"]
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_top = -181.5
-margin_right = 40.0
-margin_bottom = -125.5
-custom_fonts/font = ExtResource( 3 )
+[node name="Picture" type="Sprite" parent="Background/ConfigMenu"]
 
 [node name="pfps" type="VBoxContainer" parent="Background/ConfigMenu"]
 anchor_right = 1.0
@@ -396,6 +390,7 @@ custom_styles/normal = ExtResource( 5 )
 text = "C"
 
 [node name="ShapeHolder" type="Label" parent="."]
+visible = false
 margin_right = 40.0
 margin_bottom = 14.0
 
@@ -431,21 +426,22 @@ rotation = 1.5708
 shape = SubResource( 4 )
 
 [node name="CanvasLayer" type="Label" parent="."]
-margin_bottom = 14.0
-
-[node name="ButtonContainer" type="VBoxContainer" parent="CanvasLayer"]
-anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_right = -480.0
+margin_bottom = -839.0
+
+[node name="ButtonContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchor_bottom = 60.599
 margin_left = 93.0
 margin_top = 279.0
 margin_right = 388.0
-margin_bottom = 718.001
+margin_bottom = -130.385
 custom_constants/separation = 30
 
 [node name="Singleplayer" type="Button" parent="CanvasLayer/ButtonContainer"]
 margin_right = 295.0
-margin_bottom = 89.0
+margin_bottom = 87.0
 size_flags_vertical = 3
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_fonts/font = ExtResource( 3 )
@@ -456,9 +452,9 @@ custom_styles/normal = ExtResource( 5 )
 text = "Singleplayer"
 
 [node name="Multiplayer" type="Button" parent="CanvasLayer/ButtonContainer"]
-margin_top = 119.0
+margin_top = 117.0
 margin_right = 295.0
-margin_bottom = 208.0
+margin_bottom = 204.0
 rect_pivot_offset = Vector2( -620, 737.5 )
 size_flags_vertical = 3
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
@@ -471,9 +467,9 @@ disabled = true
 text = "Multiplayer"
 
 [node name="Tutorial" type="Button" parent="CanvasLayer/ButtonContainer"]
-margin_top = 238.0
+margin_top = 234.0
 margin_right = 295.0
-margin_bottom = 327.0
+margin_bottom = 321.0
 size_flags_vertical = 3
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_fonts/font = ExtResource( 3 )
@@ -484,9 +480,9 @@ custom_styles/normal = ExtResource( 5 )
 text = "Tutorial"
 
 [node name="Credits" type="Button" parent="CanvasLayer/ButtonContainer"]
-margin_top = 357.0
+margin_top = 351.0
 margin_right = 295.0
-margin_bottom = 446.0
+margin_bottom = 439.0
 size_flags_vertical = 3
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_fonts/font = ExtResource( 3 )
@@ -504,7 +500,6 @@ anims/SinglePlayer_Transition = SubResource( 9 )
 anims/Unused_Transition = SubResource( 7 )
 
 [node name="ShapePath" type="Path2D" parent="."]
-visible = false
 curve = SubResource( 8 )
 
 [node name="ShapeSpawnLocation" type="PathFollow2D" parent="ShapePath"]

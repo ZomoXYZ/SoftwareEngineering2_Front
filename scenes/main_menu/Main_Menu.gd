@@ -86,7 +86,7 @@ func _on_user_online():
 	print("User Online, Name: %s %s, Picture: %s" % [UserData.getMyAdjective(), UserData.getMyNoun(), UserData.PlayerPicture])
 	$Background/ConfigMenu/Adjective.text = UserData.getMyAdjective()
 	$Background/ConfigMenu/Noun.text = UserData.getMyNoun()
-	$Background/ConfigMenu/Picture.text = "%s" % UserData.PlayerPicture
+	$Background/ConfigMenu/Picture.texture = load(UserData.getMyPicture())
 	#min and max are &%$(%$&(
 	$CanvasLayer/ButtonContainer/Multiplayer.set_disabled(false)
 
