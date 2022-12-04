@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://assets/styles/background.tres" type="StyleBox" id=1]
 [ext_resource path="res://assets/styles/button_red.tres" type="StyleBox" id=2]
@@ -2263,6 +2263,18 @@ tracks/121/keys = {
 "points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
+tracks/122/type = "value"
+tracks/122/path = NodePath("Background:rect_position")
+tracks/122/interp = 1
+tracks/122/loop_wrap = true
+tracks/122/imported = false
+tracks/122/enabled = true
+tracks/122/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
 
 [sub_resource type="Animation" id=26]
 resource_name = "StartGame_Transition"
@@ -2547,6 +2559,22 @@ tracks/2/enabled = true
 tracks/2/keys = {
 "points": PoolRealArray( -360, -0.25, 0, 0.5, -79.9883, 0, -0.5, 149.5, 0.5, -60.5 ),
 "times": PoolRealArray( 0, 2.5 )
+}
+
+[sub_resource type="Animation" id=28]
+resource_name = "dummy"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Background:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ) ]
 }
 
 [sub_resource type="StyleBoxFlat" id=11]
@@ -3070,6 +3098,7 @@ anims/StartGame_Transition = SubResource( 26 )
 anims/TurnTransition = SubResource( 21 )
 anims/WANMO = SubResource( 22 )
 anims/Win_Screen = SubResource( 10 )
+anims/dummy = SubResource( 28 )
 
 [node name="CardPlayed" type="Panel" parent="."]
 visible = false

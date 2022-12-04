@@ -22,7 +22,8 @@ func playerIndexToNode(playerIndex):
 				break
 	else:
 		myIndex = 0
-	
+	if myIndex == null:
+		return null
 	if playerIndex == myIndex:
 		return $Background/Players.get_node("Player1")
 	elif playerIndex < myIndex:
@@ -547,7 +548,8 @@ func _on_gameover(player): # playerID winner
 		get_tree().change_scene("res://scenes/lobby/Lobby.tscn")
 
 func _on_playersupdated():
-	fill_players_gameturn()
+	$AnimationPlayer.play("dummy")
+	fill_players_gameturn(true)
 
 #This is an automatic message timer that waits before telling player the predet message. See fix_display_message()
 func message_timer():
