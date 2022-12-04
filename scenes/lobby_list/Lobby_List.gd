@@ -10,7 +10,7 @@ var remember = 100
 func _ready():
 	$Background/BackForText.hide()
 	LobbyConn.connect("joined_lobby", self, "_lobby_joined")
-	Request.createRequest(self, "_on_get_lobbylyst", "/lobbylist")
+	Request.createRequest(self, "_on_get_lobbylist", "/lobbylist")
 	#Standard animation procedure
 	$IntroPanel.show()
 	$AnimationPlayer.play("Intro_Transition")
@@ -26,6 +26,7 @@ func _ready():
 
 #Return to main menu
 func _on_To_Main_Menu_pressed():
+	Input.vibrate_handheld(50)
 	#Standard animation procedure
 	$OutroPanel.show()
 	$AnimationPlayer.play("Outro_Transition")
@@ -34,6 +35,7 @@ func _on_To_Main_Menu_pressed():
 
 #Goes to the lobby screen to create a lobby
 func _on_CreateLobby_pressed():
+	Input.vibrate_handheld(50)
 	if Request.token != "":
 		Request.createRequest(self, "_on_Lobby_created", "/lobby", HTTPClient.METHOD_POST)
 	
@@ -47,7 +49,7 @@ func _on_Lobby_created(result, response_code, _headers, bodyString):
 	
 	LobbyConn.join(lobbydata['id'])
 
-func _on_get_lobbylyst(result, response_code, _headers, bodyString):
+func _on_get_lobbylist(result, response_code, _headers, bodyString):
 	# parse response
 	var response = Request.parseResponse(result, response_code, bodyString)
 	#print(bodyString.get_string_from_utf8())
@@ -66,7 +68,7 @@ func _on_get_lobbylyst(result, response_code, _headers, bodyString):
 	$Background/VSlider.max_value = remember
 	$Background/VSlider.value = remember
 	
-func _on_get_lobbylystcode(result, response_code, _headers, bodyString):
+func _on_get_lobbylistcode(result, response_code, _headers, bodyString):
 	# parse response
 	var response = Request.parseResponse(result, response_code, bodyString)
 	#print(bodyString.get_string_from_utf8())
@@ -95,6 +97,7 @@ func _lobby_joined():
 	get_tree().change_scene("res://scenes/lobby/Lobby.tscn")
 
 func _on_JoinbyID_pressed():
+	Input.vibrate_handheld(50)
 	$Background/TopButtons/JoinbyID/LineEdit.clear()
 	$Background/TopButtons/JoinbyID/LineEdit.show()
 	$Background/BackForText.show()
@@ -103,7 +106,7 @@ func _on_JoinbyID_pressed():
 func _on_LineEdit_text_entered(code):
 	$Background/TopButtons/JoinbyID/LineEdit.hide()
 	$Background/BackForText.hide()
-	Request.createRequest(self, "_on_get_lobbylystcode", "/lobby/%s" %code)
+	Request.createRequest(self, "_on_get_lobbylistcode", "/lobby/%s" %code)
 
 func _on_LineEdit_text_changed(new_text):
 	var old_caret_position = $Background/TopButtons/JoinbyID/LineEdit.caret_position
@@ -123,11 +126,12 @@ func delete_children(node):
 		n.queue_free()
 	
 func _on_Refresh_pressed():
+	Input.vibrate_handheld(50)
 	delete_children($Background/Lobbies)
-	Request.createRequest(self, "_on_get_lobbylyst", "/lobbylist")
-
+	Request.createRequest(self, "_on_get_lobbylist", "/lobbylist")
 
 func _on_BackForText_pressed():
+	Input.vibrate_handheld(50)
 	#This hides the textbox for clicking out
 	$Background/BackForText.hide()
 	$Background/TopButtons/JoinbyID/LineEdit.hide()
