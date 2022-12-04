@@ -141,9 +141,11 @@ func _on_user_offline():
 	$CanvasLayer/ButtonContainer/Multiplayer.set_disabled(true)
 
 func _on_Adjective_pressed():
+	Input.vibrate_handheld(50)
 	UserData.setUserAdj(StartVars.randomIntKey(UserData.NameAdjectiveList, UserData.PlayerNameAdjective))
 
 func _on_Noun_pressed():
+	Input.vibrate_handheld(50)
 	UserData.setUserNoun(StartVars.randomIntKey(UserData.NameNounList, UserData.PlayerNameNoun))
 
 func _on_user_updated():
@@ -151,6 +153,7 @@ func _on_user_updated():
 	$Background/ConfigMenu/Adjective.text = "%s" %UserData.getMyAdjective()
 
 func _on_Config_pressed():
+	Input.vibrate_handheld(50)
 	print("hello %s %s aka %s %s" % [UserData.PlayerNameAdjective, UserData.PlayerNameNoun, UserData.getAdjective(UserData.PlayerNameAdjective), UserData.getNoun(UserData.PlayerNameNoun)])
 	if $CanvasLayer.is_visible():
 		$CanvasLayer.hide()
