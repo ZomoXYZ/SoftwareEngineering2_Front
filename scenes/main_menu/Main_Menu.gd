@@ -28,6 +28,7 @@ func _ready():
 
 #goes straight to lobby
 func _on_Singleplayer_pressed():
+	Input.vibrate_handheld(50)
 	#Using start vars as a flag to make sure our lobbies oriten themselves right
 	StartVars.singlePlayer = true
 	#Play animation before switching scene
@@ -37,18 +38,21 @@ func _on_Singleplayer_pressed():
 
 #Goes to lobby list
 func _on_Multiplayer_pressed():
+	Input.vibrate_handheld(50)
 	$AnimationPlayer.play("MultiPlayer_Transition2")
 	yield($AnimationPlayer, "animation_finished")
 	get_tree().change_scene("res://scenes/lobby_list/Lobby_List.tscn")
 
 
 func _on_Tutorial_pressed():
+	Input.vibrate_handheld(50)
 	$AnimationPlayer.play("Unused_Transition")
 	yield($AnimationPlayer, "animation_finished")
 	get_tree().change_scene("res://scenes/tutorial/Tutorial.tscn")
 
 
 func _on_Credits_pressed():
+	Input.vibrate_handheld(50)
 	$AnimationPlayer.play("Unused_Transition")
 	yield($AnimationPlayer, "animation_finished")
 	get_tree().change_scene("res://scenes/credits/Credits.tscn")
