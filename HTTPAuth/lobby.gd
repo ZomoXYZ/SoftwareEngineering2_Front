@@ -114,6 +114,22 @@ func draw(from):
 func discard(card):
 	send("discard %s" % card)
 		
+func setPassword(password):
+	if IsHost():
+		send("setpassword %s" % password)
+		
+func clearPassword():
+	if IsHost():
+		send("setpassword")
+		
+func setPointGoal(goal):
+	if IsHost():
+		send("setpointgoal %s" % goal)
+		
+func kickPlayer(playerID):
+	if IsHost():
+		send("kick %s" % playerID)
+		
 func play(cards, wanmoPair):
 	if cards == null:
 		send("play")
