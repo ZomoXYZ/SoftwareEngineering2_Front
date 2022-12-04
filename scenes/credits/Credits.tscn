@@ -56,7 +56,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"points": PoolRealArray( 476, -0.25, 0, 0.25, 0, 1205, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 476, -0.25, 0, 0.25, 0, 1529, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.6 )
 }
 
@@ -185,9 +185,8 @@ text = "Main Menu"
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_top = 251.0
-margin_right = 480.0
-margin_bottom = 727.0
+margin_top = -175.5
+margin_bottom = 300.5
 custom_styles/panel = ExtResource( 7 )
 
 [node name="Part1" type="Panel" parent="Background/MiddleCover"]

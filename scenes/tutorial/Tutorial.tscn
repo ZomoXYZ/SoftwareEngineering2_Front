@@ -56,7 +56,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"points": PoolRealArray( 476, -0.25, 0, 0.25, 0, 1216, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 476, -0.25, 0, 0.25, 0, 1680, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.6 )
 }
 

@@ -9,10 +9,10 @@ func _ready():
 	Request.connect("user_offline", self, "_on_user_offline")
 	UserData.connect("user_updated", self, "_on_user_updated")
 	var fixpos = Vector2(93,297)
-	var fixsiz = Vector2(0,14)
+	var fixsiz = Vector2(295,439)
 	Request.authorizeSession()
 	$CanvasLayer/ButtonContainer.set_position(fixpos)
-	$CanvasLayer.set_size(fixsiz)
+	$CanvasLayer/ButtonContainer.set_size(fixsiz)
 
 	# if already online, assume we're still online until told otherwise
 	if Request.online:
