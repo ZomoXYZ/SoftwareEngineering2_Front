@@ -28,7 +28,6 @@ func _ready():
 
 #goes straight to lobby
 func _on_Singleplayer_pressed():
-	Input.vibrate_handheld(50)
 	#Using start vars as a flag to make sure our lobbies oriten themselves right
 	StartVars.singlePlayer = true
 	#Play animation before switching scene
@@ -38,21 +37,18 @@ func _on_Singleplayer_pressed():
 
 #Goes to lobby list
 func _on_Multiplayer_pressed():
-	Input.vibrate_handheld(50)
 	$AnimationPlayer.play("MultiPlayer_Transition2")
 	yield($AnimationPlayer, "animation_finished")
 	get_tree().change_scene("res://scenes/lobby_list/Lobby_List.tscn")
 
 
 func _on_Tutorial_pressed():
-	Input.vibrate_handheld(50)
 	$AnimationPlayer.play("Unused_Transition")
 	yield($AnimationPlayer, "animation_finished")
 	get_tree().change_scene("res://scenes/tutorial/Tutorial.tscn")
 
 
 func _on_Credits_pressed():
-	Input.vibrate_handheld(50)
 	$AnimationPlayer.play("Unused_Transition")
 	yield($AnimationPlayer, "animation_finished")
 	get_tree().change_scene("res://scenes/credits/Credits.tscn")
@@ -99,8 +95,17 @@ func _on_user_online():
 	
 	Request.createRequest(self, "_http_request_completed", UserData.getMyPicture())
 	#Request.createRequest(self, "_http_request_completed2", UserData.getPicture(0))
+	var size = Vector2(140,140)
+	#var pos = Vector2(0,0)
 	for key in UserData.PictureList:
-		Request.createRequest(self, "_http_request_completed2", UserData.getPicture(key))
+		var pfpbutt = pfpbutton.instance()
+		$Background/ConfigMenu/pfps.get_child(counter).add_child(pfpbutt)
+		pfpbutt.key_setter(key)
+		pfpbutt.size_setter(size)
+		pfpbutt.connect("pressed", self, "_on_pfp_button_pressed")
+		counter += 1
+		if counter==4:
+			counter = 0
 
 # Called when the HTTP request is completed.
 func _http_request_completed(result, response_code, headers, body):
@@ -115,37 +120,14 @@ func _http_request_completed(result, response_code, headers, body):
 	# Assign to the child TextureRect node
 	$Background/ConfigMenu/Picture.texture = texture
 
-func _http_request_completed2(result, response_code, headers, body):
-	var image = Image.new()
-	var image_error = image.load_png_from_buffer(body)
-	var size = Vector2(40,40)
-	var pos = Vector2(0,0)
-	var pfp = pfpbutton.instance()
-	if image_error != OK:
-		print("An error occurred while trying to display the image.")
-
-	var texture = ImageTexture.new()
-	texture.create_from_image(image)
-	pfp.set_texture(texture)
-	pfp.set_size(size)
-	#pfp.set_position(pos)
-	
-	# Assign to the child TextureRect node
-	$Background/ConfigMenu/pfps.get_child(counter).add_child(pfp)
-	#for child in $Background/ConfigMenu/pfps:
-	#	child.set_size(size)
-	#$Background/ConfigMenu/pfps.get_child(counter).get_child(-1).texture_normal = texture
-
 func _on_user_offline():
 	print("User Offline")
 	$CanvasLayer/ButtonContainer/Multiplayer.set_disabled(true)
 
 func _on_Adjective_pressed():
-	Input.vibrate_handheld(50)
 	UserData.setUserAdj(StartVars.randomIntKey(UserData.NameAdjectiveList, UserData.PlayerNameAdjective))
 
 func _on_Noun_pressed():
-	Input.vibrate_handheld(50)
 	UserData.setUserNoun(StartVars.randomIntKey(UserData.NameNounList, UserData.PlayerNameNoun))
 
 func _on_user_updated():
@@ -153,7 +135,6 @@ func _on_user_updated():
 	$Background/ConfigMenu/Adjective.text = "%s" %UserData.getMyAdjective()
 
 func _on_Config_pressed():
-	Input.vibrate_handheld(50)
 	print("hello %s %s aka %s %s" % [UserData.PlayerNameAdjective, UserData.PlayerNameNoun, UserData.getAdjective(UserData.PlayerNameAdjective), UserData.getNoun(UserData.PlayerNameNoun)])
 	if $CanvasLayer.is_visible():
 		$CanvasLayer.hide()
@@ -165,3 +146,6 @@ func _on_Config_pressed():
 		$Logo.show()
 		$ShapeHolder.show()
 		$Background/ConfigMenu.hide()
+		
+func _on_pfp_button_pressed(key):
+	Request.createRequest(self, "_http_request_completed", str(key))

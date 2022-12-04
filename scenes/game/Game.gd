@@ -378,12 +378,13 @@ func _on_disconnected():
 	get_tree().change_scene("res://scenes/lobby_list/Lobby_List.tscn")
 
 func _on_playerturn(player):
+	#This yield is for animations in _on_cards_played()
+	yield($AnimationPlayer, "animation_finished")
+	
 	fill_players_gameturn()
 	fill_cards(false)
 	
 	#This is the only way I could get animations to work in the correct order
-	#This yield is for animations in _on_cards_played()
-	yield($AnimationPlayer, "animation_finished")
 	if wanmo:
 		$CardPlayed/WANMO.show()
 		$AnimationPlayer.play("WANMO")

@@ -350,29 +350,31 @@ custom_styles/normal = ExtResource( 5 )
 [node name="pfps" type="VBoxContainer" parent="Background/ConfigMenu"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 181.0
+margin_top = 201.0
 
 [node name="Row1" type="HBoxContainer" parent="Background/ConfigMenu/pfps"]
 margin_right = 420.0
-margin_bottom = 150.0
+margin_bottom = 145.0
 size_flags_vertical = 3
+custom_constants/separation = 20
+alignment = 1
 
 [node name="Row2" type="HBoxContainer" parent="Background/ConfigMenu/pfps"]
-margin_top = 154.0
+margin_top = 149.0
 margin_right = 420.0
-margin_bottom = 304.0
+margin_bottom = 294.0
 size_flags_vertical = 3
 
 [node name="Row3" type="HBoxContainer" parent="Background/ConfigMenu/pfps"]
-margin_top = 308.0
+margin_top = 298.0
 margin_right = 420.0
-margin_bottom = 458.0
+margin_bottom = 443.0
 size_flags_vertical = 3
 
 [node name="Row4" type="HBoxContainer" parent="Background/ConfigMenu/pfps"]
-margin_top = 462.0
+margin_top = 447.0
 margin_right = 420.0
-margin_bottom = 612.0
+margin_bottom = 592.0
 size_flags_vertical = 3
 
 [node name="Picture" type="Sprite" parent="Background/ConfigMenu"]
