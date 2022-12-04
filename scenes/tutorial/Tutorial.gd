@@ -20,6 +20,7 @@ func _ready():
 
 
 func _on_ToMainMenu_pressed():
+	Input.vibrate_handheld(50)
 	$Background/MiddleCover.get_child(current).hide()
 	$AnimationPlayer.play("Leave_Transition")
 	yield($AnimationPlayer, "animation_finished")
@@ -27,6 +28,7 @@ func _on_ToMainMenu_pressed():
 
 
 func _on_Next_pressed():
+	Input.vibrate_handheld(50)
 	$Background/MiddleCover.get_child(current).hide()
 	current += 1
 	if current == $Background/MiddleCover.get_children().size():
@@ -35,6 +37,7 @@ func _on_Next_pressed():
 
 
 func _on_Back_pressed():
+	Input.vibrate_handheld(50)
 	$Background/MiddleCover.get_child(current).hide()
 	current -= 1
 	if current == -1:

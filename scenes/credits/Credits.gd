@@ -22,10 +22,8 @@ func _ready():
 #func _process(delta):
 #	pass
 
-
-
-
 func _on_ToMainMenu_pressed():
+	Input.vibrate_handheld(50)
 	$Background/MiddleCover.get_child(current).hide()
 	$AnimationPlayer.play("Leave_Transition")
 	yield($AnimationPlayer, "animation_finished")
@@ -33,6 +31,7 @@ func _on_ToMainMenu_pressed():
 
 
 func _on_Next_pressed():
+	Input.vibrate_handheld(50)
 	print(current)
 	$Background/MiddleCover.get_child(current).hide()
 	current += 1
@@ -48,6 +47,7 @@ func _on_Next_pressed():
 
 func _on_Button_button_down():
 	if clickable:
+		Input.vibrate_handheld(50)
 		$Background/MiddleCover/Part3/WanAndOnlyStand.texture = play
 		clickable = false
 		yield(get_tree().create_timer(2),"timeout")
