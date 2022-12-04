@@ -95,6 +95,7 @@ func _on_players_updated():
 
 #Starting starts the game
 func _on_Start_pressed():
+	Input.vibrate_handheld(50)
 	if StartVars.singlePlayer:
 		LobbySP.start()
 	else:
@@ -112,6 +113,7 @@ func _on_game_starting():
 
 #returns to main menu if you were in single player, and returns to lobby list is from multiplayuer
 func _on_Leave_pressed():
+	Input.vibrate_handheld(50)
 	if !animating:
 		if StartVars.singlePlayer:
 			LobbySP.leave()
@@ -120,6 +122,7 @@ func _on_Leave_pressed():
 
 #Shows the options overlay menu
 func _on_Options_pressed():
+	Input.vibrate_handheld(50)
 	if !animating and kicking:
 		#Hide into panel here in case the button gets pressed during the intro animation
 		$IntroPanel.hide()
@@ -144,6 +147,7 @@ func _on_Options_pressed():
 		
 #Hides overlay when done with options menu
 func _on_BackToLobby_pressed():
+	Input.vibrate_handheld(50)
 	if !animating:
 		#Hide into panel here in case the button gets pressed during the intro animation
 		$IntroPanel.hide()
@@ -172,6 +176,7 @@ func _on_disconnected():
 #Options menu options
 
 func _on_SetPassword_pressed():
+	Input.vibrate_handheld(50)
 	#setup our textbox when button pressed
 	var pos = Vector2($LobbyOptions/Panel/ButtonContainer/PointGoal.rect_position.x,$LobbyOptions/Panel/ButtonContainer/PointGoal.rect_position.y-100)
 	$LobbyOptions/Panel/LineEdit.clear()
@@ -183,6 +188,7 @@ func _on_SetPassword_pressed():
 
 
 func _on_KickPlayer_pressed():
+	Input.vibrate_handheld(50)
 	if !animating:
 		#Hide into panel here in case the button gets pressed during the intro animation
 		$IntroPanel.hide()
@@ -201,6 +207,7 @@ func _on_KickPlayer_pressed():
 
 
 func _on_PointGoal_pressed():
+	Input.vibrate_handheld(50)
 	#setup our textbox when button pressed
 	var pos = Vector2($LobbyOptions/Panel/ButtonContainer/PointGoal.rect_position.x,$LobbyOptions/Panel/ButtonContainer/PointGoal.rect_position.y-100)
 	$LobbyOptions/Panel/LineEdit.clear()
@@ -234,24 +241,27 @@ func _on_LineEdit_text_changed(new_text):
 	$LobbyOptions/Panel/LineEdit.caret_position = old_caret_position
 
 func _on_BackForText_pressed():
+	Input.vibrate_handheld(50)
 	#This hides the textbox for clicking out
 	$LobbyOptions/Panel/LineEdit.hide()
 	$LobbyOptions/Panel/BackForText.hide()
 
-
 func _on_ButtonP2_pressed():
 	if LobbyConn.Players.size() >= 2:
+		Input.vibrate_handheld(50)
 		LobbyConn.kickPlayer(LobbyConn.Players[1].id)
 		fill_players()
 
 
 func _on_ButtonP3_pressed():
 	if LobbyConn.Players.size() >= 3:
+		Input.vibrate_handheld(50)
 		LobbyConn.kickPlayer(LobbyConn.Players[2].id)
 		fill_players()
 
 
 func _on_ButtonP4_pressed():
 	if LobbyConn.Players.size() >= 4:
+		Input.vibrate_handheld(50)
 		LobbyConn.kickPlayer(LobbyConn.Players[3].id)
 		fill_players()
