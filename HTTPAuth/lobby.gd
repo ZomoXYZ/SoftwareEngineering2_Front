@@ -115,19 +115,19 @@ func discard(card):
 	send("discard %s" % card)
 		
 func setPassword(password):
-	if IsHost():
+	if isHost():
 		send("setpassword %s" % password)
 		
 func clearPassword():
-	if IsHost():
+	if isHost():
 		send("setpassword")
 		
 func setPointGoal(goal):
-	if IsHost():
+	if isHost():
 		send("setpointgoal %s" % goal)
 		
 func kickPlayer(playerID):
-	if IsHost():
+	if isHost():
 		send("kick %s" % playerID)
 		
 func play(cards, wanmoPair):

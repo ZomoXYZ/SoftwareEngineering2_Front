@@ -214,6 +214,20 @@ func freeTypeCheck(free,card):
 			return false
 	elif free.selfValue == Cards.Free:
 		return true
+	
+	elif card.selfValue == Cards.TriangleFree:
+		if free.selfValue == Cards.Triangle1 or free.selfValue == Cards.Triangle2 or free.selfValue == Cards.TriangleInverted1 or free.selfValue == Cards.TriangleInverted2 or free.selfValue == Cards.Free:
+			return true
+		else:
+			return false
+	elif card.selfValue == Cards.CircleFree:
+		if free.selfValue == Cards.Circle1 or free.selfValue == Cards.Circle2 or free.selfValue == Cards.CircleInverted1 or free.selfValue == Cards.CircleInverted2 or free.selfValue == Cards.Free:
+			return true
+		else:
+			return false
+	elif card.selfValue == Cards.Free:
+		return true
+		
 	else:
 		return false
 
