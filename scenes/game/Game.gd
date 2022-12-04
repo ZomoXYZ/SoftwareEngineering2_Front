@@ -194,12 +194,7 @@ func _on_Card_pressed(card):
 		var selectedCards = get_selected_cards()
 		#var selectedCards = [StartVars.Cards.Triangle2, StartVars.Cards.Circle2]
 		
-		#If selected cards is 2 then we check if its a valid wanmo hand
-		if selectedCards.size() == 2:
-			if wanmo_checker(selectedCards):
-				wanmo= true
-			else:
-				wanmo= false
+
 		# figure out which cards can be selected, returns null if no cards are selected
 		var selectableCards = StartVars.getValidCards($Background/HandBox, selectedCards)
 		
@@ -215,6 +210,21 @@ func _on_Card_pressed(card):
 					child.setCanSelect(true)
 				else:
 					child.setCanSelect(false)
+		
+		#If selected cards is 2 then we check if its a valid wanmo hand
+		if selectedCards.size() == 2:
+			var manual_fix = 0
+			if wanmo_checker(selectedCards):
+				wanmo= true
+			else:
+				wanmo= false
+			for card in $Background/HandBox.get_children():
+					if !card.selected and card.canSelect:
+						manual_fix += 1
+			if manual_fix == 1:
+				for card in $Background/HandBox.get_children():
+					if !card.selected and card.canSelect:
+						card.setCanSelect(false)
 
 func fill_players_pausebutton():
 	# variables
