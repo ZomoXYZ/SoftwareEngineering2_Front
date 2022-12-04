@@ -2,6 +2,9 @@ extends Node
 
 export(PackedScene) var triangleScene
 export(PackedScene) var ellipseScene
+export(PackedScene) var pfpbutton
+
+var counter = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -86,9 +89,48 @@ func _on_user_online():
 	print("User Online, Name: %s %s, Picture: %s" % [UserData.getMyAdjective(), UserData.getMyNoun(), UserData.PlayerPicture])
 	$Background/ConfigMenu/Adjective.text = UserData.getMyAdjective()
 	$Background/ConfigMenu/Noun.text = UserData.getMyNoun()
-	$Background/ConfigMenu/Picture.texture = load(UserData.getMyPicture())
-	#min and max are &%$(%$&(
+	var pfp = str(RequestEnv.BASE_URL) + str(UserData.getMyPicture())
+	print(pfp)
 	$CanvasLayer/ButtonContainer/Multiplayer.set_disabled(false)
+	
+	Request.createRequest(self, "_http_request_completed", UserData.getMyPicture())
+	#Request.createRequest(self, "_http_request_completed2", UserData.getPicture(0))
+	for key in UserData.PictureList:
+		Request.createRequest(self, "_http_request_completed2", UserData.getPicture(key))
+
+# Called when the HTTP request is completed.
+func _http_request_completed(result, response_code, headers, body):
+	var image = Image.new()
+	var image_error = image.load_png_from_buffer(body)
+	if image_error != OK:
+		print("An error occurred while trying to display the image.")
+
+	var texture = ImageTexture.new()
+	texture.create_from_image(image)
+
+	# Assign to the child TextureRect node
+	$Background/ConfigMenu/Picture.texture = texture
+
+func _http_request_completed2(result, response_code, headers, body):
+	var image = Image.new()
+	var image_error = image.load_png_from_buffer(body)
+	var size = Vector2(40,40)
+	var pos = Vector2(0,0)
+	var pfp = pfpbutton.instance()
+	if image_error != OK:
+		print("An error occurred while trying to display the image.")
+
+	var texture = ImageTexture.new()
+	texture.create_from_image(image)
+	pfp.set_texture(texture)
+	pfp.set_size(size)
+	#pfp.set_position(pos)
+	
+	# Assign to the child TextureRect node
+	$Background/ConfigMenu/pfps.get_child(counter).add_child(pfp)
+	#for child in $Background/ConfigMenu/pfps:
+	#	child.set_size(size)
+	#$Background/ConfigMenu/pfps.get_child(counter).get_child(-1).texture_normal = texture
 
 func _on_user_offline():
 	print("User Offline")
