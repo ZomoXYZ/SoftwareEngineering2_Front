@@ -111,6 +111,7 @@ func _ready():
 	$CardPlayed.hide()
 	$TurnTransition.hide()
 	$GameOver.hide()
+	$Pause/PlayerList/KickPlayer.hide()
 	$Background/DrawnCard.connect("pressed_with_val", self, "_on_Card_pressed")
 	$Background/DrawPileBox/CardRotate.connect("pressed_with_val", self, "_on_Card_pressed")
 	$Background/DrawnCard.set_mouse_filter(Control.MOUSE_FILTER_IGNORE)
