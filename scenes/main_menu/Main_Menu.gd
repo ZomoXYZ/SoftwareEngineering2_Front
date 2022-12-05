@@ -89,13 +89,11 @@ func _on_user_online():
 	print("User Online, Name: %s %s, Picture: %s" % [UserData.getMyAdjective(), UserData.getMyNoun(), UserData.PlayerPicture])
 	$Background/ConfigMenu/Adjective.text = UserData.getMyAdjective()
 	$Background/ConfigMenu/Noun.text = UserData.getMyNoun()
-	var pfp = str(RequestEnv.BASE_URL) + str(UserData.getMyPicture())
-	print(pfp)
 	$CanvasLayer/ButtonContainer/Multiplayer.set_disabled(false)
 	
 	Request.createRequest(self, "_http_request_completed", UserData.getMyPicture())
 	#Request.createRequest(self, "_http_request_completed2", UserData.getPicture(0))
-	var size = Vector2(140,140)
+	var size = Vector2(100,100)
 	#var pos = Vector2(0,0)
 	for key in UserData.PictureList:
 		var pfpbutt = pfpbutton.instance()
@@ -111,11 +109,11 @@ func _on_user_online():
 func _http_request_completed(result, response_code, headers, body):
 	var image = Image.new()
 	var image_error = image.load_png_from_buffer(body)
-	yield(get_tree(), "idle_frame")
 	if image_error != OK:
 		print("An error occurred while trying to display the image.")
 		return
 
+	yield(get_tree(), "idle_frame")
 	var texture = ImageTexture.new()
 	texture.create_from_image(image, 4)
 
@@ -150,4 +148,4 @@ func _on_Config_pressed():
 		$Background/ConfigMenu.hide()
 		
 func _on_pfp_button_pressed(key):
-	Request.createRequest(self, "_http_request_completed", str(key))
+	UserData.setUserPic(key)
