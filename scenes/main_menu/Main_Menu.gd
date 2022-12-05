@@ -149,5 +149,4 @@ func _on_Config_pressed():
 		$Background/ConfigMenu.hide()
 		
 func _on_pfp_button_pressed(key):
-	print("pressed ", key)
 	UserData.setUserPic(key)

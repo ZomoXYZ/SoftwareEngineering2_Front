@@ -40,7 +40,7 @@ func createRequest(root, callback, endpoint, method = HTTPClient.METHOD_GET, bod
 	if bodyStr != "":
 		bodyPrintString = "\n\t" + bodyStr
 	
-	print("Requesting %s%s%s%s" % [RequestEnv.BASE_URL, endpoint, headersPrintString, bodyPrintString])
+	# print("Requesting %s%s%s%s" % [RequestEnv.BASE_URL, endpoint, headersPrintString, bodyPrintString])
 	
 	# get errors
 	var error = http_request.request(RequestEnv.BASE_URL + endpoint, headers, RequestEnv.Schema_http.to_lower() == "https", method, bodyStr)
