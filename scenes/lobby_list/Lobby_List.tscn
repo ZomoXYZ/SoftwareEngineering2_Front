@@ -345,18 +345,6 @@ anchor_bottom = 1.0
 margin_top = -124.0
 custom_styles/panel = ExtResource( 4 )
 
-[node name="BackForText" type="Button" parent="Background"]
-visible = false
-modulate = Color( 1, 1, 1, 0.658824 )
-anchor_left = -0.301
-anchor_top = -3.753
-anchor_right = 1.397
-anchor_bottom = 8.137
-margin_left = -68.205
-margin_top = 2512.06
-margin_right = 42.885
-margin_bottom = 2571.09
-
 [node name="TopButtons" type="VBoxContainer" parent="Background"]
 anchor_left = 0.5
 anchor_right = 0.5
@@ -389,23 +377,6 @@ custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
 text = "Join by ID"
 
-[node name="LineEdit" type="LineEdit" parent="Background/TopButtons/JoinbyID"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 100.0
-margin_bottom = 100.0
-custom_colors/clear_button_color_pressed = Color( 1, 1, 1, 1 )
-custom_colors/font_color_selected = Color( 1, 1, 1, 1 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_fonts/font = ExtResource( 9 )
-custom_styles/normal = ExtResource( 8 )
-align = 1
-max_length = 6
-expand_to_text_length = true
-placeholder_text = "Enter Code Here"
-caret_blink = true
-
 [node name="Refresh" type="Button" parent="Background/TopButtons"]
 margin_top = 192.0
 margin_right = 295.0
@@ -432,6 +403,37 @@ custom_styles/pressed = ExtResource( 5 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
 text = "Main Menu"
+
+[node name="BackForText" type="Button" parent="Background"]
+visible = false
+modulate = Color( 1, 1, 1, 0.658824 )
+anchor_left = -0.301
+anchor_top = -3.753
+anchor_right = 1.397
+anchor_bottom = 8.137
+margin_left = 61.48
+margin_top = 3010.31
+margin_right = -49.56
+margin_bottom = -5866.86
+
+[node name="LineEdit" type="LineEdit" parent="Background"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 83.0
+margin_top = 216.0
+margin_right = -77.0
+margin_bottom = -547.0
+custom_colors/clear_button_color_pressed = Color( 1, 1, 1, 1 )
+custom_colors/font_color_selected = Color( 1, 1, 1, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 9 )
+custom_styles/normal = ExtResource( 8 )
+align = 1
+max_length = 6
+expand_to_text_length = true
+placeholder_text = "Enter Code Here"
+caret_blink = true
 
 [node name="VSlider" type="VSlider" parent="Background"]
 margin_left = 20.0
@@ -481,11 +483,11 @@ margin_right = 1076.0
 margin_bottom = 1476.0
 custom_styles/panel = SubResource( 5 )
 
-[connection signal="pressed" from="Background/BackForText" to="." method="_on_BackForText_pressed"]
 [connection signal="pressed" from="Background/TopButtons/CreateLobby" to="." method="_on_CreateLobby_pressed"]
 [connection signal="pressed" from="Background/TopButtons/JoinbyID" to="." method="_on_JoinbyID_pressed"]
-[connection signal="text_changed" from="Background/TopButtons/JoinbyID/LineEdit" to="." method="_on_LineEdit_text_changed"]
-[connection signal="text_entered" from="Background/TopButtons/JoinbyID/LineEdit" to="." method="_on_LineEdit_text_entered"]
 [connection signal="pressed" from="Background/TopButtons/Refresh" to="." method="_on_Refresh_pressed"]
 [connection signal="pressed" from="Background/ToMainMenu" to="." method="_on_To_Main_Menu_pressed"]
+[connection signal="pressed" from="Background/BackForText" to="." method="_on_BackForText_pressed"]
+[connection signal="text_changed" from="Background/LineEdit" to="." method="_on_LineEdit_text_changed"]
+[connection signal="text_entered" from="Background/LineEdit" to="." method="_on_LineEdit_text_entered"]
 [connection signal="value_changed" from="Background/VSlider" to="." method="_on_VSlider_value_changed"]

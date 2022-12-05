@@ -16,7 +16,7 @@ func _ready():
 	$AnimationPlayer.play("Intro_Transition")
 	yield($AnimationPlayer, "animation_finished")
 	#Hide all animation objects
-	$Background/TopButtons/JoinbyID/LineEdit.hide()
+	$Background/LineEdit.hide()
 	$IntroPanel.hide()
 	$OutroPanel.hide()
 
@@ -98,27 +98,27 @@ func _lobby_joined():
 
 func _on_JoinbyID_pressed():
 	Input.vibrate_handheld(50)
-	$Background/TopButtons/JoinbyID/LineEdit.clear()
-	$Background/TopButtons/JoinbyID/LineEdit.show()
+	$Background/LineEdit.clear()
+	$Background/LineEdit.show()
 	$Background/BackForText.show()
-	$Background/TopButtons/JoinbyID/LineEdit.grab_focus()
+	$Background/LineEdit.grab_focus()
 	
 func _on_LineEdit_text_entered(code):
-	$Background/TopButtons/JoinbyID/LineEdit.hide()
+	$Background/LineEdit.hide()
 	$Background/BackForText.hide()
 	Request.createRequest(self, "_on_get_lobbylistcode", "/lobby/%s" %code)
 
 func _on_LineEdit_text_changed(new_text):
-	var old_caret_position = $Background/TopButtons/JoinbyID/LineEdit.caret_position
+	var old_caret_position = $Background/LineEdit.caret_position
 
 	var word = ''
 	var regex = RegEx.new()
 	regex.compile("[A-Z]")
 	for valid_character in regex.search_all(new_text.to_upper()):
 		word += valid_character.get_string()
-	$Background/TopButtons/JoinbyID/LineEdit.set_text(word)
+	$Background/LineEdit.set_text(word)
 
-	$Background/TopButtons/JoinbyID/LineEdit.caret_position = old_caret_position
+	$Background/LineEdit.caret_position = old_caret_position
 
 func delete_children(node):
 	for n in node.get_children():
@@ -134,4 +134,4 @@ func _on_BackForText_pressed():
 	Input.vibrate_handheld(50)
 	#This hides the textbox for clicking out
 	$Background/BackForText.hide()
-	$Background/TopButtons/JoinbyID/LineEdit.hide()
+	$Background/LineEdit.hide()
