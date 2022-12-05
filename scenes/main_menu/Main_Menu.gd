@@ -4,8 +4,6 @@ export(PackedScene) var triangleScene
 export(PackedScene) var ellipseScene
 export(PackedScene) var pfpbutton
 
-var counter = 0
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Request.connect("user_online", self, "_on_user_online")
@@ -94,32 +92,20 @@ func _on_user_online():
 	$Background/ConfigMenu/Picture.size_setter(size)
 	$CanvasLayer/ButtonContainer/Multiplayer.set_disabled(false)
 	
-	# Request.createRequest(self, "_http_request_completed", UserData.getMyPicture())
-	#var pos = Vector2(0,0)
+	for row in $Background/ConfigMenu/pfps.get_children():
+		for button in row.get_children():
+			button.queue_free()
+
+	var row = 0
 	for key in UserData.PictureList:
 		var pfpbutt = pfpbutton.instance()
-		$Background/ConfigMenu/pfps.get_child(counter).add_child(pfpbutt)
+		$Background/ConfigMenu/pfps.get_child(row).add_child(pfpbutt)
 		pfpbutt.key_setter(key)
 		pfpbutt.size_setter(size)
 		pfpbutt.connect("pressed", self, "_on_pfp_button_pressed")
-		counter += 1
-		if counter==4:
-			counter = 0
-
-# # Called when the HTTP request is completed.
-# func _http_request_completed(result, response_code, headers, body):
-# 	var image = Image.new()
-# 	var image_error = image.load_png_from_buffer(body)
-# 	if image_error != OK:
-# 		print("An error occurred while trying to display the image.")
-# 		return
-
-# 	yield(get_tree(), "idle_frame")
-# 	var texture = ImageTexture.new()
-# 	texture.create_from_image(image, 4)
-
-# 	# Assign to the child TextureRect node
-# 	$Background/ConfigMenu/Picture.texture = texture
+		row += 1
+		if row==4:
+			row = 0
 
 func _on_user_offline():
 	print("User Offline")
