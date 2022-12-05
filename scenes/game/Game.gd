@@ -94,7 +94,7 @@ func _ready():
 	var fixsiz2 = Vector2(480,853)
 	var fixsiz = Vector2(480,248)
 	$Background.set_size(fixsiz2)
-	$CardPlayed.set_size(fixsiz2)
+	#$CardPlayed.set_size(fixsiz2)
 	$TurnTransition/Box.set_position(fixpos)
 	$TurnTransition/Box.set_size(fixsiz)
 	$CardPlayed.hide()

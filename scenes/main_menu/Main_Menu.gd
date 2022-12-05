@@ -85,15 +85,16 @@ func _on_EffectTimer_timeout():
 	$ShapeHolder.add_child(shape)
 
 func _on_user_online():
+	var size = Vector2(100,100)
 	print("User Online, Name: %s %s, Picture: %s" % [UserData.PlayerNameAdjective, UserData.PlayerNameNoun, UserData.PlayerPicture])
 	print("User Online, Name: %s %s, Picture: %s" % [UserData.getMyAdjective(), UserData.getMyNoun(), UserData.PlayerPicture])
 	$Background/ConfigMenu/Adjective.text = UserData.getMyAdjective()
 	$Background/ConfigMenu/Noun.text = UserData.getMyNoun()
 	$Background/ConfigMenu/Picture.key_setter(UserData.PlayerPicture)
+	$Background/ConfigMenu/Picture.size_setter(size)
 	$CanvasLayer/ButtonContainer/Multiplayer.set_disabled(false)
 	
 	# Request.createRequest(self, "_http_request_completed", UserData.getMyPicture())
-	var size = Vector2(100,100)
 	#var pos = Vector2(0,0)
 	for key in UserData.PictureList:
 		var pfpbutt = pfpbutton.instance()
