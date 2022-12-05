@@ -303,9 +303,9 @@ func fill_players_gameturn(beforeTurns=false):
 			if !beforeTurns:
 				var points
 				if StartVars.singlePlayer:
-					points = LobbySP.Players[i]
+					points = LobbySP.Points[i]
 				else:
-					points = LobbyConn.Players[i]
+					points = LobbyConn.Points[i]
 				current.get_node("Score").text = "%s" % points
 			current.get_node("PlayerIcon").show()
 			current.get_node("Picture").show()
