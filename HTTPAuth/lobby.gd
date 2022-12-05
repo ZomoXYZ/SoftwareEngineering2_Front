@@ -336,7 +336,7 @@ func command_game_autodraw(args):
 
 func command_game_gameover(args):
 	var playerid = args[0]
-	LobbyConn.InLobby = false
+	InLobby = false
 	var player
 	for p in Players:
 		if p.id == playerid:
