@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://assets/fonts/ComicNeue-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/main_menu/Main_Menu.gd" type="Script" id=2]
@@ -10,7 +10,6 @@
 [ext_resource path="res://scenes/main_menu/PhysicsEllipse.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/styles/button_red_disabled.tres" type="StyleBox" id=9]
 [ext_resource path="res://assets/styles/button_green_disabled.tres" type="StyleBox" id=10]
-[ext_resource path="res://assets/sprites/Circle.png" type="Texture" id=11]
 [ext_resource path="res://scenes/main_menu/PFPButton.tscn" type="PackedScene" id=12]
 
 [sub_resource type="DynamicFont" id=3]
@@ -347,6 +346,12 @@ custom_styles/hover = ExtResource( 5 )
 custom_styles/pressed = ExtResource( 4 )
 custom_styles/normal = ExtResource( 5 )
 
+[node name="Picture" parent="Background/ConfigMenu" instance=ExtResource( 12 )]
+margin_left = -30.0
+margin_top = -30.0
+margin_right = -30.0
+margin_bottom = -30.0
+
 [node name="pfps" type="VBoxContainer" parent="Background/ConfigMenu"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -376,11 +381,6 @@ margin_top = 447.0
 margin_right = 420.0
 margin_bottom = 592.0
 size_flags_vertical = 3
-
-[node name="Picture" type="Sprite" parent="Background/ConfigMenu"]
-position = Vector2( 74, 100 )
-scale = Vector2( 0.255556, 0.213816 )
-texture = ExtResource( 11 )
 
 [node name="Config" type="Button" parent="Background"]
 anchor_left = 1.0
@@ -450,7 +450,7 @@ custom_constants/separation = 30
 
 [node name="Singleplayer" type="Button" parent="CanvasLayer/ButtonContainer"]
 margin_right = 295.0
-margin_bottom = 299.0
+margin_bottom = 87.0
 size_flags_vertical = 3
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_fonts/font = ExtResource( 3 )
@@ -461,9 +461,9 @@ custom_styles/normal = ExtResource( 5 )
 text = "Singleplayer"
 
 [node name="Multiplayer" type="Button" parent="CanvasLayer/ButtonContainer"]
-margin_top = 329.0
+margin_top = 117.0
 margin_right = 295.0
-margin_bottom = 628.0
+margin_bottom = 204.0
 rect_pivot_offset = Vector2( -620, 737.5 )
 size_flags_vertical = 3
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
@@ -476,9 +476,9 @@ disabled = true
 text = "Multiplayer"
 
 [node name="Tutorial" type="Button" parent="CanvasLayer/ButtonContainer"]
-margin_top = 658.0
+margin_top = 234.0
 margin_right = 295.0
-margin_bottom = 957.0
+margin_bottom = 321.0
 size_flags_vertical = 3
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_fonts/font = ExtResource( 3 )
@@ -489,9 +489,9 @@ custom_styles/normal = ExtResource( 5 )
 text = "Tutorial"
 
 [node name="Credits" type="Button" parent="CanvasLayer/ButtonContainer"]
-margin_top = 987.0
+margin_top = 351.0
 margin_right = 295.0
-margin_bottom = 1287.0
+margin_bottom = 439.0
 size_flags_vertical = 3
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_fonts/font = ExtResource( 3 )
