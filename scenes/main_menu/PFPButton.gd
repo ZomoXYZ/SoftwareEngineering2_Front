@@ -23,6 +23,7 @@ func _http_request_completed2(result, response_code, headers, body):
 	var image = Image.new()
 	var image_error = image.load_png_from_buffer(body)
 	if image_error != OK:
+		print(image_error)
 		print("An error occurred while trying to display the image.")
 		return
 	

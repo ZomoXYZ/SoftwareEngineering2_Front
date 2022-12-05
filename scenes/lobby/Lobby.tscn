@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://assets/fonts/button_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/lobby/Lobby.gd" type="Script" id=2]
@@ -12,6 +12,8 @@
 [ext_resource path="res://assets/fonts/playerlist_font.tres" type="DynamicFont" id=10]
 [ext_resource path="res://assets/styles/button_green_disabled.tres" type="StyleBox" id=11]
 [ext_resource path="res://assets/styles/button_red_disabled.tres" type="StyleBox" id=12]
+[ext_resource path="res://scenes/main_menu/PFPButton.tscn" type="PackedScene" id=13]
+[ext_resource path="res://assets/styles/dehighlight.tres" type="StyleBox" id=14]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -391,6 +393,19 @@ position = Vector2( 70, 48 )
 scale = Vector2( 0.355556, 0.262598 )
 texture = ExtResource( 8 )
 
+[node name="Control" parent="Background/PlayerList/Player1" instance=ExtResource( 13 )]
+margin_left = 22.0
+margin_top = 8.0
+margin_right = 22.0
+margin_bottom = 8.0
+
+[node name="Highlight" type="Panel" parent="Background/PlayerList/Player1"]
+margin_left = 13.0
+margin_top = -1.0
+margin_right = 113.0
+margin_bottom = 99.0
+custom_styles/panel = ExtResource( 14 )
+
 [node name="Player2" type="Label" parent="Background/PlayerList"]
 margin_top = 130.0
 margin_right = 400.0
@@ -406,6 +421,19 @@ autowrap = true
 position = Vector2( 70, 48 )
 scale = Vector2( 0.355556, 0.262598 )
 texture = ExtResource( 8 )
+
+[node name="Control" parent="Background/PlayerList/Player2" instance=ExtResource( 13 )]
+margin_left = 22.0
+margin_top = 8.0
+margin_right = 22.0
+margin_bottom = 8.0
+
+[node name="Highlight" type="Panel" parent="Background/PlayerList/Player2"]
+margin_left = 13.0
+margin_top = -1.0
+margin_right = 113.0
+margin_bottom = 99.0
+custom_styles/panel = ExtResource( 14 )
 
 [node name="Player3" type="Label" parent="Background/PlayerList"]
 margin_top = 260.0
@@ -424,6 +452,19 @@ position = Vector2( 70, 48 )
 scale = Vector2( 0.355556, 0.262598 )
 texture = ExtResource( 8 )
 
+[node name="Control" parent="Background/PlayerList/Player3" instance=ExtResource( 13 )]
+margin_left = 22.0
+margin_top = 8.0
+margin_right = 22.0
+margin_bottom = 8.0
+
+[node name="Highlight" type="Panel" parent="Background/PlayerList/Player3"]
+margin_left = 13.0
+margin_top = -1.0
+margin_right = 113.0
+margin_bottom = 99.0
+custom_styles/panel = ExtResource( 14 )
+
 [node name="Player4" type="Label" parent="Background/PlayerList"]
 margin_top = 390.0
 margin_right = 400.0
@@ -439,6 +480,19 @@ autowrap = true
 position = Vector2( 70, 48 )
 scale = Vector2( 0.355556, 0.262598 )
 texture = ExtResource( 8 )
+
+[node name="Control" parent="Background/PlayerList/Player4" instance=ExtResource( 13 )]
+margin_left = 22.0
+margin_top = 8.0
+margin_right = 22.0
+margin_bottom = 8.0
+
+[node name="Highlight" type="Panel" parent="Background/PlayerList/Player4"]
+margin_left = 13.0
+margin_top = -1.0
+margin_right = 113.0
+margin_bottom = 99.0
+custom_styles/panel = ExtResource( 14 )
 
 [node name="BottomBar" type="HBoxContainer" parent="Background"]
 anchor_top = 1.0

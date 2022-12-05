@@ -77,10 +77,15 @@ func fill_players():
 	# fill player list
 	for i in 4:
 		var current = $Background/PlayerList.get_child(i)
+		var size = Vector2(80,80)
 		if i < len(players):
 			#current.text = "%s %s" % [players[i]['name']['adjective'], players[i]['name']['noun']]
 			current.text = "%s\n%s" % [UserData.getAdjective(players[i]['name']['adjective']), UserData.getNoun(players[i]['name']['noun'])]
 			current.get_node("PlayerIcon").show()
+			current.get_node("Control").show()
+			current.get_node("Highlight").show()
+			current.get_node("Control").key_setter(players[i]['picture'])
+			current.get_node("Control").size_setter(size)
 			if i == 0:
 				current.add_stylebox_override("normal", button_red)
 			else:
@@ -88,6 +93,8 @@ func fill_players():
 		else:
 			current.text = ""
 			current.get_node("PlayerIcon").hide()
+			current.get_node("Control").hide()
+			current.get_node("Highlight").hide()
 			current.add_stylebox_override("normal", button_empty)
 
 func _on_players_updated():

@@ -6,6 +6,8 @@ var button_empty = preload("res://assets/styles/button_empty.tres")
 var button_empty2 = preload("res://assets/styles/button_empty2.tres")
 var button_green = preload("res://assets/styles/button_green.tres")
 var button_red = preload("res://assets/styles/button_red.tres")
+var highlight = preload("res://assets/styles/highlight.tres")
+var dehighlight = preload("res://assets/styles/dehighlight.tres")
 var discardMode = false
 var drawMode = false
 var wanmo = false
@@ -263,9 +265,13 @@ func fill_players_pausebutton():
 	# fill player list
 	for i in 4:
 		var current = $Pause/PlayerList.get_child(i)
+		var size = Vector2(80,80)
 		if i < len(players):
 			current.text = "%s\n%s" % [UserData.getAdjective(players[i]['name']['adjective']), UserData.getNoun(players[i]['name']['noun'])]
 			current.get_node("PlayerIcon").show()
+			current.get_node("Control").show()
+			current.get_node("Control").key_setter(players[i]['picture'])
+			current.get_node("Control").size_setter(size)
 			if i == 0:
 				current.add_stylebox_override("normal", button_red)
 			else:
@@ -273,6 +279,8 @@ func fill_players_pausebutton():
 		else:
 			current.text = ""
 			current.get_node("PlayerIcon").hide()
+			current.get_node("Control").hide()
+			current.get_node("Highlight").hide()
 			current.add_stylebox_override("normal", button_empty)
 			
 func fill_players_gameturn(beforeTurns=false):
@@ -299,8 +307,16 @@ func fill_players_gameturn(beforeTurns=false):
 					points = LobbyConn.Players[i]
 				current.get_node("Score").text = "%s" % points
 			current.get_node("PlayerIcon").show()
+			current.get_node("Picture").show()
+			print(players[i]['picture'])
+			print(UserData.getMyPicture())
 			current.add_stylebox_override("panel", button_empty)
-			current.get_node("Highlight").add_stylebox_override("panel", button_green)
+			current.get_node("Highlight").add_stylebox_override("panel", dehighlight)
+			#so we only call this once a game
+			if beforeTurns:
+				var size = Vector2(60,60)
+				current.get_node("Picture").key_setter(players[i]['picture'])
+				current.get_node("Picture").size_setter(size)
 		else:
 			current.get_node("PlayerIcon").hide()
 			current.add_stylebox_override("panel", button_empty2)
@@ -321,7 +337,7 @@ func fill_players_gameturn(beforeTurns=false):
 		
 		var text = current.get_node("Name").text
 		$TurnTransition/Box/PlayerInfo.text = "%s's Turn" %text
-		current.get_node("Highlight").add_stylebox_override("panel", button_red)
+		current.get_node("Highlight").add_stylebox_override("panel", highlight)
 		current.add_stylebox_override("panel", button_green)
 	
 #Pause shows pause overlay
