@@ -468,6 +468,7 @@ custom_styles/hover = ExtResource( 5 )
 custom_styles/pressed = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 10 )
 custom_styles/normal = ExtResource( 5 )
+disabled = true
 text = "Singleplayer"
 
 [node name="Multiplayer" type="Button" parent="CanvasLayer/ButtonContainer"]
