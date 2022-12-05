@@ -60,6 +60,10 @@ func startGame():
 
 func join_game():
 	# TODO start turn loop
+	# emit_signal("player_turn", state.turn)
+	# if my turn
+	#   emit_signal("turn_ended", cards)
+	#   emit_signal("game_over", playerID)
 	pass
 		
 func setPointGoal(goal):
@@ -70,22 +74,27 @@ func leave():
 	emit_signal("disconnected")
 
 func draw(from):
+	var drew
 	if from == LobbyConn.DrawFrom.DRAW_FROM_DECK:
-		Cards += [RandomCard()]
+		drew = RandomCard()
 	elif from == LobbyConn.DrawFrom.DRAW_FROM_DISCARD:
-		Cards += [DiscardPile]
+		drew = DiscardPile
 		DiscardPile = -1
+	Cards += [drew]
+	emit_signal("card_drew", from, drew)
 		
 func discard(card):
 	DiscardPile = card
+	emit_signal("card_discarded", card)
 		
 func play(cards, wanmoPair):
 	if cards == null:
-		pass
-		# TODO pass
+		emit_signal("cards_played", LobbyConn.HandTypes.PASS, null, null)
 	else:
 		pass
 		# TODO play cards
+		# calculate hand type
+		# emit_signal("cards_played", type, cards, wanmoPair)
 
 func generateCardHand():
 	var cards = []
