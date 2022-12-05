@@ -360,15 +360,18 @@ margin_top = 201.0
 [node name="Row1" type="HBoxContainer" parent="Background/ConfigMenu/pfps"]
 margin_right = 420.0
 margin_bottom = 145.0
+size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/separation = 20
+custom_constants/separation = 120
 alignment = 1
 
 [node name="Row2" type="HBoxContainer" parent="Background/ConfigMenu/pfps"]
 margin_top = 149.0
 margin_right = 420.0
 margin_bottom = 294.0
+size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_constants/separation = 120
 
 [node name="Row3" type="HBoxContainer" parent="Background/ConfigMenu/pfps"]
 margin_top = 298.0
@@ -380,7 +383,9 @@ size_flags_vertical = 3
 margin_top = 447.0
 margin_right = 420.0
 margin_bottom = 592.0
+size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_constants/separation = 120
 
 [node name="Config" type="Button" parent="Background"]
 anchor_left = 1.0
