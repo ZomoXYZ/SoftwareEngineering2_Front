@@ -89,10 +89,10 @@ func _on_user_online():
 	print("User Online, Name: %s %s, Picture: %s" % [UserData.getMyAdjective(), UserData.getMyNoun(), UserData.PlayerPicture])
 	$Background/ConfigMenu/Adjective.text = UserData.getMyAdjective()
 	$Background/ConfigMenu/Noun.text = UserData.getMyNoun()
+	$Background/ConfigMenu/Picture.key_setter(UserData.PlayerPicture)
 	$CanvasLayer/ButtonContainer/Multiplayer.set_disabled(false)
 	
-	Request.createRequest(self, "_http_request_completed", UserData.getMyPicture())
-	#Request.createRequest(self, "_http_request_completed2", UserData.getPicture(0))
+	# Request.createRequest(self, "_http_request_completed", UserData.getMyPicture())
 	var size = Vector2(100,100)
 	#var pos = Vector2(0,0)
 	for key in UserData.PictureList:
@@ -105,20 +105,20 @@ func _on_user_online():
 		if counter==4:
 			counter = 0
 
-# Called when the HTTP request is completed.
-func _http_request_completed(result, response_code, headers, body):
-	var image = Image.new()
-	var image_error = image.load_png_from_buffer(body)
-	if image_error != OK:
-		print("An error occurred while trying to display the image.")
-		return
+# # Called when the HTTP request is completed.
+# func _http_request_completed(result, response_code, headers, body):
+# 	var image = Image.new()
+# 	var image_error = image.load_png_from_buffer(body)
+# 	if image_error != OK:
+# 		print("An error occurred while trying to display the image.")
+# 		return
 
-	yield(get_tree(), "idle_frame")
-	var texture = ImageTexture.new()
-	texture.create_from_image(image, 4)
+# 	yield(get_tree(), "idle_frame")
+# 	var texture = ImageTexture.new()
+# 	texture.create_from_image(image, 4)
 
-	# Assign to the child TextureRect node
-	$Background/ConfigMenu/Picture.texture = texture
+# 	# Assign to the child TextureRect node
+# 	$Background/ConfigMenu/Picture.texture = texture
 
 func _on_user_offline():
 	print("User Offline")
@@ -133,6 +133,7 @@ func _on_Noun_pressed():
 func _on_user_updated():
 	$Background/ConfigMenu/Noun.text = "%s" %UserData.getMyNoun()
 	$Background/ConfigMenu/Adjective.text = "%s" %UserData.getMyAdjective()
+	$Background/ConfigMenu/Picture.key_setter(UserData.PlayerPicture)
 
 func _on_Config_pressed():
 	print("hello %s %s aka %s %s" % [UserData.PlayerNameAdjective, UserData.PlayerNameNoun, UserData.getAdjective(UserData.PlayerNameAdjective), UserData.getNoun(UserData.PlayerNameNoun)])
@@ -148,4 +149,5 @@ func _on_Config_pressed():
 		$Background/ConfigMenu.hide()
 		
 func _on_pfp_button_pressed(key):
+	print("pressed ", key)
 	UserData.setUserPic(key)
