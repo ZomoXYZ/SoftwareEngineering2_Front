@@ -111,11 +111,13 @@ func _on_user_online():
 func _http_request_completed(result, response_code, headers, body):
 	var image = Image.new()
 	var image_error = image.load_png_from_buffer(body)
+	yield(get_tree(), "idle_frame")
 	if image_error != OK:
 		print("An error occurred while trying to display the image.")
+		return
 
 	var texture = ImageTexture.new()
-	texture.create_from_image(image)
+	texture.create_from_image(image, 4)
 
 	# Assign to the child TextureRect node
 	$Background/ConfigMenu/Picture.texture = texture

@@ -24,9 +24,11 @@ func _http_request_completed2(result, response_code, headers, body):
 	var image_error = image.load_png_from_buffer(body)
 	if image_error != OK:
 		print("An error occurred while trying to display the image.")
-
+		return
+	
+	yield(get_tree(), "idle_frame")
 	var texture = ImageTexture.new()
-	texture.create_from_image(image)
+	texture.create_from_image(image, 4)
 	set_texture(texture)
 
 
