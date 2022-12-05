@@ -445,12 +445,12 @@ anchor_bottom = 60.599
 margin_left = 93.0
 margin_top = 279.0
 margin_right = 388.0
-margin_bottom = 718.001
+margin_bottom = -130.385
 custom_constants/separation = 30
 
 [node name="Singleplayer" type="Button" parent="CanvasLayer/ButtonContainer"]
 margin_right = 295.0
-margin_bottom = 87.0
+margin_bottom = 299.0
 size_flags_vertical = 3
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_fonts/font = ExtResource( 3 )
@@ -461,9 +461,9 @@ custom_styles/normal = ExtResource( 5 )
 text = "Singleplayer"
 
 [node name="Multiplayer" type="Button" parent="CanvasLayer/ButtonContainer"]
-margin_top = 117.0
+margin_top = 329.0
 margin_right = 295.0
-margin_bottom = 204.0
+margin_bottom = 628.0
 rect_pivot_offset = Vector2( -620, 737.5 )
 size_flags_vertical = 3
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
@@ -476,9 +476,9 @@ disabled = true
 text = "Multiplayer"
 
 [node name="Tutorial" type="Button" parent="CanvasLayer/ButtonContainer"]
-margin_top = 234.0
+margin_top = 658.0
 margin_right = 295.0
-margin_bottom = 321.0
+margin_bottom = 957.0
 size_flags_vertical = 3
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_fonts/font = ExtResource( 3 )
@@ -489,9 +489,9 @@ custom_styles/normal = ExtResource( 5 )
 text = "Tutorial"
 
 [node name="Credits" type="Button" parent="CanvasLayer/ButtonContainer"]
-margin_top = 351.0
+margin_top = 987.0
 margin_right = 295.0
-margin_bottom = 439.0
+margin_bottom = 1287.0
 size_flags_vertical = 3
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_fonts/font = ExtResource( 3 )
