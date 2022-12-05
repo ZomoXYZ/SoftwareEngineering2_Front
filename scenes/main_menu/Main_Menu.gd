@@ -104,8 +104,7 @@ func _on_user_online():
 		pfpbutt.size_setter(size)
 		pfpbutt.connect("pressed", self, "_on_pfp_button_pressed")
 		row += 1
-		if row==4:
-			row = 0
+		row %= 4
 
 func _on_user_offline():
 	print("User Offline")
