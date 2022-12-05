@@ -73,7 +73,7 @@ signal card_discarded(card)
 signal cards_played(handType, cards, wanmoPair) # cards and wanmoPair will be null if passed
 signal turn_ended(cards) # cards automatically drawn
 
-signal game_over(playerID) # playerID winner
+signal game_over(playerObject) # playerObject winner
 
 func _ready():
 	client.connect("connection_closed", self, "_closed")
@@ -336,7 +336,13 @@ func command_game_autodraw(args):
 
 func command_game_gameover(args):
 	var playerid = args[0]
-	emit_signal("game_over", playerid)
+	LobbyConn.InLobby = false
+	var player
+	for p in Players:
+		if p.id == playerid:
+			player = p
+			break
+	emit_signal("game_over", player)
 
 
 func command_error_(args):

@@ -97,7 +97,7 @@ func _on_players_updated():
 func _on_Start_pressed():
 	Input.vibrate_handheld(50)
 	if StartVars.singlePlayer:
-		LobbySP.start()
+		LobbySP.startGame()
 	else:
 		LobbyConn.startGame()
 

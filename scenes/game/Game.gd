@@ -13,6 +13,9 @@ var wanmo_hand = []
 var combining = false
 export(PackedScene) var cardScene
 
+func isMyTurn():
+	return (StartVars.singlePlayer && LobbySP.isMyTurn()) || (!StartVars.singlePlayer && LobbyConn.isMyTurn())
+
 func playerIndexToNode(playerIndex):
 	var myIndex
 	if !StartVars.singlePlayer:
@@ -34,6 +37,13 @@ func playerIndexToNode(playerIndex):
 func connect_signals():
 	if StartVars.singlePlayer:
 		LobbySP.connect("disconnected", self, "_on_disconnected")
+		LobbySP.connect("player_turn", self, "_on_playerturn")
+		LobbySP.connect("card_drew", self, "_on_carddrew")
+		LobbySP.connect("card_discarded", self, "_on_carddiscarded")
+		LobbySP.connect("cards_played", self, "_on_cardsplayed")
+		LobbySP.connect("turn_ended", self, "_on_turnended")
+		LobbySP.connect("game_over", self, "_on_gameover")
+		LobbySP.join_game()
 	else:
 		LobbyConn.connect("disconnected", self, "_on_disconnected")
 		LobbyConn.connect("player_turn", self, "_on_playerturn")
@@ -44,7 +54,6 @@ func connect_signals():
 		LobbyConn.connect("game_over", self, "_on_gameover")
 		LobbyConn.connect("players_updated", self, "_on_playersupdated")
 		LobbyConn.join_game()
-
 
 func fill_cards(enabled):
 	var cards
@@ -282,10 +291,13 @@ func fill_players_gameturn(beforeTurns=false):
 		$Pause.hide()
 		if i < len(players):
 			current.get_node("Name").text = "%s %s" % [UserData.getAdjective(players[i]['name']['adjective']), UserData.getNoun(players[i]['name']['noun'])]
-			if beforeTurns:
-				current.get_node("Score").text = "%s" %00
-			else:
-				current.get_node("Score").text = "%s" %LobbyConn.Points[i]
+			if !beforeTurns:
+				var points
+				if StartVars.singlePlayer:
+					points = LobbySP.Players[i]
+				else:
+					points = LobbyConn.Players[i]
+				current.get_node("Score").text = "%s" % points
 			current.get_node("PlayerIcon").show()
 			current.add_stylebox_override("panel", button_empty)
 			current.get_node("Highlight").add_stylebox_override("panel", button_green)
@@ -302,7 +314,10 @@ func fill_players_gameturn(beforeTurns=false):
 			print("current turn, singleplayer, this will error because `current` is not defined")
 			current = 0
 		else:
-			current = playerIndexToNode(LobbyConn.getTurnIndex())
+			if StartVars.singlePlayer:
+				current = playerIndexToNode(LobbySP.Turn)
+			else:
+				current = playerIndexToNode(LobbyConn.getTurnIndex())
 		
 		var text = current.get_node("Name").text
 		$TurnTransition/Box/PlayerInfo.text = "%s's Turn" %text
@@ -344,7 +359,10 @@ func _on_Submit_pressed():
 			return
 		Input.vibrate_handheld(50)
 		#Otherwise play the free card/hand
-		LobbyConn.play(selectedCards, null)
+		if StartVars.singlePlayer:
+			LobbySP.play(selectedCards, null)
+		else:
+			LobbyConn.play(selectedCards, null)
 	#If a wanmo is at play
 	elif !discardMode and !drawMode and wanmo:
 		Input.vibrate_handheld(50)
@@ -352,7 +370,10 @@ func _on_Submit_pressed():
 		if selectedCards.size() != 4:
 			wanmo = false
 			wanmo_hand = []
-			LobbyConn.play(selectedCards, null)
+			if StartVars.singlePlayer:
+				LobbySP.play(selectedCards, null)
+			else:
+				LobbyConn.play(selectedCards, null)
 		else:
 			#I have to fix wanmo hand here because I need it formatted differently to send to the server woth .play
 			#I dont do this before because it would break a lot of code I already have and im lazy
@@ -363,20 +384,26 @@ func _on_Submit_pressed():
 			selectedCards.erase(wanmo_hand[1])
 			#I was feeling aggressive here
 			print("loser",selectedCards)
-			LobbyConn.play(selectedCards, wanmo_hand)
+			if StartVars.singlePlayer:
+				LobbySP.play(selectedCards, wanmo_hand)
+			else:
+				LobbyConn.play(selectedCards, wanmo_hand)
 			wanmo_hand = []
 
 #Returns to the lobby list or main menu if this is a multi or single player game
 func _on_Leave_pressed():
 	Input.vibrate_handheld(50)
 	if StartVars.singlePlayer:
-		StartVars.singlePlayer = false
-		get_tree().change_scene("res://scenes/main_menu/Main_Menu.tscn")
+		LobbySP.leave()
 	else:
 		LobbyConn.leave()
 
 func _on_disconnected():
-	get_tree().change_scene("res://scenes/lobby_list/Lobby_List.tscn")
+	if StartVars.singlePlayer:
+		StartVars.singlePlayer = false
+		get_tree().change_scene("res://scenes/main_menu/Main_Menu.tscn")
+	else:
+		get_tree().change_scene("res://scenes/lobby_list/Lobby_List.tscn")
 
 func _on_playerturn(player):
 	#This yield is for animations in _on_cards_played()
@@ -401,7 +428,8 @@ func _on_playerturn(player):
 	yield($AnimationPlayer, "animation_finished")
 	$TurnTransition.hide()
 	
-	if LobbyConn.isMyTurn():
+	# if it's your turn
+	if isMyTurn():
 		print("My turn")
 		drawMode = true
 		$Background/DrawPileBox/CardRotate/Card/darken.hide()
@@ -412,7 +440,7 @@ func _on_playerturn(player):
 # from: DrawFrom.DRAW_FROM_DECK or DrawFrom.DRAW_FROM_DISCARD
 # card will be null if it isnt your turn
 func _on_carddrew(from, card):
-	if LobbyConn.isMyTurn():
+	if isMyTurn():
 		$Background/DrawnCard.setValue(card)
 		$Background/DrawnCard.setCanSelect(true)
 		$Background/DrawnCard.show()
@@ -422,11 +450,13 @@ func _on_carddrew(from, card):
 		discardMode = true
 		message_timer()
 	else:
-		print("Player %s drew from %s" % [LobbyConn.Turn, LobbyConn.DrawFrom.keys()[from]])
+		if StartVars.singlePlayer:
+			print("Player %s drew from %s" % [LobbySP.Turn, LobbyConn.DrawFrom.keys()[from]])
+		else:
+			print("Player %s drew from %s" % [LobbyConn.Turn, LobbyConn.DrawFrom.keys()[from]])
 
 func _on_carddiscarded(card):
-	if LobbyConn.isMyTurn():
-		print(LobbyConn.Cards)
+	if isMyTurn():
 		$Background/DrawnCard.hide()
 		discardMode = false
 		fill_cards(true)
@@ -435,7 +465,10 @@ func _on_carddiscarded(card):
 		message_timer()
 	else:
 		fill_cards(false)
-		print("Player %s discarded %s" % [LobbyConn.Turn, StartVars.CardName(card)])
+		if StartVars.singlePlayer:
+			print("Player %s discarded %s" % [LobbySP.Turn, StartVars.CardName(card)])
+		else:
+			print("Player %s discarded %s" % [LobbyConn.Turn, StartVars.CardName(card)])
 
 func _on_cardsplayed(handType, cards, wanmoPair): # cards will be null if passed
 	#I use the servers identifier to determine the correct animation to play
@@ -526,7 +559,7 @@ func _on_cardsplayed(handType, cards, wanmoPair): # cards will be null if passed
 		$AnimationPlayer.play("FreeCard4")
 
 	fill_cards(false)
-	if LobbyConn.isMyTurn():
+	if isMyTurn():
 		# temp print
 		message_timer()
 	else:
@@ -541,16 +574,15 @@ func _on_turnended(cards): # cards automatically drawn
 	fix_display_message2(true)
 	print("I finished my card by drawing %s" % StartVars.godot_sucks_join_array(cardStr, ", "))
 
-func _on_gameover(player): # playerID winner
+func _on_gameover(player): # playerObject winner
 	#yield($AnimationPlayer, "animation_finished")
-	LobbyConn.InLobby = true
 	$TurnTransition.hide()
 	$StartGame.hide()
 	$CardPlayed.hide()
 	$GameOver/Lose.hide()
 	$GameOver/Win.hide()
 	$GameOver.show()
-	if UserData.ID == player:
+	if UserData.ID == player.id:
 		$GameOver/Win.show()
 		$AnimationPlayer.play("Win_Screen")
 		yield($AnimationPlayer, "animation_finished")
@@ -587,7 +619,7 @@ func fix_display_message(override = false):
 	#Override removes the text without checking current mode
 	elif override:
 		$Background/PlayArea/DisplayMessage.text = ""
-	elif LobbyConn.isMyTurn():
+	elif isMyTurn():
 		$Background/PlayArea/DisplayMessage.text = "\nPick your cards, then click here to play them!"
 	else:
 		$Background/PlayArea/DisplayMessage.text = ""
@@ -611,7 +643,12 @@ func _on_DrawPile_pressed():
 	if drawMode:
 		Input.vibrate_handheld(50)
 		drawMode = false
-		LobbyConn.draw(LobbyConn.DrawFrom.DECK)
 		$Background/DrawPileBox/CardRotate/Card/darken.show()
-		if LobbyConn.isMyTurn():
+
+		if StartVars.singlePlayer:
+			LobbySP.draw(LobbyConn.DrawFrom.DECK)
+		else:
+			LobbyConn.draw(LobbyConn.DrawFrom.DECK)
+		
+		if isMyTurn():
 			message_timer()
